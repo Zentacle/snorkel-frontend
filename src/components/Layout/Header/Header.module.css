@@ -16,9 +16,12 @@
 .headertitle{
     text-align: center;
 }
-.headerbutton{
-    padding: 10px;
+.innerheaderbutton{
+    margin-left: 10px;
 }
+
+
+
 
 
 

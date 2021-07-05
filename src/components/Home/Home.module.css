@@ -1,7 +1,7 @@
 .image{
     width: 100%;
     
-    height: 500px;
+    height: auto;
     top: 0 !important;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
 .menu{
     z-index: 1;
     width: 100%;
-    
+    height: auto;
     display: flex;
     margin-top: -30px;
     justify-content: space-evenly;
@@ -42,15 +42,19 @@
 
 .pagetitle{
     z-index: 2;
-    top: 100px;
+    top: 10vw;
     display: flex;
     justify-content: space-around;
     position: absolute;
     width: 100%;
     color: white;
     font-weight: var(--text-weight-bold);
-    padding-left: 40px;
-    padding-right: 40px;
     font-size: 36px;
     text-align: center;
+}
+
+.carouseltitle{
+    margin-left: 30px;
+    margin-top: 20px;
+    font-weight: var(--text-weight-bold);
 }

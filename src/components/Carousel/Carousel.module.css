@@ -1,0 +1,21 @@
+.carousel{
+    height: auto;
+  
+    width: 100%;
+    margin-top: 50px;
+}
+
+
+.wholecarousel{
+    display: flex;
+    
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.inner-slide{
+    height: auto;
+}
