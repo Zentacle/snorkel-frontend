@@ -1,0 +1,13 @@
+.ratingcontainer{
+    display: flex;
+    justify-content:space-around;
+    font-weight: var(--text-weight-bold);
+    
+}
+
+.ratingtitle{
+    font-weight: var(--text-weight-bold);
+    font-size: 18px;
+}
+
+

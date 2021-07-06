@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.button{
+    background-color: white !important;
+    color: black !important;
+    width: 45vw;
+    font-weight: var(--text-weight-bold) !important;
+}
+
