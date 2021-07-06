@@ -1,6 +1,10 @@
 .container{
-    background-color: white;
+    
     padding: 5vw;
+    max-width: 500px;
+    box-shadow: 10px 0 10px 0 rgba(0, 0, 0, .5);
+    background-color: whitesmoke;
+    
 }
 
 .beachtitle{
@@ -35,4 +39,10 @@
     display: flex;
     align-items: center;
     border-radius: 5px;
+    transition: transform .5s;
+}
+
+.nextbutton:hover{
+    cursor: pointer;
+    transform: scale(1.2);
 }

@@ -2,8 +2,10 @@ import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
 import Layout from "../../Layout/Layout";
-
+import Router from "next/router";
 const Review = () => {
+    
+
     return (
         <div className={styles.paragraphwrapper}>
             <div className={styles.reviewtitle}>Review</div>
@@ -18,7 +20,7 @@ const Review = () => {
             </div>
             <br></br>
             <div className={styles.buttonwrapper}>
-                <div className={styles.nextbutton}>
+                <div className={styles.nextbutton} onClick={()=>Router.push('/')}>
                     Next
                 </div>
             </div>

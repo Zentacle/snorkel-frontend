@@ -1,12 +1,13 @@
 .container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    width: 100%;
 }
 
 .button{
-    background-color: white !important;
-    color: black !important;
-    width: 45vw;
+   
+    min-width: 50% !important;
+    width: 50% !important;
     font-weight: var(--text-weight-bold) !important;
 }
 

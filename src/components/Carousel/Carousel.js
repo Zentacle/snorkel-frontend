@@ -14,7 +14,7 @@ const MyCarousel = () => {
 
     if (size.width < 600){
         visslides = 1.5;
-        slideheight = 150;
+        slideheight = 100;
         slidewidth = 100;
         
     }
