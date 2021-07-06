@@ -38,6 +38,11 @@
     align-items: center;
     position: relative;
     padding: 10px;
+    transition: transform .5s;
+}
+
+.buttoncircle:hover{
+    transform: scale(1.2);
 }
 
 .buttonouter{
