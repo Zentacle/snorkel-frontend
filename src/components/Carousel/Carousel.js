@@ -25,12 +25,13 @@ const MyCarousel = () => {
     "hello": "moto",
     "nice": "day"
   };
-  let slides = [];
+  
   
   const [data, setData] = React.useState(null);
   React.useEffect(()=>{
     getData().then((data) => setData(data));
-  });
+
+  }, []);
   
   
 
@@ -54,6 +55,7 @@ const MyCarousel = () => {
 
 function RenderSlides({posts}) {
   let slides = [];
+  
   for (let i = 0; i < posts.length; i++) {
     slides.push(<Slide key={i} index={i}><SlideLocation info={posts[i]}></SlideLocation></Slide>);
   }
