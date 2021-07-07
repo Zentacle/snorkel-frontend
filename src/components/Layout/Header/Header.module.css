@@ -1,33 +1,39 @@
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: white;
     height: 40px;
     font-weight: var(--text-weight-bold);
-    
 }
 
-.headertitle, .headerbutton, .spaceholder{
+.headertitle,
+.headerbutton,
+.spaceholder {
     flex: 1;
-    
 }
 
-.headertitle{
+.headertitle {
     text-align: center;
 }
-.innerheaderbutton{
+
+.innerheaderbutton {
     margin-left: 10px;
+    
 }
 
-.loginbutton{
+.innerheaderbutton:hover{
+    cursor: pointer;
+}
+
+.loginbutton {
     font-size: 12px;
     text-align: right;
     margin-right: 10px;
     font-weight: var(--text-weight-normal);
+    
 }
 
-
-
-
-
+.loginbutton:hover{
+    cursor: pointer;
+}

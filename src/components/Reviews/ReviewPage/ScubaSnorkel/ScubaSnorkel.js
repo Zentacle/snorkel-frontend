@@ -8,14 +8,21 @@ const ScubaSnorkel = () => {
     const handleToggle = (event, newType) => {
         setType(newType);
     }
-    
+
     return (
         <div className={styles.container}>
-           <ToggleButtonGroup value={activityType} onChange={handleToggle} exclusive style={{width: "100%"}}>
-               <ToggleButton className={styles.button} value="snorkel"><div className={styles.button}>Snorkel</div></ToggleButton>
-               <ToggleButton className={styles.button} value="scuba"><div className={styles.button}>Scuba</div></ToggleButton>
-           </ToggleButtonGroup>
-            
+            <ToggleButtonGroup value={activityType} onChange={handleToggle} exclusive style={{ width: "100%" }}>
+                <ToggleButton className={styles.button} value="snorkel">
+                    <div className={styles.button}>
+                        Snorkel
+                    </div>
+                </ToggleButton>
+                <ToggleButton className={styles.button} value="scuba">
+                    <div className={styles.button}>
+                        Scuba
+                    </div>
+                </ToggleButton>
+            </ToggleButtonGroup>
         </div>
     )
 }

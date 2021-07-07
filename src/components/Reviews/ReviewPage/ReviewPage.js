@@ -5,22 +5,26 @@ import Layout from "../../Layout/Layout";
 import Router from "next/router";
 const Review = () => {
     
-
     return (
         <div className={styles.paragraphwrapper}>
-            <div className={styles.reviewtitle}>Review</div>
-            <textarea className={styles.paragraphreview} cols="50" rows="10"></textarea>
-            <br></br>
-            <br></br>
+            <div className={styles.reviewtitle}>
+                Review
+            </div>
+            <textarea className={styles.paragraphreview} cols="50" rows="10">
+            </textarea>
+            <br />
+            <br />
             <div className={styles.vizwrapper}>
-                <div className={styles.reviewtitle}>Visibility</div>
+                <div className={styles.reviewtitle}>
+                    Visibility
+                </div>
                 <div className={styles.vizreview}>
                     <input placeholder="visibility (ft)"></input>
                 </div>
             </div>
-            <br></br>
+            <br />
             <div className={styles.buttonwrapper}>
-                <div className={styles.nextbutton} onClick={()=>Router.push('/')}>
+                <div className={styles.nextbutton} onClick={() => Router.push('/')}>
                     Next
                 </div>
             </div>
@@ -32,13 +36,12 @@ const ReviewPage = () => {
         <Layout>
             <div className={styles.container}>
                 <div className={styles.beachtitle}>Mala Wharf</div>
-                <br></br>
-            <ScubaSnorkel></ScubaSnorkel>
-            <br></br>
-            <StarRate></StarRate>
-            <br>
-            </br>
-            <Review></Review>
+                <br />
+                <ScubaSnorkel></ScubaSnorkel>
+                <br />
+                <StarRate></StarRate>
+                <br />
+                <Review></Review>
             </div>
         </Layout>
     )

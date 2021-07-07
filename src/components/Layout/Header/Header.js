@@ -8,7 +8,7 @@ const Header = () => {
         <div>
             <div className={styles.header}>
                 <div className={styles.headerbutton}>
-                    <div className={styles.innerheaderbutton}>
+                    <div className={styles.innerheaderbutton} onClick={() => router.push("/")}>
                 <Image src="/../public/Vector.png" alt="Menu Button" height='12px' width='18px'></Image>
                 <NavSidebar/>
                 </div>

@@ -46,3 +46,8 @@ color: blue !important;
 .createone:hover{
     cursor: pointer;
 }
+
+.bottominfo{
+    width: 100%;
+    text-align: center;
+}

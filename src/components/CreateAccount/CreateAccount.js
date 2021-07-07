@@ -1,9 +1,9 @@
+import styles from "../LoginPage/LoginPage.module.css";
+//uses borrowed styling
 import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
-import styles from "../LoginPage/LoginPage.module.css";
 import Link from "next/link";
-
-const LoginButton = () => {
+const CreateButton = () => {
     return (
         <div className={styles.buttonwrapper}>
             <div className={styles.loginbutton}>
@@ -24,12 +24,15 @@ const InputArea = ({ type }) => {
 const Title = () => {
     return (
         <div className={styles.titlecontainer}>
-            Login to your account
+            Create your Free account
         </div>
     )
 }
 
-const LoginPage = () => {
+
+
+
+const CreateAccount = () => {
     return (
         <Layout>
             <BackgroundCard>
@@ -37,18 +40,22 @@ const LoginPage = () => {
                 </Title>
                 <br />
                 <br />
+                <InputArea type="Name"></InputArea>
+                <br />
+                <InputArea type="Username"></InputArea>
+                <br />
                 <InputArea type="Email"></InputArea>
                 <br />
-
                 <InputArea type="Password"></InputArea>
                 <br />
-                <LoginButton></LoginButton>
+                <br />
+                <CreateButton></CreateButton>
                 <br />
                 <div className={styles.bottominfo}>
-                    Don't have an account?&nbsp;
-                    <Link href="/createaccount">
+                    Already have an account?&nbsp;
+                    <Link href="/Login">
                         <span className={styles.createone}>
-                            Create one!
+                            Login!
                         </span>
                     </Link>
                 </div>
@@ -57,4 +64,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default CreateAccount;
