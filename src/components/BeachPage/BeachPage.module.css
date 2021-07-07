@@ -9,6 +9,20 @@
    
 }
 
+.imageinner {
+    background-size: cover;
+    min-height: 250px;
+    position:relative;
+}
+
+.overlay {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    background: rgba(0,0,0,.5);
+  }
+
 .beachdescription{
     font-weight: var(--text-weight-normal) !important;
 }

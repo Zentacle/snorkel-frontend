@@ -16,7 +16,6 @@
     height: auto;
     width: 100%;
     z-index: 0;
-    box-shadow: var(--box-shadow);
 }
 
 .menu{
@@ -33,7 +32,6 @@
 
 .searchbar{
     width: 50vw;
-    
 }
 
 .innermenu{
@@ -54,7 +52,7 @@
 }
 
 .carouseltitle{
-    margin-left: 30px;
-    margin-top: 20px;
+    margin-left: 16px;
+    margin-top: 32px;
     font-weight: var(--text-weight-bold);
 }

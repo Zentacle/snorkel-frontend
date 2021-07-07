@@ -13,7 +13,7 @@ const Menu = () => {
     return (
         <div>
             <div className={styles.innermenu}>
-            <SearchBar className={styles.searchbar} onChange={(change) => setSearch(change)}/>
+            <SearchBar value={search} className={styles.searchbar} onChange={(change) => setSearch(change)}/>
             </div>
         </div>
     )
