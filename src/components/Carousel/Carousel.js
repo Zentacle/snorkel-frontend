@@ -25,6 +25,10 @@ const MyCarousel = () => {
         "hello": "moto",
         "nice": "day"
     };
+
+    
+    
+    
     return (
     <div className={styles.carousel}>
     <CarouselProvider
@@ -39,12 +43,8 @@ const MyCarousel = () => {
       
       
       <Slider className={styles.slider}>
-          <Slide index={0}><SlideLocation info={info}></SlideLocation></Slide>
-          <Slide index={1}><SlideLocation info={info}></SlideLocation></Slide>
-          <Slide index={2}><SlideLocation info={info}></SlideLocation></Slide>
-          <Slide index={3}><SlideLocation info={info}></SlideLocation></Slide>
-          <Slide index={4}><SlideLocation info={info}></SlideLocation></Slide>
-          <Slide index={5}><SlideLocation info={info}></SlideLocation></Slide>
+          
+          <RenderSlides></RenderSlides>
         </Slider>
         <div className={styles.buttons}>
         <ButtonBack>Back</ButtonBack>
@@ -55,5 +55,18 @@ const MyCarousel = () => {
   </CarouselProvider>
   </div>
 );}
+async function getData(){
+  const res = await fetch('https://snorkel-backend.herokuapp.com/spots/get')
+  const data = await res.json()
+  console.log(data);
+  return data;
+}
+function RenderSlides(){
+  let elements1 = [1, 2, 3, 4, 5, 6];
+  return elements1.map((item, index)=> {
+    console.log("here");
+    <Slide key={index} index={index}><SlideLocation info={item}></SlideLocation></Slide>
+  })
+}
 
 export default MyCarousel;
