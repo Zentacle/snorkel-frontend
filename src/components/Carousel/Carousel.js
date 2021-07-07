@@ -30,20 +30,20 @@ const MyCarousel = () => {
   const [data, setData] = React.useState(null);
   React.useEffect(()=>{
     getData().then((data) => setData(data));
-
   }, []);
   
   
 
   return (
-    <div className={styles.carousel}>
+    data && <div className={styles.carousel}>
       <CarouselProvider
         naturalSlideWidth={slideheight}
         naturalSlideHeight={slidewidth}
-        totalSlides={6}
+        totalSlides={data.length}
         visibleSlides={visslides}
-        infinite={true}>
-        {data && <RenderSlides posts={data}></RenderSlides>}
+        infinite={true}
+      >
+        <RenderSlides beaches={data}></RenderSlides>
         <div className={styles.buttons}>
           <ButtonBack>Back</ButtonBack>
           <ButtonNext>Next</ButtonNext>
@@ -53,16 +53,15 @@ const MyCarousel = () => {
   );
 }
 
-function RenderSlides({posts}) {
-  let slides = [];
-  
-  for (let i = 0; i < posts.length; i++) {
-    slides.push(<Slide key={i} index={i}><SlideLocation info={posts[i]}></SlideLocation></Slide>);
-  }
+function RenderSlides({beaches}) {
   return (
     <Slider className={styles.slider}>
-          {slides}
-        </Slider>
+      {
+        beaches.map((beach, index) => 
+          <Slide key={beach.id} index={index}><SlideLocation info={beach}></SlideLocation></Slide>
+        )
+      }
+    </Slider>
   )
 }
 
