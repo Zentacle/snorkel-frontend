@@ -7,12 +7,12 @@ const BackImage = (props) => {
     return (
         <div className={styles.image}>
             <div className={styles.imageinner}>
-                <Image className={styles.actualimage} height='1223' width='3000' objectFit="contain" alt="here" src="/homepageimg.jpeg">
+                <Image className={styles.actualimage} height='1223' width='3000' objectFit="contain" alt="here" src={ props.beach.hero_img }>
                 </Image>
             </div>
-            <div className={styles.pagetitle}>Beach Name <br></br>
-                <div className={styles.beachdescription}>Example, Location</div>
-                <div className={styles.stars}>stars</div>
+            <div className={styles.pagetitle}>{ props.beach.name }<br></br>
+                <div className={styles.beachdescription}>{ props.beach.location_city }</div>
+                <div className={styles.stars}>{ props.beach.rating } stars</div>
             </div>
             <div className={styles.menu}>
                 <div className={styles.buttoncontainer}>
