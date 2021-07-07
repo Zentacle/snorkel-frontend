@@ -1,0 +1,11 @@
+.outercard {
+    margin-top: 10px;
+    width: 90%;
+    max-width: 500px;
+    min-height: 100%;
+}
+
+.innercard{
+    min-height: 50vh;
+    padding: 22px;
+}

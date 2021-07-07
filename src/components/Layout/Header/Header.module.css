@@ -20,7 +20,12 @@
     margin-left: 10px;
 }
 
-
+.loginbutton{
+    font-size: 12px;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: var(--text-weight-normal);
+}
 
 
 

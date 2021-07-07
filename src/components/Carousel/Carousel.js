@@ -43,7 +43,7 @@ const MyCarousel = () => {
       
       
       <Slider className={styles.slider}>
-          
+      <Slide key={7} index={0}><SlideLocation info={info}></SlideLocation></Slide>
           <RenderSlides></RenderSlides>
         </Slider>
         <div className={styles.buttons}>

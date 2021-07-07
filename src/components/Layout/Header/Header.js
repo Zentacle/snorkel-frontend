@@ -1,7 +1,9 @@
 import styles from "./Header.module.css";
 import Image from "next/image";
+import router from "next/router";
 import  NavSidebar from "../../NavSidebar/NavSidebar";
 const Header = () => {
+    
     return (
         <div>
             <div className={styles.header}>
@@ -15,7 +17,9 @@ const Header = () => {
                 <span>DiveBriefing</span>
                 </div>
                 <div className={styles.spaceholder}>
-                
+                <div className={styles.loginbutton} onClick={()=>router.push('/Login')}>
+                    Login
+                    </div>
                 </div>
             
         </div>
