@@ -3,7 +3,7 @@ import Image from "next/image";
 import BeachInfo from "../BeachPage/BeachInfo/BeachInfo";
 
 
-const BackImage = () => {
+const BackImage = (props) => {
     return (
         <div className={styles.image}>
             <div className={styles.imageinner}>
@@ -20,7 +20,7 @@ const BackImage = () => {
                         <div className={styles.buttoncircle}>
                             <Image src='/../public/mapicon.png' alt="map" objectFit="contain" height='24' width="24"></Image>
                         </div>
-                        <div className={styles.buttonlabel}>Entry Map</div>
+                        <a href={ props.beach.entry_map } className={styles.buttonlabel}>Entry Map</a>
                     </div>
                     <div className={styles.buttonouter}>
                         <div className={styles.buttoncircle}>
@@ -40,11 +40,10 @@ const BackImage = () => {
     )
 }
 
-const BeachPage = () => {
+const BeachPage = (props) => {
     return (
         <div>
-            <BackImage>
-            </BackImage>
+            <BackImage beach={ props.beach } />
             <BeachInfo />
         </div>
     )
