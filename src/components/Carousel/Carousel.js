@@ -26,9 +26,13 @@ const MyCarousel = () => {
     "nice": "day"
   };
   let slides = [];
-  for (let i = 0; i < 6; i++) {
-    slides.push(<Slide key={i} index={0}><SlideLocation info={info}></SlideLocation></Slide>);
-  }
+  
+  const [data, setData] = React.useState(null);
+  React.useEffect(()=>{
+    getData().then((data) => setData(data));
+  });
+  
+  
 
   return (
     <div className={styles.carousel}>
@@ -38,9 +42,7 @@ const MyCarousel = () => {
         totalSlides={6}
         visibleSlides={visslides}
         infinite={true}>
-        <Slider className={styles.slider}>
-          {slides}
-        </Slider>
+        {data && <RenderSlides posts={data}></RenderSlides>}
         <div className={styles.buttons}>
           <ButtonBack>Back</ButtonBack>
           <ButtonNext>Next</ButtonNext>
@@ -50,11 +52,24 @@ const MyCarousel = () => {
   );
 }
 
+function RenderSlides({posts}) {
+  let slides = [];
+  for (let i = 0; i < posts.length; i++) {
+    slides.push(<Slide key={i} index={i}><SlideLocation info={posts[i]}></SlideLocation></Slide>);
+  }
+  return (
+    <Slider className={styles.slider}>
+          {slides}
+        </Slider>
+  )
+}
+
+
 async function getData() {
   const res = await fetch('https://snorkel-backend.herokuapp.com/spots/get')
-  const data = await res.json()
-  console.log(data);
-  return data;
+  const data =  await res.json()
+  
+  return data.data;
 }
 
 
