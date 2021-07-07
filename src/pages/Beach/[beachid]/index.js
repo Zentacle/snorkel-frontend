@@ -7,7 +7,7 @@ const beach = {
     "hero_img": "https://californiadiver.com/wp-content/uploads/2013/09/IMG_4968.jpg",
     "id": 1,
     "location_city": "Lahaina, Maui, Hawaii",
-    "location_google": "",
+    "location_google": "https://goo.gl/maps/YsaNYnPtsn9bGTyN8",
     "name": "Mala Wharf",
     "num_reviews": 2,
     "rating": 4
