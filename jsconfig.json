@@ -5,7 +5,8 @@
       "components/*": ["src/components/*"],
       "hooks/*": ["src/hooks/*"],
       "pages/*": ["src/pages/*"],
-      "styles/*": ["src/styles/*"]
+      "styles/*": ["src/styles/*"],
+      "lib/*": ["src/lib/*"]
     }
   }
 }

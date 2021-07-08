@@ -7,6 +7,7 @@ import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
+import { rootDomain } from 'lib/constants';
 
 const registerUser = (email, password, name, username) => () => {
     const body = {

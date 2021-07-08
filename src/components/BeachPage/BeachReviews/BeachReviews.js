@@ -1,6 +1,8 @@
 import styles from "../BeachReviews/BeachReviews.module.css";
 import { useRouter } from "next/router";
 import IndividualReview from "./IndividualReview/IndividualReview";
+import { rootDomain } from 'constants';
+
 const ReviewButton = () => {
     const router = useRouter();
     return (
@@ -11,10 +13,8 @@ const ReviewButton = () => {
 }
 
 async function getData() {
-    // const res = await fetch('https://snorkel-backend.herokuapp.com/spots/get')
-    // const data =  await res.json()
     
-    fetch(`https://snorkel-backend.herokuapp.com/review/get?beach_id=`+ `1`,{
+    fetch(`${rootDomain}/review/get?beach_id=`+ `1`,{
         method: 'GET',
         
         headers: {
