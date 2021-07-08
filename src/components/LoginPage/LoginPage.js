@@ -1,22 +1,52 @@
+import Link from "next/link";
+import React from 'react';
+
 import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
 import styles from "../LoginPage/LoginPage.module.css";
-import Link from "next/link";
 
-const LoginButton = () => {
+const rootDomain = 'http://127.0.0.1:3000/api'
+
+const loginUser = (email, password) => () => {
+    const body = {
+        email,
+        password,
+    }
+    fetch(`${rootDomain}/user/login`, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        if (data.auth_token) {
+            window.location.href = "/";
+        }
+    })
+}
+
+const LoginButton = ({ email, password }) => {
     return (
         <div className={styles.buttonwrapper}>
-            <div className={styles.loginbutton}>
+            <button onClick={loginUser(email, password)} className={styles.loginbutton}>
                 Login
-            </div>
+            </button>
         </div>
     )
 }
 
-const InputArea = ({ type }) => {
+const InputArea = ({ value, onChange, type }) => {
     return (
         <div className={styles.outerinput}>
-            <input className={styles.inputs} placeholder={type}></input>
+            <input
+                value={value}
+                onChange={onChange}
+                className={styles.inputs}
+                placeholder={type}
+                type={type}
+            />
         </div>
     )
 }
@@ -30,6 +60,9 @@ const Title = () => {
 }
 
 const LoginPage = () => {
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('')
+
     return (
         <Layout>
             <BackgroundCard>
@@ -37,12 +70,12 @@ const LoginPage = () => {
                 </Title>
                 <br />
                 <br />
-                <InputArea type="Email"></InputArea>
+                <InputArea value={email} onChange={e => setEmail(e.target.value)} type="Email"></InputArea>
                 <br />
 
-                <InputArea type="Password"></InputArea>
+                <InputArea value={password} onChange={e => setPassword(e.target.value)} type="Password"></InputArea>
                 <br />
-                <LoginButton></LoginButton>
+                <LoginButton email={email} password={password}></LoginButton>
                 <br />
                 <div className={styles.bottominfo}>
                     Don't have an account?&nbsp;
