@@ -4,6 +4,7 @@
     max-width: 500px;
     box-shadow: 10px 0 10px 0 rgba(0, 0, 0, .5);
     background-color: whitesmoke;
+    margin-top: 15px;
     
 }
 
@@ -46,3 +47,4 @@
     cursor: pointer;
     transform: scale(1.2);
 }
+

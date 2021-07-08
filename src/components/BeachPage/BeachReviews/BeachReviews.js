@@ -1,6 +1,6 @@
 import styles from "../BeachReviews/BeachReviews.module.css";
 import { useRouter } from "next/router";
-
+import IndividualReview from "./IndividualReview/IndividualReview";
 const ReviewButton = () => {
     const router = useRouter();
     return (
@@ -10,11 +10,21 @@ const ReviewButton = () => {
     )
 }
 
+async function getData() {
+    const res = await fetch(`${rootDomain}/spots/get`)
+    const data =  await res.json()
+    console.log(data);
+    return data.data;
+  }
+  
 const BeachReviews = () => {
+    getData();
     return (
         <div>
             <ReviewButton>
             </ReviewButton>
+            <br/>
+            <IndividualReview review="the review"></IndividualReview>
         </div>
     )
 }

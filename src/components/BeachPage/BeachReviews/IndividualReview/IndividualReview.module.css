@@ -1,0 +1,23 @@
+.container{
+    padding: 16px;
+    
+}
+
+.starempty{
+    color: Grey;
+    
+}
+
+.starfull{
+    color: gold;
+}
+
+.outerupper{
+    display: flex;
+    align-items: center;
+}
+
+.imageouter{
+    width: 51px;
+    height: 51px;
+}

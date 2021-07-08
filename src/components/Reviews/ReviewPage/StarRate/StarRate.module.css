@@ -10,4 +10,11 @@
     font-size: 18px;
 }
 
+.starempty{
+    color: Grey;
+    
+}
 
+.starfull{
+    color: gold;
+}
