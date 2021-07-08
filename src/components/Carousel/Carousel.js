@@ -36,8 +36,7 @@ const MyCarousel = () => {
   return (
     data && <div className={styles.carousel}>
       <CarouselProvider
-        naturalSlideWidth={slideheight}
-        naturalSlideHeight={slidewidth}
+        isIntrinsicHeight={true}
         totalSlides={data.length}
         visibleSlides={visslides}
         infinite={true}

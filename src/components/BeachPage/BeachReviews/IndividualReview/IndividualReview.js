@@ -5,7 +5,7 @@ const IndividualReview = ({review}) => {
     return (
         <div className={styles.container}>
             
-            <div className={styles.outerupper}>
+            {/* <div className={styles.outerupper}>
             <div className={styles.imageouter}>
             image
             </div>
@@ -19,13 +19,14 @@ const IndividualReview = ({review}) => {
                     fullSymbol={(<Star className={styles.starfull}></Star>)}
                     initialRating={5}
                     readonly></Rating>
+
                 </div>
             </div>
 
             </div>
             <div className={styles.outerlower}>
 
-            </div>
+            </div> */}
             </div>
     )
 }

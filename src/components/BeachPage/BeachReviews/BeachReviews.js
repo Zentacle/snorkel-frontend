@@ -11,14 +11,23 @@ const ReviewButton = () => {
 }
 
 async function getData() {
-    const res = await fetch(`${rootDomain}/spots/get`)
-    const data =  await res.json()
-    console.log(data);
-    return data.data;
+    // const res = await fetch('https://snorkel-backend.herokuapp.com/spots/get')
+    // const data =  await res.json()
+    
+    fetch(`https://snorkel-backend.herokuapp.com/review/get?beach_id=`+ `1`,{
+        method: 'GET',
+        
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        console.log(response.json());
+        
+    })
   }
   
 const BeachReviews = () => {
-    getData();
+    // getData();
     return (
         <div>
             <ReviewButton>
