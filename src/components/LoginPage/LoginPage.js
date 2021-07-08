@@ -4,6 +4,8 @@ import React from 'react';
 import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
 import styles from "../LoginPage/LoginPage.module.css";
+import SignupInput from 'components/SignupInput';
+import PrimaryButton from 'components/PrimaryButton';
 
 const rootDomain = 'http://127.0.0.1:3000/api'
 
@@ -27,30 +29,6 @@ const loginUser = (email, password) => () => {
     })
 }
 
-const LoginButton = ({ email, password }) => {
-    return (
-        <div className={styles.buttonwrapper}>
-            <button onClick={loginUser(email, password)} className={styles.loginbutton}>
-                Login
-            </button>
-        </div>
-    )
-}
-
-const InputArea = ({ value, onChange, type }) => {
-    return (
-        <div className={styles.outerinput}>
-            <input
-                value={value}
-                onChange={onChange}
-                className={styles.inputs}
-                placeholder={type}
-                type={type}
-            />
-        </div>
-    )
-}
-
 const Title = () => {
     return (
         <div className={styles.titlecontainer}>
@@ -66,17 +44,10 @@ const LoginPage = () => {
     return (
         <Layout>
             <BackgroundCard>
-                <Title>
-                </Title>
-                <br />
-                <br />
-                <InputArea value={email} onChange={e => setEmail(e.target.value)} type="Email"></InputArea>
-                <br />
-
-                <InputArea value={password} onChange={e => setPassword(e.target.value)} type="Password"></InputArea>
-                <br />
-                <LoginButton email={email} password={password}></LoginButton>
-                <br />
+                <Title></Title>
+                <SignupInput value={email} onChange={ setEmail } type="Email"></SignupInput>
+                <SignupInput value={password} onChange={ setPassword } type="Password"></SignupInput>
+                <PrimaryButton onClick={ () => loginUser(email, password) }>Log In</PrimaryButton>
                 <div className={styles.bottominfo}>
                     Don't have an account?&nbsp;
                     <Link href="/createaccount">

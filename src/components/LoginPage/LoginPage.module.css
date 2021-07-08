@@ -6,31 +6,9 @@
     font-size: 24px;
 }
 
-.inputs{
-    width: 100%;
-    border-radius: 8px !important;
-    height: 42px;
-    border: 1px solid #cecece;
-    padding: 10px;
-}
-
 .buttonwrapper{
     display: flex;
     justify-content: center;
-}
-
-.loginbutton{
-    max-width: 500px;
-    width: 100%;
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: var(--text-weight-bold);
-    height: 30px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    transition: transform .5s;
 }
 
 .loginbutton:hover{
