@@ -3,8 +3,8 @@ import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
 import Layout from "../../Layout/Layout";
 import Router from "next/router";
+
 const Review = () => {
-    
     return (
         <div className={styles.paragraphwrapper}>
             <div className={styles.reviewtitle}>
@@ -12,8 +12,6 @@ const Review = () => {
             </div>
             <textarea className={styles.paragraphreview} cols="50" rows="10">
             </textarea>
-            <br />
-            <br />
             <div className={styles.vizwrapper}>
                 <div className={styles.reviewtitle}>
                     Visibility
@@ -22,7 +20,6 @@ const Review = () => {
                     <input placeholder="visibility (ft)"></input>
                 </div>
             </div>
-            <br />
             <div className={styles.buttonwrapper}>
                 <div className={styles.nextbutton} onClick={() => Router.push('/')}>
                     Next
@@ -36,11 +33,8 @@ const ReviewPage = () => {
         <Layout>
             <div className={styles.container}>
                 <div className={styles.beachtitle}>Mala Wharf</div>
-                <br />
                 <ScubaSnorkel></ScubaSnorkel>
-                <br />
                 <StarRate></StarRate>
-                <br />
                 <Review></Review>
             </div>
         </Layout>
