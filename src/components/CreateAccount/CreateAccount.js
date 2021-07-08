@@ -49,7 +49,7 @@ const CreateAccount = () => {
                 <PrimaryButton onClick={ () => registerUser(email, password, name, username) }>Create Account</PrimaryButton>
                 <div className={styles.bottominfo}>
                     Already have an account?&nbsp;
-                    <Link href="/Login">
+                    <Link href="/login">
                         <span className={styles.createone}>
                             Login!
                         </span>

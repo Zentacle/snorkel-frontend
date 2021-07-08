@@ -50,7 +50,7 @@ const LoginPage = () => {
                 <PrimaryButton onClick={ () => loginUser(email, password) }>Log In</PrimaryButton>
                 <div className={styles.bottominfo}>
                     Don't have an account?&nbsp;
-                    <Link href="/createaccount">
+                    <Link href="/register">
                         <span className={styles.createone}>
                             Create one!
                         </span>
