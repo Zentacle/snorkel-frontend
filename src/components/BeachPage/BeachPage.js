@@ -1,7 +1,8 @@
 import styles from "../BeachPage/BeachPage.module.css";
 import Image from "next/image";
 import BeachInfo from "../BeachPage/BeachInfo/BeachInfo";
-
+import Rating from "react-rating";
+import { Star } from "@material-ui/icons";
 
 const BackImage = (props) => {
     return (
@@ -10,7 +11,12 @@ const BackImage = (props) => {
                 <div className={styles.overlay} />
                 <div className={styles.pagetitle}>{ props.beach.name }<br></br>
                     <div className={styles.beachdescription}>{ props.beach.location_city }</div>
-                    <div className={styles.stars}>{ props.beach.rating } stars</div>
+                    <div className={styles.stars}>
+                    <Rating fractions={2}
+                    emptySymbol={(<Star className={styles.starempty}></Star>)} 
+                    fullSymbol={(<Star className={styles.starfull}></Star>)}
+                    initialRating={props.beach.rating}
+                    readonly></Rating></div>
                 </div>
             </div>
             <div className={styles.menu}>

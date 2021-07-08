@@ -3,19 +3,18 @@ import React from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import SlideLocation from './Location/Location';
-
+import { ArrowBack, ArrowForward } from '@material-ui/icons';
 import useWindowSize from '../../hooks/WindowDimension/WindowDimension';
+import { TramRounded } from '@material-ui/icons';
 const MyCarousel = () => {
   const size = useWindowSize();
 
   let visslides = 3;
-  let slideheight = 150;
-  let slidewidth = 100;
+  
 
   if (size.width < 600) {
     visslides = 1.5;
-    slideheight = 100;
-    slidewidth = 100;
+    
 
   }
   React.useEffect(() => {
@@ -37,16 +36,15 @@ const MyCarousel = () => {
   return (
     data && <div className={styles.carousel}>
       <CarouselProvider
-        naturalSlideWidth={slideheight}
-        naturalSlideHeight={slidewidth}
+        isIntrinsicHeight={true}
         totalSlides={data.length}
         visibleSlides={visslides}
         infinite={true}
       >
         <RenderSlides beaches={data}></RenderSlides>
         <div className={styles.buttons}>
-          <ButtonBack>Back</ButtonBack>
-          <ButtonNext>Next</ButtonNext>
+          <ButtonBack className={styles.buttonback}><ArrowBack></ArrowBack></ButtonBack>
+          <ButtonNext className={styles.buttonnext}><ArrowForward></ArrowForward></ButtonNext>
         </div>
       </CarouselProvider>
     </div>

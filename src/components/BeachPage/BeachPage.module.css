@@ -1,11 +1,11 @@
 .pagetitle{
     z-index: 2;
-    top: 30vw;
-    left: 10vw;
-    position: absolute;   
+ 
+    position: relative;   
     color: white;
     font-weight: var(--text-weight-bold);
-    font-size: 15px;
+    padding-top: 150px;
+    padding-left: 50px;
    
 }
 
@@ -21,6 +21,7 @@
     left: 0; right: 0;
     top: 0; bottom: 0;
     background: rgba(0,0,0,.5);
+    height: 100%;
   }
 
 .beachdescription{
@@ -69,4 +70,13 @@
     margin-top: 5px;
     font-size: 10px;
     color: white;
+}
+
+.starempty{
+    color: Grey;
+    
+}
+
+.starfull{
+    color: gold;
 }

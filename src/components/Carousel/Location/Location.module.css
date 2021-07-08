@@ -1,15 +1,12 @@
 .slide{
-width: 30vw;
-height: 20vw;
-margin-left: 10px;
+width: 256px;
+height: 206px;
+margin-left: 20px;
+margin-right: 20px;
+overflow-wrap: normal;
 
 }
-@media only screen and (max-width: 600px) {
-    .slide{
-        width: 60vw;
-        height: 50vw;
-    }
-}
+
 
 .slidepic{
     width: 100%;
@@ -26,4 +23,13 @@ margin-left: 10px;
 .locationtext{
     padding: 3px;
     font-weight: var(--text-weight-bold);
+}
+
+.starempty{
+    color: Grey;
+    
+}
+
+.starfull{
+    color: gold;
 }
