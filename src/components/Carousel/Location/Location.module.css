@@ -1,6 +1,5 @@
 .slide {
     width: 256px;
-    height: 206px;
     margin-right: 16px;
     border-radius: 8px;
     background-color: white;
@@ -11,7 +10,7 @@
 
 .slidepic{
     width: 100%;
-    height: 70%;
+    height: 160px;
 
     position: relative;
     overflow: hidden;
@@ -21,9 +20,25 @@
     object-fit: cover !important;
 }
 
-.locationtext{
+.locationInfoContainer{
     padding: 8px;
+}
+
+.spotName {
     font-weight: var(--text-weight-bold);
+}
+
+.location {
+    font-size: 14px;
+}
+
+.ratingContainer {
+    display: flex;
+}
+
+.numReviews {
+    padding-top: 2px;
+    margin-left: 4px;
 }
 
 .starempty{

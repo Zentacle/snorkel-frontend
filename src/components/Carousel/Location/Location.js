@@ -16,14 +16,19 @@ const SlideLocation = ({ ...props }) => {
 
                 </div>
 
-                <div className={styles.locationtext}>
-                    {props.info.name}
-                    <br></br>
-                    <Rating fractions={2}
-                        emptySymbol={(<Star className={styles.starempty}></Star>)}
-                        fullSymbol={(<Star className={styles.starfull}></Star>)}
-                        initialRating={props.info.rating}
-                        readonly></Rating>
+                <div className={styles.locationInfoContainer}>
+                    <div className={styles.spotName}>{props.info.name}</div>
+                    <div className={styles.location}>{props.info.location_city}</div>
+                    <div className={styles.ratingContainer}>
+                        <Rating
+                            fractions={2}
+                            emptySymbol={(<Star className={styles.starempty}></Star>)}
+                            fullSymbol={(<Star className={styles.starfull}></Star>)}
+                            initialRating={props.info.rating}
+                            readonly
+                        />
+                        <div className={styles.numReviews}>({props.info.num_reviews})</div>
+                    </div>
                 </div>
 
             </a>
