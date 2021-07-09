@@ -3,6 +3,7 @@ import Image from "next/image";
 import BeachInfo from "../BeachPage/BeachInfo/BeachInfo";
 import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
+import Link from 'next/link';
 
 const BackImage = (props) => {
     return (
@@ -27,20 +28,24 @@ const BackImage = (props) => {
             <div className={styles.menu}>
                 <div className={styles.buttoncontainer}>
                     <div className={styles.buttonouter}>
-                        <a href={props.beach.entry_map} className={styles.buttoncircle}>
-                            <Image src='/../public/mapicon.png' alt="map" objectFit="contain" height='24' width="24"></Image>
-                        </a>
+                        <Link href={props.beach.entry_map || ''}>
+                            <a className={styles.buttoncircle}>
+                                <Image src='/mapicon.png' alt="map" objectFit="contain" height='24' width="24"></Image>
+                            </a>
+                        </Link>
                         <div className={styles.buttonlabel}>Entry Map</div>
                     </div>
                     <div className={styles.buttonouter}>
-                        <a href={props.beach.location_google} className={styles.buttoncircle}>
-                            <Image src='/../public/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
-                        </a>
+                        <Link href={props.beach.location_google || ''}>
+                            <a className={styles.buttoncircle}>
+                                <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
+                            </a>
+                        </Link>
                         <div className={styles.buttonlabel}>Directions</div>
                     </div>
                     <div className={styles.buttonouter}>
                         <div className={styles.buttoncircle}>
-                            <Image src='/../public/photosicon.png' alt="photos" objectFit="contain" height='24' width="24"></Image>
+                            <Image src='/photosicon.png' alt="photos" objectFit="contain" height='24' width="24"></Image>
                         </div>
                         <div className={styles.buttonlabel}>Photos</div>
                     </div>
