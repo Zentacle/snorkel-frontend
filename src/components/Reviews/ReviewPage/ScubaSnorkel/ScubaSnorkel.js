@@ -9,20 +9,14 @@ const ScubaSnorkel = ({ value, onChange }) => {
     }
 
     return (
-        <div className={styles.container}>
-            <ToggleButtonGroup value={value} onChange={handleToggle} exclusive style={{ width: "100%" }}>
-                <ToggleButton className={styles.button} value="snorkel">
-                    <div className={styles.button}>
-                        Snorkel
-                    </div>
-                </ToggleButton>
-                <ToggleButton className={styles.button} value="scuba">
-                    <div className={styles.button}>
-                        Scuba
-                    </div>
-                </ToggleButton>
-            </ToggleButtonGroup>
-        </div>
+        <ToggleButtonGroup value={value} onChange={handleToggle} exclusive style={{ width: "100%" }}>
+            <ToggleButton className={styles.button} value="snorkel">
+                Snorkel
+            </ToggleButton>
+            <ToggleButton className={styles.button} value="scuba">
+                Scuba
+            </ToggleButton>
+        </ToggleButtonGroup>
     )
 }
 

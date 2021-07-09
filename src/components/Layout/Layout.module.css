@@ -8,10 +8,9 @@
 
 .main {
     max-height: 100%;
-    display: flex;
-    justify-content: center;
     max-width: 720px;
     margin: auto;
+    width: 100%;
 }
 
 

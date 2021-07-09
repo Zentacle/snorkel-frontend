@@ -1,11 +1,9 @@
 .container{
-    
-    padding: 16px;
-    max-width: 500px;
+    background-color: white;
+    border-radius: 8px;
     box-shadow: 10px 0 10px 0 rgba(0, 0, 0, .5);
-    background-color: whitesmoke;
-    margin-top: 15px;
-    
+    margin: 16px 16px 0 16px;
+    padding: 16px;
 }
 
 .beachtitle{
@@ -13,6 +11,10 @@
     font-size: 36px;
     font-weight: var(--text-weight-bold);
     
+}
+
+.spacer {
+    margin: 16px 0;
 }
 
 .paragraphreview{
@@ -23,11 +25,6 @@
 .reviewtitle{
     font-weight: var(--text-weight-bold);
     font-size: 18px;
-}
-
-.buttonwrapper{
-    display: flex;
-    justify-content: flex-end;
 }
 
 .nextbutton{
