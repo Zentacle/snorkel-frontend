@@ -1,10 +1,11 @@
 .slide {
     width: 256px;
     height: 206px;
-    margin-left: 20px;
-    margin-right: 20px;
-    overflow-wrap: normal;
+    margin-right: 16px;
     border-radius: 8px;
+    background-color: white;
+    flex-shrink: 0;
+    overflow: hidden;
 }
 
 

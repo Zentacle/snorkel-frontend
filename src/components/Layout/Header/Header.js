@@ -1,28 +1,26 @@
 import styles from "./Header.module.css";
 import Image from "next/image";
 import router from "next/router";
-import  NavSidebar from "../../NavSidebar/NavSidebar";
+import NavSidebar from "../../NavSidebar/NavSidebar";
+import Link from "next/link";
 const Header = () => {
-    
+
     return (
-        <div>
-            <div className={styles.header}>
+        <div className={styles.header}>
+            <div className={styles.headercontainer}>
                 <div className={styles.headerbutton}>
-                    <div className={styles.innerheaderbutton} onClick={() => router.push("/")}>
-                <Image src="/../public/Vector.png" alt="Menu Button" height='12px' width='18px'></Image>
-                <NavSidebar/>
-                </div>
-                </div>
-                <div className={styles.headertitle}>
-                <span>DiveBriefing</span>
+                    <Link className={styles.innerheaderbutton} href='/'>
+                        <a className={styles.headertitle}>
+                            <span>DiveBriefing</span>
+                        </a>
+                    </Link>
                 </div>
                 <div className={styles.spaceholder}>
-                <div className={styles.loginbutton} onClick={()=>router.push('/Login')}>
-                    Login
-                    </div>
+                    <Link href='/register'>
+                        <a className={styles.loginbutton}>Create Account</a>
+                    </Link>
                 </div>
-            
-        </div>
+            </div>
         </div>
     );
 }

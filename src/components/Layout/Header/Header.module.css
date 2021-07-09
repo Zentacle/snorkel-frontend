@@ -1,25 +1,19 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background: white;
-    height: 40px;
     font-weight: var(--text-weight-bold);
 }
 
-.headertitle,
-.headerbutton,
+.headercontainer {
+    align-items: center;
+    display: flex;
+    height: 40px;
+    margin: auto;
+    max-width: 720px;
+    padding: 0 16px;
+}
+
 .spaceholder {
-    flex: 1;
-}
-
-.headertitle {
-    text-align: center;
-}
-
-.innerheaderbutton {
-    margin-left: 10px;
-    
+    margin-left: auto;
 }
 
 .innerheaderbutton:hover{
@@ -27,11 +21,10 @@
 }
 
 .loginbutton {
-    font-size: 12px;
+    font-size: 14px;
     text-align: right;
-    margin-right: 10px;
     font-weight: var(--text-weight-normal);
-    
+    color: var(--primary-color);
 }
 
 .loginbutton:hover{

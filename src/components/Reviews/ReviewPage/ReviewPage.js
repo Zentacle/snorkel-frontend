@@ -20,7 +20,7 @@ const submitReview = (body) => {
         },
     }).then(response => {
         if (response.ok) {
-            Router.push(`/beach/${body['beach_id']}`)
+            Router.push(`/Beach/${body['beach_id']}`)
         }
         return response.json()
     })

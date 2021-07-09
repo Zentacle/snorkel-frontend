@@ -20,18 +20,10 @@
 
 .menu{
     z-index: 1;
-    width: 100%;
+    width: 80%;
     height: auto;
-    display: flex;
-    margin-top: -30px;
-    justify-content: space-evenly;
-
-
-    
-}
-
-.searchbar{
-    width: 50vw;
+    margin: auto;
+    margin-top: -30px;    
 }
 
 .innermenu{
@@ -55,4 +47,9 @@
     margin-left: 16px;
     margin-top: 32px;
     font-weight: var(--text-weight-bold);
+}
+
+.container{
+    height: auto;
+    margin-bottom: 15px;
 }

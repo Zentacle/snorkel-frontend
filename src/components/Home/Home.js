@@ -11,10 +11,8 @@ const Menu = () => {
     }, [search]);
 
     return (
-        <div>
-            <div className={styles.innermenu}>
+        <div className={styles.innermenu}>
             <SearchBar value={search} className={styles.searchbar} onChange={(change) => setSearch(change)}/>
-            </div>
         </div>
     )
 }
@@ -37,16 +35,16 @@ const BackImage = () => {
             </div>
     )
 }
-const CarouselTitle = () => {
-    return (
-        <div className={styles.carouseltitle}>Local Favorites in Maui</div>
-    )
-}
+
 const Home1 = () => {
     return(
-        <div style={{height: '100%'}}>
+        <div className={styles.container}>
             <BackImage></BackImage>
-            <CarouselTitle></CarouselTitle>
+            <div className={styles.carouseltitle}>Local Favorites in Maui</div>
+            <MyCarousel></MyCarousel>
+            <div className={styles.carouseltitle}>Viz Reported Recently</div>
+            <MyCarousel></MyCarousel>
+            <div className={styles.carouseltitle}>Top Rated in Maui</div>
             <MyCarousel></MyCarousel>
         </div>
     )

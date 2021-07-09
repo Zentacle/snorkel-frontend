@@ -1,10 +1,17 @@
 .carousel{
-    height: 300px;
-    
-    width: 100%;
-    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    width: 100vw;
+    max-width: 720px;
+    padding: 16px 16px 0 16px;
 }
 
+.sliderTray{
+    display: inline;
+}
 
 .wholecarousel{
     display: flex;
