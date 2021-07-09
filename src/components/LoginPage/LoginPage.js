@@ -6,8 +6,7 @@ import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
 import styles from "../LoginPage/LoginPage.module.css";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
-
-const rootDomain = 'http://127.0.0.1:3000/api'
+import { rootDomain } from 'constants';
 
 const loginUser = (email, password) => () => {
     const body = {

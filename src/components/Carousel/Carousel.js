@@ -5,7 +5,8 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import SlideLocation from './Location/Location';
 import { ArrowBack, ArrowForward } from '@material-ui/icons';
 import useWindowSize from '../../hooks/WindowDimension/WindowDimension';
-import { TramRounded } from '@material-ui/icons';
+import { rootDomain } from 'lib/constants';
+
 const MyCarousel = () => {
   const size = useWindowSize();
 
@@ -65,7 +66,7 @@ function RenderSlides({beaches}) {
 
 
 async function getData() {
-  const res = await fetch('https://snorkel-backend.herokuapp.com/spots/get')
+  const res = await fetch(`${rootDomain}/spots/get`)
   const data =  await res.json()
   
   return data.data;
