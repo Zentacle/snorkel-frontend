@@ -4,27 +4,30 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
+import Link from "next/link";
 const SlideLocation = ({ ...props }) => {
     const router = useRouter();
 
     return (
-        <div className={styles.slide} onClick={() => router.push(`/Beach/${props.info.id}`)}>
-            <div className={styles.slidepic}>
-                <Image className={styles.image} src={props.info.hero_img} alt="picture" objectFit="contain" layout="fill"></Image>
-                
-            </div>
+        <Link href={`/Beach/${props.info.id}`}>
+            <a className={styles.slide}>
+                <div className={styles.slidepic}>
+                    <Image className={styles.image} src={props.info.hero_img} alt="picture" objectFit="contain" layout="fill"></Image>
 
-            <div className={styles.locationtext}>
-                {props.info.name}
-                <br></br>
-                <Rating fractions={2}
-                    emptySymbol={(<Star className={styles.starempty}></Star>)}
-                    fullSymbol={(<Star className={styles.starfull}></Star>)}
-                    initialRating={props.info.rating}
-                    readonly></Rating>
-            </div>
+                </div>
 
-        </div>
+                <div className={styles.locationtext}>
+                    {props.info.name}
+                    <br></br>
+                    <Rating fractions={2}
+                        emptySymbol={(<Star className={styles.starempty}></Star>)}
+                        fullSymbol={(<Star className={styles.starfull}></Star>)}
+                        initialRating={props.info.rating}
+                        readonly></Rating>
+                </div>
+
+            </a>
+        </Link>
     )
 }
 
