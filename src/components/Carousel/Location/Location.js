@@ -8,7 +8,7 @@ const SlideLocation = ({ ...props }) => {
     const router = useRouter();
     console.log(props);
     return (
-        <Card className={styles.slide} onClick={() => router.push('/Beach/1')}>
+        <Card className={styles.slide} onClick={() => router.push(`/Beach/${props.info.id}`)}>
             <div className={styles.slidepic}>
                 <Image className={styles.image} src={props.info.hero_img} alt="picture" objectFit="contain" layout="fill"></Image>
             </div>
