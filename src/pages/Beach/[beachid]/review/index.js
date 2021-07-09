@@ -1,5 +1,5 @@
+import ReviewPage from "components/Reviews/ReviewPage/ReviewPage";
 
-import ReviewPage from "../../components/Reviews/ReviewPage/ReviewPage";
 const Review = () => {
     return (
         <ReviewPage>

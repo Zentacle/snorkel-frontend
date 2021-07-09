@@ -47,7 +47,7 @@ const CreateAccount = () => {
                 <SignupInput value={username} onChange={ setUsername} type="Username"></SignupInput>
                 <SignupInput value={email} onChange={ setEmail } type="Email"></SignupInput>
                 <SignupInput value={password} onChange={ setPassword } type="Password"></SignupInput>
-                <PrimaryButton onClick={ () => registerUser(email, password, name, username) }>Create Account</PrimaryButton>
+                <PrimaryButton onClick={ registerUser(email, password, name, username) }>Create Account</PrimaryButton>
                 <div className={styles.bottominfo}>
                     Already have an account?&nbsp;
                     <Link href="/login">
