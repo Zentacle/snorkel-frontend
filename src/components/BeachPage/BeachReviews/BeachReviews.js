@@ -11,7 +11,7 @@ async function getData() {
             'Content-Type': 'application/json'
         }
     }).then(response => {
-        console.log(response.json());
+        return response.json();
         
     })
   }
@@ -26,7 +26,7 @@ const BeachReviews = () => {
                 <div className={styles.reviewbutton} onClick={() => router.push(`./${beachid}/review`)}>Write a Review</div>
             </div>
             <br/>
-            <IndividualReview review="the review"></IndividualReview>
+            {reviews && <IndividualReview review={reviews[0]}></IndividualReview>}
         </div>
     )
 }

@@ -2,10 +2,11 @@ import styles from "../IndividualReview/IndividualReview.module.css";
 import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
 const IndividualReview = ({review}) => {
+    console.log(review);
     return (
         <div className={styles.container}>
             
-            {/* <div className={styles.outerupper}>
+            <div className={styles.outerupper}>
             <div className={styles.imageouter}>
             image
             </div>
@@ -26,7 +27,7 @@ const IndividualReview = ({review}) => {
             </div>
             <div className={styles.outerlower}>
 
-            </div> */}
+            </div>
             </div>
     )
 }

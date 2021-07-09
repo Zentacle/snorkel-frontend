@@ -14,3 +14,8 @@
   transition: transform .5s;
   width: 100%;
 }
+
+.button:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+}
