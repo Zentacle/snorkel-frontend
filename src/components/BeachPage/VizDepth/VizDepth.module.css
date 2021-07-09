@@ -1,14 +1,14 @@
 .container{
     display: flex;
     justify-content: space-around;
+    padding: 16px 24px 0 24px;
+    margin-bottom: 16px;
 }
 
 .viz, .depth{
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    width: 150px;
-
+    flex-grow: 1;
 }
 
 .depthinfo, .actualdepth, .vizinfo, .actualviz{
@@ -17,10 +17,11 @@
 
 .depthinfo, .vizinfo{
     font-size: 10px;
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--text-weight-normal);
+    color: #5a5a5a;
 }
 
 .actualdepth, .actualviz{
-    font-size: 10px;
-    font-weight: var(--font-weight-bold);
+    font-size: 14px;
+    font-weight: var(--text-weight-bold);
 }

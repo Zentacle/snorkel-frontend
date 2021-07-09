@@ -1,12 +1,14 @@
-.pagetitle{
-    z-index: 2;
- 
-    position: relative;   
+.pageHeroInfo {
     color: white;
+    position: absolute;
+    bottom: 32px;
+    margin: 0 24px;
+}
+
+.pagetitle{
+    position: relative;   
     font-weight: var(--text-weight-bold);
-    padding-top: 150px;
-    padding-left: 50px;
-   
+    font-size: 24px;
 }
 
 .imageinner {
@@ -26,13 +28,13 @@
 
 .beachdescription{
     font-weight: var(--text-weight-normal) !important;
+    font-size: 14px;
 }
 
 .menu{
     width: 100%;
-    height: 50px;
+    height: 55px;
     background-color: var(--primary-color);
-    margin-top: -5px;
 }
 
 .buttoncontainer{
@@ -41,11 +43,12 @@
 }
 
 .buttoncircle{
-    width: 50px;
-    height: 50px;
+    margin: auto;
+    width: 48px;
+    height: 48px;
     border-radius: 25px;
     background-color: white;
-    margin-top: -25px;
+    margin-top: -24px;
     z-index: 99;
     box-shadow: var(--box-shadow);
     display: flex;
@@ -63,12 +66,13 @@
 .buttonouter{
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .buttonlabel{
     text-align: center;
     margin-top: 5px;
-    font-size: 10px;
+    font-size: 14px;
     color: white;
 }
 
