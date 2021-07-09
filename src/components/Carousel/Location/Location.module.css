@@ -5,6 +5,8 @@
     background-color: white;
     flex-shrink: 0;
     overflow: hidden;
+    position: relative;
+    transform: translateZ(0)
 }
 
 
@@ -13,7 +15,6 @@
     height: 160px;
 
     position: relative;
-    overflow: hidden;
 }
 
 .image{
