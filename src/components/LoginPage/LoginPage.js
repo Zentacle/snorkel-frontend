@@ -48,7 +48,7 @@ const LoginPage = () => {
                 <SignupInput value={password} onChange={ setPassword } type="Password"></SignupInput>
                 <PrimaryButton onClick={ loginUser(email, password) }>Log In</PrimaryButton>
                 <div className={styles.bottominfo}>
-                    Don't have an account?&nbsp;
+                    Don&apos;t have an account?&nbsp;
                     <Link href="/register">
                         <span className={styles.createone}>
                             Create one!

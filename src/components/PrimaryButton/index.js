@@ -1,9 +1,11 @@
 import styles from './styles.module.css';
 
-export default ({ children, onClick }) => {
+const PrimaryButton = ({ children, onClick }) => {
   return (
     <button onClick={ onClick } className={styles.button}>
         { children }
     </button>
   )
 }
+
+export default PrimaryButton

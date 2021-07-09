@@ -1,6 +1,8 @@
 import styles from "../IndividualReview/IndividualReview.module.css";
 import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
+import Image from 'next/image';
+
 const IndividualReview = ({ review }) => {
     console.log(review);
     return (
@@ -8,7 +10,7 @@ const IndividualReview = ({ review }) => {
 
             <div className={styles.outerupper}>
                 <div className={styles.imageouter}>
-                    <img className={styles.profilePic} src={review.user.profile_pic} />
+                    <Image className={styles.profilePic} src={review.user.profile_pic} />
                 </div>
                 <div className={styles.centerouter}>
                     <div className={styles.centerupper}>
