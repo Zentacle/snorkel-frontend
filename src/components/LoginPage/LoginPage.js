@@ -6,7 +6,7 @@ import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
 import styles from "../LoginPage/LoginPage.module.css";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
-import { rootDomain } from 'constants';
+import { rootDomain } from 'lib/constants';
 
 const loginUser = (email, password) => () => {
     const body = {
@@ -46,7 +46,7 @@ const LoginPage = () => {
                 <Title></Title>
                 <SignupInput value={email} onChange={ setEmail } type="Email"></SignupInput>
                 <SignupInput value={password} onChange={ setPassword } type="Password"></SignupInput>
-                <PrimaryButton onClick={ () => loginUser(email, password) }>Log In</PrimaryButton>
+                <PrimaryButton onClick={ loginUser(email, password) }>Log In</PrimaryButton>
                 <div className={styles.bottominfo}>
                     Don't have an account?&nbsp;
                     <Link href="/register">

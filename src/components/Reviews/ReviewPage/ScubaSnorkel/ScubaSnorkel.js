@@ -2,16 +2,15 @@ import styles from "./ScubaSnorkel.module.css";
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import React from "react";
-const ScubaSnorkel = () => {
-    const [activityType, setType] = React.useState('');
+const ScubaSnorkel = ({ value, onChange }) => {
 
     const handleToggle = (event, newType) => {
-        setType(newType);
+        onChange(newType);
     }
 
     return (
         <div className={styles.container}>
-            <ToggleButtonGroup value={activityType} onChange={handleToggle} exclusive style={{ width: "100%" }}>
+            <ToggleButtonGroup value={value} onChange={handleToggle} exclusive style={{ width: "100%" }}>
                 <ToggleButton className={styles.button} value="snorkel">
                     <div className={styles.button}>
                         Snorkel

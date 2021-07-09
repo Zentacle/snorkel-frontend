@@ -6,7 +6,7 @@ import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
 const SlideLocation = ({ ...props }) => {
     const router = useRouter();
-    console.log(props);
+
     return (
         <Card className={styles.slide} onClick={() => router.push(`/Beach/${props.info.id}`)}>
             <div className={styles.slidepic}>

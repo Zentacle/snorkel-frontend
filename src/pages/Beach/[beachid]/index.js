@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import Layout from "components/Layout/Layout";
 import BeachPage from "components/BeachPage/BeachPage";
 
@@ -14,9 +16,12 @@ const beach = {
 }
 
 const Beach = () => {
+    const router = useRouter()
+    const { beachid } = router.query
+
     return (
         <Layout>
-            <BeachPage beach={ beach }></BeachPage>
+            <BeachPage beach={ beach } beachid={beachid}></BeachPage>
         </Layout>
     )
 }

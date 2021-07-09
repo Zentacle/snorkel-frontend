@@ -49,7 +49,7 @@ const BeachPage = (props) => {
     return (
         <div>
             <BackImage beach={ props.beach } />
-            <BeachInfo />
+            <BeachInfo beachid={ props.beachid } />
         </div>
     )
 }
