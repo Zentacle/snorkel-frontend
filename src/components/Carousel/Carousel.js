@@ -36,7 +36,7 @@ const MyCarousel = () => {
 
   return (
     data && <div className={styles.carousel}>
-      { data.map(beach => (<SlideLocation info={beach}></SlideLocation>)) }
+      { data.map(beach => (<SlideLocation key={ beach.id } info={beach}></SlideLocation>)) }
     </div>
   );
 }
