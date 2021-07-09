@@ -11,7 +11,7 @@ const BackImage = (props) => {
             <div className={styles.imageinner} style={{ backgroundImage: `url(${props.beach.hero_img})` }}>
                 <div className={styles.overlay} />
                 <div className={styles.pageHeroInfo}>
-                    <div className={styles.pagetitle}>{props.beach.name}</div>
+                    <h1 className={styles.pagetitle}>{props.beach.name}</h1>
                     <div className={styles.stars}>
                         <Rating
                             fractions={2}

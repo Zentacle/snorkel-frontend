@@ -9,6 +9,7 @@
     position: relative;   
     font-weight: var(--text-weight-bold);
     font-size: 24px;
+    margin: 0;
 }
 
 .imageinner {
