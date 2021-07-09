@@ -1,21 +1,8 @@
 import Image from "next/image"
 import styles from "./Home.module.css"
-import SearchBar from "material-ui-search-bar"
+import SearchBar from "components/SearchBar"
 import React from "react";
 import MyCarousel from "../Carousel/Carousel"
-
-const Menu = () => {
-    const [search, setSearch] = React.useState('');
-    React.useEffect(()=>{
-        console.log(search);
-    }, [search]);
-
-    return (
-        <div className={styles.innermenu}>
-            <SearchBar value={search} className={styles.searchbar} onChange={(change) => setSearch(change)}/>
-        </div>
-    )
-}
 
 const BackImage = () => {
     return (
@@ -30,7 +17,7 @@ const BackImage = () => {
                 <div className={styles.pagetitle}>Whats the viz?</div>
                 <div className={styles.menu}>
                     
-                    <Menu></Menu>
+                    <SearchBar></SearchBar>
                 </div>
             </div>
     )

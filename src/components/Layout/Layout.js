@@ -6,7 +6,7 @@ const Layout = ({children}) => {
     return (
         <div className={styles.container}>
         <Head>
-          <title>SnorkelFinder</title>
+          <title>DiveBriefing</title>
           <link rel="icon" href="/favicon.ico"/>
         </Head>
         <Header></Header>

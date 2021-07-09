@@ -9,6 +9,14 @@
     position: relative;
 }
 
+.menu{
+    z-index: 1;
+    width: 80%;
+    height: auto;
+    margin: auto;
+    margin-top: -30px;    
+  }
+
 .imageinner{
    
     top: 0;
@@ -16,18 +24,6 @@
     height: auto;
     width: 100%;
     z-index: 0;
-}
-
-.menu{
-    z-index: 1;
-    width: 80%;
-    height: auto;
-    margin: auto;
-    margin-top: -30px;    
-}
-
-.innermenu{
-    width: 100%;
 }
 
 .pagetitle{
