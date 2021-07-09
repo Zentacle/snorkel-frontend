@@ -16,7 +16,7 @@ async function getData(id) {
     })
   }
   
-const BeachReviews = () => {
+const BeachReviews = (props) => {
     const router = useRouter();
     const { beachid } = router.query
     const [reviews, setReviews] = React.useState(null);
@@ -25,7 +25,7 @@ const BeachReviews = () => {
             if(!router.isReady) return;
     
             if (!props.name) {
-                fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
+                fetch(`${rootDomain}/reviews/get?beach_id=${beachid}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ const BeachReviews = () => {
                 }).then(response => {
                     return response.json();
                 }).then(data => {
-                    setName(data.data.name);
+                    setReviews(data.data);
                 })
             }
         }, [router.isReady])
