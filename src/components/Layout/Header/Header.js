@@ -6,8 +6,8 @@ import Link from "next/link";
 const Header = () => {
 
     return (
-        <div>
-            <div className={styles.header}>
+        <div className={styles.header}>
+            <div className={styles.headercontainer}>
                 <div className={styles.headerbutton}>
                     <Link className={styles.innerheaderbutton} href='/'>
                         <a className={styles.headertitle}>
@@ -20,7 +20,6 @@ const Header = () => {
                         <a className={styles.loginbutton}>Create Account</a>
                     </Link>
                 </div>
-
             </div>
         </div>
     );

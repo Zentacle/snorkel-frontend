@@ -1,9 +1,14 @@
 .header {
-    display: flex;
-    align-items: center;
     background: white;
-    height: 40px;
     font-weight: var(--text-weight-bold);
+}
+
+.headercontainer {
+    align-items: center;
+    display: flex;
+    height: 40px;
+    margin: auto;
+    max-width: 720px;
     padding: 0 16px;
 }
 
