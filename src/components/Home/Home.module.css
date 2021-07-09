@@ -48,3 +48,8 @@
     margin-top: 32px;
     font-weight: var(--text-weight-bold);
 }
+
+.container{
+    height: auto;
+    margin-bottom: 15px;
+}

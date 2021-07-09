@@ -50,7 +50,7 @@ const CreateAccount = () => {
                 <PrimaryButton onClick={ registerUser(email, password, name, username) }>Create Account</PrimaryButton>
                 <div className={styles.bottominfo}>
                     Already have an account?&nbsp;
-                    <Link href="/login">
+                    <Link href="/Login">
                         <span className={styles.createone}>
                             Login!
                         </span>

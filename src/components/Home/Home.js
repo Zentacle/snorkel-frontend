@@ -38,7 +38,7 @@ const BackImage = () => {
 
 const Home1 = () => {
     return(
-        <div style={{height: '100vh'}}>
+        <div className={styles.container}>
             <BackImage></BackImage>
             <div className={styles.carouseltitle}>Local Favorites in Maui</div>
             <MyCarousel></MyCarousel>
