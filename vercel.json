@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://snorkel-backend.herokuapp.com/:path*"
+    },
+    {
+      "source": "/api/:path*/",
+      "destination": "https://snorkel-backend.herokuapp.com/:path*/"
+    }
+  ]
+}
