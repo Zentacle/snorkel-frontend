@@ -6,7 +6,7 @@
     flex-wrap: nowrap;
     width: 100vw;
     max-width: 720px;
-    margin: 16px 16px 0 16px;
+    padding: 16px 16px 0 16px;
 }
 
 .sliderTray{

@@ -11,10 +11,8 @@ const Menu = () => {
     }, [search]);
 
     return (
-        <div>
-            <div className={styles.innermenu}>
+        <div className={styles.innermenu}>
             <SearchBar value={search} className={styles.searchbar} onChange={(change) => setSearch(change)}/>
-            </div>
         </div>
     )
 }
