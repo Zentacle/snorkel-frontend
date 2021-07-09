@@ -21,3 +21,17 @@
     width: 51px;
     height: 51px;
 }
+
+.profilePic {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+
+.centerouter {
+    margin: 0 4px;
+}
+
+.outerlower {
+    margin: 8px 0;
+}

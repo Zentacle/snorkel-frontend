@@ -36,18 +36,7 @@ const MyCarousel = () => {
 
   return (
     data && <div className={styles.carousel}>
-      <CarouselProvider
-        isIntrinsicHeight={true}
-        totalSlides={data.length}
-        visibleSlides={visslides}
-        infinite={true}
-      >
-        <RenderSlides beaches={data}></RenderSlides>
-        <div className={styles.buttons}>
-          <ButtonBack className={styles.buttonback}><ArrowBack></ArrowBack></ButtonBack>
-          <ButtonNext className={styles.buttonnext}><ArrowForward></ArrowForward></ButtonNext>
-        </div>
-      </CarouselProvider>
+      { data.map(beach => (<SlideLocation info={beach}></SlideLocation>)) }
     </div>
   );
 }

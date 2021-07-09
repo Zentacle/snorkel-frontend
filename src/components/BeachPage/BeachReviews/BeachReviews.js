@@ -25,7 +25,7 @@ const BeachReviews = (props) => {
             if(!router.isReady) return;
     
             if (!props.name) {
-                fetch(`${rootDomain}/reviews/get?beach_id=${beachid}`, {
+                fetch(`${rootDomain}/review/get?beach_id=${beachid}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -33,6 +33,7 @@ const BeachReviews = (props) => {
                 }).then(response => {
                     return response.json();
                 }).then(data => {
+                    console.log(data.data);
                     setReviews(data.data);
                 })
             }
@@ -45,7 +46,10 @@ const BeachReviews = (props) => {
                 <div className={styles.reviewbutton} onClick={() => router.push(`./${beachid}/review`)}>Write a Review</div>
             </div>
             <br/>
-            {reviews && <IndividualReview review={reviews[0]}></IndividualReview>}
+            { reviews && reviews.length
+                ? reviews.map(review => <IndividualReview review={review}></IndividualReview>)
+                : <div>No reviews yet. Be the first!</div>
+            }
         </div>
     )
 }

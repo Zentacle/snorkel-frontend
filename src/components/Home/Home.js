@@ -44,7 +44,7 @@ const CarouselTitle = () => {
 }
 const Home1 = () => {
     return(
-        <div style={{height: '100%'}}>
+        <div style={{height: '100vh'}}>
             <BackImage></BackImage>
             <CarouselTitle></CarouselTitle>
             <MyCarousel></MyCarousel>
