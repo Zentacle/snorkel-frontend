@@ -15,7 +15,7 @@ const VizDepth = ({ date, viz }) => {
             <div className={styles.viz}>
                 <div className={styles.vizinfo}>Viz {date && `(last reported ${hours}h ago)`}
                 </div>
-                <div className={styles.actualviz}>{ viz || 'N/A' }</div>
+                <div className={styles.actualviz}>{ `${viz}ft` || 'N/A' }</div>
             </div>
             <div className={styles.depth}>
                 <div className={styles.depthinfo}>Max Depth
