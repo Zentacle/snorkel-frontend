@@ -38,7 +38,7 @@ const SearchPage = (props) => {
     useEffect(() => {
         if (!router.isReady) { return; }
 
-        fetch(`${rootDomain}/spots/search?search_term=${search_term}`, {
+        fetch(`${rootDomain}/spots/search?search_term=${searchTerm}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,9 +53,9 @@ const SearchPage = (props) => {
     return (
         <Layout>
           <SearchBar value={ searchTerm } onChange={ setSearchTerm }/>
-            { results.map(result => 
-              <Location key={ result.id } info={result}/>
-            )
+            { results.length
+                ? results.map(result => <Location key={ result.id } info={result}/>)
+                : <div>No results found. We currently only support Maui locations</div>
             }
         </Layout>
     )

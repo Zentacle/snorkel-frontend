@@ -48,7 +48,7 @@ const BeachReviews = (props) => {
             <br/>
             { reviews && reviews.length
                 ? reviews.map(review => <IndividualReview key={ review.id } review={review}></IndividualReview>)
-                : <div>No reviews yet. Be the first!</div>
+                : <div className={ styles.emptyState }>No reviews yet. Be the first!</div>
             }
         </div>
     )

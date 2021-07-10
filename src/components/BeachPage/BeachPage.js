@@ -8,7 +8,7 @@ import Link from 'next/link';
 const BackImage = (props) => {
     return (
         <div className={styles.image}>
-            <div className={styles.imageinner} style={{ backgroundImage: `url(${props.beach.hero_img})` }}>
+            <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
                 <div className={styles.overlay} />
                 <div className={styles.pageHeroInfo}>
                     <h1 className={styles.pagetitle}>{props.beach.name}</h1>

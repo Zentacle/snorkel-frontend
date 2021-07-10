@@ -27,6 +27,8 @@
 
 .spotName {
     font-weight: var(--text-weight-bold);
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .location {

@@ -23,3 +23,8 @@
     transform: scale(1.1);
     cursor: pointer;
 }
+
+.emptyState {
+    text-align: center;
+    padding-bottom: 100px;
+}

@@ -7,7 +7,7 @@ import { ArrowBack, ArrowForward } from '@material-ui/icons';
 import useWindowSize from '../../hooks/WindowDimension/WindowDimension';
 import { rootDomain } from 'lib/constants';
 
-const MyCarousel = () => {
+const MyCarousel = (props) => {
   const size = useWindowSize();
 
   let visslides = 3;
@@ -21,15 +21,10 @@ const MyCarousel = () => {
   React.useEffect(() => {
 
   }, [visslides])
-  const info = {
-    "hello": "moto",
-    "nice": "day"
-  };
-  
-  
+
   const [data, setData] = React.useState(null);
   React.useEffect(()=>{
-    getData().then((data) => setData(data));
+    getData(props.sort).then((data) => setData(data));
   }, []);
   
   
@@ -54,8 +49,8 @@ function RenderSlides({beaches}) {
 }
 
 
-async function getData() {
-  const res = await fetch(`${rootDomain}/spots/get`)
+async function getData(sort) {
+  const res = await fetch(`${rootDomain}/spots/get?sort=${sort}`,)
   const data =  await res.json()
   
   return data.data;

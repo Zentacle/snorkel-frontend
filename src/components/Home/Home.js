@@ -30,9 +30,9 @@ const Home1 = () => {
             <div className={styles.carouseltitle}>Local Favorites in Maui</div>
             <MyCarousel></MyCarousel>
             <div className={styles.carouseltitle}>Viz Reported Recently</div>
-            <MyCarousel></MyCarousel>
+            <MyCarousel sort='latest'></MyCarousel>
             <div className={styles.carouseltitle}>Top Rated in Maui</div>
-            <MyCarousel></MyCarousel>
+            <MyCarousel sort='top'></MyCarousel>
         </div>
     )
 }

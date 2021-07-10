@@ -2,3 +2,40 @@
     background-color: white;
     
 }
+
+.entryMap {
+    margin: 16px;
+    border-radius: 8px;
+    height: 140px;
+    background-size: cover;
+    display:flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: 12px;
+}
+
+.viewButton {
+    outline: none;
+    background-color: white;
+    color: var(--primary-color);
+    border: 2px var(--primary-color) solid;
+    border-radius: 8px;
+    padding: 12px 0;
+    display: block;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+}
+
+.overlay {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.2);
+    height: 100%;
+}
