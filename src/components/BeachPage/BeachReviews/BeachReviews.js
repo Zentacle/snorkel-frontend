@@ -33,7 +33,7 @@ const BeachReviews = (props) => {
                 }).then(response => {
                     return response.json();
                 }).then(data => {
-                    console.log(data.data);
+                    
                     setReviews(data.data);
                 })
             }

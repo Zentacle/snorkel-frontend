@@ -8,7 +8,7 @@ import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { useCurrentUser } from '../../context/usercontext'
-
+import router from "next/router";
 
 const Title = () => {
     return (
@@ -43,7 +43,7 @@ const LoginPage = () => {
             }
     
             
-            dispatch("here");
+            dispatch();
             
     
     

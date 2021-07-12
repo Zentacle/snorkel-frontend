@@ -16,7 +16,7 @@ const registerUser = (email, password, name, username) => () => {
         name,
         username,
     }
-    fetch(`${rootDomain}/user/signup`, {
+    fetch(`${rootDomain}/user/register`, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
