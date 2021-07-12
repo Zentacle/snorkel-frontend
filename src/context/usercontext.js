@@ -4,7 +4,7 @@ import { rootDomain } from 'lib/constants';
 const UserContext = React.createContext();
 
 function userReducer(state, user) {
-
+    if (user == null){
     fetch(`${rootDomain}/user/me`, {
         method: 'POST',
         //body: JSON.stringify(body),
@@ -22,6 +22,7 @@ function userReducer(state, user) {
         console.log(err)
 
     })
+}
 
     return { user };
 }

@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
 
 
   React.useEffect(() => {
-    console.log('here')
+    
   }, []);
 
   return (
@@ -24,7 +24,7 @@ function SetUser() {
   React.useEffect(() => {
     
     fetch(`${rootDomain}/user/me`, {
-      method: 'POST',
+      method: 'GET',
       //body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'
@@ -36,14 +36,14 @@ function SetUser() {
       dispatch(data)
      
     }).catch((err) => {
-      dispatch("hello")
+      
       console.log(err)
 
     })
     
 
   }, [])
-  console.log(useCurrentUser());
+ 
   return null;
 
 }

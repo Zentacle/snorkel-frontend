@@ -39,7 +39,7 @@ const LoginPage = () => {
             return response.json()
         }).then(data => {
             if (data.auth_token) {
-                //window.location.href = "/";
+                window.location.href = "/";
             }
     
             
