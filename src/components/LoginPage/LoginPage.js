@@ -7,39 +7,50 @@ import styles from "../LoginPage/LoginPage.module.css";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
+import { useCurrentUser } from '../../context/usercontext'
 
-const loginUser = (email, password) => () => {
-    const body = {
-        email,
-        password,
-    }
-    fetch(`${rootDomain}/user/login`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => {
-        return response.json()
-    }).then(data => {
-        if (data.auth_token) {
-            window.location.href = "/";
-        }
-    })
-}
 
 const Title = () => {
     return (
         <div className={styles.titlecontainer}>
             Login to your account
         </div>
+        
     )
 }
 
 const LoginPage = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('')
-
+    const {dispatch} = useCurrentUser()
+    const loginUser = (email, password) => () => {
+        
+        const body = {
+            email,
+            password,
+        }
+        fetch(`${rootDomain}/user/login`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            if (data.auth_token) {
+                //window.location.href = "/";
+            }
+    
+            
+            dispatch("here");
+            
+    
+    
+        })
+    }
+ 
+   
     return (
         <Layout>
             <BackgroundCard>
