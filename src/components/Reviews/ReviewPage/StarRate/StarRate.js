@@ -10,7 +10,7 @@ const StarRate = ({value, onChange}) => {
             </div>
             <div className={styles.ratingcontainer}>
                 <Rating
-                    fractions={2} 
+                    fractions={1} 
                     initialRating={ value }
                     emptySymbol={(<Star className={styles.starempty}></Star>)} 
                     fullSymbol={(<Star className={styles.starfull}></Star>)}

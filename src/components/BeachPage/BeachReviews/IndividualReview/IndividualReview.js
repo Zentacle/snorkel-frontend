@@ -14,7 +14,7 @@ const IndividualReview = ({ review }) => {
 
             <div className={styles.outerupper}>
                 <div className={styles.imageouter}>
-                    <Image className={styles.profilePic} src={review.user.profile_pic} height='48' width='48'/>
+                    { review.user.profile_pic && <Image className={styles.profilePic} src={review.user.profile_pic} height='48' width='48'/> }
                 </div>
                 <div className={styles.centerouter}>
                     <div className={styles.centerupper}>
