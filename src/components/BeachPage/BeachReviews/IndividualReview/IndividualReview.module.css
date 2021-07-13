@@ -35,3 +35,15 @@
 .outerlower {
     margin: 8px 0;
 }
+
+.centerlower {
+    display: flex;
+    align-items: center;
+}
+
+.reviewDate {
+    color: lightslategray;
+    font-size: 12px;
+    margin-left: 4px;
+    margin-top: -2px;
+}
