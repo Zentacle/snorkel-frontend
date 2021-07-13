@@ -37,7 +37,7 @@ export default function Home(props) {
       <Head>
         <meta property="og:title" content="Zentacle" key="title" />
         <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
-        <meta property="og:image" content="https://www.zentacle.com/social_background.png" key="image" />
+        <meta property="og:image" content="https://www.zentacle.com/social_background.jpg" key="image" />
       </Head>
       <div className={styles.container}>
         <div className={styles.image}>
