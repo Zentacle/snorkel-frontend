@@ -1,3 +1,4 @@
+import { rootDomain } from "src/lib/constants";
 export default () => {
   fetch(`${rootDomain}/user/me`, {
     method: 'POST',

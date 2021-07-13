@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
@@ -7,39 +8,46 @@ import styles from "../LoginPage/LoginPage.module.css";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
-
-const loginUser = (email, password) => () => {
-    const body = {
-        email,
-        password,
-    }
-    fetch(`${rootDomain}/user/login`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => {
-        return response.json()
-    }).then(data => {
-        if (data.auth_token) {
-            window.location.href = "/";
-        }
-    })
-}
+import { useCurrentUser } from '../../context/usercontext'
+import router from "next/router";
 
 const Title = () => {
     return (
         <div className={styles.titlecontainer}>
             Login to your account
         </div>
+        
     )
 }
 
 const LoginPage = () => {
+    const router = useRouter();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('')
-
+    const {dispatch} = useCurrentUser()
+    const loginUser = (email, password) => () => {
+        
+        const body = {
+            email,
+            password,
+        }
+        fetch(`${rootDomain}/user/login`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            if (data.auth_token) {
+                router.push('/')
+            }
+            dispatch();
+        })
+    }
+ 
+   
     return (
         <Layout>
             <BackgroundCard>

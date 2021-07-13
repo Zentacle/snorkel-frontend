@@ -13,6 +13,7 @@ export async function getServerSideProps(context) {
   const props = {};
   await Promise.all(sorts.map(async sort => {
     let res = await fetch(`${rootDomain}/spots/get?sort=${sort}`,)
+    
     const data = await res.json()
     props[sort] = data.data;
     return data;

@@ -1,9 +1,21 @@
 import styles from "./Header.module.css";
-import Image from "next/image";
-import router from "next/router";
-import NavSidebar from "../../NavSidebar/NavSidebar";
+
 import Link from "next/link";
+import React from "react";
+import { useCurrentUser } from '../../../context/usercontext'
+
+const Profile = ({ user }) => {
+    if (user) {
+        return <div className={styles.outerprofile}>{user.username}</div>
+    }
+    else return null;
+}
+
+
 const Header = () => {
+
+    let currentuser = useCurrentUser().state;
+
 
     return (
         <div className={styles.header}>
@@ -17,9 +29,9 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className={styles.spaceholder}>
-                    <Link href='/register'>
+                    {currentuser.user && currentuser.user.msg ? <Link href='/register'>
                         <a className={styles.loginbutton}>Create Account</a>
-                    </Link>
+                    </Link> : <Profile user={currentuser.user}></Profile>}
                 </div>
             </div>
         </div>
