@@ -1,7 +1,7 @@
 .image{
     width: 100%;
     
-    height: auto;
+    height: 300px;
     top: 0 !important;
     display: flex;
     flex-direction: column;
@@ -14,29 +14,29 @@
     width: 80%;
     height: auto;
     margin: auto;
-    margin-top: -30px;    
+    margin-top: -24px;    
   }
 
 .imageinner{
-   
-    top: 0;
-    left: 0;
-    height: auto;
+    height: 100%;
     width: 100%;
     z-index: 0;
+    background-size: cover;
+    background-position: center;
 }
 
 .pagetitle{
     z-index: 2;
-    top: 10vw;
-    display: flex;
-    justify-content: space-around;
-    position: absolute;
     width: 100%;
     color: white;
     font-weight: var(--text-weight-bold);
     font-size: 36px;
     text-align: center;
+    margin: -12px 0px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .carouseltitle{

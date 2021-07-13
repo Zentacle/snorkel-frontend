@@ -53,7 +53,7 @@ const Beach = (props) => {
     return (
         <Layout>
             <Head>
-                <meta property="og:title" content={`DiveBriefing - ${beach.name}`} key="title" />
+                <meta property="og:title" content={`Zentacle - ${beach.name}`} key="title" />
                 <meta property="og:description" content={ beach.description } key="description" />
                 <meta property="og:image" content={ beach.hero_img } key="image" />
             </Head>

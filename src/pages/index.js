@@ -34,17 +34,15 @@ export default function Home(props) {
   return (
     <Layout>
       <Head>
-        <meta property="og:title" content="DiveBriefing" key="title" />
+        <meta property="og:title" content="Zentacle" key="title" />
         <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
-        <meta property="og:image" content="https://divebriefing.vercel.app/social_background.png" key="image" />
+        <meta property="og:image" content="https://www.zentacle.com/social_background.png" key="image" />
       </Head>
       <div className={styles.container}>
         <div className={styles.image}>
-          <div className={styles.imageinner}>
-            <Image className={styles.actualimage} height='300' width='720' objectFit="contain" alt="hero" src="/homepageimg.jpeg">
-            </Image>
+          <div className={styles.imageinner} style={{ 'background-image': `url(\'/hero.jpg\')`}}>
+            <div className={styles.pagetitle}>Find your next underwater adventure</div>
           </div>
-          <div className={styles.pagetitle}>Whats the viz?</div>
           <div className={styles.menu}>
 
             <SearchBar></SearchBar>

@@ -12,6 +12,15 @@
     padding: 0 16px;
 }
 
+.headertitlelink {
+    display: flex;
+    align-items: center;
+}
+
+.headertitle {
+    margin-left: 4px;
+}
+
 .spaceholder {
     margin-left: auto;
 }

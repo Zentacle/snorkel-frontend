@@ -10,8 +10,9 @@ const Header = () => {
             <div className={styles.headercontainer}>
                 <div className={styles.headerbutton}>
                     <Link className={styles.innerheaderbutton} href='/'>
-                        <a className={styles.headertitle}>
-                            <span>DiveBriefing</span>
+                        <a className={styles.headertitlelink}>
+                            <Image src='/logo.jpg' height='32' width='32'/>
+                            <span className={styles.headertitle}>Zentacle</span>
                         </a>
                     </Link>
                 </div>
