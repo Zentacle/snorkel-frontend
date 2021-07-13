@@ -54,7 +54,7 @@ export default function Home(props) {
           <MyCarousel data={ props.default }></MyCarousel>
         </div>
         <div>
-          <div className={styles.carouseltitle}>Viz Reported Recently</div>
+          <div className={styles.carouseltitle}>Conditions Reported Recently</div>
           <MyCarousel data={ props.latest }></MyCarousel>
         </div>
         <div>
