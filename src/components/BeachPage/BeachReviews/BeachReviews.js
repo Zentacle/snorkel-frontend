@@ -1,10 +1,13 @@
-import styles from "../BeachReviews/BeachReviews.module.css";
+import React from "react";
 import { useRouter } from "next/router";
+
+import styles from "../BeachReviews/BeachReviews.module.css";
 import IndividualReview from "./IndividualReview/IndividualReview";
 import { rootDomain } from 'lib/constants';
-import React from "react";
+import { useCurrentUser } from 'context/usercontext';
+import { PrimaryLink } from 'components/PrimaryButton';
+
 async function getData(id) {
-    
     fetch(`${rootDomain}/review/get?beach_id=`+ id,{
         method: 'GET',
         headers: {
@@ -39,11 +42,15 @@ const BeachReviews = (props) => {
             }
         }, [router.isReady])
  
-    
+    const { state } = useCurrentUser();
+    const link = state.user && state.user.id
+        ? `./${beachid}/review`
+        : '/Login'
+
     return (
         <div>
             <div className={styles.reviewbuttoncontainer}>
-                <div className={styles.reviewbutton} onClick={() => router.push(`./${beachid}/review`)}>Write a Review</div>
+                <PrimaryLink className={styles.reviewbutton} href={ link }>Write a Review</PrimaryLink>
             </div>
             <br/>
             { reviews && reviews.length

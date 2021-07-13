@@ -51,9 +51,9 @@ const CreateAccount = () => {
                 <div className={styles.bottominfo}>
                     Already have an account?&nbsp;
                     <Link href="/Login">
-                        <span className={styles.createone}>
+                        <a className={styles.createone}>
                             Login!
-                        </span>
+                        </a>
                     </Link>
                 </div>
             </BackgroundCard>

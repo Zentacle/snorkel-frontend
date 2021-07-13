@@ -6,7 +6,8 @@
       "hooks/*": ["src/hooks/*"],
       "pages/*": ["src/pages/*"],
       "styles/*": ["src/styles/*"],
-      "lib/*": ["src/lib/*"]
+      "lib/*": ["src/lib/*"],
+      "context/*": ["src/context/*"]
     }
   }
 }

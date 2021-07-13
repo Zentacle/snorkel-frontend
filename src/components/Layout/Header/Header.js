@@ -1,8 +1,8 @@
 import styles from "./Header.module.css";
 import Image from 'next/image';
 import Link from "next/link";
-import React from "react";
-import { useCurrentUser } from '../../../context/usercontext'
+import React, { useEffect } from "react";
+import { useCurrentUser } from 'context/usercontext';
 
 const Profile = ({ user }) => {
     if (user) {
@@ -13,9 +13,8 @@ const Profile = ({ user }) => {
 
 
 const Header = () => {
-
-    let currentuser = useCurrentUser().state;
-
+    let { state } = useCurrentUser();
+    const currentUser = state.user;
 
     return (
         <div className={styles.header}>
@@ -29,9 +28,12 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className={styles.spaceholder}>
-                    {currentuser.user && currentuser.user.msg ? <Link href='/register'>
-                        <a className={styles.loginbutton}>Create Account</a>
-                    </Link> : <Profile user={currentuser.user}></Profile>}
+                    { currentUser && currentUser.id
+                        ? <Profile user={currentUser}></Profile>
+                        : <Link href='/register'>
+                            <a className={styles.loginbutton}>Create Account</a>
+                        </Link>
+                    }
                 </div>
             </div>
         </div>

@@ -39,11 +39,11 @@ const LoginPage = () => {
             }
         }).then(response => {
             return response.json()
-        }).then(data => {
+        }).then(({data, user}) => {
             if (data.auth_token) {
                 router.push('/')
             }
-            dispatch();
+            dispatch(user);
         })
     }
  
@@ -58,9 +58,9 @@ const LoginPage = () => {
                 <div className={styles.bottominfo}>
                     Don&apos;t have an account?&nbsp;
                     <Link href="/register">
-                        <span className={styles.createone}>
+                        <a className={styles.createone}>
                             Create one!
-                        </span>
+                        </a>
                     </Link>
                 </div>
             </BackgroundCard>
