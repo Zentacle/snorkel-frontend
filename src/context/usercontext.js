@@ -5,7 +5,6 @@ const UserContext = React.createContext();
 
 function userReducer(state, user) {
     if (user == null) {
-        console.log(rootDomain);
         fetch(`${rootDomain}/user/me`, {
             method: 'POST',
             //body: JSON.stringify(body),
