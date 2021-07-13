@@ -4,25 +4,26 @@ import { rootDomain } from 'lib/constants';
 const UserContext = React.createContext();
 
 function userReducer(state, user) {
-    if (user == null){
-    fetch(`${rootDomain}/user/me`, {
-        method: 'POST',
-        //body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => {
-        return response.json()
-    }).then(data => {
+    if (user == null) {
+        console.log(rootDomain);
+        fetch(`${rootDomain}/user/me`, {
+            method: 'POST',
+            //body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return response.json()
+        }).then(data => {
 
-        user = data;
+            user = data;
 
-    }).catch((err) => {
+        }).catch((err) => {
 
-        console.log(err)
+            console.log(err)
 
-    })
-}
+        })
+    }
 
     return { user };
 }
