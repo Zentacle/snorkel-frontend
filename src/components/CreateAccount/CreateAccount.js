@@ -20,7 +20,7 @@ const CreateAccount = () => {
         const body = {
             email,
             password,
-            name,
+            'display_name': name,
             username,
         }
         fetch(`${rootDomain}/user/register`, {

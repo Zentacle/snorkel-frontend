@@ -14,7 +14,10 @@ const IndividualReview = ({ review }) => {
 
             <div className={styles.outerupper}>
                 <div className={styles.imageouter}>
-                    { review.user.profile_pic && <Image className={styles.profilePic} src={review.user.profile_pic} height='48' width='48'/> }
+                    { review.user.profile_pic
+                        ? <Image className={styles.profilePic} src={review.user.profile_pic} height='48' width='48'/>
+                        : <Image className={styles.profilePic} src='/default_profile.png' height='48' width='48' />
+                    }
                 </div>
                 <div className={styles.centerouter}>
                     <div className={styles.centerupper}>
@@ -25,7 +28,7 @@ const IndividualReview = ({ review }) => {
                             fractions={2}
                             emptySymbol={(<Star className={styles.starempty}></Star>)}
                             fullSymbol={(<Star className={styles.starfull}></Star>)}
-                            initialRating={5}
+                            initialRating={review.rating}
                             readonly
                         />
                         <span className={styles.reviewDate}>{ review_date }</span>
