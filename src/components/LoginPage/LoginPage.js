@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
@@ -20,6 +21,7 @@ const Title = () => {
 }
 
 const LoginPage = () => {
+    const router = useRouter();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('')
     const {dispatch} = useCurrentUser()
@@ -39,14 +41,9 @@ const LoginPage = () => {
             return response.json()
         }).then(data => {
             if (data.auth_token) {
-                window.location.href = "/";
+                router.push('/')
             }
-    
-            
             dispatch();
-            
-    
-    
         })
     }
  
