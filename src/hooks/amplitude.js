@@ -10,6 +10,7 @@ export const initAmplitude = (userId) => {
     } else {
       amplitude.getInstance().init('b628782272a6f671076be09a7b6fb6b7');
     }
+    amplitude.getInstance().logEvent('view_app');
     console.log('initialized');
   }
 };
