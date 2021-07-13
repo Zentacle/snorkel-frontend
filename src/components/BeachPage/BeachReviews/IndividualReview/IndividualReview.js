@@ -35,6 +35,9 @@ const IndividualReview = ({ review }) => {
                     </div>
                 </div>
             </div>
+            <div className={ styles.activityContainer }>
+                <span className={ styles.activity }>{review.activity_type}</span>
+            </div>
             <div className={styles.outerlower}>
                 {review.text}
             </div>

@@ -48,3 +48,16 @@
     margin-left: 4px;
     margin-top: -2px;
 }
+
+.activity {
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 2px 4px;
+    color: var(--primary-color);
+    text-transform: capitalize;
+}
+
+.activityContainer {
+    margin: 8px 0;
+}
