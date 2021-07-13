@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import SearchBar from "material-ui-search-bar"
 import React from "react";
+
 import styles from './styles.module.css';
+import { sendEvent } from 'hooks/amplitude';
 
 const Menu = (props) => {
   const router = useRouter();
@@ -16,7 +18,12 @@ const Menu = (props) => {
               value={search}
               className={styles.searchbar}
               onChange={ setSearch }
-              onRequestSearch={() => router.push(`/search?search_term=${search}`)}
+              onRequestSearch={() => {
+                  sendEvent('submit_search', {
+                      'query': search,
+                  });
+                  router.push(`/search?search_term=${search}`
+              )}}
           />
       </div>
   )

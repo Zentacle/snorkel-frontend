@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import Layout from "../Layout/Layout";
@@ -10,6 +10,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { useCurrentUser } from '../../context/usercontext'
 import router from "next/router";
+import { sendEvent, setAmplitudeUserId } from "hooks/amplitude";
 
 const Title = () => {
     return (
@@ -41,12 +42,19 @@ const LoginPage = () => {
             return response.json()
         }).then(({data, user}) => {
             if (data.auth_token) {
+                setAmplitudeUserId(user.id)
+                sendEvent('login_success');
                 router.push('/')
+            } else {
+                sendEvent('login_error');
             }
             dispatch(user);
         })
     }
- 
+
+    useEffect(() => {
+        sendEvent('login_begin');
+    }, [])
    
     return (
         <Layout>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from "next/link";
 
 import styles from "../LoginPage/LoginPage.module.css";
@@ -8,34 +8,42 @@ import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
-
-const registerUser = (email, password, name, username) => () => {
-    const body = {
-        email,
-        password,
-        name,
-        username,
-    }
-    fetch(`${rootDomain}/user/register`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => {
-        return response.json()
-    }).then(data => {
-        if (data.auth_token) {
-            window.location.href = "/";
-        }
-    })
-}
+import { sendEvent } from 'hooks/amplitude';
 
 const CreateAccount = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('')
     const [name, setName] = React.useState('')
     const [username, setUsername] = React.useState('')
+
+    const registerUser = (email, password, name, username) => () => {
+        const body = {
+            email,
+            password,
+            name,
+            username,
+        }
+        fetch(`${rootDomain}/user/register`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            if (data.auth_token) {
+                sendEvent('register_success');
+                window.location.href = "/";
+            } else {
+                sendEvent('register_error');
+            }
+        })
+    }
+
+    useEffect(() => {
+        sendEvent('register_begin');
+    }, [])
 
     return (
         <Layout>

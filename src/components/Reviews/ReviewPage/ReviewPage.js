@@ -9,6 +9,7 @@ import Layout from "../../Layout/Layout";
 import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
+import { sendEvent } from 'hooks/amplitude';
 
 const submitReview = (body) => {
     fetch(`${rootDomain}/review/add`, {
@@ -20,6 +21,9 @@ const submitReview = (body) => {
         },
     }).then(response => {
         if (response.ok) {
+            sendEvent('review_submit', {
+                'site_id': body.beach_id,
+            });
             Router.push(`/Beach/${body['beach_id']}`)
         }
         return response.json()
@@ -38,6 +42,10 @@ const ReviewPage = (props) => {
 
     React.useEffect(() => {
         if (!router.isReady) return;
+
+        sendEvent('review_begin', {
+            'site_id': beachid,
+        })
 
         if (!props.name) {
             fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {

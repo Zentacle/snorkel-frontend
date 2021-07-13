@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from 'next/head';
 import Image from "next/image"
 
@@ -41,7 +41,7 @@ export default function Home(props) {
       </Head>
       <div className={styles.container}>
         <div className={styles.image}>
-          <div className={styles.imageinner} style={{ 'background-image': `url(\'/hero.jpg\')`}}>
+          <div className={styles.imageinner} style={{ 'backgroundImage': `url(\'/hero.jpg\')`}}>
             <div className={styles.pagetitle}>Find your next underwater adventure</div>
           </div>
           <div className={styles.menu}>

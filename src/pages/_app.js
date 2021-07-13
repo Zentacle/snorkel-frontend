@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { initAmplitude } from 'hooks/amplitude';
+
 import '../styles/globals.css'
 import { UserProvider, useCurrentUser } from 'src/context/usercontext';
 import { rootDomain } from "src/lib/constants";
-function MyApp({ Component, pageProps }) {
 
+function MyApp({ Component, pageProps }) {
   return (
     <UserProvider>
       <SetUser></SetUser>
@@ -16,7 +18,6 @@ function SetUser() {
   const { dispatch } = useCurrentUser();
 
   React.useEffect(() => {
-
     fetch(`${rootDomain}/user/me`, {
       method: 'GET',
       
@@ -26,7 +27,7 @@ function SetUser() {
     }).then(response => {
       return response.json()
     }).then(data => {
-
+      initAmplitude(data.id);
       dispatch(data)
 
     }).catch((err) => {

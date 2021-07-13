@@ -5,6 +5,7 @@ import Layout from "components/Layout/Layout";
 import BeachPage from "components/BeachPage/BeachPage";
 import { rootDomain } from 'lib/constants';
 import Head from 'next/head';
+import { sendEvent } from 'hooks/amplitude';
 
 export async function getServerSideProps(context) {
     const beachid = context.params.beachid;
@@ -35,6 +36,8 @@ const Beach = (props) => {
 
     useEffect(() => {
         if (!router.isReady) { return; }
+
+        sendEvent('beach_view', { site_id: beachid });
 
         if (beach.notFound) {
             fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {

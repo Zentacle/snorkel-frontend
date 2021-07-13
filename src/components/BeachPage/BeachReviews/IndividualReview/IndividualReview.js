@@ -4,11 +4,11 @@ import { Star } from "@material-ui/icons";
 import Image from 'next/image';
 
 const IndividualReview = ({ review }) => {
-    console.log(review);
     const review_date = new Date(review.date_posted).toLocaleString(
         [],
         {day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute:'2-digit'}
     );
+
     return (
         <div className={styles.container}>
 
