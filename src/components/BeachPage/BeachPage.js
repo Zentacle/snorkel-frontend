@@ -5,7 +5,9 @@ import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
 import Link from 'next/link';
 
+
 const BackImage = (props) => {
+
     return (
         <div className={styles.image}>
             <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
@@ -17,7 +19,7 @@ const BackImage = (props) => {
                             fractions={2}
                             emptySymbol={(<Star className={styles.starempty}></Star>)}
                             fullSymbol={(<Star className={styles.starfull}></Star>)}
-                            initialRating={props.beach.rating}
+                            initialRating={props.beach.ratings.average}
                             readonly>
                         </Rating>
                     </div>
