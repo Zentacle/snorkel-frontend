@@ -48,7 +48,7 @@ const BeachReviews = (props) => {
         : '/Login'
 
     return (
-        <div>
+        <div className={styles.reviewContainer}>
             <div className={styles.reviewbuttoncontainer}>
                 <PrimaryLink className={styles.reviewbutton} href={ link }>Write a Review</PrimaryLink>
             </div>
