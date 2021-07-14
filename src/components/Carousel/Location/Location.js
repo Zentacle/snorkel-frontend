@@ -19,7 +19,7 @@ const SlideLocation = ({ ...props }) => {
                 <div className={styles.locationInfoContainer}>
                     <div className={styles.spotName}>{props.info.name}</div>
                     <div className={styles.location}>{props.info.location_city}</div>
-                    <div className={styles.ratingContainer}>
+                    <div className={styles.ratingContainer} title={ props.info.rating }>
                         <Rating
                             fractions={2}
                             emptySymbol={(<Star className={styles.starempty}></Star>)}
