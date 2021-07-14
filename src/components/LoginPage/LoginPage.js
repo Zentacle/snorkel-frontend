@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { toaster } from 'evergreen-ui';
 
 import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
@@ -39,16 +40,21 @@ const LoginPage = () => {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            return response.json()
-        }).then(({data, user}) => {
-            if (data.auth_token) {
-                setAmplitudeUserId(user.id)
-                sendEvent('login_success');
-                router.push('/')
-            } else {
-                sendEvent('login_error');
-            }
-            dispatch(user);
+            response.json().then(({ data, user, msg }) => {
+                if (response.ok) {
+                    if (data.auth_token) {
+                        setAmplitudeUserId(user.id)
+                        sendEvent('login_success');
+                        router.push('/')
+                    } else {
+                        sendEvent('login_error');
+                    }
+                    dispatch(user);
+                } else {
+                    sendEvent('login_error');
+                    toaster.danger(msg)
+                }
+            })
         })
     }
 

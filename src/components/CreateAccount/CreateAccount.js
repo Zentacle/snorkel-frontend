@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Link from "next/link";
+import { toaster } from 'evergreen-ui';
 
 import styles from "../LoginPage/LoginPage.module.css";
 //uses borrowed styling
@@ -30,14 +31,19 @@ const CreateAccount = () => {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            return response.json()
-        }).then(data => {
-            if (data.auth_token) {
-                sendEvent('register_success');
-                window.location.href = "/";
-            } else {
-                sendEvent('register_error');
-            }
+            response.json().then(data => {
+                if (response.ok) {
+                    if (data.auth_token) {
+                        sendEvent('register_success');
+                        window.location.href = "/";
+                    } else {
+                        sendEvent('register_error');
+                    }
+                } else {
+                    sendEvent('register_error');
+                    toaster.danger(data.msg);
+                }
+            })
         })
     }
 
