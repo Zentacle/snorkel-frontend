@@ -25,6 +25,8 @@ const submitReview = (body) => {
                 'site_id': body.beach_id,
             });
             Router.push(`/Beach/${body['beach_id']}`)
+        } else {
+            response.json().then(({msg}) => toaster.danger(msg));
         }
         return response.json()
     })
