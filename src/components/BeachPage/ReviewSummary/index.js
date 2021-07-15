@@ -4,14 +4,15 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Rating from "react-rating";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const TotalReviews = ({ratings}) =>{
+const TotalReviews = ({rating}) =>{
+    
     return (
         <div className={styles.averagecontainer}>
-            <div className={styles.averagerating}>{ratings.average && (ratings.average).toString().substr(0, 3)}</div>
+            <div className={styles.averagerating}>{rating && (rating).toString().substr(0, 3)}</div>
             <div className={styles.averagestars}>
             <Rating className={styles.rating}
                     fractions={10} 
-                    initialRating={ ratings.average }
+                    initialRating={ rating }
                     emptySymbol={(<Star className={styles.staremptysmall}></Star>)} 
                     fullSymbol={(<Star className={styles.starfullsmall}></Star>)}
                     readonly
@@ -22,9 +23,9 @@ const TotalReviews = ({ratings}) =>{
     )
 }
 
-const ReviewSummary = ({ratings}) =>{
+const ReviewSummary = ({ratings, rating, num_reviews}) =>{
     
-    let total = ratings['total']
+    let total = num_reviews
     
     return (
         <div className={styles.outerdiv}>
@@ -48,7 +49,7 @@ const ReviewSummary = ({ratings}) =>{
                 <div className={styles.bar5}><ProgressBar className={styles.progbar} variant="warning" now={(ratings[1]/total) * 100}></ProgressBar></div>
 
             </div>
-        <TotalReviews ratings={ratings}></TotalReviews>
+        <TotalReviews rating={rating}></TotalReviews>
         </div>
     )
 
