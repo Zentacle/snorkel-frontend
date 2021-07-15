@@ -19,7 +19,7 @@ const BackImage = (props) => {
                             fractions={2}
                             emptySymbol={(<Star className={styles.starempty}></Star>)}
                             fullSymbol={(<Star className={styles.starfull}></Star>)}
-                            initialRating={props.beach.ratings.average}
+                            initialRating={props.beach.rating}
                             readonly>
                         </Rating>
                     </div>
