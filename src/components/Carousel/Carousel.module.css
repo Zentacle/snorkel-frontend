@@ -36,6 +36,16 @@
     cursor: pointer;
 }
 
+@media (hover: none) {
+    .carousel{
+        overflow: scroll;
+    }
+
+    .button {
+        display: none;
+    }
+}
+
 .caret {
     margin: auto;
 }
