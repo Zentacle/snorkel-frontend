@@ -13,14 +13,14 @@ const EntryMap = ({ src }) => (
     </a>
 )
 
-const BeachInfo = ({ description, entry_map, last_review_date, last_review_viz, ratings, rating, num_reviews }) => {
+const BeachInfo = ({ id, description, entry_map, last_review_date, last_review_viz, ratings, rating, num_reviews }) => {
     return (
         <div className={styles.container}>
             <VizDepth date={ last_review_date } viz={ last_review_viz }></VizDepth>
             <BeachAbout description={ description }></BeachAbout>
             <EntryMap src={ entry_map }/>
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
-            <BeachReviews></BeachReviews>
+            <BeachReviews beachid={id}></BeachReviews>
         </div>
     )
 }

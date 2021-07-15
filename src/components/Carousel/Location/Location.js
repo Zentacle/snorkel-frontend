@@ -9,7 +9,7 @@ const SlideLocation = ({ ...props }) => {
     const router = useRouter();
 
     return (
-        <Link href={`/Beach/${props.info.id}`}>
+        <Link href={props.info.url}>
             <a className={styles.slide} style={props.style}>
                 <div className={styles.slidepic}>
                     <Image className={styles.image} src={props.info.hero_img} alt="picture" objectFit="contain" layout="fill"></Image>
