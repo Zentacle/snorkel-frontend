@@ -6,6 +6,7 @@ import Location from "components/Carousel/Location/Location";
 import { rootDomain } from 'lib/constants';
 import SearchBar from 'components/SearchBar';
 import Head from 'next/head';
+import styles from './styles.module.css';
 
 export async function getServerSideProps(context) {
     const search_term = context.query.search_term;
@@ -52,11 +53,15 @@ const SearchPage = (props) => {
 
     return (
         <Layout>
-          <SearchBar value={ searchTerm } onChange={ setSearchTerm }/>
-            { results.length
-                ? results.map(result => <Location key={ result.id } info={result}/>)
-                : <div>No results found. We currently only support Maui locations</div>
-            }
+            <div className={ styles.searchContainer}>
+                <SearchBar value={ searchTerm } onChange={ setSearchTerm }/>
+                <div className={ styles.searchResultsContainer }>
+                    { results.length
+                        ? results.map(result => <div className={styles.slide}><Location key={ result.id } info={result}/></div>)
+                        : <div>No results found. We currently only support Maui locations</div>
+                    }
+                </div>
+            </div>
         </Layout>
     )
 }

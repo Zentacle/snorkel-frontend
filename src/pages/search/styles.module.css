@@ -1,0 +1,13 @@
+.searchContainer {
+  margin-top: 12px;
+}
+
+.searchResultsContainer {
+  margin-top: 24px;
+}
+
+.slide {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
