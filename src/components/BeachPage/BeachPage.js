@@ -5,7 +5,9 @@ import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
 import Link from 'next/link';
 
+
 const BackImage = (props) => {
+
     return (
         <div className={styles.image}>
             <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
