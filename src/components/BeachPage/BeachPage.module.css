@@ -16,7 +16,7 @@
     background-size: cover;
     min-height: 250px;
     position:relative;
-    background-position-y: bottom;
+    background-position-y: center;
 }
 
 .overlay {

@@ -10,7 +10,7 @@ const SlideLocation = ({ ...props }) => {
 
     return (
         <Link href={`/Beach/${props.info.id}`}>
-            <a className={styles.slide}>
+            <a className={styles.slide} style={props.style}>
                 <div className={styles.slidepic}>
                     <Image className={styles.image} src={props.info.hero_img} alt="picture" objectFit="contain" layout="fill"></Image>
 

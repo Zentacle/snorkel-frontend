@@ -1,12 +1,43 @@
+.carouselContainer {
+    position: relative;
+}
+
 .carousel{
     display: flex;
     flex-direction: row;
-    overflow: scroll;
+    overflow: hidden;
     white-space: nowrap;
     flex-wrap: nowrap;
     width: 100vw;
     max-width: 720px;
     padding: 16px 16px 0 16px;
+}
+
+.nextButton{
+    right: 0;
+}
+
+.prevButton {
+    left: 0;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.5);
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: space-around;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.caret {
+    margin: auto;
 }
 
 .sliderTray{
