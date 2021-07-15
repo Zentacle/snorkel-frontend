@@ -8,3 +8,9 @@
 .footertext{
     margin-top: 5px;
 }
+
+.footerLink{
+    margin: 0 4px;
+    color: var(--primary-color);
+    text-decoration: underline;
+}
