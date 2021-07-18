@@ -22,13 +22,16 @@
     "js-cookie": "^2.2.1",
     "material-ui-search-bar": "^1.0.0",
     "next": "11.0.1",
+    "next-s3-upload": "^0.1.5",
     "pure-react-carousel": "^1.27.6",
     "react": "17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "17.0.2",
+    "react-dropzone": "^11.3.4",
     "react-minimal-side-navigation": "^1.9.2",
     "react-rating": "^2.0.5",
     "react-router-dom": "^5.2.0",
+    "s3-upload": "^0.1.0",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {

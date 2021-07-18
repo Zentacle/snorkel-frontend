@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie'
-
+import Image from 'next/image';
 import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
@@ -10,6 +10,9 @@ import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
+import { useDropzone } from 'react-dropzone';
+import { useS3Upload } from 'next-s3-upload';
+import { resetWarningCache } from 'prop-types';
 
 const submitReview = (body) => {
     fetch(`${rootDomain}/review/add`, {
@@ -26,11 +29,15 @@ const submitReview = (body) => {
             });
             Router.push(`/Beach/${body['beach_id']}`)
         } else {
-            response.json().then(({msg}) => toaster.danger(msg));
+            response.json().then(({ msg }) => toaster.danger(msg));
         }
         return response.json()
     })
 }
+
+
+
+
 
 const ReviewPage = (props) => {
     const router = useRouter()
@@ -41,6 +48,12 @@ const ReviewPage = (props) => {
     const [name, setName] = React.useState(props.name);
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
+    const [urls, setUrls] = React.useState([]);
+
+    React.useEffect(() => {
+
+    }, [urls])
+
 
     React.useEffect(() => {
         if (!router.isReady) return;
@@ -63,6 +76,115 @@ const ReviewPage = (props) => {
         }
     }, [router.isReady])
 
+
+    const RenderUrls = ({ urls }) => {
+        console.log("render urls")
+        React.useEffect(() => {
+            console.log('url change')
+        }, [urls])
+        return (
+            urls.map(function (object, i) {
+                return (
+                    <div>
+                        <img key={object} className={styles.image} src={object} layout='fill' alt="pic preview" >
+                        </img>
+                    </div>
+                )
+            })
+        )
+
+    }
+
+    const DropZoneArea = () => {
+        const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ accept: 'image/*' });
+
+
+        return (
+
+            <div>
+                {acceptedFiles.length < 2 &&
+                    <div {...getRootProps({ className: 'dropzone' })}>
+                        <input {...getInputProps()} />
+                        <div className={styles.dropzone}>
+                            <div className={styles.fileupload}>
+
+                                <div className={styles.plusicon}>
+                                    +
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                <FileSubmit actualFile={acceptedFiles}></FileSubmit>
+            </div>
+        )
+    }
+
+
+
+    function FileSubmit({ actualFile }) {
+
+
+        let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
+        const [localUrl, changeLocalUrl] = React.useState();
+
+        let f = null;
+
+
+        if (actualFile) {
+            actualFile.map(file => {
+                f = file;
+            })
+        }
+        React.useEffect(() => {
+
+            if (f) {
+                const rand = (Math.random()).toString().substring(3, 10)
+                let testid = rand + f.path
+
+                const myNewFile = new File([f], testid, { type: f.type });
+
+                changeLocalUrl(URL.createObjectURL(myNewFile))
+                console.log("here")
+                console.log(URL.createObjectURL(myNewFile))
+                let images = urls;
+                images.push(URL.createObjectURL(myNewFile))
+                setUrls(images)
+                changeLocalUrl(URL.createObjectURL(myNewFile))
+                // let url = uploadToS3(myNewFile).then(response => {
+
+                //     console.log(response);
+                // });
+                console.log("in filesubmit")
+
+            }
+
+        }, [f]);
+        console.log(localUrl)
+
+
+
+        return (
+            <div>
+                {/* {localUrl &&
+            urls.map(function(object, i){
+                return (
+                    <div>
+                    <img key={object} className={styles.image} src={object} layout='fill' alt="pic preview" >
+                </img>
+                </div>
+                )
+            })
+                
+                
+            } */}
+
+            </div>
+        )
+
+    }
     return (
         <Layout>
             <div className={styles.container}>
@@ -88,6 +210,29 @@ const ReviewPage = (props) => {
                         <input value={visibility} onChange={e => setVisibility(e.target.value)} placeholder="visibility (ft)"></input>
                     </div>
                 </div>
+                <div className={styles.spacer}>
+
+                    <div className={styles.reviewtitle}>
+                        Photos
+                    </div>
+                    <div className={styles.photooutercontainer}>
+
+                        <div className={styles.photocontainer}>
+                            <div className={styles.individualphotoupload}>
+                                <div className={styles.containerdropzone}>
+                                    <DropZoneArea></DropZoneArea>
+
+                                    <br />
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <RenderUrls urls={urls}></RenderUrls>
+
                 <PrimaryButton className={styles.nextbutton} onClick={() => submitReview({
                     'activity_type': activity,
                     rating,
@@ -101,5 +246,7 @@ const ReviewPage = (props) => {
         </Layout>
     )
 }
+
+
 
 export default ReviewPage;

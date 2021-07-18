@@ -6,6 +6,18 @@
     padding: 16px;
 }
 
+.containerdropzone{
+    width: 50px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    
+}
 .beachtitle{
 
     font-size: 36px;
@@ -45,3 +57,11 @@
     transform: scale(1.2);
 }
 
+.image{
+    height: 50px;
+}
+
+.photooutercontainer{
+    display: flex;
+    flex-direction: row;
+}
