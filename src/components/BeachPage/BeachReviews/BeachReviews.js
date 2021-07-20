@@ -20,27 +20,24 @@ async function getData(id) {
   }
   
 const BeachReviews = (props) => {
-    const router = useRouter();
-    const { beachid } = router.query
+    const { beachid } = props;
     const [reviews, setReviews] = React.useState(null);
    
-        React.useEffect(() => {
-            if(!router.isReady) return;
-    
-            if (!props.name) {
-                fetch(`${rootDomain}/review/get?beach_id=${beachid}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => {
-                    return response.json();
-                }).then(data => {
-                    
-                    setReviews(data.data);
-                })
-            }
-        }, [router.isReady])
+    React.useEffect(() => {
+        if (!props.name) {
+            fetch(`${rootDomain}/review/get?beach_id=${beachid}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                
+                setReviews(data.data);
+            })
+        }
+    }, [])
  
     const { state } = useCurrentUser();
     const link = state.user && state.user.id
