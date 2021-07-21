@@ -12,6 +12,14 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 
+const visibilityLabel = {
+    1: 'Extremely poor (<5ft)',
+    2: 'Poor (5-10ft)',
+    3: 'Average (10-30ft)',
+    4: 'Good (30-100ft)',
+    5: 'Amazing (100ft/30m+)',
+}
+
 const ReviewPage = (props) => {
     const router = useRouter()
     const { beachid } = router.query
@@ -21,6 +29,7 @@ const ReviewPage = (props) => {
     const [name, setName] = React.useState(props.name);
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
+    const [visibilityHover, setVisibilityHover] = React.useState(undefined)
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
 
     React.useEffect(() => {
@@ -76,6 +85,9 @@ const ReviewPage = (props) => {
                     <ScubaSnorkel value={activity} onChange={setActivity}></ScubaSnorkel>
                 </div>
                 <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Rating
+                    </div>
                     <StarRate value={rating} onChange={setRating}></StarRate>
                 </div>
                 <div className={styles.spacer}>
@@ -89,9 +101,8 @@ const ReviewPage = (props) => {
                     <div className={styles.reviewtitle}>
                         Visibility
                     </div>
-                    <div className={styles.vizreview}>
-                        <input value={visibility} onChange={e => setVisibility(e.target.value)} placeholder="visibility (ft)"></input>
-                    </div>
+                    <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
+                    <div className={styles.visibilityLabel}>{ visibilityLabel[visibility || visibilityHover] }</div>
                 </div>
                 <PrimaryButton className={styles.nextbutton} disabled={ isSubmitDisabled } onClick={() => submitReview({
                     'activity_type': activity,

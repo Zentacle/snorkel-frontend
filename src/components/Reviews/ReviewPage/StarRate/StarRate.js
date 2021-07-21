@@ -1,24 +1,20 @@
 import styles from "./StarRate.module.css";
 import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
-import Image from "next/image";
-const StarRate = ({value, onChange}) => {
-    return (
-        <div className={styles.container}>
-            <div className={styles.ratingtitle}>
-                Rating
-            </div>
-            <div className={styles.ratingcontainer}>
-                <Rating
-                    fractions={1} 
-                    initialRating={ value }
-                    emptySymbol={(<Star className={styles.starempty}></Star>)} 
-                    fullSymbol={(<Star className={styles.starfull}></Star>)}
-                    onChange={ onChange }
-                >
-                </Rating>
 
-            </div>
+const StarRate = ({value, onChange, onHover}) => {
+    return (
+        <div className={styles.ratingcontainer}>
+            <Rating
+                fractions={1} 
+                initialRating={ value }
+                emptySymbol={(<Star className={styles.starempty}></Star>)} 
+                fullSymbol={(<Star className={styles.starfull}></Star>)}
+                onChange={ onChange }
+                onHover={ onHover }
+            >
+            </Rating>
+
         </div>
     )
 }
