@@ -12,27 +12,6 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 
-const submitReview = (body) => {
-    fetch(`${rootDomain}/review/add`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
-        },
-    }).then(response => {
-        if (response.ok) {
-            sendEvent('review_submit', {
-                'site_id': body.beach_id,
-            });
-            Router.push(`/Beach/${body['beach_id']}`)
-        } else {
-            response.json().then(({msg}) => toaster.danger(msg));
-        }
-        return response.json()
-    })
-}
-
 const ReviewPage = (props) => {
     const router = useRouter()
     const { beachid } = router.query
@@ -42,6 +21,7 @@ const ReviewPage = (props) => {
     const [name, setName] = React.useState(props.name);
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
+    const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
 
     React.useEffect(() => {
         if (!router.isReady) return;
@@ -63,6 +43,30 @@ const ReviewPage = (props) => {
             })
         }
     }, [router.isReady])
+
+    const submitReview = (body) => {
+        setIsSubmitDisabled(true);
+
+        fetch(`${rootDomain}/review/add`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
+            },
+        }).then(response => {
+            if (response.ok) {
+                sendEvent('review_submit', {
+                    'site_id': body.beach_id,
+                });
+                Router.push(`/Beach/${body['beach_id']}`)
+            } else {
+                setIsSubmitDisabled(false);
+                response.json().then(({msg}) => toaster.danger(msg));
+            }
+            return response.json()
+        })
+    }
 
     return (
         <Layout>
@@ -89,7 +93,7 @@ const ReviewPage = (props) => {
                         <input value={visibility} onChange={e => setVisibility(e.target.value)} placeholder="visibility (ft)"></input>
                     </div>
                 </div>
-                <PrimaryButton className={styles.nextbutton} onClick={() => submitReview({
+                <PrimaryButton className={styles.nextbutton} disabled={ isSubmitDisabled } onClick={() => submitReview({
                     'activity_type': activity,
                     rating,
                     text,
