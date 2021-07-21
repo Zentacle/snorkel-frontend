@@ -68,7 +68,7 @@ const ReviewPage = (props) => {
                 sendEvent('review_submit', {
                     'site_id': body.beach_id,
                 });
-                Router.push(`/Beach/${body['beach_id']}`)
+                location.reload();
             } else {
                 setIsSubmitDisabled(false);
                 response.json().then(({msg}) => toaster.danger(msg));
