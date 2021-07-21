@@ -35,9 +35,10 @@ export default function Home(props) {
   return (
     <Layout>
       <Head>
-        <meta property="og:title" content="Zentacle - Scuba and Snorkel Reviews" key="title" />
-        <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
-        <meta property="og:image" content="https://www.zentacle.com/social_background.jpg" key="image" />
+        <meta property="og:title" content="Zentacle - Scuba and Snorkel Reviews" key="og:title" />
+        <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="og:description" />
+        <meta property="og:image" content="https://www.zentacle.com/social_background.jpg" key="og:image" />
+        <meta name="description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
       </Head>
       <div className={styles.container}>
         <div className={styles.image}>
