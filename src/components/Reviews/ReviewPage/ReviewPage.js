@@ -56,7 +56,7 @@ const ReviewPage = (props) => {
     const submitReview = (body) => {
         setIsSubmitDisabled(true);
 
-        fetch(`${rootDomain}/review/add`, {
+        fetch(`${rootDomain}/review/fake`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
