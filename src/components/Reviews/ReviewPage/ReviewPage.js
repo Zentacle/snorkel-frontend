@@ -13,47 +13,19 @@ import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
 import { useS3Upload } from 'next-s3-upload';
 import { resetWarningCache } from 'prop-types';
-
-const submitReview = (body) => {
-    fetch(`${rootDomain}/review/add`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
-        },
-    }).then(response => {
-        if (response.ok) {
-            sendEvent('review_submit', {
-                'site_id': body.beach_id,
-            });
-            Router.push(`/Beach/${body['beach_id']}`)
-        } else {
-            response.json().then(({ msg }) => toaster.danger(msg));
-        }
-        return response.json()
-    })
-}
-
-
-
+import { PhotoSharp } from '@material-ui/icons';
 
 
 const ReviewPage = (props) => {
     const router = useRouter()
     const { beachid } = router.query
-
     const [activity, setActivity] = React.useState('snorkel');
     const [rating, setRating] = React.useState(0);
     const [name, setName] = React.useState(props.name);
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
     const [urls, setUrls] = React.useState([]);
-
-    React.useEffect(() => {
-
-    }, [urls])
-
+    const [files, setFiles] = React.useState([]);
 
     React.useEffect(() => {
         if (!router.isReady) return;
@@ -79,25 +51,65 @@ const ReviewPage = (props) => {
 
     const RenderUrls = ({ urls }) => {
         console.log("render urls")
-        React.useEffect(() => {
-            console.log('url change')
-        }, [urls])
+
         return (
             urls.map(function (object, i) {
                 return (
                     <div>
-                        <img key={object} className={styles.image} src={object} layout='fill' alt="pic preview" >
-                        </img>
+                        <div className={styles.photooutercontainer}>
+
+                            <div className={styles.photocontainer}>
+                                <div className={styles.individualphotoupload}>
+                                    <div className={styles.containerdropzone}>
+                                        <img key={object} className={styles.image} src={object} layout='fill' alt="pic preview" >
+
+                                        </img>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )
             })
         )
 
     }
+    let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
+
+    function submitReview(body) {
+
+        let theBlob = null;
+
+        console.log(files)
+
+        if (urls.length > 0) {
+            let url = uploadToS3(files[0]).then(response => {
+
+                console.log(response);
+            });
+        }
+        // fetch(`${rootDomain}/review/add`, {
+        //     method: 'POST',
+        //     body: JSON.stringify(body),
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
+        //     },
+        // }).then(response => {
+        //     if (response.ok) {
+        //         sendEvent('review_submit', {
+        //             'site_id': body.beach_id,
+        //         });
+        //         Router.push(`/Beach/${body['beach_id']}`)
+        //     } else {
+        //         response.json().then(({ msg }) => toaster.danger(msg));
+        //     }
+        //     return response.json()
+        // })
+    }
 
     const DropZoneArea = () => {
         const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ accept: 'image/*' });
-
 
         return (
 
@@ -115,7 +127,6 @@ const ReviewPage = (props) => {
                             </div>
                         </div>
                     </div>
-
                 }
                 <FileSubmit actualFile={acceptedFiles}></FileSubmit>
             </div>
@@ -124,14 +135,10 @@ const ReviewPage = (props) => {
 
 
 
+
     function FileSubmit({ actualFile }) {
 
-
-        let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
-        const [localUrl, changeLocalUrl] = React.useState();
-
         let f = null;
-
 
         if (actualFile) {
             actualFile.map(file => {
@@ -143,47 +150,23 @@ const ReviewPage = (props) => {
             if (f) {
                 const rand = (Math.random()).toString().substring(3, 10)
                 let testid = rand + f.path
-
                 const myNewFile = new File([f], testid, { type: f.type });
-
-                changeLocalUrl(URL.createObjectURL(myNewFile))
-                console.log("here")
-                console.log(URL.createObjectURL(myNewFile))
+                let fileImages = files;
+                fileImages.push(myNewFile);
+                setFiles([...fileImages])
                 let images = urls;
                 images.push(URL.createObjectURL(myNewFile))
-                setUrls(images)
-                changeLocalUrl(URL.createObjectURL(myNewFile))
-                // let url = uploadToS3(myNewFile).then(response => {
-
-                //     console.log(response);
-                // });
+                setUrls([...images])
                 console.log("in filesubmit")
 
             }
 
         }, [f]);
-        console.log(localUrl)
-
-
 
         return (
             <div>
-                {/* {localUrl &&
-            urls.map(function(object, i){
-                return (
-                    <div>
-                    <img key={object} className={styles.image} src={object} layout='fill' alt="pic preview" >
-                </img>
-                </div>
-                )
-            })
-                
-                
-            } */}
-
             </div>
         )
-
     }
     return (
         <Layout>
@@ -211,28 +194,23 @@ const ReviewPage = (props) => {
                     </div>
                 </div>
                 <div className={styles.spacer}>
-
                     <div className={styles.reviewtitle}>
                         Photos
                     </div>
-                    <div className={styles.photooutercontainer}>
-
-                        <div className={styles.photocontainer}>
-                            <div className={styles.individualphotoupload}>
-                                <div className={styles.containerdropzone}>
-                                    <DropZoneArea></DropZoneArea>
-
-                                    <br />
-
-
+                    <div className={styles.photoscontainer}>
+                        <div className={styles.photooutercontainer}>
+                            <div className={styles.photocontainer}>
+                                <div className={styles.individualphotoupload}>
+                                    <div className={styles.containerdropzone}>
+                                        <DropZoneArea></DropZoneArea>
+                                        <br />
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
+                        <RenderUrls urls={urls}></RenderUrls>
                     </div>
                 </div>
-                <RenderUrls urls={urls}></RenderUrls>
-
                 <PrimaryButton className={styles.nextbutton} onClick={() => submitReview({
                     'activity_type': activity,
                     rating,
