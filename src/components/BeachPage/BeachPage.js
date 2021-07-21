@@ -2,7 +2,7 @@ import styles from "../BeachPage/BeachPage.module.css";
 import Image from "next/image";
 import BeachInfo from "../BeachPage/BeachInfo/BeachInfo";
 import Rating from "react-rating";
-import { Star } from "@material-ui/icons";
+import { EmptyStar, FullStar } from "components/StarRating";
 import Link from 'next/link';
 
 
@@ -17,8 +17,8 @@ const BackImage = (props) => {
                     <div className={styles.stars}>
                         <Rating
                             fractions={2}
-                            emptySymbol={(<Star className={styles.starempty}></Star>)}
-                            fullSymbol={(<Star className={styles.starfull}></Star>)}
+                            emptySymbol={(<EmptyStar/>)}
+                            fullSymbol={(<FullStar/>)}
                             initialRating={props.beach.rating}
                             readonly>
                         </Rating>

@@ -45,3 +45,6 @@
     transform: scale(1.2);
 }
 
+.visibilityLabel {
+    font-size: 14px;
+}

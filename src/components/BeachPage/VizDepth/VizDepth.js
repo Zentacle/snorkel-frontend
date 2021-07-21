@@ -1,4 +1,6 @@
 import styles from "../VizDepth/VizDepth.module.css";
+import Rating from "react-rating";
+import { EmptyStar, FullStar } from "components/StarRating";
 
 const VizDepth = ({ date, viz }) => {
     const lastDate = new Date(date);
@@ -8,14 +10,22 @@ const VizDepth = ({ date, viz }) => {
         hours = '<1'
     }
 
-
-
     return (
         <div className={styles.container}>
             <div className={styles.viz}>
                 <div className={styles.vizinfo}>Viz {date && `(last reported ${hours}h ago)`}
                 </div>
-                <div className={styles.actualviz}>{ viz ? `${viz}ft` : 'N/A' }</div>
+                <div className={styles.actualviz}>
+                    { viz
+                    ? <Rating
+                            fractions={2}
+                            emptySymbol={(<EmptyStar/>)}
+                            fullSymbol={(<FullStar/>)}
+                            initialRating={Math.min(viz, 5)}
+                            readonly>
+                        </Rating>
+                    : 'N/A' }
+                </div>
             </div>
             <div className={styles.depth}>
                 <div className={styles.depthinfo}>Max Depth
