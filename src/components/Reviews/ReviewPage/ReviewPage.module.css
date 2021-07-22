@@ -76,6 +76,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
    
 }
 .photoscontainer{
@@ -85,4 +86,15 @@
 .dropzone:hover{
     cursor: pointer;
    
+}
+
+.xicon{
+    cursor: pointer;
+    z-index: 10;
+   margin-top: -60px;
+   margin-left: 50px;
+}
+
+.individualphotoupload{
+    position: relative;
 }

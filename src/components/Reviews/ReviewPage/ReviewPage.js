@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Cookies from 'js-cookie'
+import Cookies, { remove } from 'js-cookie'
 import Image from 'next/image';
 import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
@@ -11,12 +11,14 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
-import { useS3Upload } from 'next-s3-upload';
+
 import { resetWarningCache } from 'prop-types';
 import { PhotoSharp } from '@material-ui/icons';
 
 
 const ReviewPage = (props) => {
+
+
     const router = useRouter()
     const { beachid } = router.query
     const [activity, setActivity] = React.useState('snorkel');
@@ -24,10 +26,10 @@ const ReviewPage = (props) => {
     const [name, setName] = React.useState(props.name);
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
-    const [urls, setUrls] = React.useState([]);
-    const [files, setFiles] = React.useState([]);
+    const [fileRecords, setFileRecords] = React.useState([]);
 
     React.useEffect(() => {
+
         if (!router.isReady) return;
 
         sendEvent('review_begin', {
@@ -49,81 +51,113 @@ const ReviewPage = (props) => {
     }, [router.isReady])
 
 
-    const RenderUrls = ({ urls }) => {
+    const RenderUrls = () => {
         console.log("render urls")
 
+        const removeFile = (object) => {
+
+            const newFileRecords = fileRecords.filter((value) => {
+                value === object
+            });
+            setFileRecords(newFileRecords)
+        }
+
+
+
         return (
-            urls.map(function (object, i) {
+            fileRecords.map(function (object, i) {
                 return (
-                    <div>
+                    <div key={object.url}>
                         <div className={styles.photooutercontainer}>
 
                             <div className={styles.photocontainer}>
                                 <div className={styles.individualphotoupload}>
                                     <div className={styles.containerdropzone}>
-                                        <img key={object} className={styles.image} src={object} layout='fill' alt="pic preview" >
+                                        <img className={styles.image} src={object.url} layout='fill' alt="pic preview" >
 
                                         </img>
+                                    </div>
+                                    <div className={styles.xicon} onClick={() => removeFile(object)}>
+                                        x
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 )
             })
         )
 
     }
-    let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
 
-    function submitReview(body) {
 
-        let theBlob = null;
+    async function submitReview(body) {
 
-        console.log(files)
 
-        if (urls.length > 0) {
-            let url = uploadToS3(files[0]).then(response => {
+        async function uploadPhoto(file) {
 
-                console.log(response);
+            const filename = encodeURIComponent(file.name);
+            const res = await fetch(`/api/s3-upload?file=reviews/${filename}`);
+            const { url, fields } = await res.json();
+            const formData = new FormData();
+
+            Object.entries({ ...fields, file }).forEach(([key, value]) => {
+                formData.append(key, value);
             });
+
+            const upload = await fetch(url, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (upload.ok) {
+                console.log('Uploaded successfully!');
+            } else {
+                console.error('Upload failed.');
+            }
+        };
+
+
+        for (let i = 0; i < files.length; i++) {
+            await uploadPhoto(fileRecords[i])
         }
-        // fetch(`${rootDomain}/review/add`, {
-        //     method: 'POST',
-        //     body: JSON.stringify(body),
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
-        //     },
-        // }).then(response => {
-        //     if (response.ok) {
-        //         sendEvent('review_submit', {
-        //             'site_id': body.beach_id,
-        //         });
-        //         Router.push(`/Beach/${body['beach_id']}`)
-        //     } else {
-        //         response.json().then(({ msg }) => toaster.danger(msg));
-        //     }
-        //     return response.json()
-        // })
+
+
+        fetch(`${rootDomain}/review/add`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
+            },
+        }).then(response => {
+            if (response.ok) {
+                sendEvent('review_submit', {
+                    'site_id': body.beach_id,
+                });
+                Router.push(`/Beach/${body['beach_id']}`)
+            } else {
+                response.json().then(({ msg }) => toaster.danger(msg));
+            }
+            return response.json()
+        })
     }
 
     const DropZoneArea = () => {
+
         const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ accept: 'image/*' });
 
         return (
-
             <div>
                 {acceptedFiles.length < 2 &&
                     <div {...getRootProps({ className: 'dropzone' })}>
                         <input {...getInputProps()} />
                         <div className={styles.dropzone}>
                             <div className={styles.fileupload}>
-
                                 <div className={styles.plusicon}>
                                     +
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -145,19 +179,22 @@ const ReviewPage = (props) => {
                 f = file;
             })
         }
+
         React.useEffect(() => {
 
             if (f) {
                 const rand = (Math.random()).toString().substring(3, 10)
                 let testid = rand + f.path
                 const myNewFile = new File([f], testid, { type: f.type });
-                let fileImages = files;
-                fileImages.push(myNewFile);
-                setFiles([...fileImages])
-                let images = urls;
-                images.push(URL.createObjectURL(myNewFile))
-                setUrls([...images])
-                console.log("in filesubmit")
+                const objUrl = URL.createObjectURL(myNewFile)
+                let newFileRecord = {
+                    file: myNewFile,
+                    url: objUrl
+                }
+                let fileRecordsCopy = fileRecords
+                fileRecordsCopy.push(newFileRecord)
+                setFileRecords([...fileRecordsCopy])
+                
 
             }
 
@@ -208,7 +245,7 @@ const ReviewPage = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <RenderUrls urls={urls}></RenderUrls>
+                        <RenderUrls></RenderUrls>
                     </div>
                 </div>
                 <PrimaryButton className={styles.nextbutton} onClick={() => submitReview({
