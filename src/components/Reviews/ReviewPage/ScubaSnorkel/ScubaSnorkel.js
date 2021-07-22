@@ -1,6 +1,6 @@
 import styles from "./ScubaSnorkel.module.css";
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@material-ui/core/ToggleButton';
+import ToggleButtonGroup from '@material-ui/core/ToggleButtonGroup';
 import React from "react";
 const ScubaSnorkel = ({ value, onChange }) => {
 

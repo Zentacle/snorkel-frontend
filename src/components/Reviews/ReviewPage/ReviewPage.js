@@ -2,8 +2,10 @@ import React from 'react';
 import Router, { useRouter } from 'next/router';
 import Cookies from 'js-cookie'
 import { toaster } from 'evergreen-ui';
-import DateFnsUtils from '@date-io/date-fns';
-import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import TextField from '@material-ui/core/TextField';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import DatePicker from '@material-ui/lab/DatePicker';
 
 import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
@@ -90,14 +92,14 @@ const ReviewPage = (props) => {
                     <div className={styles.reviewtitle}>
                         Date
                     </div>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
-                            variant="inline"
                             value={dateDived}
                             onChange={setDateDived}
-                            maxDate={new Date()}
+                            renderInput={(params) => <TextField {...params} />}
+                            maxDate={ new Date() }
                         />
-                    </MuiPickersUtilsProvider>
+                    </LocalizationProvider>
                 </div>
                 <div className={styles.spacer}>
                     <div className={styles.reviewtitle}>
