@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import SearchBar from "material-ui-search-bar"
 import React from "react";
 
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
+import SearchIcon from '@material-ui/icons/Search';
 
 const Menu = (props) => {
   const router = useRouter();
@@ -12,20 +12,32 @@ const Menu = (props) => {
       console.log(search);
   }, [search]);
 
+  const conductSearch = () => {
+    sendEvent('submit_search', {
+        'query': search,
+    });
+    router.push(`/search?search_term=${search}`)
+  }
+
   return (
-      <div className={styles.innermenu}>
-          <SearchBar
-              value={search}
-              className={styles.searchbar}
-              onChange={ setSearch }
-              onRequestSearch={() => {
-                  sendEvent('submit_search', {
-                      'query': search,
-                  });
-                  router.push(`/search?search_term=${search}`
-              )}}
-          />
-      </div>
+    <div className={ styles.container }>
+        <div className={ styles.inputContainer }>
+            <input
+                placeholder="Search"
+                value={search}
+                className={styles.searchbar}
+                onChange={ e => setSearch(e.target.value) }
+                handleKeyDown={ () => {
+                    if (e.key === 'Enter') {
+                        conductSearch()
+                    }
+                }}
+            />
+        </div>
+        <button className={ styles.searchButton } onClick={ conductSearch }>
+            <SearchIcon className={ styles.icon }/>
+        </button>
+    </div>
   )
 }
 
