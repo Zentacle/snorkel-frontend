@@ -8,9 +8,6 @@ import SearchIcon from '@material-ui/icons/Search';
 const Menu = (props) => {
   const router = useRouter();
   const [search, setSearch] = React.useState(props.value || '');
-  React.useEffect(()=>{
-      console.log(search);
-  }, [search]);
 
   const conductSearch = () => {
     sendEvent('submit_search', {
