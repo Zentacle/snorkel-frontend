@@ -11,9 +11,13 @@
 
 .starempty{
     color: Grey;
-    
 }
 
 .starfull{
     color: gold;
+}
+
+.large {
+    height: 2em!important;
+    width: 2em!important;
 }

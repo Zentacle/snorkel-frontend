@@ -1,13 +1,14 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Cookies from 'js-cookie'
 import { toaster } from 'evergreen-ui';
+import DateFnsUtils from '@date-io/date-fns';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
 import Layout from "../../Layout/Layout";
-import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
@@ -29,8 +30,9 @@ const ReviewPage = (props) => {
     const [name, setName] = React.useState(props.name);
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
-    const [visibilityHover, setVisibilityHover] = React.useState(undefined)
+    const [visibilityHover, setVisibilityHover] = React.useState(undefined);
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
+    const [dateDived, setDateDived] = React.useState(new Date());
 
     React.useEffect(() => {
         if (!router.isReady) return;
@@ -86,9 +88,22 @@ const ReviewPage = (props) => {
                 </div>
                 <div className={styles.spacer}>
                     <div className={styles.reviewtitle}>
+                        Date
+                    </div>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <DatePicker
+                            variant="inline"
+                            value={dateDived}
+                            onChange={setDateDived}
+                            maxDate={new Date()}
+                        />
+                    </MuiPickersUtilsProvider>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
                         Rating
                     </div>
-                    <StarRate value={rating} onChange={setRating}></StarRate>
+                    <StarRate large value={rating} onChange={setRating}></StarRate>
                 </div>
                 <div className={styles.spacer}>
                     <div className={styles.reviewtitle}>
@@ -110,6 +125,7 @@ const ReviewPage = (props) => {
                     text,
                     visibility,
                     beach_id: beachid,
+                    date_dived: new Date(dateDived).toISOString(),
                 })}>
                     Submit
                 </PrimaryButton>
