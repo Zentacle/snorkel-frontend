@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
 import { useRouter } from 'next/router';
 import Cookies, { remove } from 'js-cookie'
@@ -73,6 +75,7 @@ const ReviewPage = (props) => {
                             <div className={styles.photocontainer}>
                                 <div className={styles.individualphotoupload}>
                                     <div className={styles.containerdropzone}>
+                                        
                                         <img className={styles.image} src={object.url} layout='fill' alt="pic preview" >
 
                                         </img>
@@ -119,7 +122,7 @@ const ReviewPage = (props) => {
         };
 
 
-        for (let i = 0; i < files.length; i++) {
+        for (let i = 0; i < fileRecords.length; i++) {
             await uploadPhoto(fileRecords[i])
         }
 
@@ -140,7 +143,7 @@ const ReviewPage = (props) => {
             } else {
                 response.json().then(({ msg }) => toaster.danger(msg));
             }
-            return response.json()
+            
         })
     }
 
