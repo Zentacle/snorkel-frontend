@@ -9,7 +9,7 @@ export const getServerSideProps = async (ctx) => {
 
   const fields = data.data.map(location => (
     {
-      loc: `https://zentacle.com${location.url}`,
+      loc: `https://www.zentacle.com${location.url}`,
       lastmod: new Date().toISOString(),
       changefreq: 'daily',
       priority: 0.7,
