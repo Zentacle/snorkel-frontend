@@ -1,3 +1,32 @@
+.emailContainer {
+    margin-bottom: 12px;
+}
+
+.emailBox {
+    border-radius: 4px;
+    border: 1px solid #cecece;
+    font-size: 14px;
+    padding: 4px 8px;
+    min-width: 200px;
+    height: 32px;
+}
+
+.emailSubmit {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    padding: 4px 8px;
+    height: 32px;
+    margin-left: 8px;
+    color: white;
+}
+
+.formContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    justify-content: center;
+}
+
 .footer {
     text-align: center;
     font-size: 0.75rem;
