@@ -12,10 +12,14 @@ const SlideLocation = ({ ...props }) => {
         <Link href={props.info.url}>
             <a className={styles.slide} style={props.style}>
                 <div className={styles.slidepic}>
-                    <Image className={styles.image} src={props.info.hero_img} alt="picture" objectFit="contain" layout="fill"></Image>
-
+                    <Image
+                        className={styles.image}
+                        src={props.info.hero_img || '/generic_beach.jpeg'}
+                        alt="picture"
+                        objectFit="contain"
+                        layout="fill"
+                    />
                 </div>
-
                 <div className={styles.locationInfoContainer}>
                     <div className={styles.spotName}>{props.info.name}</div>
                     <div className={styles.location}>{props.info.location_city}</div>
@@ -30,7 +34,6 @@ const SlideLocation = ({ ...props }) => {
                         <div className={styles.numReviews}>({props.info.num_reviews})</div>
                     </div>
                 </div>
-
             </a>
         </Link>
     )

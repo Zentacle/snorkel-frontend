@@ -1,0 +1,30 @@
+.title {
+  font-size: 36px;
+  font-weight: var(--text-weight-bold);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 16px;
+}
+
+.sectiontitle{
+  font-weight: var(--text-weight-bold);
+}
+
+.spacer {
+  margin: 16px 0;
+}
+
+.container{
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 10px 0 10px 0 rgba(0, 0, 0, .5);
+  margin: 16px 16px 0 16px;
+  padding: 16px;
+}
+
+.helper {
+  font-size: 12px;
+  margin: 4px 0;
+}
