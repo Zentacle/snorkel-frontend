@@ -4,7 +4,7 @@ import { getServerSideSitemap } from 'next-sitemap'
 
 export const getServerSideProps = async (ctx) => {
   // Method to source urls from cms
-  const res = await fetch('https://zentacle.com/api/spots/get')
+  const res = await fetch('https://zentacle.com/api/spots/get?limit=none')
   const data = await res.json()
 
   const fields = data.data.map(location => (
