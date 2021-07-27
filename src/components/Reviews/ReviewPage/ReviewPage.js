@@ -13,7 +13,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
-
+import { MdCancel } from 'react-icons/Md';
 import { resetWarningCache } from 'prop-types';
 import { PhotoSharp } from '@material-ui/icons';
 
@@ -54,14 +54,13 @@ const ReviewPage = (props) => {
 
 
     const RenderUrls = () => {
-        console.log("render urls")
+       
 
-        const removeFile = (object) => {
-
-            const newFileRecords = fileRecords.filter((value) => {
-                value === object
-            });
-            setFileRecords(newFileRecords)
+        const removeFile = (index) => {
+            
+            fileRecords.splice(index, 1)
+            
+            setFileRecords([...fileRecords])
         }
 
 
@@ -80,8 +79,8 @@ const ReviewPage = (props) => {
 
                                         </img>
                                     </div>
-                                    <div className={styles.xicon} onClick={() => removeFile(object)}>
-                                        x
+                                    <div className={styles.xicon} onClick={() => removeFile(i)}>
+                                    <MdCancel></MdCancel>
                                     </div>
                                 </div>
                             </div>

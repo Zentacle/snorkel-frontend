@@ -16,6 +16,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+
     
 }
 .beachtitle{
@@ -65,7 +66,8 @@
 .photooutercontainer{
     display: flex;
     flex-direction: row;
-    margin-right: 5px;
+    max-width: 50px;
+    margin-right: 6px;
     
     
 }
@@ -77,6 +79,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    
    
 }
 .photoscontainer{
@@ -91,8 +94,9 @@
 .xicon{
     cursor: pointer;
     z-index: 10;
-   margin-top: -60px;
-   margin-left: 50px;
+   margin-top: -57px;
+   margin-left: 43px;
+   
 }
 
 .individualphotoupload{
