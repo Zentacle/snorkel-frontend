@@ -4,7 +4,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Cookies, { remove } from 'js-cookie'
 import Image from 'next/image';
-import Cookies from 'js-cookie'
 import { toaster } from 'evergreen-ui';
 
 import styles from "../ReviewPage/ReviewPage.module.css";
@@ -137,28 +136,7 @@ const ReviewPage = (props) => {
             await uploadPhoto(fileRecords[i])
         }
 
-    const submitReview = (body) => {
-        setIsSubmitDisabled(true);
-
-        fetch(`${rootDomain}/review/add`, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
-            },
-        }).then(response => {
-            if (response.ok) {
-                sendEvent('review_submit', {
-                    'site_id': body.beach_id,
-                });
-                Router.push(`/Beach/${body['beach_id']}`)
-            } else {
-                response.json().then(({ msg }) => toaster.danger(msg));
-            }
-            
-        })
-    }
+    
 
     const DropZoneArea = () => {
 
@@ -216,16 +194,13 @@ const ReviewPage = (props) => {
 
         }, [f]);
 
-        return (
-            <div>
-            </div>
-        )
-    }
+       
+    
                 setIsSubmitDisabled(false);
                 response.json().then(({msg}) => toaster.danger(msg));
-            }
-            return response.json()
-        })
+            
+            return (<div/>)
+        
     }
 
     return (
@@ -287,7 +262,7 @@ const ReviewPage = (props) => {
         </Layout>
     )
 }
-
+}
 
 
 export default ReviewPage;
