@@ -28,12 +28,15 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className={styles.spaceholder}>
-                    { currentUser && currentUser.id
-                        ? <Profile user={currentUser}></Profile>
-                        : <Link href='/register'>
-                            <a className={styles.loginbutton}>Create Account</a>
-                        </Link>
-                    }
+                    <div><Link href="/add/spot"><a className={styles.addSpot}>Add New Spot</a></Link></div>
+                    <div className={styles.rightButton}>
+                        { currentUser && currentUser.id
+                            ? <Profile user={currentUser}></Profile>
+                            : <Link href='/register'>
+                                <a className={styles.loginbutton}>Create Account</a>
+                            </Link>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

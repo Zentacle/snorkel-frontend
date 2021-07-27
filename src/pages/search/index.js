@@ -57,7 +57,7 @@ const SearchPage = (props) => {
                 <SearchBar value={ searchTerm } onChange={ setSearchTerm }/>
                 <div className={ styles.searchResultsContainer }>
                     { results.length
-                        ? results.map(result => <div className={styles.slide}><Location key={ result.id } info={result}/></div>)
+                        ? results.map(result => <div key={ result.id } className={styles.slide}><Location info={result}/></div>)
                         : <div>No results found. We currently only support Maui locations</div>
                     }
                 </div>

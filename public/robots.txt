@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.zentacle.com
+
+# Sitemaps
+Sitemap: https://www.zentacle.com/sitemap.xml
+Sitemap: https://zentacle.com/server-sitemap.xml

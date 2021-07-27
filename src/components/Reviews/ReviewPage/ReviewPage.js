@@ -4,6 +4,9 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Cookies, { remove } from 'js-cookie'
 import Image from 'next/image';
+import Cookies from 'js-cookie'
+import { toaster } from 'evergreen-ui';
+
 import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
@@ -17,6 +20,13 @@ import { MdCancel } from 'react-icons/Md';
 import { resetWarningCache } from 'prop-types';
 import { PhotoSharp } from '@material-ui/icons';
 
+const visibilityLabel = {
+    1: 'Extremely poor (<5ft)',
+    2: 'Poor (5-10ft)',
+    3: 'Average (10-30ft)',
+    4: 'Good (30-100ft)',
+    5: 'Amazing (100ft/30m+)',
+}
 
 const ReviewPage = (props) => {
 
@@ -29,6 +39,8 @@ const ReviewPage = (props) => {
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
     const [fileRecords, setFileRecords] = React.useState([]);
+    const [visibilityHover, setVisibilityHover] = React.useState(undefined)
+    const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
 
     React.useEffect(() => {
 
@@ -125,6 +137,8 @@ const ReviewPage = (props) => {
             await uploadPhoto(fileRecords[i])
         }
 
+    const submitReview = (body) => {
+        setIsSubmitDisabled(true);
 
         fetch(`${rootDomain}/review/add`, {
             method: 'POST',
@@ -207,6 +221,13 @@ const ReviewPage = (props) => {
             </div>
         )
     }
+                setIsSubmitDisabled(false);
+                response.json().then(({msg}) => toaster.danger(msg));
+            }
+            return response.json()
+        })
+    }
+
     return (
         <Layout>
             <div className={styles.container}>
@@ -215,6 +236,9 @@ const ReviewPage = (props) => {
                     <ScubaSnorkel value={activity} onChange={setActivity}></ScubaSnorkel>
                 </div>
                 <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Rating
+                    </div>
                     <StarRate value={rating} onChange={setRating}></StarRate>
                 </div>
                 <div className={styles.spacer}>
@@ -228,9 +252,8 @@ const ReviewPage = (props) => {
                     <div className={styles.reviewtitle}>
                         Visibility
                     </div>
-                    <div className={styles.vizreview}>
-                        <input value={visibility} onChange={e => setVisibility(e.target.value)} placeholder="visibility (ft)"></input>
-                    </div>
+                    <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
+                    <div className={styles.visibilityLabel}>{ visibilityLabel[visibility || visibilityHover] }</div>
                 </div>
                 <div className={styles.spacer}>
                     <div className={styles.reviewtitle}>
@@ -250,7 +273,8 @@ const ReviewPage = (props) => {
                         <RenderUrls></RenderUrls>
                     </div>
                 </div>
-                <PrimaryButton className={styles.nextbutton} onClick={() => submitReview({
+   
+                <PrimaryButton className={styles.nextbutton} disabled={ isSubmitDisabled } onClick={() => submitReview({
                     'activity_type': activity,
                     rating,
                     text,

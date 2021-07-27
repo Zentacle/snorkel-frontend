@@ -5,17 +5,24 @@ import Image from "next/image"
 import styles from "components/Home/Home.module.css"
 import SearchBar from "components/SearchBar"
 import Layout from 'components/Layout/Layout';
-import MyCarousel from "components/Carousel/Carousel"
+import Carousel from "components/Carousel/Carousel"
 import { rootDomain } from "src/lib/constants";
 
 export async function getServerSideProps(context) {
-  const sorts = ['top', 'latest', 'default']
+  const sorts = ['top', 'latest', 'default', 'recs']
   const props = {};
   await Promise.all(sorts.map(async sort => {
-    let res = await fetch(`${rootDomain}/spots/get?sort=${sort}`,)
+    let res;
+    if (sort === 'recs') {
+      res = await fetch(`${rootDomain}/spots/recs`, {
+        headers: context.req ? { cookie: context.req.headers.cookie } : undefined
+      })
+    } else {
+      res = await fetch(`${rootDomain}/spots/get?sort=${sort}`,)
+    }
     
     const data = await res.json()
-    props[sort] = data.data;
+    props[sort] = data.data || null;
     return data;
   }))
 
@@ -35,9 +42,10 @@ export default function Home(props) {
   return (
     <Layout>
       <Head>
-        <meta property="og:title" content="Zentacle" key="title" />
-        <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
-        <meta property="og:image" content="https://www.zentacle.com/social_background.jpg" key="image" />
+        <meta property="og:title" content="Zentacle - Scuba and Snorkel Reviews" key="og:title" />
+        <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="og:description" />
+        <meta property="og:image" content="https://www.zentacle.com/social_background.jpg" key="og:image" />
+        <meta name="description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
       </Head>
       <div className={styles.container}>
         <div className={styles.image}>
@@ -49,17 +57,21 @@ export default function Home(props) {
             <SearchBar></SearchBar>
           </div>
         </div>
+        { props.recs && Object.keys(props.recs).length > 0 && <div>
+          <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
+          <Carousel data={ props.recs }></Carousel>
+        </div>}
         <div>
           <div className={styles.carouseltitle}>Local Favorites in Maui</div>
-          <MyCarousel data={ props.default }></MyCarousel>
+          <Carousel data={ props.default }></Carousel>
         </div>
         <div>
           <div className={styles.carouseltitle}>Conditions Reported Recently</div>
-          <MyCarousel data={ props.latest }></MyCarousel>
+          <Carousel data={ props.latest }></Carousel>
         </div>
         <div>
           <div className={styles.carouseltitle}>Top Rated in Maui</div>
-          <MyCarousel data={ props.top }></MyCarousel>
+          <Carousel data={ props.top }></Carousel>
         </div>
       </div>
     </Layout>

@@ -31,3 +31,16 @@ a {
   color: inherit;
   font: inherit;
 }
+
+input {
+  outline: none;
+  background: none;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+}
+
+button {
+  outline: none;
+  background: none;
+  border: none;
+}
