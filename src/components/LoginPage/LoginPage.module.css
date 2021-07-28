@@ -17,11 +17,7 @@
 }
 
 .createone{
-color: blue !important;
-
-}
-
-.createone:hover{
+    color: blue !important;
     cursor: pointer;
 }
 
