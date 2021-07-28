@@ -1,11 +1,11 @@
 import React from "react";
-import { useRouter } from "next/router";
 
 import styles from "../BeachReviews/BeachReviews.module.css";
 import IndividualReview from "./IndividualReview/IndividualReview";
 import { rootDomain } from 'lib/constants';
 import { useCurrentUser } from 'context/usercontext';
 import { PrimaryLink } from 'components/PrimaryButton';
+import { sendEvent } from 'hooks/amplitude';
 
 async function getData(id) {
     fetch(`${rootDomain}/review/get?beach_id=`+ id,{
@@ -38,6 +38,12 @@ const BeachReviews = (props) => {
             })
         }
     }, [])
+
+    const onReviewClick = () => {
+        sendEvent('review_begin', {
+            'site_id': beachid,
+        })
+    }
  
     const { state } = useCurrentUser();
     const link = state.user && state.user.id
@@ -47,7 +53,7 @@ const BeachReviews = (props) => {
     return (
         <div className={styles.reviewContainer}>
             <div className={styles.reviewbuttoncontainer}>
-                <PrimaryLink className={styles.reviewbutton} href={ link }>Write a Review</PrimaryLink>
+                <PrimaryLink onClick={ onReviewClick } className={styles.reviewbutton} href={ link }>Write a Review</PrimaryLink>
             </div>
             <br/>
             { reviews && reviews.length

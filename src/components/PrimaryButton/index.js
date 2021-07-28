@@ -9,9 +9,9 @@ const PrimaryButton = ({ children, disabled, onClick }) => {
   )
 }
 
-export const PrimaryLink = ({ children, href }) => (
+export const PrimaryLink = ({ children, href, onClick }) => (
   <Link href={href}>
-    <a className={styles.button}>
+    <a onClick={onClick} className={styles.button}>
       {children}
     </a>
   </Link>

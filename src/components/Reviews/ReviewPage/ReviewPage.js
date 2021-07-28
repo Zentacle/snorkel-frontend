@@ -35,10 +35,6 @@ const ReviewPage = (props) => {
     React.useEffect(() => {
         if (!router.isReady) return;
 
-        sendEvent('review_begin', {
-            'site_id': beachid,
-        })
-
         if (!props.name) {
             fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
                 method: 'GET',
