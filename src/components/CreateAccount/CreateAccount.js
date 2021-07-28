@@ -57,11 +57,13 @@ const CreateAccount = () => {
                 <div className={styles.titlecontainer}>
                     Create your Free account
                 </div>
-                <SignupInput value={name} onChange={ setName } type="Name"></SignupInput>
-                <SignupInput value={username} onChange={ setUsername} type="Username"></SignupInput>
-                <SignupInput value={email} onChange={ setEmail } type="Email"></SignupInput>
-                <SignupInput value={password} onChange={ setPassword } type="Password"></SignupInput>
-                <PrimaryButton onClick={ registerUser(email, password, name, username) }>Create Account</PrimaryButton>
+                <form onSubmit={ e => {e.preventDefault();}}>
+                    <SignupInput value={name} onChange={ setName } id='name-input' type="Name"></SignupInput>
+                    <SignupInput value={username} onChange={ setUsername} id='username-input' type="Username"></SignupInput>
+                    <SignupInput value={email} onChange={ setEmail } id='email-input' type="Email"></SignupInput>
+                    <SignupInput value={password} onChange={ setPassword } id='passowrd-input' type="Password"></SignupInput>
+                    <PrimaryButton onClick={ registerUser(email, password, name, username) }>Create Account</PrimaryButton>
+                </form>
                 <div className={styles.bottominfo}>
                     Already have an account?&nbsp;
                     <Link href="/Login">
