@@ -118,13 +118,13 @@ const ReviewPage = (props) => {
         async function uploadPhoto(file) {
             console.log(file)
             const filename = await encodeURIComponent(file.file.name);
-            const res = await fetch(`${rootDomain}/image/getpost`, {
+            const res = await fetch(`${rootDomain}/s3-upload`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "filename": "reviews/" + filename
+                    file: filename
                 })
 
             });
@@ -135,7 +135,7 @@ const ReviewPage = (props) => {
                 formData.append(key, presignedPostData.fields[key]);
             });
             // Actual file has to be appended last.
-            formData.append("file", file);
+            formData.append("file", file.file);
             
 
             console.log(presignedPostData.url)

@@ -12,11 +12,11 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 const apiPaths = {
-    '/api': {
+    '/apibackend': {
         // target: 'https://snorkel-backend.herokuapp.com', 
         target: 'http://localhost:5000', 
         pathRewrite: {
-            '^/api': ''
+            '^/apibackend': ''
         },
         changeOrigin: true
     }
@@ -28,7 +28,7 @@ app.prepare().then(() => {
   const server = express()
  
   if (isDevelopment) {
-    server.use('/api', createProxyMiddleware(apiPaths['/api']));
+    server.use('/apibackend', createProxyMiddleware(apiPaths['/apibackend']));
   }
 
   server.all('*', (req, res) => {
