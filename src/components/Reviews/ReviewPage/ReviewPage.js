@@ -105,8 +105,13 @@ const ReviewPage = (props) => {
     }
 
 
-    async function submitReview(body) {
+   
 
+
+        
+
+    const submitReview = async (body) => {
+        setIsSubmitDisabled(true);
 
         async function uploadPhoto(file) {
 
@@ -135,8 +140,26 @@ const ReviewPage = (props) => {
         for (let i = 0; i < fileRecords.length; i++) {
             await uploadPhoto(fileRecords[i])
         }
-
-    
+        fetch(`${rootDomain}/review/add`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
+            },
+        }).then(response => {
+            if (response.ok) {
+                sendEvent('review_submit', {
+                    'site_id': body.beach_id,
+                });
+                Router.push(`/Beach/${body['beach_id']}`)
+            } else {
+                setIsSubmitDisabled(false)
+                response.json().then(({ msg }) => toaster.danger(msg));
+            }
+            
+        })
+    }
 
     const DropZoneArea = () => {
 
@@ -196,8 +219,7 @@ const ReviewPage = (props) => {
 
        
     
-                setIsSubmitDisabled(false);
-                response.json().then(({msg}) => toaster.danger(msg));
+                
             
             return (<div/>)
         
@@ -262,7 +284,7 @@ const ReviewPage = (props) => {
         </Layout>
     )
 }
-}
+
 
 
 export default ReviewPage;
