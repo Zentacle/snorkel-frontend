@@ -7,6 +7,8 @@ import SearchBar from "components/SearchBar"
 import Layout from 'components/Layout/Layout';
 import Carousel from "components/Carousel/Carousel"
 import { rootDomain } from "src/lib/constants";
+import Banner from "components/EmailBanner";
+import Cookies from "js-cookie";
 
 export async function getServerSideProps(context) {
   const sorts = ['top', 'latest', 'default', 'recs']
@@ -57,6 +59,7 @@ export default function Home(props) {
             <SearchBar></SearchBar>
           </div>
         </div>
+        <Banner isShown={!(Cookies.get('has_seen_banner') || Cookies.get('access_token_cookie'))}></Banner>
         { props.recs && Object.keys(props.recs).length > 0 && <div>
           <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
           <Carousel data={ props.recs }></Carousel>

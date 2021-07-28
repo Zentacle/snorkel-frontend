@@ -1,0 +1,39 @@
+.title {
+  font-size: 18px;
+  font-weight: var(--text-weight-bold);
+}
+
+.subtitle {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 8px 12px;
+  font-size: 12px;
+  width: 100%;
+}
+
+.formLabel {
+  font-weight: var(--text-weight-bold);
+  font-size: 12px;
+}
+
+.spacer {
+  margin: 8px 0;
+}
+
+.bottominfo{
+  width: 100%;
+  text-align: center;
+}
+
+.createone{
+  color: blue !important;
+  cursor: pointer;
+}
