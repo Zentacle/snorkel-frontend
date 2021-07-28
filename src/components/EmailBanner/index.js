@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 import Cookies from 'js-cookie';
+import { rootDomain } from 'lib/constants';
 
 const Banner = (props) => {
   const [name, setName] = React.useState('');
