@@ -18,6 +18,8 @@ import { useDropzone } from 'react-dropzone';
 import { MdCancel } from 'react-icons/Md';
 import { resetWarningCache } from 'prop-types';
 import { PhotoSharp } from '@material-ui/icons';
+import { get } from 'lodash';
+import { json } from 'body-parser';
 
 const visibilityLabel = {
     1: 'Extremely poor (<5ft)',
@@ -65,12 +67,12 @@ const ReviewPage = (props) => {
 
 
     const RenderUrls = () => {
-       
+
 
         const removeFile = (index) => {
-            
+
             fileRecords.splice(index, 1)
-            
+
             setFileRecords([...fileRecords])
         }
 
@@ -85,13 +87,13 @@ const ReviewPage = (props) => {
                             <div className={styles.photocontainer}>
                                 <div className={styles.individualphotoupload}>
                                     <div className={styles.containerdropzone}>
-                                        
+
                                         <img className={styles.image} src={object.url} layout='fill' alt="pic preview" >
 
                                         </img>
                                     </div>
                                     <div className={styles.xicon} onClick={() => removeFile(i)}>
-                                    <MdCancel></MdCancel>
+                                        <MdCancel></MdCancel>
                                     </div>
                                 </div>
                             </div>
@@ -105,29 +107,44 @@ const ReviewPage = (props) => {
     }
 
 
-   
 
 
-        
+
+
 
     const submitReview = async (body) => {
         setIsSubmitDisabled(true);
 
         async function uploadPhoto(file) {
-
-            const filename = encodeURIComponent(file.name);
-            const res = await fetch(`/api/s3-upload?file=reviews/${filename}`);
-            const { url, fields } = await res.json();
-            const formData = new FormData();
-
-            Object.entries({ ...fields, file }).forEach(([key, value]) => {
-                formData.append(key, value);
-            });
-
-            const upload = await fetch(url, {
+            console.log(file)
+            const filename = await encodeURIComponent(file.file.name);
+            const res = await fetch(`${rootDomain}/image/getpost`, {
                 method: 'POST',
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "filename": "reviews/" + filename
+                })
+
             });
+
+            const presignedPostData = await res.json();
+            const formData = new FormData();
+            Object.keys(presignedPostData.fields).forEach(key => {
+                formData.append(key, presignedPostData.fields[key]);
+            });
+            // Actual file has to be appended last.
+            formData.append("file", file);
+            
+
+            console.log(presignedPostData.url)
+            const upload = await fetch(presignedPostData.url,{
+                method: 'POST',
+                body: formData
+            }
+            );
+            console.log(formData)
 
             if (upload.ok) {
                 console.log('Uploaded successfully!');
@@ -157,7 +174,7 @@ const ReviewPage = (props) => {
                 setIsSubmitDisabled(false)
                 response.json().then(({ msg }) => toaster.danger(msg));
             }
-            
+
         })
     }
 
@@ -211,18 +228,18 @@ const ReviewPage = (props) => {
                 let fileRecordsCopy = fileRecords
                 fileRecordsCopy.push(newFileRecord)
                 setFileRecords([...fileRecordsCopy])
-                
+
 
             }
 
         }, [f]);
 
-       
-    
-                
-            
-            return (<div/>)
-        
+
+
+
+
+        return (<div />)
+
     }
 
     return (
@@ -250,7 +267,7 @@ const ReviewPage = (props) => {
                         Visibility
                     </div>
                     <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
-                    <div className={styles.visibilityLabel}>{ visibilityLabel[visibility || visibilityHover] }</div>
+                    <div className={styles.visibilityLabel}>{visibilityLabel[visibility || visibilityHover]}</div>
                 </div>
                 <div className={styles.spacer}>
                     <div className={styles.reviewtitle}>
@@ -270,8 +287,8 @@ const ReviewPage = (props) => {
                         <RenderUrls></RenderUrls>
                     </div>
                 </div>
-   
-                <PrimaryButton className={styles.nextbutton} disabled={ isSubmitDisabled } onClick={() => submitReview({
+
+                <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
                     'activity_type': activity,
                     rating,
                     text,
