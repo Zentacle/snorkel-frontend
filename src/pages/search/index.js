@@ -61,7 +61,7 @@ const SearchPage = (props) => {
                         ? results.map(result => <div key={ result.id } className={styles.slide}><Location info={result}/></div>)
                         : <div>
                             No results found. We currently only support Maui locations, but would love to add more with your help.
-                            <Link href='/add/spot'><a> Click here to request it be added.</a></Link>
+                            <Link href={ `/add/spot?name=${searchTerm}` }><a className={styles.requestAdd}> Click here to request it be added.</a></Link>
                         </div>
                     }
                 </div>

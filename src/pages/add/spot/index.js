@@ -7,7 +7,8 @@ import Layout from "components/Layout/Layout";
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 
-const NewSpot = () => {
+const NewSpot = (props) => {
+  console.log(props)
   const submitSpot = () => {
     setIsSubmitDisabled(true);
 
@@ -35,7 +36,7 @@ const NewSpot = () => {
   }
 
   const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
-  const [locationName, setLocationName] = React.useState('');
+  const [locationName, setLocationName] = React.useState(props.query['name']);
   const [locationCity, setLocationCity] = React.useState('');
   const [description, setDescription] = React.useState('');
 
@@ -66,6 +67,10 @@ const NewSpot = () => {
       </div>
     </Layout>
   )
+}
+
+NewSpot.getInitialProps = (context) => {
+  return { query: context.query }
 }
 
 export default NewSpot;

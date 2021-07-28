@@ -11,3 +11,8 @@
   border-radius: 8px;
   overflow: hidden;
 }
+
+.requestAdd {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
