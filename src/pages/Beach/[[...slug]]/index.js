@@ -37,10 +37,10 @@ const Beach = (props) => {
   useEffect(() => {
       if (!router.isReady) { return; }
 
-      sendEvent('beach_view', { site_id: beachid });
+      sendEvent('beach_view', { site_id: beach.id });
 
       if (beach.notFound) {
-          fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
+          fetch(`${rootDomain}/spots/get?beach_id=${beach.id}`, {
               method: 'GET',
               headers: {
                   'Content-Type': 'application/json'
