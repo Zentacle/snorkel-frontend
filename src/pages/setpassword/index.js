@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import Link from "next/link";
 import { toaster } from 'evergreen-ui';
 
-import styles from "../LoginPage/LoginPage.module.css";
+import styles from "components/LoginPage/LoginPage.module.css";
 //uses borrowed styling
-import Layout from "../Layout/Layout";
-import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
+import Layout from "components/Layout/Layout";
+import BackgroundCard from "components/Layout/BackgroundCard/BackgroundCard";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
