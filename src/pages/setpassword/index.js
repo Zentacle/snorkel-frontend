@@ -11,20 +11,15 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 
-const CreateAccount = () => {
-    const [email, setEmail] = React.useState('');
+const CreateAccount = (props) => {
     const [password, setPassword] = React.useState('')
-    const [name, setName] = React.useState('')
-    const [username, setUsername] = React.useState('')
 
-    const registerUser = (email, password, name, username) => () => {
+    const registerUser = () => () => {
         const body = {
-            email,
             password,
-            'display_name': name,
-            username,
+            'user_id': props.userId,
         }
-        fetch(`${rootDomain}/user/register`, {
+        fetch(`${rootDomain}/user/register/password`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -34,13 +29,13 @@ const CreateAccount = () => {
             response.json().then(data => {
                 if (response.ok) {
                     if (data.auth_token) {
-                        sendEvent('register_success');
+                        sendEvent('partial_register_password_success');
                         window.location.href = "/";
                     } else {
-                        sendEvent('register_error');
+                        sendEvent('partial_register_password_error');
                     }
                 } else {
-                    sendEvent('register_error');
+                    sendEvent('partial_register_password_error');
                     toaster.danger(data.msg);
                 }
             })
@@ -55,26 +50,19 @@ const CreateAccount = () => {
         <Layout>
             <BackgroundCard>
                 <div className={styles.titlecontainer}>
-                    Create your Free account
+                    Finish creating your account by setting a password
                 </div>
                 <form onSubmit={ e => {e.preventDefault();}}>
-                    <SignupInput value={name} onChange={ setName } id='name-input' type="Name"></SignupInput>
-                    <SignupInput value={username} onChange={ setUsername} id='username-input' type="Username"></SignupInput>
-                    <SignupInput value={email} onChange={ setEmail } id='email-input' type="Email"></SignupInput>
                     <SignupInput value={password} onChange={ setPassword } id='password-input' type="Password"></SignupInput>
-                    <PrimaryButton onClick={ registerUser(email, password, name, username) }>Create Account</PrimaryButton>
+                    <PrimaryButton onClick={ registerUser }>Create Account</PrimaryButton>
                 </form>
-                <div className={styles.bottominfo}>
-                    Already have an account?&nbsp;
-                    <Link href="/Login">
-                        <a className={styles.createone}>
-                            Login!
-                        </a>
-                    </Link>
-                </div>
             </BackgroundCard>
         </Layout>
     )
+}
+
+CreateAccount.setInitialProps = (context) => {
+  { userId: context.query.userid }
 }
 
 export default CreateAccount;
