@@ -16,6 +16,7 @@ import { useDropzone } from 'react-dropzone';
 import { MdCancel } from 'react-icons/Md';
 import { resetWarningCache } from 'prop-types';
 import { PhotoSharp } from '@material-ui/icons';
+import { toaster } from 'evergreen-ui';
 
 
 const ReviewPage = (props) => {
@@ -98,17 +99,19 @@ const ReviewPage = (props) => {
 
 
         async function uploadPhoto(file) {
-
             const filename = encodeURIComponent(file.name);
-            const res = await fetch(`/api/s3-upload?file=reviews/${filename}`);
-            const { url, fields } = await res.json();
+
+
+            const res = await fetch(`/apibackend/s3-upload?file=reviews/${filename}`);
+            const presignedPostData = await res.json();
             const formData = new FormData();
-
-            Object.entries({ ...fields, file }).forEach(([key, value]) => {
-                formData.append(key, value);
+            Object.keys(presignedPostData.fields).forEach(key => {
+                formData.append(key, presignedPostData.fields[key]);
             });
+            // Actual file has to be appended last.
+            formData.append("file", file);
 
-            const upload = await fetch(url, {
+            const upload = await fetch(presignedPostData.url, {
                 method: 'POST',
                 body: formData,
             });
@@ -122,7 +125,7 @@ const ReviewPage = (props) => {
 
 
         for (let i = 0; i < fileRecords.length; i++) {
-            await uploadPhoto(fileRecords[i])
+            await uploadPhoto(fileRecords[i].file)
         }
 
 
