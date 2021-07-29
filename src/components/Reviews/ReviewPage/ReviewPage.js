@@ -14,7 +14,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
-import { MdCancel } from 'react-icons/Md';
+import { MdCancel } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
 
 const visibilityLabel = {
