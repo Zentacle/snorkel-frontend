@@ -59,7 +59,7 @@ export default function Home(props) {
             <SearchBar></SearchBar>
           </div>
         </div>
-        <Banner isShown={!(Cookies.get('has_seen_banner') || Cookies.get('access_token_cookie'))}></Banner>
+        <Banner isShown={!(Cookies.get('has_seen_banner') || Cookies.get('csrf_access_token'))}></Banner>
         { props.recs && Object.keys(props.recs).length > 0 && <div>
           <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
           <Carousel data={ props.recs }></Carousel>
