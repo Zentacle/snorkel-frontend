@@ -14,7 +14,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
-import { MdCancel } from 'react-icons/md';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { v4 as uuidv4 } from 'uuid';
 
 const visibilityLabel = {
@@ -71,21 +71,21 @@ const ReviewPage = (props) => {
         return (
             fileRecords.map(function (object, i) {
                 return (
-                    <div key={object.url}>
-                        <div className={styles.photooutercontainer}>
-                            <div className={styles.photocontainer}>
-                                <div className={styles.individualphotoupload}>
-                                    <div className={styles.containerdropzone}>
-                                        <img className={styles.image} src={object.url} layout='fill' alt="pic preview" >
-                                        </img>
-                                    </div>
-                                    <div className={styles.xicon} onClick={() => removeFile(i)}>
-                                        <MdCancel></MdCancel>
-                                    </div>
+
+                    <div key={object.url} className={styles.photooutercontainer}>
+                        <div className={styles.photocontainer}>
+                            <div className={styles.individualphotoupload}>
+                                <div className={styles.containerdropzone}>
+                                    <img className={styles.image} src={object.url} layout='fill' alt="pic preview" >
+                                    </img>
+                                </div>
+                                <div className={styles.xicon} onClick={() => removeFile(i)}>
+                                    <CancelIcon fontSize="small"></CancelIcon>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 )
             })
         )
@@ -97,7 +97,7 @@ const ReviewPage = (props) => {
         setIsSubmitDisabled(true);
 
         async function uploadPhoto(file) {
-            
+
             const filename = await encodeURIComponent(file.name);
             const res = await fetch(`/apibackend/s3-upload?file=reviews/${filename}`);
             const presignedPostData = await res.json();
@@ -183,7 +183,7 @@ const ReviewPage = (props) => {
         React.useEffect(() => {
 
             //make sure users cannot upload more than 10 photos
-            if (f && fileRecords.length == 10){
+            if (f && fileRecords.length == 10) {
                 toaster.danger("Each review can have at most 10 photos.")
             }
             if (f && !(fileRecords.length > 9)) {
@@ -201,7 +201,7 @@ const ReviewPage = (props) => {
                 setFileRecords([...fileRecordsCopy])
 
             }
-            
+
 
         }, [submittedFile]);
 

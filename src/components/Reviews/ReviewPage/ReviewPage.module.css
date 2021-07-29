@@ -86,8 +86,9 @@
 .xicon {
     cursor: pointer;
     z-index: 10;
-    margin-top: -60px;
-    margin-left: 44px;
+    margin-top: -63px;
+    margin-left: 41px;
+    transform: scale(.8);
 }
 
 .individualphotoupload {
