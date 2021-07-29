@@ -56,9 +56,11 @@ const Beach = (props) => {
   return (
       <Layout>
           <Head>
-              <meta property="og:title" content={`Zentacle - ${beach.name} - Scuba and Snorkel reviews`} key="title" />
-              <meta property="og:description" content={ beach.description } key="description" />
-              <meta property="og:image" content={ beach.hero_img } key="image" />
+              <title key="title">{`Zentacle - ${beach.name}`}</title>
+              <meta property="og:title" content={`Zentacle - ${beach.name} - Scuba and Snorkel reviews`} key="og-title" />
+              <meta property="og:description" content={ beach.description } key="og-description" />
+              <meta property="og:image" content={ beach.hero_img } key="og-image" />
+              <meta property="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}`} key="description"/>
               <link rel="canonical" href={`https://www.zentacle.com${beach.url}`}/>
           </Head>
           <BeachPage beach={beach} beachid={beachid}></BeachPage>
