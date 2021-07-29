@@ -51,9 +51,9 @@ const Beach = (props) => {
       {
         user.reviews.map(review => {
           return (
-            <div className={styles.reviewContainer}>
+            <div className={styles.reviewContainer} key={review.id} >
               <div className={styles.reviewBeach}>{review.spot.name} on {review.date_dived}</div>
-              <IndividualReview review={review} user={user} key={review.id} />
+              <IndividualReview review={review} user={user} />
             </div>
           )
         })
