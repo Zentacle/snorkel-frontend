@@ -1,0 +1,16 @@
+.title {
+  font-weight: var(--text-weight-bold);
+  font-size: 32px;
+}
+
+.subtitle {
+
+}
+
+.reviewContainer {
+  margin: 12px 0;
+}
+
+.reviewBeach {
+  font-weight: var(--text-weight-bold);
+}

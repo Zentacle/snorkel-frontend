@@ -3,7 +3,7 @@ import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
 import Image from 'next/image';
 
-const IndividualReview = ({ review }) => {
+const IndividualReview = ({ review, user }) => {
     const review_date = new Date(review.date_posted).toLocaleString(
         [],
         {day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute:'2-digit'}
@@ -14,14 +14,14 @@ const IndividualReview = ({ review }) => {
 
             <div className={styles.outerupper}>
                 <div className={styles.imageouter}>
-                    { review.user.profile_pic
-                        ? <Image className={styles.profilePic} src={review.user.profile_pic} height='48' width='48'/>
+                    { user.profile_pic
+                        ? <Image className={styles.profilePic} src={user.profile_pic} height='48' width='48'/>
                         : <Image className={styles.profilePic} src='/default_profile.png' height='48' width='48' />
                     }
                 </div>
                 <div className={styles.centerouter}>
                     <div className={styles.centerupper}>
-                        {review.user.display_name}
+                        {user.display_name}
                     </div>
                     <div className={styles.centerlower}>
                         <Rating
