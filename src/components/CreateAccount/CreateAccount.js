@@ -14,14 +14,16 @@ import { sendEvent } from 'hooks/amplitude';
 const CreateAccount = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('')
-    const [name, setName] = React.useState('')
+    const [firstName, setFirstName] = React.useState('')
+    const [lastName, setLastName] = React.useState('')
     const [username, setUsername] = React.useState('')
 
-    const registerUser = (email, password, name, username) => () => {
+    const registerUser = () => {
         const body = {
             email,
             password,
-            'display_name': name,
+            'first_name': firstName,
+            'last_name': lastName,
             username,
         }
         fetch(`${rootDomain}/user/register`, {
@@ -58,11 +60,12 @@ const CreateAccount = () => {
                     Create your Free account
                 </div>
                 <form onSubmit={ e => {e.preventDefault();}}>
-                    <SignupInput value={name} onChange={ setName } id='name-input' type="Name"></SignupInput>
+                    <SignupInput value={firstName} onChange={ setFirstName } id='first-name-input' type="First Name"></SignupInput>
+                    <SignupInput value={lastName} onChange={ setLastName } id='last-name-input' type="Last Name"></SignupInput>
                     <SignupInput value={username} onChange={ setUsername} id='username-input' type="Username"></SignupInput>
                     <SignupInput value={email} onChange={ setEmail } id='email-input' type="Email"></SignupInput>
                     <SignupInput value={password} onChange={ setPassword } id='password-input' type="Password"></SignupInput>
-                    <PrimaryButton onClick={ registerUser(email, password, name, username) }>Create Account</PrimaryButton>
+                    <PrimaryButton onClick={ registerUser }>Create Account</PrimaryButton>
                 </form>
                 <div className={styles.bottominfo}>
                     Already have an account?&nbsp;

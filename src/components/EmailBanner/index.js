@@ -8,7 +8,8 @@ import Cookies from 'js-cookie';
 import { rootDomain } from 'lib/constants';
 
 const Banner = (props) => {
-  const [name, setName] = React.useState('');
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [diveRegion, setDiveRegion] = React.useState('');
   const [isShown, setIsShown] = React.useState(props.isShown)
@@ -16,7 +17,8 @@ const Banner = (props) => {
   const submitEmail = () => {
     const body = {
       email,
-      'display_name': name,
+      'first_name': firstName,
+      'last_name': lastName,
     }
     fetch(`${rootDomain}/user/register`, {
       method: 'POST',
@@ -63,8 +65,12 @@ const Banner = (props) => {
         </div>
         <div className={styles.formContainer}>
           <div className={styles.spacer}>
-            <div className={styles.formLabel}>Name</div>
-            <input value={name} onChange={e => setName(e.target.value)} className={styles.input} placeholder='Name' />
+            <div className={styles.formLabel}>First Name</div>
+            <input value={firstName} onChange={e => setFirstName(e.target.value)} className={styles.input} placeholder='First Name' />
+          </div>
+          <div className={styles.spacer}>
+            <div className={styles.formLabel}>Last Name</div>
+            <input value={lastName} onChange={e => setLastName(e.target.value)} className={styles.input} placeholder='Last Name' />
           </div>
           <div className={styles.spacer}>
             <div className={styles.formLabel}>Email</div>
