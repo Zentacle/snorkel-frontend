@@ -53,12 +53,14 @@ const Banner = (props) => {
     <Pane>
       <Dialog
         isShown={isShown}
-        title='Zentacle is currently in beta'
+        title='Zentacle is currently in testing in the Maui region and we need your help!'
         cancelLabel='Skip'
         onConfirm={submitEmail}
         onCancel={submitCancel}
       >
-        <div className={styles.subtitle}>Sign up to get early access, be notified of new features, and give feedback</div>
+        <div className={styles.subtitle}>
+          If you love scuba/snorkeling, sign up to get early access, be notified of new features, and give feedback. I would really appreciate your support!
+        </div>
         <div className={styles.formContainer}>
           <div className={styles.spacer}>
             <div className={styles.formLabel}>Name</div>
