@@ -45,7 +45,7 @@ const Beach = (props) => {
         <meta property="description" content={user.display_name} key="description" />
         <link rel="canonical" href={`https://www.zentacle.com/user/${user.username}`} />
       </Head>
-      <h1 className={styles.title}>{user.display_name}'s' Dive Log</h1>
+      <h1 className={styles.title}>{user.display_name}&apos;s Dive Log</h1>
       <h2 className={styles.username}>@{user.username}</h2>
       <h3 className={styles.subtitle}>{user.reviews.length} dives</h3>
       {
