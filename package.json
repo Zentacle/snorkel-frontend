@@ -16,7 +16,6 @@
     "amplitude-js": "^8.3.1",
     "antd": "^4.16.6",
     "awesome-react-icons": "^1.4.8",
-    "aws-sdk": "^2.951.0",
     "bootstrap": "^4.6.0",
     "evergreen-ui": "^6.1.0",
     "express": "^4.17.1",
@@ -25,7 +24,6 @@
     "material-design-icons": "^3.0.1",
     "material-ui-search-bar": "^1.0.0",
     "next": "11.0.1",
-    "next-s3-upload": "^0.1.5",
     "next-sitemap": "^1.6.140",
     "pure-react-carousel": "^1.27.6",
     "react": "17.0.2",
@@ -36,7 +34,6 @@
     "react-minimal-side-navigation": "^1.9.2",
     "react-rating": "^2.0.5",
     "react-router-dom": "^5.2.0",
-    "s3-upload": "^0.1.0",
     "styled-components": "^5.3.0",
     "uuid": "^8.3.2"
   },
