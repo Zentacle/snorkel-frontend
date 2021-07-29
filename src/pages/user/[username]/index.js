@@ -47,7 +47,7 @@ const Beach = (props) => {
       </Head>
       <h1 className={styles.title}>{user.display_name}'s' Dive Log</h1>
       <h2 className={styles.username}>@{user.username}</h2>
-      <h3 className={styles.subtitle}>{user.reviews.length} reviews</h3>
+      <h3 className={styles.subtitle}>{user.reviews.length} dives</h3>
       {
         user.reviews.map(review => {
           return (
