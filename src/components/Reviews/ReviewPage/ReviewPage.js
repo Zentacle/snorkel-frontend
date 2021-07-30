@@ -99,7 +99,7 @@ const ReviewPage = (props) => {
         async function uploadPhoto(file) {
 
             const filename = await encodeURIComponent(file.name);
-            const res = await fetch(`/apibackend/s3-upload?file=reviews/${filename}`);
+            const res = await fetch(`${rootDomain}/s3-upload?file=reviews/${filename}`);
             const presignedPostData = await res.json();
             const formData = new FormData();
 

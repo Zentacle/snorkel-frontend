@@ -10,7 +10,6 @@ module.exports = {
       'www.islands.com',
       'scontent.fhnl3-1.fna.fbcdn.net',
       'scontent.fhnl3-2.fna.fbcdn.net',
-      
     ]
   }
 }
