@@ -2,6 +2,7 @@ import styles from "../IndividualReview/IndividualReview.module.css";
 import Rating from "react-rating";
 import { Star } from "@material-ui/icons";
 import Image from 'next/image';
+import Link from 'next/link';
 
 const IndividualReview = ({ review, user }) => {
     const review_date = new Date(review.date_posted).toLocaleString(
@@ -20,9 +21,16 @@ const IndividualReview = ({ review, user }) => {
                     }
                 </div>
                 <div className={styles.centerouter}>
-                    <div className={styles.centerupper}>
-                        {user.display_name}
-                    </div>
+                    {
+                     user.username
+                        ? (
+                            <Link href={`/user/${user.username}`}>
+                                <a className={styles.centerupper}>
+                                    {user.display_name}
+                                </a>
+                            </Link>
+                        ) : <div className={styles.centerupper}>{user.display_name}</div>
+                    }
                     <div className={styles.centerlower}>
                         <Rating
                             fractions={2}
