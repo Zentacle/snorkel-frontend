@@ -1,4 +1,4 @@
-.container{
+.container {
     background-color: white;
     border-radius: 8px;
     box-shadow: 10px 0 10px 0 rgba(0, 0, 0, .5);
@@ -6,28 +6,38 @@
     padding: 16px;
 }
 
-.beachtitle{
+.containerdropzone {
+    width: 50px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
 
+.beachtitle {
     font-size: 36px;
     font-weight: var(--text-weight-bold);
-    
 }
 
 .spacer {
     margin: 16px 0;
 }
 
-.paragraphreview{
+.paragraphreview {
     width: 100%;
     height: 100px;
 }
 
-.reviewtitle{
+.reviewtitle {
     font-weight: var(--text-weight-bold);
     font-size: 18px;
 }
 
-.nextbutton{
+.nextbutton {
     width: 40vw;
     background-color: var(--primary-color);
     color: white;
@@ -40,9 +50,49 @@
     transition: transform .5s;
 }
 
-.nextbutton:hover{
+.nextbutton:hover {
     cursor: pointer;
-    transform: scale(1.2);
+    transform: scale(1.1);
+}
+
+.image {
+    height: 50px;
+}
+
+.photooutercontainer {
+    display: flex;
+    flex-direction: row;
+    max-width: 50px;
+    margin-right: 6px;
+}
+
+.dropzone {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.photoscontainer {
+    display: flex;
+}
+
+.dropzone:hover {
+    cursor: pointer;
+}
+
+.xicon {
+    cursor: pointer;
+    z-index: 10;
+    margin-top: -63px;
+    margin-left: 41px;
+    transform: scale(.8);
+}
+
+.individualphotoupload {
+    position: relative;
 }
 
 .visibilityLabel {
