@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-const Beach = (props) => {
+const DiveLog = (props) => {
   const [user, setUser] = useState(props)
 
   useEffect(() => {
@@ -62,4 +62,4 @@ const Beach = (props) => {
   )
 }
 
-export default Beach;
+export default DiveLog;
