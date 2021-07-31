@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
 }
 
 // '/' route
-export default function Home(props) {
+const Home = (props) => {
   return (
     <Layout>
       <Head>
@@ -80,3 +80,5 @@ export default function Home(props) {
     </Layout>
   )
 }
+
+export default Home;

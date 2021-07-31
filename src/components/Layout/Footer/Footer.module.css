@@ -1,45 +1,67 @@
+.footer {
+    text-align: center;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 24px 0;
+}
+
 .emailContainer {
     margin-bottom: 12px;
 }
 
 .emailBox {
     border-radius: 4px;
-    border: 1px solid #cecece;
-    font-size: 14px;
+    border: 1px solid white;
     padding: 4px 8px;
     min-width: 200px;
     height: 32px;
 }
 
+.emailBox::placeholder {
+    color: #cecece;
+}
+
 .emailSubmit {
-    background-color: var(--primary-color);
+    background-color: white;
     border-radius: 4px;
     padding: 4px 8px;
     height: 32px;
     margin-left: 8px;
-    color: white;
+    color: var(--primary-color);
+    cursor: pointer;
 }
 
 .formContainer {
     display: flex;
     align-items: center;
-    margin-top: 4px;
+    margin-top: 8px;
     justify-content: center;
 }
 
-.footer {
-    text-align: center;
-    font-size: 0.75rem;
-    background-color: white;
-    padding: 24px 0;
+.footertext{
+    margin-top: 8px;
+    font-weight: var(--text-weight-bold);
 }
 
-.footertext{
-    margin-top: 5px;
+@media (max-width: 390px) {
+    .footerLinkContainer {
+        flex-direction: column !important;
+    }
+    .footerLink {
+        flex: 1 !important;
+    }
+}
+
+.footerLinkContainer {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
 }
 
 .footerLink{
-    margin: 0 4px;
-    color: var(--primary-color);
-    text-decoration: underline;
+    padding: 16px;
+    color: white;
+    text-decoration: none;
+    flex: 1 0 180px;
 }
