@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from 'next/head';
 import Image from "next/image"
 
@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
 
 // '/' route
 const Home = (props) => {
-  const [shouldShowBanner, setShouldShowBanner] = React.useEffect(false);
+  const [shouldShowBanner, setShouldShowBanner] = React.useState(false);
   
   React.useEffect(() => {
     setShouldShowBanner(!(Cookies.get('has_seen_banner') || Cookies.get('csrf_access_token')));
