@@ -69,7 +69,7 @@ const Home = (props) => {
             <SearchBar></SearchBar>
           </div>
         </div>
-        <Banner isShown={showShowBanner}></Banner>
+        <Banner isShown={shouldShowBanner}></Banner>
         { props.recs && Object.keys(props.recs).length > 0 && <div>
           <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
           <Carousel data={ props.recs }></Carousel>
