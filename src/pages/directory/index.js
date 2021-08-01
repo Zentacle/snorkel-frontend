@@ -44,4 +44,4 @@ const Directory = ({ data }) => {
   )
 }
 
-export default
+export default Directory;
