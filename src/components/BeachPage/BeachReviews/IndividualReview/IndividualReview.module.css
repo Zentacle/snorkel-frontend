@@ -30,6 +30,8 @@
 
 .centerupper {
     color: black;
+    display: inline-block;
+    min-width: 48px;
 }
 
 .centerouter {
