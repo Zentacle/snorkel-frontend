@@ -25,14 +25,14 @@ export const getServerSideProps = async (ctx) => {
 }
 
 // Default export to prevent next.js errors
-export default ({ data }) => {
+const Directory = ({ data }) => {
   return (
     <Layout>
       <div className={ styles.container }>
         <h1 className={ styles.title }>Locations Directory</h1>
         {
           data.map(location => (
-            <div className={ styles.link }>
+            <div className={ styles.link } key={location.url}>
               <Link href={location.url}>
                 <a>{location.name} ({location.city})</a>
               </Link>
@@ -43,3 +43,5 @@ export default ({ data }) => {
     </Layout>
   )
 }
+
+export default
