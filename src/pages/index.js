@@ -41,11 +41,15 @@ export async function getServerSideProps(context) {
 
 // '/' route
 const Home = (props) => {
-  const shouldShowBanner = !(Cookies.get('has_seen_banner') || Cookies.get('csrf_access_token'));
+  const [shouldShowBanner, setShouldShowBanner] = React.useEffect(false);
+  
+  React.useEffect(() => {
+    setShouldShowBanner(!(Cookies.get('has_seen_banner') || Cookies.get('csrf_access_token')));
 
-  if (document.referrer.match(/^https?:\/\/([^\/]+\.)?google\.com(\/|$)/i)) {
-    shouldShowBanner = false;
-  }
+    if (document.referrer.match(/^https?:\/\/([^\/]+\.)?google\.com(\/|$)/i)) {
+      setShouldShowBanner(false);
+    }
+  }, [])
 
   return (
     <Layout>
