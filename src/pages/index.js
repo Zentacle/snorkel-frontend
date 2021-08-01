@@ -56,7 +56,7 @@ const Home = (props) => {
       <Head>
         <meta property="og:title" content="Zentacle - Scuba and Snorkel Reviews" key="og:title" />
         <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="og:description" />
-        <meta property="og:image" content="https://www.zentacle.com/social_background.jpg" key="og:image" />
+        <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
         <meta name="description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
       </Head>
       <div className={styles.container}>
