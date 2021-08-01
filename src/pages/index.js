@@ -41,6 +41,12 @@ export async function getServerSideProps(context) {
 
 // '/' route
 const Home = (props) => {
+  const shouldShowBanner = !(Cookies.get('has_seen_banner') || Cookies.get('csrf_access_token'));
+
+  if (document.referrer.match(/^https?:\/\/([^\/]+\.)?google\.com(\/|$)/i)) {
+    shouldShowBanner = false;
+  }
+
   return (
     <Layout>
       <Head>
@@ -59,7 +65,7 @@ const Home = (props) => {
             <SearchBar></SearchBar>
           </div>
         </div>
-        <Banner isShown={!(Cookies.get('has_seen_banner') || Cookies.get('csrf_access_token'))}></Banner>
+        <Banner isShown={showShowBanner}></Banner>
         { props.recs && Object.keys(props.recs).length > 0 && <div>
           <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
           <Carousel data={ props.recs }></Carousel>
