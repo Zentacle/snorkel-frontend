@@ -1,27 +1,7 @@
-.reviewbutton{
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: var(--text-weight-bold);
-    box-shadow: var(--box-shadow);
-    width: 70%;
-    max-width: 500px;
-    height: 40px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    transition: transform .5s;
-
-}
-
 .reviewbuttoncontainer{
     display: flex;
     justify-content: space-around;
-}
-
-.reviewbutton:hover{
-    transform: scale(1.1);
-    cursor: pointer;
+    margin-bottom: 16px;
 }
 
 .emptyState {

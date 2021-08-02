@@ -15,16 +15,27 @@ export async function getServerSideProps(context) {
           'Content-Type': 'application/json'
       }
   })
-  const data = await res.json()
+  const beach_data = await res.json()
 
-  if (!data) {
+  const response = await fetch(`${rootDomain}/review/get?beach_id=${beachid}`, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+  const review_data = await response.json();
+
+  if (!beach_data) {
       return {
           notFound: true,
       }
   }
 
   return {
-      props: data.data, // will be passed to the page component as props
+      props: {
+          'beach': beach_data.data,
+          'reviews': review_data.data,
+      }, // will be passed to the page component as props
   }
 }
 
@@ -32,7 +43,7 @@ const Beach = (props) => {
   const router = useRouter()
   const { beachid } = router.query
 
-  const [beach, setBeach] = useState(props)
+  const [beach, setBeach] = useState(props.beach)
 
   useEffect(() => {
       if (!router.isReady) { return; }
@@ -63,7 +74,7 @@ const Beach = (props) => {
               <meta name="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}`} key="description"/>
               <link rel="canonical" href={`https://www.zentacle.com${beach.url}`}/>
           </Head>
-          <BeachPage beach={beach} beachid={beachid}></BeachPage>
+          <BeachPage beach={beach} beachid={beachid} reviews={props.reviews}></BeachPage>
       </Layout>
   )
 }
