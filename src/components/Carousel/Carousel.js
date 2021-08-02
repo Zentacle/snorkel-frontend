@@ -1,11 +1,8 @@
 import styles from './Carousel.module.css';
 import React from 'react';
 import Image from 'next/image';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
 import Location from './Location/Location';
 import { ArrowBack, ArrowForward } from '@material-ui/icons';
-import useWindowSize from '../../hooks/WindowDimension/WindowDimension';
 import { rootDomain } from 'lib/constants';
 
 const MyCarousel = (props) => {
@@ -38,18 +35,6 @@ const MyCarousel = (props) => {
       <div className={ `${styles.nextButton} ${styles.button}` } onClick={moveCarousel(true)}><Image className={styles.caret} src='/right_caret.png' height='24' width='24'/></div>
     </div>
   );
-}
-
-function RenderSlides({beaches}) {
-  return (
-    <Slider className={styles.slider}>
-      {
-        beaches.map((beach, index) => 
-          <Slide key={beach.id} index={index}><Location info={beach}></Location></Slide>
-        )
-      }
-    </Slider>
-  )
 }
 
 export default MyCarousel;

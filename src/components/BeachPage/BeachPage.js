@@ -59,10 +59,10 @@ const BackImage = (props) => {
 
 const BeachPage = (props) => {
     return (
-        <div>
+        <>
             <BackImage beach={props.beach} />
             <BeachInfo {...props.beach} reviews={props.reviews} />
-        </div>
+        </>
     )
 }
 

@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import Image from 'next/image';
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import { useCurrentUser } from 'context/usercontext';
 
 const Profile = ({ user }) => {
