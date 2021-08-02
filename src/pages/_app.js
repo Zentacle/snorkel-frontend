@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { initAmplitude } from 'hooks/amplitude';
+import Head from 'next/head';
 
 import '../styles/globals.css'
 import { UserProvider, useCurrentUser } from 'src/context/usercontext';
@@ -7,10 +8,15 @@ import { rootDomain } from "src/lib/constants";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <UserProvider>
-      <SetUser></SetUser>
-      <Component {...pageProps} />
-    </UserProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <UserProvider>
+        <SetUser></SetUser>
+        <Component {...pageProps} />
+      </UserProvider>
+    </>
   )
 }
 
