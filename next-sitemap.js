@@ -1,10 +1,13 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://www.zentacle.com',
   generateRobotsTxt: true, // (optional)
-  exclude: ['/server-sitemap.xml'], // <= exclude here
+  exclude: [
+    '/server-sitemap.xml',
+    '/setpassword',
+  ], // <= exclude here
   robotsTxtOptions: {
     additionalSitemaps: [
-      'https://zentacle.com/server-sitemap.xml', // <==== Add here
+      'https://www.zentacle.com/server-sitemap.xml', // <==== Add here
     ],
   },
 }
