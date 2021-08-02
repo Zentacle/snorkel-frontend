@@ -32,7 +32,11 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className={styles.spaceholder}>
-                    <div><Link href="/add/spot"><a className={styles.addSpot}>Add New Spot</a></Link></div>
+                    <div>
+                        {currentUser && currentUser.id && <Link href="/add/spot">
+                            <a className={styles.addSpot}>Add New Spot</a>
+                        </Link>}
+                    </div>
                     <div className={styles.rightButton}>
                         {currentUser && currentUser.id
                             ? <Profile user={currentUser}></Profile>
