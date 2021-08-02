@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Layout from "components/Layout/Layout";
@@ -40,29 +39,11 @@ export async function getServerSideProps(context) {
 }
 
 const Beach = (props) => {
-  const router = useRouter()
-  const { beachid } = router.query
-
   const [beach, setBeach] = useState(props.beach)
 
   useEffect(() => {
-      if (!router.isReady) { return; }
-
       sendEvent('beach_view', { site_id: beach.id });
-
-      if (beach.notFound) {
-          fetch(`${rootDomain}/spots/get?beach_id=${beach.id}`, {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json'
-              }
-          }).then(response => {
-              return response.json();
-          }).then(data => {
-              setBeach(data.data);
-          })
-      }
-  }, [router.isReady])
+  }, [])
 
   return (
       <Layout>
@@ -75,7 +56,7 @@ const Beach = (props) => {
               <link rel="canonical" href={`https://www.zentacle.com${beach.url}`}/>
               <link rel="preload" as="image" href={beach.hero_img}/>
           </Head>
-          <BeachPage beach={beach} beachid={beachid} reviews={props.reviews}></BeachPage>
+          <BeachPage beach={beach} beachid={beach.id} reviews={props.reviews}></BeachPage>
       </Layout>
   )
 }

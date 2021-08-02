@@ -2,7 +2,6 @@ import React from "react";
 
 import styles from "../BeachReviews/BeachReviews.module.css";
 import IndividualReview from "./IndividualReview/IndividualReview";
-import { rootDomain } from 'lib/constants';
 import { useCurrentUser } from 'context/usercontext';
 import { PrimaryLink } from 'components/PrimaryButton';
 import { sendEvent } from 'hooks/amplitude';

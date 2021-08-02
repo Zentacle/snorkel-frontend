@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import styles from "../BeachInfo/BeachInfo.module.css";
 import VizDepth from "../VizDepth/VizDepth";
 import BeachAbout from "../BeachAbout/BeachAbout";
