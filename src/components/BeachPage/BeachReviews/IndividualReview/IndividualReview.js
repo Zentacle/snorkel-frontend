@@ -1,6 +1,6 @@
 import styles from "../IndividualReview/IndividualReview.module.css";
 import Rating from "react-rating";
-import { Star } from "@material-ui/icons";
+import Star from "@material-ui/icons/Star";
 import Image from 'next/image';
 import Link from 'next/link';
 

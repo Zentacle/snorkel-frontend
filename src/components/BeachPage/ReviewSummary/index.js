@@ -2,7 +2,7 @@ import styles from "../ReviewSummary/ReviewSummary.module.css";
 import Star from "@material-ui/icons/Star";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Rating from "react-rating";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Head from 'next/head';
 
 const TotalReviews = ({rating}) =>{
     
@@ -29,6 +29,9 @@ const ReviewSummary = ({ratings, rating, num_reviews}) =>{
     
     return (
         <div className={styles.outerdiv}>
+            <Head>
+                <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" as="style" onLoad="this.onload=null;this.rel='stylesheet'"/>
+            </Head>
             <div className={styles.innergrid}>
                 <div className={styles.one}>5</div>
                 <div className={styles.star1}><Star className={styles.starempty}></Star></div>
