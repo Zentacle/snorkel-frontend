@@ -1,3 +1,8 @@
+.container {
+  padding: 8px;
+  background-color: white;
+}
+
 .title {
   font-weight: var(--text-weight-bold);
   font-size: 32px;

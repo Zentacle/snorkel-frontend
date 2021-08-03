@@ -45,19 +45,21 @@ const DiveLog = (props) => {
         <meta property="description" content={user.display_name} key="description" />
         <link rel="canonical" href={`https://www.zentacle.com/user/${user.username}`} />
       </Head>
-      <h1 className={styles.title}>{user.display_name}&apos;s Dive Log</h1>
-      <h2 className={styles.username}>@{user.username}</h2>
-      <h3 className={styles.subtitle}>{user.reviews.length} dives</h3>
-      {
-        user.reviews.map(review => {
-          return (
-            <div className={styles.reviewContainer} key={review.id} >
-              <div className={styles.reviewBeach}>{review.spot.name} on {review.date_dived || review.date_posted}</div>
-              <IndividualReview review={review} user={user} />
-            </div>
-          )
-        })
-      }
+      <div className={styles.container}>
+        <h1 className={styles.title}>{user.display_name}&apos;s Dive Log</h1>
+        <h2 className={styles.username}>@{user.username}</h2>
+        <h3 className={styles.subtitle}>{user.reviews.length} dives</h3>
+        {
+          user.reviews.map(review => {
+            return (
+              <div className={styles.reviewContainer} key={review.id} >
+                <div className={styles.reviewBeach}>{review.spot.name} on {review.date_dived || review.date_posted}</div>
+                <IndividualReview review={review} user={user} />
+              </div>
+            )
+          })
+        }
+      </div>
     </Layout>
   )
 }
