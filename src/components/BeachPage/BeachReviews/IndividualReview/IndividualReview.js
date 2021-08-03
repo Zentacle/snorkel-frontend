@@ -4,14 +4,14 @@ import { Star } from "@material-ui/icons";
 import Image from 'next/image';
 import Link from 'next/link';
 
-const IndividualReview = ({ review, user, style }) => {
+const IndividualReview = ({ review, user }) => {
     const review_date = new Date(review.date_posted).toLocaleString(
         [],
         {day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute:'2-digit'}
     );
 
     return (
-        <div className={styles.container} style={style}>
+        <div className={styles.container}>
 
             <div className={styles.outerupper}>
                 <div className={styles.imageouter}>
