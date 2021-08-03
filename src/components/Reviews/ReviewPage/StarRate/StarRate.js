@@ -1,6 +1,6 @@
 import styles from "./StarRate.module.css";
 import Rating from "react-rating";
-import { Star } from "@material-ui/icons";
+import Star from "@material-ui/icons/Star";
 
 const StarRate = ({value, onChange, onHover}) => {
     return (

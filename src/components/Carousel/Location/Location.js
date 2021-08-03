@@ -1,9 +1,8 @@
 import styles from "./Location.module.css"
-import { Card, CardContent } from "@material-ui/core";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Rating from "react-rating";
-import { Star } from "@material-ui/icons";
+import Star from "@material-ui/icons/Star";
 import Link from "next/link";
 const SlideLocation = ({ ...props }) => {
     const router = useRouter();

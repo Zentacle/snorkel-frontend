@@ -2,8 +2,6 @@ import styles from './Carousel.module.css';
 import React from 'react';
 import Image from 'next/image';
 import Location from './Location/Location';
-import { ArrowBack, ArrowForward } from '@material-ui/icons';
-import { rootDomain } from 'lib/constants';
 
 const MyCarousel = (props) => {
   const [data, setData] = React.useState(props.data);

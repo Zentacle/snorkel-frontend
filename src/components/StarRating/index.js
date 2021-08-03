@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { Star } from "@material-ui/icons";
+import Star from "@material-ui/icons/Star";
 
 export const EmptyStar = () => (
   <Star className={styles.starempty}></Star>
