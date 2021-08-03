@@ -29,8 +29,8 @@ const MyCarousel = (props) => {
       { data && <div className={styles.carousel} ref={carousel}>
         { data.map(beach => (<Location style={{'left': offset}}key={ beach.id } info={beach}></Location>)) }
       </div> }
-      <div className={ `${styles.prevButton} ${styles.button}` } onClick={ moveCarousel(false)}><Image className={styles.caret} src='/left_caret.png' height='24' width='24'/></div>
-      <div className={ `${styles.nextButton} ${styles.button}` } onClick={moveCarousel(true)}><Image className={styles.caret} src='/right_caret.png' height='24' width='24'/></div>
+      <div className={ `${styles.prevButton} ${styles.button}` } onClick={ moveCarousel(false)}><Image className={styles.caret} alt="left caret" src='/left_caret.png' height='24' width='24'/></div>
+      <div className={ `${styles.nextButton} ${styles.button}` } onClick={moveCarousel(true)}><Image className={styles.caret} alt="right caret" src='/right_caret.png' height='24' width='24'/></div>
     </div>
   );
 }
