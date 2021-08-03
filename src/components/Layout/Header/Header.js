@@ -7,7 +7,7 @@ import { useCurrentUser } from 'context/usercontext';
 const Profile = ({ user }) => {
     if (user) {
         return (
-            <Link href={`user/${user.username}`}>
+            <Link href={`/user/${user.username}`}>
                 <a className={styles.outerprofile}>{user.username}</a>
             </Link>
         )
