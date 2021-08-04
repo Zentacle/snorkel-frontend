@@ -138,3 +138,8 @@ text-align: end;
 .bar5{
     grid-area: "bar5";
 }
+
+.ratingscount{
+    font-style: italic;
+    color: grey;
+}

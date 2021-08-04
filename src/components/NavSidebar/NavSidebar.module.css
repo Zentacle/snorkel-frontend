@@ -1,9 +1,0 @@
-.outersidebar{
-    z-index: 200;
-    position: fixed;
-    left: -1000px;
-    top: 0;
-    width: 200px;
-    height: 100%;
-    background-color: white;
-}
