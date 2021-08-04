@@ -1,10 +1,17 @@
+import React from 'react';
+
 import { sendEvent } from "hooks/amplitude";
 import styles from "./Footer.module.css";
 import Link from 'next/link';
 
 const Footer = () =>{
+    const [email, setEmail] = React.useState('');
+    const [hasSubmitted, setHasSubmitted] = React.useState(false);
+
     const onClick = () => {
-      sendEvent('submit_email');
+      sendEvent('submit_email', {
+        email,
+      });
     }
 
     return (
@@ -12,17 +19,21 @@ const Footer = () =>{
           <div className={ styles.emailContainer }>
             <div>Sign up to get updates on local conditions</div>
             <div className={ styles.formContainer }>
-              <input className={ styles.emailBox } placeholder="email"/>
-              <button className={ styles.emailSubmit } type="submit" onClick={ onClick }>Submit</button>
+              <input value={email} onChange={e=>setEmail(e.target.value)} className={ styles.emailBox } placeholder="email"/>
+              {
+                hasSubmitted
+                  ? <div>Submitted!</div>
+                  : <button className={ styles.emailSubmit } type="submit" onClick={ onClick }>Submit</button>
+              }
             </div>
           </div>
           <h3 className={styles.footertext}>
             Snorkel and Scuba Diving Reviews
           </h3>
           <div className={ styles.footerLinkContainer }>
-            <a className={ styles.footerLink } href="mailto:mjmayank@gmail.com">Report an issue</a>
-            <a className={ styles.footerLink } href="mailto:mjmayank@gmail.com">Suggest an edit</a>
-            <a className={ styles.footerLink } href="mailto:mjmayank@gmail.com">Add a new location</a>
+            <a style={{ display: 'block' }} className={ styles.footerLink } href="mailto:mjmayank@gmail.com">Report an issue</a>
+            <a style={{ display: 'block' }} className={ styles.footerLink } href="mailto:mjmayank@gmail.com">Suggest an edit</a>
+            <Link href='/add/spot'><a className={ styles.footerLink }>Add a new location</a></Link>
             <Link href='/directory'><a className={ styles.footerLink }>Directory</a></Link>
           </div>
         </footer>
