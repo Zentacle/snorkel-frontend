@@ -4,7 +4,7 @@ import Layout from 'components/Layout/Layout';
 import { rootDomain } from 'lib/constants';
 import styles from './styles.module.css';
 
-export const getServerSideProps = async (ctx) => {
+export const getStaticProps = async (ctx) => {
   // Method to source urls from cms
   const res = await fetch(`${rootDomain}/spots/get?limit=none`)
   const data = await res.json()
@@ -20,7 +20,8 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       'data': fields,
-    }
+    },
+    'revalidate': 86400,
   }
 }
 
