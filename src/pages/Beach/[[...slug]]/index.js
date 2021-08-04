@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
       }
   }
 
-  console.log(`Beach API request took ${Date.now()-startTime}ms`)
+  console.log(`beach_api_timing: ${Date.now()-startTime}ms`)
   return {
       props: {
           'beach': beach_data.data,
