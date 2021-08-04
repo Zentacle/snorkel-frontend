@@ -63,6 +63,7 @@
 
 .buttoncircle:hover{
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 .buttonouter{
@@ -78,12 +79,38 @@
     color: white;
 }
 
-.carouseltitle{
-    margin-left: 16px;
-    margin-top: 32px;
-    font-weight: var(--text-weight-bold);
+
+.photoouterwrapper{
+    overflow: hidden;
+    height: 0px;
+    transition: height 1s;
+    background-color: white;
+   
+
 }
 
-.carouselSpacer {
-    margin: 32px 0;
+.photopage{
+    width: auto;
+    height: 100px;
+    overflow: hidden;
+    
+}
+
+.individualphoto{
+    width: auto;
+    height: 100px;
+}
+
+.photocontainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pagetitlephotos{
+    position: relative;   
+    font-weight: var(--text-weight-bold);
+    font-size: 24px;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
