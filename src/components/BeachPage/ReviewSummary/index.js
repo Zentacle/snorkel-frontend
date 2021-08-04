@@ -4,7 +4,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Rating from "react-rating";
 import Head from 'next/head';
 
-const TotalReviews = ({rating}) =>{
+const TotalReviews = ({rating, num_reviews}) =>{
     
     return (
         <div className={styles.averagecontainer}>
@@ -18,7 +18,9 @@ const TotalReviews = ({rating}) =>{
                     readonly
                 >
                 </Rating>
+                <div className={styles.ratingscount}>({num_reviews})</div>
             </div>
+            
         </div>
     )
 }
@@ -52,7 +54,7 @@ const ReviewSummary = ({ratings, rating, num_reviews}) =>{
                 <div className={styles.bar5}><ProgressBar className={styles.progbar} variant="warning" now={(ratings[1]/total) * 100}></ProgressBar></div>
 
             </div>
-        <TotalReviews rating={rating}></TotalReviews>
+        <TotalReviews rating={rating} num_reviews={num_reviews}></TotalReviews>
         </div>
     )
 
