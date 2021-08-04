@@ -8,8 +8,7 @@ import Head from 'next/head';
 import { sendEvent } from 'hooks/amplitude';
 
 export async function getServerSideProps(context) {
-  const requestId = uuidv4();
-  console.log(`Start API request:${requestId} at ${Date.now()}`)
+  const startTime = Date.now();
   const beachid = context.params.slug[0];
   const res = await fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
       method: 'GET',
@@ -33,7 +32,7 @@ export async function getServerSideProps(context) {
       }
   }
 
-  console.log(`End API request:${requestId} at ${Date.now()}`)
+  console.log(`Beach API request took ${Date.now()-startTime}ms`)
   return {
       props: {
           'beach': beach_data.data,

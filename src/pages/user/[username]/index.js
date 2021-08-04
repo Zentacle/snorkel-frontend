@@ -6,6 +6,7 @@ import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import IndividualReview from 'components/BeachPage/BeachReviews/IndividualReview/IndividualReview';
 import styles from './styles.module.css';
+import Link from 'next/link';
 
 export async function getServerSideProps(context) {
   const username = context.query.username;
@@ -53,7 +54,16 @@ const DiveLog = (props) => {
           user.reviews.map(review => {
             return (
               <div className={styles.reviewContainer} key={review.id} >
-                <div className={styles.reviewBeach}>{review.spot.name} on {review.date_dived || review.date_posted}</div>
+                <div
+                  className={styles.reviewBeach}
+                >
+                  <Link href={review.spot.url}>
+                    <a>
+                      {review.spot.name}
+                    </a>
+                  </Link>
+                  &nbsp;on {new Date(review.date_dived || review.date_posted).toLocaleDateString()}
+                </div>
                 <IndividualReview review={review} user={user} />
               </div>
             )
