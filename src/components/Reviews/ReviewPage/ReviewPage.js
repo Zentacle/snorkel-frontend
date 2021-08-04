@@ -116,10 +116,14 @@ const ReviewPage = (props) => {
                 console.error('Upload failed.');
             }
         };
-
+        let fileNames = []
         for (let i = 0; i < fileRecords.length; i++) {
             await uploadPhoto(fileRecords[i].file)
+            fileNames.push(fileRecords[i].file.name)
         }
+        
+        body.images = fileNames
+        
 
         fetch(`${rootDomain}/review/add`, {
             method: 'POST',
