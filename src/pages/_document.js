@@ -4,6 +4,8 @@ import { ServerStyleSheet } from 'styled-components'
 // https://stackoverflow.com/questions/63449123/how-to-add-multiple-stylesheets-to-ctx-renderpage
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
+    const requestId = uuidv4();
+    console.log(`Start styled components:${requestId} at ${Date.now()}`)
     const sheet = new ServerStyleSheet()
     const originalRenderPage = ctx.renderPage
 
@@ -15,6 +17,7 @@ export default class MyDocument extends Document {
         })
 
       const initialProps = await Document.getInitialProps(ctx)
+      console.log(`End styled components:${requestId} at ${Date.now()}`)
       return {
         ...initialProps,
         styles: (
