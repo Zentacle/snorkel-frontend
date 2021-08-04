@@ -11,6 +11,8 @@ import { ReactPhotoCollage } from "react-photo-collage";
 import { rootDomain } from 'lib/constants';
 import { useRouter } from "next/router";
 import Carousel from 'components/Carousel/Carousel';
+
+
 const BackImage = (props) => {
     const router = useRouter();
     const [photosHeight, setPhotosHeight] = React.useState(0);
@@ -87,6 +89,37 @@ const BackImage = (props) => {
 
 
 
+
+        
+
+
+    console.log(photoArray)
+    React.useEffect(()=>{
+        
+        for (let i = 0; i < photoArray.length && i < 3; i++){
+        fetch(`${rootDomain}/s3-download?file=` + 'reviews/' + photoArray[i].url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            console.log(response)
+            return response.json();
+        }).then(data => {
+            
+            const urls = signedUrls;
+            urls.push(data.data)
+            setSignedUrls([...urls])
+            
+        }).catch(err => {
+            console.log(err)
+        })
+        }
+        
+    }, [photoArray])
+    console.log(signedUrls)
+   
+   
     return (
         <div className={styles.image}>
             <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
