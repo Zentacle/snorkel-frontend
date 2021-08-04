@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4} from 'uuid';
 
 import Layout from "components/Layout/Layout";
 import BeachPage from "components/BeachPage/BeachPage";
@@ -7,6 +8,8 @@ import Head from 'next/head';
 import { sendEvent } from 'hooks/amplitude';
 
 export async function getServerSideProps(context) {
+  const requestId = uuidv4();
+  console.log(`Start API request:${requestId} at ${Date.now()}`)
   const beachid = context.params.slug[0];
   const res = await fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
       method: 'GET',
@@ -30,6 +33,7 @@ export async function getServerSideProps(context) {
       }
   }
 
+  console.log(`End API request:${requestId} at ${Date.now()}`)
   return {
       props: {
           'beach': beach_data.data,
