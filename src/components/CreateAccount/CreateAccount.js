@@ -64,6 +64,8 @@ const CreateAccount = () => {
                     headers: {
                         'Content-Type': 'application/json'
                     }
+                }).then(() => {
+                    window.location.href = "/"
                 })
             }
         }
