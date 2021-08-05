@@ -54,15 +54,18 @@ const CreateAccount = () => {
     }, [])
 
     useEffect(() => {
-        const handleLogin = (id) => {
-            console.log(id);
-            fetch(`${rootDomain}/user/google_register`, {
-                method: 'POST',
-                body: JSON.stringify(id),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+        const handleLogin = (response) => {
+            sendEvent('google_register_error');
+            if (response.credential) {
+                sendEvent('google_register_success');
+                fetch(`${rootDomain}/user/google_register`, {
+                    method: 'POST',
+                    body: JSON.stringify(response),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+            }
         }
 
         const initializeGSI = () => {
