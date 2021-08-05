@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookies from 'js-cookie'
+import { withRouter } from 'next/router';
 
 import { rootDomain } from 'lib/constants';
 import PrimaryButton from "components/PrimaryButton";
@@ -8,8 +9,8 @@ import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 
 const NewSpot = (props) => {
-  console.log(props)
   const submitSpot = () => {
+    const router = withRouter();
     setIsSubmitDisabled(true);
 
     fetch(`${rootDomain}/spots/add`, {
@@ -26,7 +27,7 @@ const NewSpot = (props) => {
     }).then(response => {
       if (response.ok) {
         sendEvent('spot_add');
-        Router.push(`/`)
+        router.push(`/`)
       } else {
         setIsSubmitDisabled(false);
         response.json().then(({ msg }) => toaster.danger(msg));

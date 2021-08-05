@@ -53,7 +53,6 @@ const Home = (props) => {
   }, [])
 
   const { state } = useCurrentUser();
-  React.useEffect(() => {console.log(state.user)}, [state])
 
   React.useEffect(googleOneTap('/', state.user), [state])
 
