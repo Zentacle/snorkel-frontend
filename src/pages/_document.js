@@ -16,7 +16,7 @@ export default class MyDocument extends Document {
         })
 
       const initialProps = await Document.getInitialProps(ctx)
-      console.log(`styled_components_timing: ${Date.now()-startTime}ms`)
+      console.log(`styled_components_timing: ${Date.now() - startTime}ms`)
       return {
         ...initialProps,
         styles: (
@@ -36,12 +36,12 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=G-WFH58XWN7D`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=G-WFH58XWN7D`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
@@ -51,6 +51,7 @@ export default class MyDocument extends Document {
                 `,
             }}
           />
+          <script src="https://accounts.google.com/gsi/client" async defer></script>
         </Head>
         <body>
           <Main />
