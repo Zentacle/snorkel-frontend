@@ -114,3 +114,17 @@
     margin-left: 10px;
     margin-bottom: 10px;
 }
+
+.showmore{
+    display: flex;
+    justify-content: flex-end;
+    font-style: italic;
+    color: grey;
+    padding-right: 10px;
+
+}
+
+.showmore:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

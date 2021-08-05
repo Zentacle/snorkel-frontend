@@ -44,7 +44,7 @@ const BackImage = (props) => {
     }, [])
     console.log(photoArray)
     React.useEffect(()=>{
-        
+        if (signedUrls.length != 3){
         for (let i = 0; i < photoArray.length && i < 3; i++){
         fetch(`${rootDomain}/s3-download?file=` + 'reviews/' + photoArray[i].url, {
             method: 'GET',
@@ -64,6 +64,7 @@ const BackImage = (props) => {
             console.log(err)
         })
         }
+    }
         
     }, [photoArray])
     console.log(signedUrls)
@@ -129,7 +130,14 @@ const BackImage = (props) => {
 
             })}
             </div>
-            <div onClick={()=>router.push('/Beach/Photos')}> show more</div>
+            <div className={styles.showmore} onClick={()=>router.push({pathname: '/Beach/Photos', query:{
+                beach_id: props.beach.beach_id,
+                hero_img: props.beach.hero_img,
+                name: props.beach.name,
+                rating: props.beach.rating,
+                location_city: props.beach.location_city
+
+            }})}> show more >>></div>
             </div>
 
         </div>
