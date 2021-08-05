@@ -58,7 +58,7 @@ const CreateAccount = () => {
             console.log(id);
             fetch(`${rootDomain}/user/google_register`, {
                 method: 'POST',
-                body: id,
+                body: JSON.stringify(id),
                 headers: {
                     'Content-Type': 'application/json'
                 }
