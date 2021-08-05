@@ -5,7 +5,6 @@ import Layout from "components/Layout/Layout";
 import Location from "components/Carousel/Location/Location";
 import { rootDomain } from 'lib/constants';
 import SearchBar from 'components/SearchBar';
-import Head from 'next/head';
 import styles from './styles.module.css';
 import Link from 'next/link';
 

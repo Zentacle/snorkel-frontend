@@ -20,7 +20,7 @@ const Menu = (props) => {
               onChange={ setSearch }
               onRequestSearch={() => {
                   sendEvent('submit_search', {
-                      'query': search,
+                      'query': search.toLowerCase(),
                   });
                   router.push(`/search?search_term=${search}`
               )}}

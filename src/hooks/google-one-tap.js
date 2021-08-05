@@ -1,4 +1,3 @@
-import React from 'react';
 import { sendEvent } from 'hooks/amplitude';
 import { rootDomain } from "src/lib/constants";
 
