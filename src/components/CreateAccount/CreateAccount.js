@@ -67,7 +67,7 @@ const CreateAccount = () => {
                     console.log(notification.getDismissedReason())
                 }
                 console.log(notification)
-                fetch(`${rootDomain}/register/google_register`, {
+                fetch(`${rootDomain}/user/google_register`, {
                     method: 'POST',
                     body: notification,
                 })
