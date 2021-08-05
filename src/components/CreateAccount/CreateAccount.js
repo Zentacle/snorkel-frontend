@@ -54,9 +54,21 @@ const CreateAccount = () => {
     }, [])
 
     useEffect(() => {
+        const handleLogin = (id) => {
+            console.log(id);
+            fetch(`${rootDomain}/user/google_register`, {
+                method: 'POST',
+                body: id,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
+
         const initializeGSI = () => {
             google.accounts.id.initialize({
                 client_id: '609299692665-bl3secuu5i4v1iumjm0kje0db1lge1ec.apps.googleusercontent.com',
+                callback: handleLogin,
             });
             google.accounts.id.prompt(notification => {
                 if (notification.isNotDisplayed()) {
