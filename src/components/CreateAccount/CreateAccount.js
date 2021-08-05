@@ -70,6 +70,9 @@ const CreateAccount = () => {
                 fetch(`${rootDomain}/user/google_register`, {
                     method: 'POST',
                     body: notification,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
             });
         }
