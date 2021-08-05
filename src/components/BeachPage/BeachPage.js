@@ -95,7 +95,7 @@ const BackImage = (props) => {
 
     console.log(photoArray)
     React.useEffect(()=>{
-        
+        if (signedUrls.length != 3){
         for (let i = 0; i < photoArray.length && i < 3; i++){
         fetch(`${rootDomain}/s3-download?file=` + 'reviews/' + photoArray[i].url, {
             method: 'GET',
@@ -115,6 +115,7 @@ const BackImage = (props) => {
             console.log(err)
         })
         }
+    }
         
     }, [photoArray])
     console.log(signedUrls)
