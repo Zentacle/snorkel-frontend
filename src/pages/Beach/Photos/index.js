@@ -1,4 +1,4 @@
-import PhotoPage from "components/PhotoPage";
+import {PhotoPage} from "components/PhotoPage";
 
 const ThePhotoPage = () =>{
     return (

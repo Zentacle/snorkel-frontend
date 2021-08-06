@@ -7,7 +7,7 @@ import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
 import Link from 'next/link';
 import React from 'react'
-
+import { ReactPhotoCollage } from "react-photo-collage";
 import { rootDomain } from 'lib/constants';
 import { useRouter } from "next/router";
 
@@ -15,7 +15,7 @@ const BackImage = (props) => {
     const router = useRouter();
     const [photosHeight, setPhotosHeight] = React.useState(0);
     const [photoArray, setPhotoArray] = React.useState([]);
-    const [signedUrls, setSignedUrls] = React.useState([]);
+    
     const changeHeight = () => {
         if (photosHeight == 0) {
             setPhotosHeight(200)
@@ -23,11 +23,12 @@ const BackImage = (props) => {
             setPhotosHeight(0)
         }
     }
+
     React.useEffect(() => {
-        
+
 
         if (!props.name) {
-            fetch(`${rootDomain}/images`, {
+            fetch(`${rootDomain}/beachimages?beach_id=` + props.beach.id, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -36,40 +37,52 @@ const BackImage = (props) => {
                 return response.json();
             }).then(data => {
                 setPhotoArray([...data.data]);
-                
-                
+                console.log(data.data)
+
+
             })
         }
 
     }, [])
-    console.log(photoArray)
-    React.useEffect(()=>{
-        if (signedUrls.length != 3){
-        for (let i = 0; i < photoArray.length && i < 3; i++){
-        fetch(`${rootDomain}/s3-download?file=` + 'reviews/' + photoArray[i].url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            console.log(response)
-            return response.json();
-        }).then(data => {
-            
-            const urls = signedUrls;
-            urls.push(data.data)
-            setSignedUrls([...urls])
-            
-        }).catch(err => {
-            console.log(err)
-        })
-        }
-    }
+
+    const [settings1, setSettings1] = React.useState(null);
+    const [settings2, setSettings2] = React.useState(null);
+    const [settings3, setSettings3] = React.useState(null);
+    React.useEffect(() => {
         
+        if (photoArray.length > 0) {
+            const arLen = photoArray.length;
+            setSettings1({
+                width: '100px',
+                height: ['100px'],
+                layout: [1],
+                photos: [{ source: photoArray[arLen-1].signedurl.data }],
+                showNumOfRemainingPhotos: false
+            })
+
+            setSettings2({
+                width: '100px',
+                height: ['100px'],
+                layout: [1],
+                photos: [{ source: photoArray[arLen-2].signedurl.data }],
+                showNumOfRemainingPhotos: false
+            })
+
+            setSettings3({
+                width: '100px',
+                height: ['100px'],
+                layout: [1],
+                photos: [{ source: photoArray[arLen-3].signedurl.data }],
+                showNumOfRemainingPhotos: false
+            })
+
+        }
+
     }, [photoArray])
-    console.log(signedUrls)
-   
-   
+
+
+
+
     return (
         <div className={styles.image}>
             <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
@@ -116,28 +129,23 @@ const BackImage = (props) => {
                 </div>
             </div>
 
-            <div className={styles.photoouterwrapper} style={{ height: photosHeight}}>
+            <div className={styles.photoouterwrapper} style={{ height: photosHeight }}>
                 <div className={styles.pagetitlephotos}>User Photos</div>
-                <div className={styles.photocontainer}>
-            {signedUrls && signedUrls.map((object, i)=>{
-                const url = object
-                
-                return (<div key={object} className={styles.photopage}>
-                    
-                    <img alt="error loading" src={url} className={styles.individualphoto}></img>
-                    
-                </div>)
+                {settings1 && settings1.photos[0].source && <div className={styles.photocontainer}>
+                    <ReactPhotoCollage {...settings1}></ReactPhotoCollage>
+                    {settings2 && settings2.photos[0].source && <ReactPhotoCollage {...settings2}></ReactPhotoCollage>}
+                    {settings3 && settings3.photos[0].source && <ReactPhotoCollage {...settings3}></ReactPhotoCollage>}
+                </div>}
+                <div className={styles.showmore} onClick={() => router.push({
+                    pathname: '/Beach/Photos', query: {
+                        beach_id: props.beach.id,
+                        hero_img: props.beach.hero_img,
+                        name: props.beach.name,
+                        rating: props.beach.rating,
+                        location_city: props.beach.location_city
 
-            })}
-            </div>
-            <div className={styles.showmore} onClick={()=>router.push({pathname: '/Beach/Photos', query:{
-                beach_id: props.beach.beach_id,
-                hero_img: props.beach.hero_img,
-                name: props.beach.name,
-                rating: props.beach.rating,
-                location_city: props.beach.location_city
-
-            }})}> show more >>></div>
+                    }
+                })}> show more >>></div>
             </div>
 
         </div>
