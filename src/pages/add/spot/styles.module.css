@@ -16,6 +16,36 @@
   margin: 16px 0;
 }
 
+.placeContainer {
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.helper {
+  font-weight: var(--text-weight-bold);
+}
+
+.placeSelection {
+  border-bottom: 1px solid #cecece;
+  cursor: pointer;
+  padding: 8px;
+  transition: background-color 0.5s;
+}
+
+.placeSelection:hover {
+  background-color: #eeeeee;
+}
+
+.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.active:hover {
+  background-color: var(--primary-color);
+}
+
 .container{
   background-color: white;
   border-radius: 8px;
@@ -27,4 +57,14 @@
 .helper {
   font-size: 12px;
   margin: 4px 0;
+}
+
+.text {
+  padding: 8px;
+}
+
+.textArea {
+  padding: 8px;
+  min-height: 200px;
+  width: 100%;
 }
