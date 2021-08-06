@@ -44,7 +44,7 @@
 
 .centerlower {
     display: flex;
-    align-items: center;
+    align-items: baseline;
 }
 
 .reviewDate {
