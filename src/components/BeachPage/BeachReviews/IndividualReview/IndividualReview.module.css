@@ -1,5 +1,5 @@
 .container{
-    padding: 8px 0;
+    padding: 12px 0;
 }
 
 .starempty{
@@ -65,4 +65,9 @@
 
 .activityContainer {
     margin: 8px 0;
+}
+
+.helper {
+    font-size: 12px;
+    font-style: italic;
 }

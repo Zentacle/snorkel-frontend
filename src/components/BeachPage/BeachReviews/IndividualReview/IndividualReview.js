@@ -49,6 +49,7 @@ const IndividualReview = ({ review, user }) => {
             <div className={styles.outerlower}>
                 {review.text}
             </div>
+            { review.shorediving_data && <div className={ styles.helper }>Originally posted on shorediving.com</div> }
         </div>
     )
 }
