@@ -17,7 +17,6 @@ const BackImage = (props) => {
     const router = useRouter();
     const [photosHeight, setPhotosHeight] = React.useState(0);
     const [photoArray, setPhotoArray] = React.useState([]);
-
     const changeHeight = () => {
         if (photosHeight == 0) {
             setPhotosHeight(200)
@@ -54,34 +53,33 @@ const BackImage = (props) => {
     const [settings2, setSettings2] = React.useState(null);
     const [settings3, setSettings3] = React.useState(null);
     React.useEffect(() => {
-
+        
         if (photoArray.length > 0) {
             const arLen = photoArray.length;
             setSettings1({
                 width: '100px',
                 height: ['100px'],
                 layout: [1],
-                photos: [{ source: photoArray[arLen - 1].signedurl.data }],
+                photos: [{ source: photoArray[arLen-1].signedurl.data }],
                 showNumOfRemainingPhotos: false
             })
-            if (photoArray.length > 1) {
-                setSettings2({
-                    width: '100px',
-                    height: ['100px'],
-                    layout: [1],
-                    photos: [{ source: photoArray[arLen - 2].signedurl.data }],
-                    showNumOfRemainingPhotos: false
-                })
-            }
-            if (photoArray.length > 2) {
-                setSettings3({
-                    width: '100px',
-                    height: ['100px'],
-                    layout: [1],
-                    photos: [{ source: photoArray[arLen - 3].signedurl.data }],
-                    showNumOfRemainingPhotos: false
-                })
-            }
+
+            setSettings2({
+                width: '100px',
+                height: ['100px'],
+                layout: [1],
+                photos: [{ source: photoArray[arLen-2].signedurl.data }],
+                showNumOfRemainingPhotos: false
+            })
+
+            setSettings3({
+                width: '100px',
+                height: ['100px'],
+                layout: [1],
+                photos: [{ source: photoArray[arLen-3].signedurl.data }],
+                showNumOfRemainingPhotos: false
+            })
+
         }
 
     }, [photoArray])
@@ -89,38 +87,6 @@ const BackImage = (props) => {
 
 
 
-
-        
-
-
-    console.log(photoArray)
-    React.useEffect(()=>{
-        if (signedUrls.length != 3){
-        for (let i = 0; i < photoArray.length && i < 3; i++){
-        fetch(`${rootDomain}/s3-download?file=` + 'reviews/' + photoArray[i].url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            console.log(response)
-            return response.json();
-        }).then(data => {
-            
-            const urls = signedUrls;
-            urls.push(data.data)
-            setSignedUrls([...urls])
-            
-        }).catch(err => {
-            console.log(err)
-        })
-        }
-    }
-        
-    }, [photoArray])
-    console.log(signedUrls)
-   
-   
     return (
         <div className={styles.image}>
             <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
@@ -174,8 +140,11 @@ const BackImage = (props) => {
                     {settings2 && settings2.photos[0].source && <ReactPhotoCollage {...settings2}></ReactPhotoCollage>}
                     {settings3 && settings3.photos[0].source && <ReactPhotoCollage {...settings3}></ReactPhotoCollage>}
                 </div>}
+<<<<<<< HEAD
                 {!settings1 && <div className={styles.photocontainer}>No photos yet!
                     </div>}
+=======
+>>>>>>> 18db903 (photo page, review, and dropdown)
                 <div className={styles.showmore} onClick={() => router.push({
                     pathname: '/Beach/Photos', query: {
                         beach_id: props.beach.id,
