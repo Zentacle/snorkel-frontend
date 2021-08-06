@@ -1,6 +1,7 @@
 import React from 'react';
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router';
+import { toaster } from 'evergreen-ui';
 
 import { rootDomain } from 'lib/constants';
 import PrimaryButton from "components/PrimaryButton";
@@ -18,7 +19,7 @@ const NewSpot = (props) => {
       'location_city': locationCity,
       'description': description,
     }
-    if (selectedGooglePlaceIndex) {
+    if (selectedGooglePlaceIndex !== null) {
       body['place_id'] = googlePlaceCandidates[selectedGooglePlaceIndex].place_id;
     }
 
@@ -38,7 +39,6 @@ const NewSpot = (props) => {
         setIsSubmitDisabled(false);
         response.json().then(({ msg }) => toaster.danger(msg));
       }
-      return response.json()
     })
   }
 
