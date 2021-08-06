@@ -10,7 +10,7 @@ import React from 'react'
 import { ReactPhotoCollage } from "react-photo-collage";
 import { rootDomain } from 'lib/constants';
 import { useRouter } from "next/router";
-
+import Carousel from 'components/Carousel/Carousel';
 const BackImage = (props) => {
     const router = useRouter();
     const [photosHeight, setPhotosHeight] = React.useState(0);
