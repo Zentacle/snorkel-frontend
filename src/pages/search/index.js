@@ -59,8 +59,8 @@ const SearchPage = (props) => {
                     { results.length
                         ? results.map(result => <div key={ result.id } className={styles.slide}><Location info={result}/></div>)
                         : <div>
-                            No results found. We currently only support Maui locations, but would love to add more with your help.
-                            <Link href={ `/add/spot?name=${searchTerm}` }><a className={styles.requestAdd}> Click here to request it be added.</a></Link>
+                            No results found. We&apos;re currently starting in Maui and plan to expand soon. We would love to add more with your help. Make sure to create and account so you&apos;re on our email list.
+                            <Link href={ `/add/spot?name=${searchTerm}` }><a className={styles.requestAdd}> Click here to submit a new location</a></Link>
                         </div>
                     }
                 </div>
