@@ -9,7 +9,7 @@ import { rootDomain } from "src/lib/constants";
 import Banner from "components/EmailBanner";
 import Cookies from "js-cookie";
 import { useCurrentUser } from 'context/usercontext';
-import googleOneTap from "hooks/google-one-tap";
+import useGoogleOneTap from "hooks/useGoogleOneTap";
 
 export async function getServerSideProps(context) {
   const sorts = ['top', 'latest', 'default', 'recs']
@@ -54,7 +54,7 @@ const Home = (props) => {
 
   const { state } = useCurrentUser();
 
-  React.useEffect(googleOneTap('/', state.user), [state])
+  React.useEffect(useGoogleOneTap('/', state.user), [state])
 
   return (
     <Layout>
