@@ -2,7 +2,7 @@ import { sendEvent } from 'hooks/amplitude';
 import { rootDomain } from "src/lib/constants";
 import * as ga from 'lib/ga';
 
-const googleOneTap = (redirectURL, user) => () => {
+const useGoogleOneTap = (redirectURL, user) => () => {
   if (!user) { return }
   if (user && user.id) { return }
   const handleLogin = (response) => {
@@ -54,4 +54,4 @@ const googleOneTap = (redirectURL, user) => () => {
   document.querySelector('body').appendChild(script)
 }
 
-export default googleOneTap;
+export default useGoogleOneTap;

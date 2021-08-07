@@ -6,7 +6,7 @@ import { rootDomain } from 'lib/constants';
 import Head from 'next/head';
 import { sendEvent } from 'hooks/amplitude';
 import { useCurrentUser } from 'context/usercontext';
-import googleOneTap from 'hooks/google-one-tap';
+import useGoogleOneTap from 'hooks/useGoogleOneTap';
 
 export async function getServerSideProps(context) {
     const startTime = Date.now();
@@ -51,7 +51,7 @@ const Beach = (props) => {
 
     const { state } = useCurrentUser();
 
-    useEffect(googleOneTap('/', state.user), [state])
+    useEffect(useGoogleOneTap('/', state.user), [state])
 
     return (
         <Layout>

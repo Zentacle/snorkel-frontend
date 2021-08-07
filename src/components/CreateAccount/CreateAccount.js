@@ -10,7 +10,7 @@ import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
-import googleOneTap from 'hooks/google-one-tap';
+import useGoogleOneTap from 'hooks/useGoogleOneTap';
 import * as ga from 'lib/ga';
 
 const CreateAccount = () => {
@@ -58,7 +58,7 @@ const CreateAccount = () => {
         sendEvent('register_begin');
     }, [])
 
-    useEffect(googleOneTap('/', {}), [])
+    useEffect(useGoogleOneTap('/', {}), [])
 
     return (
         <Layout>
