@@ -11,6 +11,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import googleOneTap from 'hooks/google-one-tap';
+import * as ga from 'lib/ga';
 
 const CreateAccount = () => {
     const [email, setEmail] = React.useState('');
@@ -37,6 +38,9 @@ const CreateAccount = () => {
             response.json().then(data => {
                 if (response.ok) {
                     if (data.auth_token) {
+                        ga.event({
+                            action: "signup",
+                        })
                         sendEvent('register_success');
                         window.location.href = "/";
                     } else {

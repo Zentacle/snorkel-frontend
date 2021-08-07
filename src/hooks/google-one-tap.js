@@ -1,12 +1,12 @@
 import { sendEvent } from 'hooks/amplitude';
 import { rootDomain } from "src/lib/constants";
+import * as ga from 'lib/ga';
 
 const googleOneTap = (redirectURL, user) => () => {
   if (!user) { return }
   if (user && user.id) { return }
   const handleLogin = (response) => {
     if (response.credential) {
-      sendEvent('google_register_success');
       fetch(`${rootDomain}/user/google_register`, {
         method: 'POST',
         body: JSON.stringify(response),
@@ -14,6 +14,10 @@ const googleOneTap = (redirectURL, user) => () => {
           'Content-Type': 'application/json'
         }
       }).then(() => {
+        sendEvent('google_register_success');
+        ga.event({
+          action: "signup",
+        })
         window.location.href = redirectURL
       })
     } else {
