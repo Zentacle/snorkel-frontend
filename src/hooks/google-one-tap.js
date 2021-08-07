@@ -32,7 +32,6 @@ const googleOneTap = (redirectURL, user) => () => {
         callback: handleLogin,
       });
       google.accounts.id.prompt(notification => {
-        sendEvent('onetap_view')
         if (notification.isNotDisplayed()) {
           sendEvent('onetap_error', {
             'reason': notification.getNotDisplayedReason(),
@@ -42,6 +41,8 @@ const googleOneTap = (redirectURL, user) => () => {
           console.log(notification.getSkippedReason())
         } else if (notification.isDismissedMoment()) {
           console.log(notification.getDismissedReason())
+        } else {
+          sendEvent('onetap_view');
         }
       });
     }
