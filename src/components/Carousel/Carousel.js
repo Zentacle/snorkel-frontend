@@ -1,5 +1,5 @@
 import styles from './Carousel.module.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Location from './Location/Location';
 
@@ -23,6 +23,8 @@ const MyCarousel = (props) => {
       setOffset(newOffset);
     }
   }
+
+  useEffect(() => setData(props.data), [props.data])
 
   return (
     <div className={ styles.carouselContainer }>

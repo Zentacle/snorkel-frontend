@@ -4,6 +4,7 @@ import BeachInfo from "../BeachPage/BeachInfo/BeachInfo";
 import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
 import Link from 'next/link';
+import Carousel from 'components/Carousel/Carousel';
 
 
 const BackImage = (props) => {
@@ -62,6 +63,10 @@ const BeachPage = (props) => {
         <>
             <BackImage beach={props.beach} />
             <BeachInfo {...props.beach} reviews={props.reviews} />
+            <div className={styles.carouselSpacer}>
+                <div className={styles.carouseltitle}>Other Locations Nearby</div>
+                <Carousel data={[...props.nearbyBeaches]}></Carousel>
+            </div>
         </>
     )
 }
