@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { sendEvent } from 'hooks/amplitude';
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from 'hooks/useGoogleOneTap';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context) {
     const startTime = Date.now();
@@ -45,13 +46,32 @@ export async function getServerSideProps(context) {
 const Beach = (props) => {
     const [beach, setBeach] = useState(props.beach)
 
+    const router = useRouter();
+
     useEffect(() => {
         sendEvent('beach_view', { site_id: beach.id });
     }, [])
 
+    useEffect(() => {
+        if (!router.isReady) { return }
+        const beachid = router.query.slug[0];
+        fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res =>
+            res.json()
+        ).then(beach_data => {
+            setNearbyBeaches([...beach_data.data])
+        });
+    }, [router.isReady])
+
     const { state } = useCurrentUser();
 
     useEffect(useGoogleOneTap('/', state.user), [state])
+
+    const [nearbyBeaches, setNearbyBeaches] = useState([])
 
     return (
         <Layout>
@@ -64,7 +84,7 @@ const Beach = (props) => {
                 <link rel="canonical" href={`https://www.zentacle.com${beach.url}`} />
                 <link rel="preload" as="image" href={beach.hero_img} />
             </Head>
-            <BeachPage beach={beach} beachid={beach.id} reviews={props.reviews}></BeachPage>
+            <BeachPage beach={beach} beachid={beach.id} reviews={props.reviews} nearbyBeaches={nearbyBeaches}></BeachPage>
         </Layout>
     )
 }
