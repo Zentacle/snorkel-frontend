@@ -65,7 +65,7 @@ const Beach = (props) => {
         ).then(beach_data => {
             setNearbyBeaches([...beach_data.data])
         });
-    }, [router.isReady])
+    }, [router.isReady, router.query.slug])
 
     const { state } = useCurrentUser();
 
