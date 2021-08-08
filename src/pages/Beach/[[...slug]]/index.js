@@ -72,6 +72,7 @@ const Beach = (props) => {
     useEffect(useGoogleOneTap('/', state.user), [state])
 
     const [nearbyBeaches, setNearbyBeaches] = useState([])
+    useEffect(() => setBeach(props.beach), [props.beach])
 
     return (
         <Layout>
