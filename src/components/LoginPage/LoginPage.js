@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { toaster } from 'evergreen-ui';
+import { useRouter } from 'next/router';
 
 import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
@@ -13,22 +13,13 @@ import { useCurrentUser } from '../../context/usercontext'
 import useGoogleButton from 'hooks/useGoogleButton';
 import { sendEvent, setAmplitudeUserId } from "hooks/amplitude";
 
-const Title = () => {
-    return (
-        <div className={styles.titlecontainer}>
-            Login to your account
-        </div>
-        
-    )
-}
-
 const LoginPage = () => {
     const router = useRouter();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('')
-    const {dispatch} = useCurrentUser()
+    const { dispatch } = useCurrentUser()
     const loginUser = (email, password) => () => {
-        
+
         const body = {
             email,
             password,
@@ -63,19 +54,21 @@ const LoginPage = () => {
     }, [])
 
     useEffect(useGoogleButton('/', {}), [])
-   
+
     return (
         <Layout>
             <BackgroundCard>
-                <Title></Title>
+                <div className={styles.titlecontainer}>
+                    Login to your account
+                </div>
                 <div
                     id="google_button"
                     className={styles.googleButton}
                 >
                 </div>
-                <SignupInput value={email} onChange={ setEmail } type="Email"></SignupInput>
-                <SignupInput value={password} onChange={ setPassword } type="Password"></SignupInput>
-                <PrimaryButton onClick={ loginUser(email, password) }>Log In</PrimaryButton>
+                <SignupInput value={email} onChange={setEmail} type="Email"></SignupInput>
+                <SignupInput value={password} onChange={setPassword} type="Password"></SignupInput>
+                <PrimaryButton onClick={loginUser(email, password)}>Log In</PrimaryButton>
                 <div className={styles.bottominfo}>
                     Don&apos;t have an account?&nbsp;
                     <Link href="/register">
