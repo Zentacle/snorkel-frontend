@@ -1,6 +1,8 @@
 .searchContainer {
   margin-top: 12px;
   padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .searchResultsContainer {
@@ -11,6 +13,7 @@
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
+  margin: 8px;
 }
 
 .requestAdd {
