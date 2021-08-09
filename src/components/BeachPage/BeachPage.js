@@ -152,7 +152,7 @@ const BackImage = (props) => {
                         location_city: props.beach.location_city
 
                     }
-                })}> show more >>></div>
+                })}> show more &gt;&gt;&gt;</div>
             </div>
 
         </div>
