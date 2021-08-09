@@ -49,8 +49,7 @@ const useGoogleOneTap = (redirectURL, user) => () => {
   }
   const script = document.createElement('script')
   script.src = 'https://accounts.google.com/gsi/client'
-  script.onload = setTimeout(initializeGSI, 3000)
-  script.async = true;
+  script.onload = setTimeout(initializeGSI, 1000)
   script.defer = true;
   document.querySelector('body').appendChild(script)
 }
