@@ -9,7 +9,7 @@ import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from 'hooks/useGoogleOneTap';
 import { useRouter } from 'next/router';
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
     const startTime = Date.now();
     const beachid = context.params.slug[0];
     const res = await fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
@@ -40,6 +40,20 @@ export async function getServerSideProps(context) {
             'beach': beach_data.data,
             'reviews': review_data.data,
         }, // will be passed to the page component as props
+        revalidate: 3600,
+    }
+}
+
+export async function getStaticPaths() {
+    const res = await fetch(`${rootDomain}/spots/get?limit=none&ssg=true`)
+    const data = await res.json()
+    return {
+        paths: data.data.map(beach => ({
+            params: {
+                slug: [`${beach.id}`, beach.beach_name_for_url]
+            }
+        })),
+        fallback: 'blocking',
     }
 }
 
