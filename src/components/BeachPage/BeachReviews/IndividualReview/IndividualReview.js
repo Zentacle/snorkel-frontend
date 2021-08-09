@@ -49,15 +49,12 @@ const IndividualReview = ({ review, user }) => {
             <div className={styles.outerlower}>
                 {review.text}
             </div>
-<<<<<<< HEAD
             { review.shorediving_data && <div className={ styles.helper }>Originally posted on shorediving.com</div> }
-=======
             </div>
             <div className={styles.photos}>
                 <PhotoGrid isReview={true} beach_id={-1} review_id={review.id}></PhotoGrid>
                 
             </div>
->>>>>>> 18db903 (photo page, review, and dropdown)
         </div>
     )
 }
