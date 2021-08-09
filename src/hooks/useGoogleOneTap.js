@@ -36,22 +36,27 @@ const useGoogleOneTap = (redirectURL, user) => () => {
           sendEvent('onetap_error', {
             'reason': notification.getNotDisplayedReason(),
           })
-          console.log(notification.getNotDisplayedReason())
         } else if (notification.isSkippedMoment()) {
-          console.log(notification.getSkippedReason())
+          sendEvent('onetap_error', {
+            'reason': notification.getSkippedReason(),
+          })
         } else if (notification.isDismissedMoment()) {
-          console.log(notification.getDismissedReason())
+          sendEvent('onetap_error', {
+            'reason': notification.getDismissedReason(),
+          })
         } else {
           sendEvent('onetap_view');
         }
       });
     }
   }
-  const script = document.createElement('script')
-  script.src = 'https://accounts.google.com/gsi/client'
-  script.onload = setTimeout(initializeGSI, 1000)
-  script.defer = true;
-  document.querySelector('body').appendChild(script)
+  setTimeout(() => {
+    const script = document.createElement('script')
+    script.src = 'https://accounts.google.com/gsi/client'
+    script.onload = setTimeout(initializeGSI, 1000)
+    script.defer = true;
+    document.querySelector('body').appendChild(script)
+  }, 3000)
 }
 
 export default useGoogleOneTap;
