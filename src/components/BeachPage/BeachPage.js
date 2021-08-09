@@ -19,6 +19,9 @@ const BackImage = (props) => {
     const changeHeight = () => {
         if (photosHeight == 0) {
             setPhotosHeight(200)
+            if (photoArray.length < 1){
+                setPhotosHeight(100)
+            }
         } else {
             setPhotosHeight(0)
         }
@@ -137,6 +140,8 @@ const BackImage = (props) => {
                     {settings2 && settings2.photos[0].source && <ReactPhotoCollage {...settings2}></ReactPhotoCollage>}
                     {settings3 && settings3.photos[0].source && <ReactPhotoCollage {...settings3}></ReactPhotoCollage>}
                 </div>}
+                {!settings1 && <div className={styles.photocontainer}>No photos yet!
+                    </div>}
                 <div className={styles.showmore} onClick={() => router.push({
                     pathname: '/Beach/Photos', query: {
                         beach_id: props.beach.id,
