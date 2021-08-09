@@ -8,9 +8,8 @@ import { sendEvent } from 'hooks/amplitude';
 const Menu = (props) => {
   const router = useRouter();
   const [search, setSearch] = React.useState(props.value || '');
-  React.useEffect(()=>{
-      console.log(search);
-  }, [search]);
+
+  React.useEffect(() => setSearch(props.value), [props.value])
 
   return (
       <div className={styles.innermenu}>
@@ -19,6 +18,7 @@ const Menu = (props) => {
               className={styles.searchbar}
               onChange={ setSearch }
               onRequestSearch={() => {
+                  if (!search) { return }
                   sendEvent('submit_search', {
                       'query': search.toLowerCase(),
                   });

@@ -8,36 +8,16 @@ import SearchBar from 'components/SearchBar';
 import styles from './styles.module.css';
 import Link from 'next/link';
 
-export async function getServerSideProps(context) {
-    const search_term = context.query.search_term;
-    const res = await fetch(`${rootDomain}/spots/search?search_term=${search_term}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    const data = await res.json()
-
-    if (!data) {
-        return {
-            notFound: true,
-        }
-    }
-
-    return {
-        props: data, // will be passed to the page component as props
-    }
-}
-
-const SearchPage = (props) => {
+const SearchPage = () => {
     const router = useRouter()
 
-    const [results, setResults] = useState(props.data);
-    const [searchTerm, setSearchTerm] = useState(router.query.search_term);
-    console.log(props.data);
+    const [results, setResults] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         if (!router.isReady) { return; }
+
+        setSearchTerm(router.query.search_term)
 
         fetch(`${rootDomain}/spots/search?search_term=${router.query.search_term}`, {
             method: 'GET',
