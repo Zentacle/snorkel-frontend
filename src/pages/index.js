@@ -11,18 +11,12 @@ import Cookies from "js-cookie";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 
-export async function getServerSideProps(context) {
-  const sorts = ['top', 'latest', 'default', 'recs']
+export async function getStaticProps(context) {
+  const sorts = ['top', 'latest', 'default']
   const props = {};
   await Promise.all(sorts.map(async sort => {
     let res;
-    if (sort === 'recs') {
-      res = await fetch(`${rootDomain}/spots/recs`, {
-        headers: context.req ? { cookie: context.req.headers.cookie } : undefined
-      })
-    } else {
-      res = await fetch(`${rootDomain}/spots/get?sort=${sort}`,)
-    }
+    res = await fetch(`${rootDomain}/spots/get?sort=${sort}`,)
 
     const data = await res.json()
     props[sort] = data.data || null;
@@ -37,12 +31,15 @@ export async function getServerSideProps(context) {
 
   return {
     props, // will be passed to the page component as props
+    revalidate: 3600,
   }
 }
 
 // '/' route
 const Home = (props) => {
   const [shouldShowBanner, setShouldShowBanner] = React.useState(false);
+  const [recs, setRecs] = React.useState(null);
+  const { state } = useCurrentUser();
 
   React.useEffect(() => {
     setShouldShowBanner(!(Cookies.get('has_seen_banner') || Cookies.get('csrf_access_token')));
@@ -52,7 +49,14 @@ const Home = (props) => {
     }
   }, [])
 
-  const { state } = useCurrentUser();
+  React.useEffect(() => {
+    if (!state.user) { return }
+    fetch(`${rootDomain}/spots/recs`).then(res =>
+      res.json()
+    ).then(data => {
+      setRecs(data.data)
+    })
+  }, [state.user])
 
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
@@ -75,9 +79,9 @@ const Home = (props) => {
           </div>
         </div>
         <Banner isShown={shouldShowBanner}></Banner>
-        {props.recs && Object.keys(props.recs).length > 0 && <div>
+        {recs && Object.keys(recs).length > 0 && <div>
           <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
-          <Carousel data={props.recs}></Carousel>
+          <Carousel data={recs}></Carousel>
         </div>}
         <div>
           <div className={styles.carouseltitle}>Local Favorites in Maui</div>
