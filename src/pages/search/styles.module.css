@@ -1,12 +1,12 @@
 .searchContainer {
   margin-top: 12px;
   padding: 8px;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .searchResultsContainer {
   margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .slide {
