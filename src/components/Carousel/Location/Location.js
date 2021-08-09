@@ -17,7 +17,7 @@ const SlideLocation = ({ ...props }) => {
                         alt="picture"
                         objectFit="contain"
                         height="160"
-                        width="160"
+                        width="256"
                     />
                 </div>
                 <div className={styles.locationInfoContainer}>
