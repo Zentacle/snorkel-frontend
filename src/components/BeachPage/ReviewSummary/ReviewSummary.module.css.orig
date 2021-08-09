@@ -1,0 +1,148 @@
+.outerdiv{
+    
+    width: 100%;
+    display: flex;
+    
+    
+}
+
+.innergrid{
+    padding: 15px;
+    padding-right: 0px;
+    width: 70%;
+    display: grid;
+    grid-gap: 3px;
+    grid-column-gap: 5px;
+    grid-template-columns: 10% 10% 70%;
+    grid-template-rows: 18% 18% 18% 18% 18%;
+    grid-template-areas: "one star1 bar1"
+                        "two star2 bar2"
+                        "three star3 bar3"
+                        "four star4 bar4"
+                        "five star5 bar5";
+    
+}
+
+.averagecontainer{
+   
+}
+.averagerating{
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 64px;
+}
+.starempty{
+    color: Grey;
+    
+}
+
+.starfull{
+    color: gold;
+   
+}
+
+.starfullsmall{
+    color: gold;
+    
+}
+
+.staremptysmall{
+    color: transparent;
+}
+.progbar{
+    height: 10px !important;
+    margin-top: 7px;
+    width: 90%;
+
+}
+.rating{
+    transform: scale(.65);
+    width: auto;
+}
+
+.averagestars{
+    width: 150px;
+    text-align: center;
+    
+}
+.one, .two, .three, .four, .five{
+text-align: end;
+}
+
+.star1, .star2, .star3, .star4, .star5{
+    text-align: center;
+    margin-top: -1px;
+    transform: scale(.75);
+}
+
+.bar1, .bar2, .bar3, .bar4, .bar5{
+   width: 100%;
+}
+
+.one{
+    grid-area: "one";
+}
+
+.two{
+    grid-area: "two";
+}
+
+.three{
+    grid-area: "three";
+}
+
+.four{
+    grid-area: "four";
+}
+
+.five{
+    grid-area: "five";
+}
+
+.star1{
+    grid-area: "star1";
+}
+
+.star2{
+    grid-area: "star2";
+}
+
+.star3{
+    grid-area: "star3";
+}
+
+.star4{
+    grid-area: "star4";
+}
+
+.star5{
+    grid-area: "star5";
+}
+
+.bar1{
+    grid-area: "bar1";
+}
+
+.bar2{
+    grid-area: "bar2";
+}
+
+.bar3{
+    grid-area: "bar3";
+}
+
+.bar4{
+    grid-area: "bar4";
+}
+
+.bar5{
+    grid-area: "bar5";
+}
+
+.ratingscount{
+<<<<<<< HEAD
+=======
+    font-style: italic;
+>>>>>>> b587cc7 (add total reviews to review summary)
+    color: grey;
+}
