@@ -10,7 +10,7 @@ import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
-import useGoogleOneTap from 'hooks/useGoogleOneTap';
+import useGoogleButton from 'hooks/useGoogleButton';
 import * as ga from 'lib/ga';
 
 const CreateAccount = () => {
@@ -58,7 +58,7 @@ const CreateAccount = () => {
         sendEvent('register_begin');
     }, [])
 
-    useEffect(useGoogleOneTap('/', {}), [])
+    useEffect(useGoogleButton('/', {}), [])
 
     return (
         <Layout>
@@ -66,6 +66,12 @@ const CreateAccount = () => {
                 <div className={styles.titlecontainer}>
                     Create your Free account
                 </div>
+                <div
+                    id="google_button"
+                    className={styles.googleButton}
+                >
+                </div>
+                <div className={styles.orSeparator}>OR</div>
                 <form onSubmit={ e => {e.preventDefault();}}>
                     <SignupInput value={firstName} onChange={ setFirstName } id='first-name-input' type="First Name"></SignupInput>
                     <SignupInput value={lastName} onChange={ setLastName } id='last-name-input' type="Last Name"></SignupInput>
