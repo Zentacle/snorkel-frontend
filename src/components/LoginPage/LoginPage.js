@@ -10,7 +10,7 @@ import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { rootDomain } from 'lib/constants';
 import { useCurrentUser } from '../../context/usercontext'
-import router from "next/router";
+import useGoogleButton from 'hooks/useGoogleButton';
 import { sendEvent, setAmplitudeUserId } from "hooks/amplitude";
 
 const Title = () => {
@@ -61,11 +61,18 @@ const LoginPage = () => {
     useEffect(() => {
         sendEvent('login_begin');
     }, [])
+
+    useEffect(useGoogleButton('/', {}), [])
    
     return (
         <Layout>
             <BackgroundCard>
                 <Title></Title>
+                <div
+                    id="google_button"
+                    className={styles.googleButton}
+                >
+                </div>
                 <SignupInput value={email} onChange={ setEmail } type="Email"></SignupInput>
                 <SignupInput value={password} onChange={ setPassword } type="Password"></SignupInput>
                 <PrimaryButton onClick={ loginUser(email, password) }>Log In</PrimaryButton>
