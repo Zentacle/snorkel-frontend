@@ -16,7 +16,8 @@ const SlideLocation = ({ ...props }) => {
                         src={props.info.hero_img || '/generic_beach.jpeg'}
                         alt="picture"
                         objectFit="contain"
-                        layout="fill"
+                        height="160"
+                        width="160"
                     />
                 </div>
                 <div className={styles.locationInfoContainer}>
