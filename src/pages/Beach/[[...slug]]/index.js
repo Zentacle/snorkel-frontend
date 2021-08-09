@@ -11,8 +11,9 @@ import { useRouter } from 'next/router';
 
 export async function getStaticProps(context) {
     const startTime = Date.now();
+   console.log(context.params.slug[0])
     const beachid = context.params.slug[0];
-    const res = await fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
+    const res = await fetch(`${rootDomain}/spots/get?beach_id=` + beachid, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
