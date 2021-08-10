@@ -16,7 +16,7 @@ const BeachInfo = ({ id, description, entry_map, last_review_date, last_review_v
         <div className={styles.container}>
             <VizDepth date={ last_review_date } viz={ last_review_viz }></VizDepth>
             <BeachAbout description={ description }></BeachAbout>
-            <EntryMap src={ entry_map }/>
+            { entry_map && <EntryMap src={ entry_map }/> }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
             <BeachReviews beachid={id} reviews={reviews}></BeachReviews>
         </div>

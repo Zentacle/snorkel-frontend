@@ -6,9 +6,13 @@ import { EmptyStar, FullStar } from "components/StarRating";
 import Link from 'next/link';
 import Carousel from 'components/Carousel/Carousel';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-
+import { toaster } from 'evergreen-ui';
 
 const BackImage = (props) => {
+    const onEntryMapClick = () => {
+        if (props.beach.entry_map) { return }
+        toaster.danger(`We don&apos;t have a map for this location yet`)
+    }
 
     return (
         <div className={styles.image}>
@@ -39,7 +43,7 @@ const BackImage = (props) => {
             <div className={styles.menu}>
                 <div className={styles.buttoncontainer}>
                     <div className={styles.buttonouter}>
-                        <Link href={props.beach.entry_map || ''}>
+                        <Link href={props.beach.entry_map || ''} >
                             <a className={styles.buttoncircle}>
                                 <Image src='/mapicon.png' alt="map" objectFit="contain" height='24' width="24"></Image>
                             </a>
