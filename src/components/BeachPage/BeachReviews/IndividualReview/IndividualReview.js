@@ -11,6 +11,7 @@ const IndividualReview = ({ review, user }) => {
     );
 
     return (
+        <div className={styles.outercontainer}>
         <div className={styles.container}>
             <div>
             <div className={styles.outerupper}>
@@ -53,7 +54,9 @@ const IndividualReview = ({ review, user }) => {
             <div className={styles.photos}>
                 <PhotoGrid isReview={true} beach_id={-1} review_id={review.id}></PhotoGrid>
             </div>
-            { review.shorediving_data && <div className={ styles.helper }>Originally posted on shorediving.com</div> }
+            
+        </div>
+        { review.shorediving_data && <div className={ styles.helper }>Originally posted on shorediving.com</div> }
         </div>
     )
 }

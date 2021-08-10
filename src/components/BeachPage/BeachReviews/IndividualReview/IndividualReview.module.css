@@ -1,5 +1,5 @@
 .container{
-    padding: 8px 0;
+    
     display: flex;
     justify-content: space-between;
 }
@@ -76,4 +76,8 @@
 .helper {
     font-size: 12px;
     font-style: italic;
+}
+
+.outercontainer{
+    padding: 12px 0;
 }
