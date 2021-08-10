@@ -1,4 +1,10 @@
 .container{
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.photos{
+    
     padding: 12px 0;
 }
 

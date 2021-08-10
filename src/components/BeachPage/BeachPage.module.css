@@ -101,3 +101,54 @@
 .carouselSpacer {
     margin: 32px 0;
 }
+
+.photoouterwrapper{
+    overflow: hidden;
+    height: 0px;
+    transition: height 1s;
+    background-color: white;
+   
+
+}
+
+.photopage{
+    width: auto;
+    height: 100px;
+    overflow: hidden;
+    
+}
+
+.individualphoto{
+    width: auto;
+    height: 100px;
+}
+
+.photocontainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pagetitlephotos{
+    position: relative;   
+    font-weight: var(--text-weight-bold);
+    font-size: 24px;
+    margin-left: 24px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.showmore{
+    display: flex;
+    justify-content: flex-end;
+    font-style: italic;
+    color: grey;
+    padding-right: 8px;
+    padding-top: 8px;
+
+}
+
+.showmore:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
