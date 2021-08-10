@@ -117,13 +117,20 @@ const ReviewPage = (props) => {
             }
         };
 
+        const images = [];
+
         for (let i = 0; i < fileRecords.length; i++) {
-            await uploadPhoto(fileRecords[i].file)
+            const file = fileRecords[i].file;
+            images.push(file.name);
+            await uploadPhoto(file);
         }
 
         fetch(`${rootDomain}/review/add`, {
             method: 'POST',
-            body: JSON.stringify(body),
+            body: JSON.stringify({
+                ...body,
+                images,
+            }),
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
