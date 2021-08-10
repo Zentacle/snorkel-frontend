@@ -1,7 +1,18 @@
 .container{
+    
+    display: flex;
+    justify-content: space-between;
+}
+.photos{
+    
     padding: 12px 0;
 }
 
+.photos * {
+    border: none !important;
+    border-radius: 4px;
+
+}
 .starempty{
     color: Grey;
     
@@ -70,4 +81,8 @@
 .helper {
     font-size: 12px;
     font-style: italic;
+}
+
+.outercontainer{
+    padding: 12px 0;
 }
