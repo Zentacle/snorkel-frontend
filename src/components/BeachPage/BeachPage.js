@@ -38,139 +38,139 @@ const BackImage = (props) => {
 
 
 
-const router = useRouter();
-const [photosHeight, setPhotosHeight] = React.useState(0);
-const [photoArray, setPhotoArray] = React.useState([]);
+    const router = useRouter();
+    const [photosHeight, setPhotosHeight] = React.useState(0);
+    const [photoArray, setPhotoArray] = React.useState([]);
 
 
 
 
-React.useEffect(() => {
+    React.useEffect(() => {
 
 
-    if (!props.name) {
-        fetch(`${rootDomain}/beachimages?beach_id=` + props.beach.id, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            return response.json();
-        }).then(data => {
-            setPhotoArray([...data.data]);
-            if (data.data.length != 0) {
-                setPhotosHeight(145)
-            }
+        if (!props.name) {
+            fetch(`${rootDomain}/beachimages?beach_id=` + props.beach.id, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                setPhotoArray([...data.data]);
+                if (data.data.length != 0) {
+                    setPhotosHeight(145)
+                }
 
 
 
-        })
-    }
+            })
+        }
 
-}, [])
+    }, [])
 
-const [settings1, setSettings1] = React.useState(null);
-const [settings2, setSettings2] = React.useState(null);
-const [settings3, setSettings3] = React.useState(null);
-React.useEffect(() => {
+    const [settings1, setSettings1] = React.useState(null);
+    const [settings2, setSettings2] = React.useState(null);
+    const [settings3, setSettings3] = React.useState(null);
+    React.useEffect(() => {
 
-    if (photoArray.length > 0) {
-        const arLen = photoArray.length;
-        setSettings1({
-            width: '100px',
-            height: ['100px'],
-            layout: [1],
-            photos: [{ source: photoArray[arLen - 1].signedurl.data }],
-            showNumOfRemainingPhotos: false
-        })
-        if (photoArray.length > 1) {
-            setSettings2({
+        if (photoArray.length > 0) {
+            const arLen = photoArray.length;
+            setSettings1({
                 width: '100px',
                 height: ['100px'],
                 layout: [1],
-                photos: [{ source: photoArray[arLen - 2].signedurl.data }],
+                photos: [{ source: photoArray[arLen - 1].signedurl.data }],
                 showNumOfRemainingPhotos: false
             })
+            if (photoArray.length > 1) {
+                setSettings2({
+                    width: '100px',
+                    height: ['100px'],
+                    layout: [1],
+                    photos: [{ source: photoArray[arLen - 2].signedurl.data }],
+                    showNumOfRemainingPhotos: false
+                })
+            }
+            if (photoArray.length > 2) {
+                setSettings3({
+                    width: '100px',
+                    height: ['100px'],
+                    layout: [1],
+                    photos: [{ source: photoArray[arLen - 3].signedurl.data }],
+                    showNumOfRemainingPhotos: false
+                })
+            }
         }
-        if (photoArray.length > 2) {
-            setSettings3({
-                width: '100px',
-                height: ['100px'],
-                layout: [1],
-                photos: [{ source: photoArray[arLen - 3].signedurl.data }],
-                showNumOfRemainingPhotos: false
-            })
-        }
-    }
 
-}, [photoArray])
+    }, [photoArray])
 
 
 
-return (
-    <div className={styles.image}>
-        <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
-            <div className={styles.overlay} />
-            <div className={styles.pageHeroInfo}>
-                <div className={styles.nameContainer}>
-                    <h1 className={styles.pagetitle}>{props.beach.name}</h1>
-                    <Link href="/register">
-                        <a className={styles.favorite} alt="Mark as favorite">
-                            <FavoriteBorder />
-                        </a>
-                    </Link>
-                </div>
-                <div className={styles.stars}>
-                    <Rating
-                        fractions={2}
-                        emptySymbol={(<EmptyStar />)}
-                        fullSymbol={(<FullStar />)}
-                        initialRating={props.beach.rating}
-                        readonly>
-                    </Rating>
-                </div>
-                <div className={styles.beachdescription}>{props.beach.location_city}</div>
-            </div>
-
-        </div>
-        <div className={styles.menu}>
-            <div className={styles.buttoncontainer}>
-                <div className={styles.buttonouter}>
-                    <Link href={props.beach.entry_map || props.beach.url}>
-                        <a className={styles.buttoncircle} onClick={onEntryMapClick}>
-                            <Image src='/mapicon.png' alt="map" objectFit="contain" height='24' width="24"></Image>
-                        </a>
-                    </Link>
-                    <div className={styles.buttonlabel}>Entry Map</div>
-                </div>
-                <div className={styles.buttonouter}>
-                    <Link href={props.beach.location_google || ''}>
-                        <a className={styles.buttoncircle}>
-                            <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
-                        </a>
-                    </Link>
-                    <div className={styles.buttonlabel}>Directions</div>
-                </div>
-                <div className={styles.buttonouter}>
-                    <div className={styles.buttoncircle} onClick={() => photoClick()}>
-                        <Image src='/photosicon.png' alt="photos" objectFit="contain" height='24' width="24"></Image>
+    return (
+        <div className={styles.image}>
+            <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
+                <div className={styles.overlay} />
+                <div className={styles.pageHeroInfo}>
+                    <div className={styles.nameContainer}>
+                        <h1 className={styles.pagetitle}>{props.beach.name}</h1>
+                        <Link href="/register">
+                            <a className={styles.favorite} alt="Mark as favorite">
+                                <FavoriteBorder />
+                            </a>
+                        </Link>
                     </div>
-                    <div className={styles.buttonlabel}>Photos</div>
+                    <div className={styles.stars}>
+                        <Rating
+                            fractions={2}
+                            emptySymbol={(<EmptyStar />)}
+                            fullSymbol={(<FullStar />)}
+                            initialRating={props.beach.rating}
+                            readonly>
+                        </Rating>
+                    </div>
+                    <div className={styles.beachdescription}>{props.beach.location_city}</div>
+                </div>
+
+            </div>
+            <div className={styles.menu}>
+                <div className={styles.buttoncontainer}>
+                    <div className={styles.buttonouter}>
+                        <Link href={props.beach.entry_map || props.beach.url}>
+                            <a className={styles.buttoncircle} onClick={onEntryMapClick}>
+                                <Image src='/mapicon.png' alt="map" objectFit="contain" height='24' width="24"></Image>
+                            </a>
+                        </Link>
+                        <div className={styles.buttonlabel}>Entry Map</div>
+                    </div>
+                    <div className={styles.buttonouter}>
+                        <Link href={props.beach.location_google || ''}>
+                            <a className={styles.buttoncircle}>
+                                <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
+                            </a>
+                        </Link>
+                        <div className={styles.buttonlabel}>Directions</div>
+                    </div>
+                    <div className={styles.buttonouter}>
+                        <div className={styles.buttoncircle} onClick={() => photoClick()}>
+                            <Image src='/photosicon.png' alt="photos" objectFit="contain" height='24' width="24"></Image>
+                        </div>
+                        <div className={styles.buttonlabel}>Photos</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className={styles.photoouterwrapper} style={{ height: photosHeight }}>
-            {settings1 && settings1.photos[0].source && <div className={styles.photocontainer}>
-                <ReactPhotoCollage {...settings1}></ReactPhotoCollage>
-                {settings2 && settings2.photos[0].source && <ReactPhotoCollage {...settings2}></ReactPhotoCollage>}
-                {settings3 && settings3.photos[0].source && <ReactPhotoCollage {...settings3}></ReactPhotoCollage>}
-            </div>}
-            {!settings1 && <div className={styles.photocontainer}>No photos yet!
-            </div>}
+            <div className={styles.photoouterwrapper} style={{ height: photosHeight }}>
+                {settings1 && settings1.photos[0].source && <div className={styles.photocontainer}>
+                    <ReactPhotoCollage {...settings1}></ReactPhotoCollage>
+                    {settings2 && settings2.photos[0].source && <ReactPhotoCollage {...settings2}></ReactPhotoCollage>}
+                    {settings3 && settings3.photos[0].source && <ReactPhotoCollage {...settings3}></ReactPhotoCollage>}
+                </div>}
+                {!settings1 && <div className={styles.photocontainer}>No photos yet!
+                </div>}
 
+            </div>
         </div>
-    </div>
-)
+    )
 }
 
 const BeachPage = (props) => {
