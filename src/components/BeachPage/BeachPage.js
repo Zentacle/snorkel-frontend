@@ -24,7 +24,7 @@ const BackImage = (props) => {
                 setPhotosHeight(100)
             }
         } else {
-            setPhotosHeight(0)
+            setPhotosHeight(1)
         }
     }
 
