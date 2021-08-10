@@ -20,16 +20,9 @@ const BackImage = (props) => {
     const router = useRouter();
     const [photosHeight, setPhotosHeight] = React.useState(0);
     const [photoArray, setPhotoArray] = React.useState([]);
-    const changeHeight = () => {
-        if (photosHeight == 0) {
-            setPhotosHeight(200)
-            if (photoArray.length < 1) {
-                setPhotosHeight(100)
-            }
-        } else {
-            setPhotosHeight(0)
-        }
-    }
+    
+        
+    
 
     React.useEffect(() => {
 
@@ -44,7 +37,10 @@ const BackImage = (props) => {
                 return response.json();
             }).then(data => {
                 setPhotoArray([...data.data]);
-                console.log(data.data)
+                if (data.data.length != 0){
+                    setPhotosHeight(145)
+                }
+
 
 
             })
@@ -135,7 +131,16 @@ const BackImage = (props) => {
                         <div className={styles.buttonlabel}>Directions</div>
                     </div>
                     <div className={styles.buttonouter}>
-                        <div className={styles.buttoncircle} onClick={() => changeHeight()}>
+                        <div className={styles.buttoncircle} onClick={() => router.push({
+                            pathname: '/Beach/Photos', query: {
+                                beach_id: props.beach.id,
+                                hero_img: props.beach.hero_img,
+                                name: props.beach.name,
+                                rating: props.beach.rating,
+                                location_city: props.beach.location_city
+
+                            }
+                        })}>
                             <Image src='/photosicon.png' alt="photos" objectFit="contain" height='24' width="24"></Image>
                         </div>
                         <div className={styles.buttonlabel}>Photos</div>
@@ -143,7 +148,6 @@ const BackImage = (props) => {
                 </div>
             </div>
             <div className={styles.photoouterwrapper} style={{ height: photosHeight }}>
-                <div className={styles.pagetitlephotos}>User Photos</div>
                 {settings1 && settings1.photos[0].source && <div className={styles.photocontainer}>
                     <ReactPhotoCollage {...settings1}></ReactPhotoCollage>
                     {settings2 && settings2.photos[0].source && <ReactPhotoCollage {...settings2}></ReactPhotoCollage>}
@@ -151,16 +155,7 @@ const BackImage = (props) => {
                 </div>}
                 {!settings1 && <div className={styles.photocontainer}>No photos yet!
                 </div>}
-                <div className={styles.showmore} onClick={() => router.push({
-                    pathname: '/Beach/Photos', query: {
-                        beach_id: props.beach.id,
-                        hero_img: props.beach.hero_img,
-                        name: props.beach.name,
-                        rating: props.beach.rating,
-                        location_city: props.beach.location_city
 
-                    }
-                })}> show more &gt;&gt;&gt;</div>
             </div>
         </div>
     )

@@ -78,6 +78,7 @@
 
 .buttoncircle:hover{
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 .buttonouter{
@@ -129,6 +130,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
 
 .pagetitlephotos{
