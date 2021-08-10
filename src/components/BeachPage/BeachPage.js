@@ -5,6 +5,7 @@ import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
 import Link from 'next/link';
 import Carousel from 'components/Carousel/Carousel';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 
 const BackImage = (props) => {
@@ -14,7 +15,14 @@ const BackImage = (props) => {
             <div className={styles.imageinner} style={{ backgroundImage: `url(\'${props.beach.hero_img}\')` }}>
                 <div className={styles.overlay} />
                 <div className={styles.pageHeroInfo}>
-                    <h1 className={styles.pagetitle}>{props.beach.name}</h1>
+                    <div className={styles.nameContainer}>
+                        <h1 className={styles.pagetitle}>{props.beach.name}</h1>
+                        <Link href="/register">
+                            <a className={styles.favorite} alt="Mark as favorite">
+                                <FavoriteBorder/>
+                            </a>
+                        </Link>
+                    </div>
                     <div className={styles.stars}>
                         <Rating
                             fractions={2}

@@ -39,7 +39,7 @@ const useGoogleButton = (redirectURL, user) => () => {
   }
   const script = document.createElement('script')
   script.src = 'https://accounts.google.com/gsi/client'
-  script.onload = setTimeout(initializeGSI, 100)
+  script.onload = setTimeout(initializeGSI, 1000)
   script.async = true;
   document.querySelector('body').appendChild(script)
 }

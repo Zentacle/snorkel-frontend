@@ -12,6 +12,20 @@
     margin: 0;
 }
 
+.nameContainer {
+    display: flex;
+    align-items: center;
+}
+
+.favorite {
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+.favorite:hover {
+    color: red;
+}
+
 .imageinner {
     background-size: cover;
     min-height: 250px;
