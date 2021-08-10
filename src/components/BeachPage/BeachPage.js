@@ -11,7 +11,7 @@ import { toaster } from 'evergreen-ui';
 const BackImage = (props) => {
     const onEntryMapClick = () => {
         if (props.beach.entry_map) { return }
-        toaster.danger(`We don&apos;t have a map for this location yet`)
+        toaster.danger(`Sorry, we don\'t have a map for this location yet!`)
     }
 
     return (
@@ -43,8 +43,8 @@ const BackImage = (props) => {
             <div className={styles.menu}>
                 <div className={styles.buttoncontainer}>
                     <div className={styles.buttonouter}>
-                        <Link href={props.beach.entry_map || ''} >
-                            <a className={styles.buttoncircle}>
+                        <Link href={props.beach.entry_map || props.beach.url}>
+                            <a className={styles.buttoncircle} onClick={onEntryMapClick}>
                                 <Image src='/mapicon.png' alt="map" objectFit="contain" height='24' width="24"></Image>
                             </a>
                         </Link>
