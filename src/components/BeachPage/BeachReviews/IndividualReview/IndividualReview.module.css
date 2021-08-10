@@ -8,6 +8,11 @@
     padding: 12px 0;
 }
 
+.photos * {
+    border: none !important;
+    border-radius: 4px;
+
+}
 .starempty{
     color: Grey;
     
