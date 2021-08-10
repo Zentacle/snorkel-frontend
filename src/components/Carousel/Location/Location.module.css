@@ -1,5 +1,6 @@
 .slide {
     width: 256px;
+    
     margin-right: 16px;
     border-radius: 8px;
     background-color: white;
@@ -11,6 +12,8 @@
     -moz-transition: left 0.5s ease-in-out, transform 0.1s ease-in-out;
     -o-transition: left 0.5s ease-in-out, transform 0.1s ease-in-out;
     transition: left 0.5s ease-in-out, transform 0.1s ease-in-out;
+
+
 }
 
 .slide:active {
@@ -30,6 +33,7 @@
 
 .locationInfoContainer{
     padding: 8px;
+    width: 100%;
 }
 
 .spotName {
