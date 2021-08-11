@@ -92,7 +92,7 @@ const Beach = (props) => {
         <Layout>
             <Head>
                 <title key="title">{`Zentacle - ${beach.name}`}</title>
-                <meta property="og:title" content={`Zentacle - ${beach.name} - Scuba and Snorkel reviews`} key="og-title" />
+                <meta property="og:title" content={`Zentacle - ${beach.name} - Scuba Diving and Snorkel Reviews`} key="og-title" />
                 <meta property="og:description" content={beach.description} key="og-description" />
                 <meta property="og:image" content={beach.hero_img} key="og-image" />
                 <meta name="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}`} key="description" />

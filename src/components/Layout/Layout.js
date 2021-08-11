@@ -6,7 +6,7 @@ const Layout = ({children}) => {
     return (
         <div className={styles.container}>
         <Head>
-          <title>Zentacle</title>
+          <title>Zentacle - Snorkel and Scuba Diving Reviews, Maps, and Photos</title>
           <link rel="icon" href="/favicon.ico"/>
         </Head>
         <Header></Header>
