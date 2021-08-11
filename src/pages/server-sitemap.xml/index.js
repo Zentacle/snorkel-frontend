@@ -4,10 +4,10 @@ import { getServerSideSitemap } from 'next-sitemap'
 
 export const getServerSideProps = async (ctx) => {
   // Method to source urls from cms
-  const res = await fetch('https://zentacle.com/api/spots/get?limit=none')
-  const data = await res.json()
+  let res = await fetch('https://zentacle.com/api/spots/get?limit=none')
+  let data = await res.json()
 
-  const fields = data.data.map(location => (
+  const spot_fields = data.data.map(location => (
     {
       loc: `https://www.zentacle.com${location.url}`,
       lastmod: new Date().toISOString(),
@@ -16,8 +16,21 @@ export const getServerSideProps = async (ctx) => {
     }
   ))
 
-  return getServerSideSitemap(ctx, fields)
+  res = await fetch('https://zentacle.com/api/getall')
+  data = await res.json()
+
+  const user_fields = data.data.filter(user => user.username).map(user => (
+    {
+      loc: `https://www.zentacle.com/user/${user.username}`,
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly',
+      priority: 0.2,
+    }
+  ))
+
+  return getServerSideSitemap(ctx, [...spot_fields, ...user_fields])
 }
 
+const SitemapNullComponent = () => {}
 // Default export to prevent next.js errors
-export default () => {}
+export default SitemapNullComponent;
