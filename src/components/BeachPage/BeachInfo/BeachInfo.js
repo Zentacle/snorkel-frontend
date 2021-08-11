@@ -12,6 +12,7 @@ const EntryMap = ({ src }) => (
 )
 
 const BeachInfo = ({ id, description, entry_map, last_review_date, last_review_viz, ratings, rating, num_reviews, reviews }) => {
+    
     return (
         <div className={styles.container}>
             <VizDepth date={ last_review_date } viz={ last_review_viz }></VizDepth>

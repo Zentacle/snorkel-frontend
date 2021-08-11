@@ -40,7 +40,7 @@ const BackImage = (props) => {
 
     const router = useRouter();
     const [photosHeight, setPhotosHeight] = React.useState(0);
-    const [photoArray, setPhotoArray] = React.useState([]);
+    const [photoArray, setPhotoArray] = props.photoState;
 
 
 
@@ -174,9 +174,25 @@ const BackImage = (props) => {
 }
 
 const BeachPage = (props) => {
+    const photoState = React.useState([]);
+    const [photos, setPhotos] = photoState;
+    
+
+
+
+    for (let i = 0; i < props.reviews.length; i++) {
+        props.reviews[i].signedUrls = photos.filter((element) => element.review_id == props.reviews[i].id);
+
+    }
+
+   
+    
+
+
+
     return (
         <>
-            <BackImage beach={props.beach} />
+            <BackImage beach={props.beach} photoState={photoState} />
             <BeachInfo {...props.beach} reviews={props.reviews} />
             <div className={styles.carouselSpacer}>
                 <div className={styles.carouseltitle}>Other Locations Nearby</div>
