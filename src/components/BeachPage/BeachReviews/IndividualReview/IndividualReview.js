@@ -13,8 +13,9 @@ const IndividualReview = ({ review, user }) => {
         reviewRef.current = indreview
 
         React.useEffect(() => {
-
-            setPhotoArray([...reviewRef.current.signedUrls])
+            if (reviewRef && reviewRef.length) {
+                setPhotoArray([...reviewRef.current.signedUrls])
+            }
 
         }, [])
 
