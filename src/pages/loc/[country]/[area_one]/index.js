@@ -1,7 +1,7 @@
 import Page from 'pages/index';
 import { rootDomain } from "src/lib/constants";
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const area_one = context.query.area_one;
   const country = context.query.country;
   const sorts = ['top', 'latest', 'default']
