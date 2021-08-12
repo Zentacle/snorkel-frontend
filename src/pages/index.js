@@ -29,6 +29,10 @@ export async function getStaticProps(context) {
     }
   }
 
+  props['area'] = {
+    'name': 'Maui',
+  }
+
   return {
     props, // will be passed to the page component as props
     revalidate: 3600,
@@ -60,10 +64,16 @@ const Home = (props) => {
 
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
+  let title = "Zentacle - Snorkel and Scuba Diving Reviews, Maps, and Photos"
+  if (props.area.name && props.area.name !== 'Maui') {
+    title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
+  }
+
   return (
     <Layout>
       <Head>
-        <meta property="og:title" content="Zentacle - Scuba and Snorkel Reviews" key="og:title" />
+        <title>{title}</title>
+        <meta property="og:title" content={title} key="og:title" />
         <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="og:description" />
         <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
         <meta name="description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
@@ -79,6 +89,7 @@ const Home = (props) => {
           </div>
         </div>
         <Banner isShown={shouldShowBanner}></Banner>
+        <h1 className={styles.areaTitle}>{props.area.name}</h1>
         {recs && Object.keys(recs).length > 0 && <div>
           <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
           <Carousel data={recs}></Carousel>

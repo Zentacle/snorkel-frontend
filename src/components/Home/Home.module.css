@@ -39,6 +39,12 @@
     transform: translateY(-50%);
 }
 
+.areaTitle {
+    font-size: 36px;
+    font-weight: var(--text-weight-bold);
+    margin-left: 16px;
+}
+
 .carouseltitle{
     margin: 32px 16px 0 16px;
     font-weight: var(--text-weight-bold);
