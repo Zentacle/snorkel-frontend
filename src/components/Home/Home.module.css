@@ -40,8 +40,7 @@
 }
 
 .carouseltitle{
-    margin-left: 16px;
-    margin-top: 32px;
+    margin: 32px 16px 0 16px;
     font-weight: var(--text-weight-bold);
 }
 

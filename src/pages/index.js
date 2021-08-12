@@ -71,7 +71,7 @@ const Home = (props) => {
       <div className={styles.container}>
         <div className={styles.image}>
           <div className={styles.imageinner} style={{ 'backgroundImage': `url(\'/hero.jpg\')` }}>
-            <div className={styles.pagetitle}>Find your next underwater adventure</div>
+            <h1 className={styles.pagetitle}>Find your next underwater adventure</h1>
           </div>
           <div className={styles.menu}>
 
@@ -84,16 +84,16 @@ const Home = (props) => {
           <Carousel data={recs}></Carousel>
         </div>}
         <div>
-          <div className={styles.carouseltitle}>Local Favorites in Maui</div>
+          <h2 className={styles.carouseltitle}>Local Snorkel and Scuba Favorites in Maui</h2>
           <Carousel data={props.default}></Carousel>
+        </div>
+        <div>
+          <h2 className={styles.carouseltitle}>Top Rated Snorkel and Scuba in Maui</h2>
+          <Carousel data={props.top}></Carousel>
         </div>
         <div>
           <div className={styles.carouseltitle}>Conditions Reported Recently</div>
           <Carousel data={props.latest}></Carousel>
-        </div>
-        <div>
-          <div className={styles.carouseltitle}>Top Rated in Maui</div>
-          <Carousel data={props.top}></Carousel>
         </div>
       </div>
     </Layout>
