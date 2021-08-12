@@ -2,7 +2,11 @@ import styles from "../VizDepth/VizDepth.module.css";
 import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
 
-const VizDepth = ({ date, viz }) => {
+const VizDepth = ({
+    date,
+    max_depth,
+    viz,
+}) => {
     const lastDate = new Date(date);
     const now = new Date();
     let hours = parseInt(Math.abs(now - lastDate) / (60*60*1000));
@@ -30,7 +34,7 @@ const VizDepth = ({ date, viz }) => {
             <div className={styles.depth}>
                 <div className={styles.depthinfo}>Max Depth
                 </div>
-                <div className={styles.actualdepth}>40ft</div>
+                <div className={styles.actualdepth}>{max_depth || '40ft (unconfirmed)'}</div>
             </div>
         </div>
     )

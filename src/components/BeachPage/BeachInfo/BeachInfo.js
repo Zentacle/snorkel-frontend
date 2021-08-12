@@ -11,11 +11,22 @@ const EntryMap = ({ src }) => (
     </a>
 )
 
-const BeachInfo = ({ id, description, entry_map, last_review_date, last_review_viz, ratings, rating, num_reviews, reviews }) => {
+const BeachInfo = ({
+    id,
+    description,
+    entry_map,
+    last_review_date,
+    last_review_viz,
+    ratings,
+    rating,
+    num_reviews,
+    reviews,
+    max_depth,
+}) => {
     
     return (
         <div className={styles.container}>
-            <VizDepth date={ last_review_date } viz={ last_review_viz }></VizDepth>
+            <VizDepth date={ last_review_date } viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
             <BeachAbout description={ description }></BeachAbout>
             { entry_map && <EntryMap src={ entry_map }/> }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
