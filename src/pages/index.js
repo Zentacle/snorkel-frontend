@@ -95,11 +95,11 @@ const Home = (props) => {
           <Carousel data={recs}></Carousel>
         </div>}
         <div>
-          <h2 className={styles.carouseltitle}>Local Snorkel and Scuba Favorites in Maui</h2>
+          <h2 className={styles.carouseltitle}>{`Local Snorkel and Scuba Favorites in ${page.area.name}`}</h2>
           <Carousel data={props.default}></Carousel>
         </div>
         <div>
-          <h2 className={styles.carouseltitle}>Top Rated Snorkel and Scuba in Maui</h2>
+          <h2 className={styles.carouseltitle}>{`Top Rated Snorkel and Scuba in {page.area.name}`}</h2>
           <Carousel data={props.top}></Carousel>
         </div>
         <div>
