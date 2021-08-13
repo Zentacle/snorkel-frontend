@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import * as ga from 'lib/ga';
 import styles from './styles.module.css'
@@ -14,7 +15,7 @@ const AdCarousel = (props) => {
     <>
       <div className={styles.carouselTitle}>Recommended boat tour</div>
       <div className={styles.container}>
-      <img className={styles.image} src="https://www.lovebigisland.com/wp-content/uploads/hokulani-kealakekua-bay-snorkel-620x427.jpg"/>
+      <Image className={styles.image} src="https://www.lovebigisland.com/wp-content/uploads/hokulani-kealakekua-bay-snorkel-620x427.jpg"/>
         <div className={styles.slideContainer}>
           <div className={styles.name}>
             AM or PM Snorkel on Four Winds
