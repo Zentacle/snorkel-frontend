@@ -16,7 +16,7 @@ export const getServerSideProps = async (ctx) => {
     }
   ))
 
-  res = await fetch('https://zentacle.com/api/getall')
+  res = await fetch('https://zentacle.com/api/getall?top=true')
   data = await res.json()
 
   const user_fields = data.data.filter(user => user.username).map(user => (
