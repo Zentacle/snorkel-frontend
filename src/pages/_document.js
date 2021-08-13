@@ -1,18 +1,21 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheets as MUIServerStyleSheets } from '@material-ui/core/styles';
 
 // https://stackoverflow.com/questions/63449123/how-to-add-multiple-stylesheets-to-ctx-renderpage
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const startTime = Date.now();
     const sheet = new ServerStyleSheet()
+    // create MUI sheets
+    const materialUISheets = new MUIServerStyleSheets();
     const originalRenderPage = ctx.renderPage
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+            sheet.collectStyles(materialUISheets.collect(<App {...props} />)),
         })
 
       const initialProps = await Document.getInitialProps(ctx)
