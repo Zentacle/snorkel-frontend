@@ -1,7 +1,7 @@
 .image {
-  width: 256px;
+  min-width: 256px;
   height: auto;
-  max-height: 210px;
+  position: relative;
 }
 
 .carouselTitle {
@@ -23,6 +23,7 @@
   }
 
   .image {
+    height: 210px;
     width: 100%;
   }
 }

@@ -15,7 +15,13 @@ const AdCarousel = (props) => {
     <>
       <div className={styles.carouselTitle}>Recommended boat tour</div>
       <div className={styles.container}>
-      <Image className={styles.image} src="https://www.lovebigisland.com/wp-content/uploads/hokulani-kealakekua-bay-snorkel-620x427.jpg"/>
+        <div className={styles.image}>
+        <Image
+          src="https://www.lovebigisland.com/wp-content/uploads/hokulani-kealakekua-bay-snorkel-620x427.jpg"
+          objectFit="cover"
+          layout="fill"
+        />
+        </div>
         <div className={styles.slideContainer}>
           <div className={styles.name}>
             AM or PM Snorkel on Four Winds
