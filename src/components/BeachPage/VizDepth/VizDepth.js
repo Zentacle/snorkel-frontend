@@ -4,6 +4,7 @@ import { EmptyStar, FullStar } from "components/StarRating";
 
 const VizDepth = ({
     date,
+    difficulty,
     max_depth,
     viz,
 }) => {
@@ -14,12 +15,29 @@ const VizDepth = ({
         hours = '<1'
     }
 
+    let difficultyClassName = styles.undetermined
+    switch (difficulty) {
+        case 'advanced':
+            difficultyClassName = styles.advanced;
+            break;
+        case 'intermediate':
+            difficultyClassName = styles.intermediate;
+            break;
+        case 'beginner':
+            difficultyClassName = styles.beginner;
+            break;
+    }
+
     return (
         <div className={styles.container}>
-            <div className={styles.viz}>
-                <div className={styles.vizinfo}>Viz {date && `(last reported ${hours}h ago)`}
+            <div className={styles.itemContainer}>
+                <div className={styles.header}>Difficulty</div>
+                <div className={styles.value}> <span className={difficultyClassName}>{difficulty || 'Not ranked yet'}</span></div>
+            </div>
+            <div className={styles.itemContainer}>
+                <div className={styles.header}>Viz {date && `(last reported ${hours}h ago)`}
                 </div>
-                <div className={styles.actualviz}>
+                <div className={styles.value}>
                     { viz
                     ? <Rating
                             fractions={2}
@@ -31,10 +49,10 @@ const VizDepth = ({
                     : 'N/A' }
                 </div>
             </div>
-            <div className={styles.depth}>
-                <div className={styles.depthinfo}>Max Depth
+            <div className={styles.itemContainer}>
+                <div className={styles.header}>Max Depth
                 </div>
-                <div className={styles.actualdepth}>{max_depth || '40ft (unconfirmed)'}</div>
+                <div className={styles.value}>{max_depth || '40ft (unconfirmed)'}</div>
             </div>
         </div>
     )

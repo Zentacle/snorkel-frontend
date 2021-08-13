@@ -5,23 +5,41 @@
     margin-bottom: 16px;
 }
 
-.viz, .depth{
+.itemContainer{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-.depthinfo, .actualdepth, .vizinfo, .actualviz{
-    
-}
-
-.depthinfo, .vizinfo{
+.header{
     font-size: 10px;
     font-weight: var(--text-weight-normal);
     color: #5a5a5a;
 }
 
-.actualdepth, .actualviz{
+.value{
     font-size: 14px;
     font-weight: var(--text-weight-bold);
+}
+
+.undetermined, .beginner, .intermediate, .advanced {
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.beginner {
+    background-color: #69a041;
+    color: white;
+}
+
+.undetermined {
+    background-color: #cecece;
+}
+
+.intermediate {
+    background-color: #4bafe1;
+}
+
+.advanced {
+    background-color: #676767;
 }

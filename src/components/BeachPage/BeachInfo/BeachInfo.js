@@ -16,6 +16,7 @@ const BeachInfo = ({
     id,
     name,
     description,
+    difficulty,
     entry_map,
     last_review_date,
     last_review_viz,
@@ -28,7 +29,7 @@ const BeachInfo = ({
     
     return (
         <div className={styles.container}>
-            <VizDepth date={ last_review_date } viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
+            <VizDepth date={ last_review_date } difficulty={difficulty} viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
             <BeachAbout description={ description }></BeachAbout>
             { entry_map && <EntryMap src={ entry_map }/> }
             <AdCarousel beach_name={name}></AdCarousel>
