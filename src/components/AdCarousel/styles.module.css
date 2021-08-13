@@ -1,0 +1,53 @@
+.image {
+  width: 256px;
+  height: auto;
+  max-height: 210px;
+}
+
+.carouselTitle {
+  font-weight: var(--text-weight-bold);
+  margin: 8px 16px 4px 16px;
+}
+
+.container {
+  display: flex;
+  margin: 0 16px;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .image {
+    width: 100%;
+  }
+}
+
+.slideContainer {
+  padding: 8px;
+}
+
+.name {
+  font-weight: var(--text-weight-bold);
+}
+
+.description {
+  padding: 4px 0;
+}
+
+.button {
+  background-color: #43AB24;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 8px;
+  float: right;
+  cursor: pointer;
+}
+
+.button:hover{
+  color: white;
+}

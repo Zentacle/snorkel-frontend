@@ -3,6 +3,7 @@ import VizDepth from "../VizDepth/VizDepth";
 import BeachAbout from "../BeachAbout/BeachAbout";
 import BeachReviews from "../BeachReviews/BeachReviews";
 import ReviewSummary from 'components/BeachPage/ReviewSummary';
+import AdCarousel from "components/AdCarousel";
 
 const EntryMap = ({ src }) => (
     <a className={ styles.entryMap } style={{ backgroundImage: `url(\'${src}\')` }} href={ src }>
@@ -13,6 +14,7 @@ const EntryMap = ({ src }) => (
 
 const BeachInfo = ({
     id,
+    name,
     description,
     entry_map,
     last_review_date,
@@ -29,6 +31,7 @@ const BeachInfo = ({
             <VizDepth date={ last_review_date } viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
             <BeachAbout description={ description }></BeachAbout>
             { entry_map && <EntryMap src={ entry_map }/> }
+            <AdCarousel beach_name={name}></AdCarousel>
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
             <BeachReviews beachid={id} reviews={reviews}></BeachReviews>
         </div>
