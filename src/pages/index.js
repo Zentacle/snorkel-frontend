@@ -114,7 +114,7 @@ const Home = (props) => {
         <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
         <meta name="description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
         <script src="http://maps.google.com/maps/api/js?key=AIzaSyAPbvPcOMVp6qdWP59cML7kmYd2ShEGu_Y&sensor=false" 
-          type="text/javascript"></script>
+          type="text/javascript" async></script>
       </Head>
       <div className={styles.container}>
         <div className={styles.image}>
