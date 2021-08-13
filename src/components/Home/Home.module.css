@@ -39,10 +39,26 @@
     transform: translateY(-50%);
 }
 
+.areaDropdown {
+    display: flex;
+    align-items: baseline;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.areaTitle:hover {
+    background-color: rgba(224, 240, 255, .5);
+    transform: scale(1.01);
+}
+
 .areaTitle {
     font-size: 36px;
     font-weight: var(--text-weight-bold);
-    margin-left: 16px;
+    margin-left: 8px;
+    margin-bottom: 0;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color .2s, transform .2s;
 }
 
 .carouseltitle{

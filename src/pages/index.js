@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from 'next/head';
+import { SelectMenu } from 'evergreen-ui'
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import styles from "components/Home/Home.module.css"
 import SearchBar from "components/SearchBar"
@@ -10,6 +12,7 @@ import Banner from "components/EmailBanner";
 import Cookies from "js-cookie";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
+import { useRouter } from "next/router";
 
 export async function getStaticProps(context) {
   const sorts = ['top', 'latest', 'default']
@@ -69,6 +72,9 @@ const Home = (props) => {
     title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
   }
 
+  const [selected, setSelected] = React.useState(null)
+  const router = useRouter();
+
   return (
     <Layout>
       <Head>
@@ -84,12 +90,21 @@ const Home = (props) => {
             <h1 className={styles.pagetitle}>Find your next underwater adventure</h1>
           </div>
           <div className={styles.menu}>
-
             <SearchBar></SearchBar>
           </div>
         </div>
         <Banner isShown={shouldShowBanner}></Banner>
-        <h1 className={styles.areaTitle}>{props.area.name}</h1>
+        <SelectMenu
+          title="Select location"
+          options={[{ label: 'Maui', value: "maui" }, { label: 'Big Island', value: "big-island" }]}
+          selected={selected}
+          onSelect={(item) => router.push(`/loc/us/hi/${item.value}`)}
+        >
+          <div className={styles.areaDropdown}>
+            <h1 className={styles.areaTitle}>{props.area.name}</h1>
+            <ArrowDropDownIcon />
+          </div>
+        </SelectMenu>
         {recs && Object.keys(recs).length > 0 && <div>
           <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
           <Carousel data={recs}></Carousel>
