@@ -25,6 +25,7 @@ export default class MyDocument extends Document {
         styles: (
           <>
             {initialProps.styles}
+            {materialUISheets.getStyleElement()}
             {sheet.getStyleElement()}
           </>
         ),
