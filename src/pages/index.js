@@ -76,6 +76,35 @@ const Home = (props) => {
   const [selected, setSelected] = React.useState(null)
   const router = useRouter();
 
+  React.useEffect(() => {
+    var locations = props.default;
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 9,
+      center: new google.maps.LatLng(20.83674343601845, -156.4178040410507),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      console.log(locations.latitude)
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i].name);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  }, [])
+  
   return (
     <Layout>
       <Head>
@@ -84,6 +113,8 @@ const Home = (props) => {
         <meta property="og:description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="og:description" />
         <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
         <meta name="description" content="Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you." key="description" />
+        <script src="http://maps.google.com/maps/api/js?key=AIzaSyAPbvPcOMVp6qdWP59cML7kmYd2ShEGu_Y&sensor=false" 
+          type="text/javascript"></script>
       </Head>
       <div className={styles.container}>
         <div className={styles.image}>
@@ -102,6 +133,7 @@ const Home = (props) => {
             selected={selected}
             onSelect={(item) => router.push(`/loc/us/hi/${item.value}`)}
           >
+            <div id="map" className={styles.googleMap}></div>
             <div className={styles.areaDropdown}>
               <h1 className={styles.areaTitle}>{props.area.name}</h1>
               <ArrowDropDownIcon />
