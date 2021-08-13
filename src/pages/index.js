@@ -106,7 +106,7 @@ const Home = (props) => {
       }
     }
     const script = document.createElement('script')
-    script.src = 'http://maps.google.com/maps/api/js?key=AIzaSyAPbvPcOMVp6qdWP59cML7kmYd2ShEGu_Y&sensor=false'
+    script.src = 'https://maps.google.com/maps/api/js?key=AIzaSyAPbvPcOMVp6qdWP59cML7kmYd2ShEGu_Y&sensor=false'
     script.onload = setTimeout(initializeMap, 1000)
     script.async = true;
     document.querySelector('body').appendChild(script)
