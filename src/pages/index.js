@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import { useRouter } from "next/router";
+import MaxWidth from "components/MaxWidth";
 
 export async function getStaticProps(context) {
   const sorts = ['top', 'latest', 'default']
@@ -94,33 +95,35 @@ const Home = (props) => {
           </div>
         </div>
         <Banner isShown={shouldShowBanner}></Banner>
-        <SelectMenu
-          title="Select location"
-          options={[{ label: 'Maui', value: "maui" }, { label: 'Big Island', value: "big-island" }]}
-          selected={selected}
-          onSelect={(item) => router.push(`/loc/us/hi/${item.value}`)}
-        >
-          <div className={styles.areaDropdown}>
-            <h1 className={styles.areaTitle}>{props.area.name}</h1>
-            <ArrowDropDownIcon />
+        <MaxWidth>
+          <SelectMenu
+            title="Select location"
+            options={[{ label: 'Maui', value: "maui" }, { label: 'Big Island', value: "big-island" }]}
+            selected={selected}
+            onSelect={(item) => router.push(`/loc/us/hi/${item.value}`)}
+          >
+            <div className={styles.areaDropdown}>
+              <h1 className={styles.areaTitle}>{props.area.name}</h1>
+              <ArrowDropDownIcon />
+            </div>
+          </SelectMenu>
+          {recs && Object.keys(recs).length > 0 && <div>
+            <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
+            <Carousel data={recs}></Carousel>
+          </div>}
+          <div>
+            <h2 className={styles.carouseltitle}>{`Local Snorkel and Scuba Favorites in ${props.area.name}`}</h2>
+            <Carousel data={props.default}></Carousel>
           </div>
-        </SelectMenu>
-        {recs && Object.keys(recs).length > 0 && <div>
-          <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
-          <Carousel data={recs}></Carousel>
-        </div>}
-        <div>
-          <h2 className={styles.carouseltitle}>{`Local Snorkel and Scuba Favorites in ${props.area.name}`}</h2>
-          <Carousel data={props.default}></Carousel>
-        </div>
-        <div>
-          <h2 className={styles.carouseltitle}>{`Top Rated Snorkel and Scuba in ${props.area.name}`}</h2>
-          <Carousel data={props.top}></Carousel>
-        </div>
-        <div>
-          <div className={styles.carouseltitle}>Conditions Reported Recently</div>
-          <Carousel data={props.latest}></Carousel>
-        </div>
+          <div>
+            <h2 className={styles.carouseltitle}>{`Top Rated Snorkel and Scuba in ${props.area.name}`}</h2>
+            <Carousel data={props.top}></Carousel>
+          </div>
+          <div>
+            <div className={styles.carouseltitle}>Conditions Reported Recently</div>
+            <Carousel data={props.latest}></Carousel>
+          </div>
+        </MaxWidth>
       </div>
     </Layout>
   )

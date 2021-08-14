@@ -1,4 +1,6 @@
 .innermenu{
+  max-width: 720px;
+  margin: auto;
   width: 100%;
   border-radius: 32px;
   overflow: hidden;

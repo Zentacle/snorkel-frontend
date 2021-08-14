@@ -8,6 +8,7 @@ import { sendEvent } from 'hooks/amplitude';
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from 'hooks/useGoogleOneTap';
 import { useRouter } from 'next/router';
+import MaxWidth from 'components/MaxWidth';
 
 export async function getStaticProps(context) {
     const startTime = Date.now();
@@ -99,7 +100,9 @@ const Beach = (props) => {
                 <link rel="canonical" href={`https://www.zentacle.com${beach.url}`} />
                 <link rel="preload" as="image" href={beach.hero_img} />
             </Head>
-            <BeachPage beach={beach} beachid={beach.id} reviews={props.reviews} nearbyBeaches={nearbyBeaches}></BeachPage>
+            <MaxWidth>
+                <BeachPage beach={beach} beachid={beach.id} reviews={props.reviews} nearbyBeaches={nearbyBeaches}></BeachPage>
+            </MaxWidth>
         </Layout>
     )
 }
