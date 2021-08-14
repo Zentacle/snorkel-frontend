@@ -19,8 +19,8 @@ const NewSpot = (props) => {
       'location_city': locationCity,
       'description': description,
     }
-    if (selectedGooglePlaceIndex !== null) {
-      body['place_id'] = googlePlaceCandidates[selectedGooglePlaceIndex].place_id;
+    if (selectedGooglePlace) {
+      body['place_id'] = selectedGooglePlace.place_id;
     }
 
     fetch(`${rootDomain}/spots/add`, {
@@ -48,7 +48,7 @@ const NewSpot = (props) => {
       .then(data => {
         setGooglePlaceCandidates(data.results);
         if (data.results.length === 1) {
-          setSelectedGooglePlaceIndex(0);
+          setSelectedGooglePlace(data.results[0]);
         }
       });
   }
@@ -58,16 +58,16 @@ const NewSpot = (props) => {
   const [locationCity, setLocationCity] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [googlePlaceCandidates, setGooglePlaceCandidates] = React.useState(null);
-  const [selectedGooglePlaceIndex, setSelectedGooglePlaceIndex] = React.useState(null);
+  const [selectedGooglePlace, setSelectedGooglePlace] = React.useState(null);
 
   const debouncedSearchTerm = useDebounce(locationName, 2000);
 
   React.useEffect(() => {
-    if (selectedGooglePlaceIndex !== null && googlePlaceCandidates) {
-      const formatted_address = googlePlaceCandidates[selectedGooglePlaceIndex].formatted_address.split(',')[1].trim()
+    if (selectedGooglePlace) {
+      const formatted_address = selectedGooglePlace.formatted_address.split(',')[1].trim()
       setLocationCity(formatted_address)
     }
-  }, [selectedGooglePlaceIndex])
+  }, [selectedGooglePlace])
 
   React.useEffect(
     () => {
@@ -99,17 +99,17 @@ const NewSpot = (props) => {
   }, [])
 
   React.useEffect(() => {
-    if (!window.google || selectedGooglePlaceIndex === null) {return}
-    const location = googlePlaceCandidates[selectedGooglePlaceIndex].geometry.location;
+    if (!window.google || !selectedGooglePlace) {return}
+    const location = selectedGooglePlace.geometry.location;
     var center = new google.maps.LatLng(location.lat, location.lng);
     window.map.panTo(center);
     const marker = new google.maps.Marker({
       position: center,
       map: map
     });
-  }, [selectedGooglePlaceIndex, googlePlaceCandidates])
+  }, [selectedGooglePlace, googlePlaceCandidates])
 
-  const setSelected = (index) => () => { setSelectedGooglePlaceIndex(index) }
+  const setSelected = (index) => () => { setSelectedGooglePlace(googlePlaceCandidates[index]) }
 
   return (
     <Layout>
@@ -129,7 +129,7 @@ const NewSpot = (props) => {
               <div className={styles.placeContainer}>
                 {googlePlaceCandidates.map((place, index) => (
                   <div
-                    className={`${styles.placeSelection} ${selectedGooglePlaceIndex === index && styles.active}`}
+                    className={`${styles.placeSelection} ${selectedGooglePlace && selectedGooglePlace.place_id === place.place_id && styles.active}`}
                     onClick={setSelected(index)}
                     key={place.place_id}
                   >
