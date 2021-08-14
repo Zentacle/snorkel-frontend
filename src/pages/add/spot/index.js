@@ -83,6 +83,32 @@ const NewSpot = (props) => {
     [debouncedSearchTerm]
   );
 
+  React.useEffect(() => {
+    const initializeMap = () => {
+      window.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 9,
+        center: new google.maps.LatLng(20.83674343601845, -156.4178040410507),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+    }
+    const script = document.createElement('script')
+    script.src = 'https://maps.google.com/maps/api/js?key=AIzaSyAPbvPcOMVp6qdWP59cML7kmYd2ShEGu_Y'
+    script.onload = setTimeout(initializeMap,1000)
+    script.async = true;
+    document.querySelector('body').appendChild(script)
+  }, [])
+
+  React.useEffect(() => {
+    if (!window.google || selectedGooglePlaceIndex === null) {return}
+    const location = googlePlaceCandidates[selectedGooglePlaceIndex].geometry.location;
+    var center = new google.maps.LatLng(location.lat, location.lng);
+    window.map.panTo(center);
+    const marker = new google.maps.Marker({
+      position: center,
+      map: map
+    });
+  }, [selectedGooglePlaceIndex, googlePlaceCandidates])
+
   const setSelected = (index) => () => { setSelectedGooglePlaceIndex(index) }
 
   return (
@@ -115,6 +141,7 @@ const NewSpot = (props) => {
             </div>
           ) : (<div>Nothing found! Please enter the rest of the info below</div>)
         }
+        <div id="map" className={styles.googleMap}></div>
         <div className={styles.spacer}>
           <div className={styles.sectiontitle}>City/State/Country</div>
           <div className={styles.helper}>(ie. Monterey, CA, United States)</div>

@@ -68,3 +68,9 @@
   min-height: 200px;
   width: 100%;
 }
+
+.googleMap {
+  height: 360px;
+  border-radius: 32px;
+  margin: 0 16px 32px 16px;
+}
