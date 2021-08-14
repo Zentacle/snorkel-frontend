@@ -16,6 +16,7 @@ import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { v4 as uuidv4 } from 'uuid';
+import MaxWidth from 'components/MaxWidth';
 
 const visibilityLabel = {
     1: 'Extremely poor (<5ft)',
@@ -214,57 +215,59 @@ const ReviewPage = (props) => {
 
     return (
         <Layout>
-            <div className={styles.container}>
-                <div className={styles.beachtitle}>{name}</div>
-                <div className={styles.spacer}>
-                    <ScubaSnorkel value={activity} onChange={setActivity}></ScubaSnorkel>
-                </div>
-                <div className={styles.spacer}>
-                    <div className={styles.reviewtitle}>
-                        Rating
+            <MaxWidth>
+                <div className={styles.container}>
+                    <div className={styles.beachtitle}>{name}</div>
+                    <div className={styles.spacer}>
+                        <ScubaSnorkel value={activity} onChange={setActivity}></ScubaSnorkel>
                     </div>
-                    <StarRate value={rating} onChange={setRating}></StarRate>
-                </div>
-                <div className={styles.spacer}>
-                    <div className={styles.reviewtitle}>
-                        Review
+                    <div className={styles.spacer}>
+                        <div className={styles.reviewtitle}>
+                            Rating
+                        </div>
+                        <StarRate value={rating} onChange={setRating}></StarRate>
                     </div>
-                    <textarea value={text} onChange={e => setText(e.target.value)} className={styles.paragraphreview}>
-                    </textarea>
-                </div>
-                <div className={styles.spacer}>
-                    <div className={styles.reviewtitle}>
-                        Visibility
+                    <div className={styles.spacer}>
+                        <div className={styles.reviewtitle}>
+                            Review
+                        </div>
+                        <textarea value={text} onChange={e => setText(e.target.value)} className={styles.paragraphreview}>
+                        </textarea>
                     </div>
-                    <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
-                    <div className={styles.visibilityLabel}>{visibilityLabel[visibility || visibilityHover]}</div>
-                </div>
-                <div className={styles.spacer}>
-                    <div className={styles.reviewtitle}>
-                        Photos
+                    <div className={styles.spacer}>
+                        <div className={styles.reviewtitle}>
+                            Visibility
+                        </div>
+                        <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
+                        <div className={styles.visibilityLabel}>{visibilityLabel[visibility || visibilityHover]}</div>
                     </div>
-                    <div className={styles.photoscontainer}>
-                        <div className={styles.photooutercontainer}>
-                            <div className={styles.individualphotoupload}>
-                                <div className={styles.containerdropzone}>
-                                    <DropZoneArea></DropZoneArea>
-                                    <br />
+                    <div className={styles.spacer}>
+                        <div className={styles.reviewtitle}>
+                            Photos
+                        </div>
+                        <div className={styles.photoscontainer}>
+                            <div className={styles.photooutercontainer}>
+                                <div className={styles.individualphotoupload}>
+                                    <div className={styles.containerdropzone}>
+                                        <DropZoneArea></DropZoneArea>
+                                        <br />
+                                    </div>
                                 </div>
                             </div>
+                            <RenderUrls></RenderUrls>
                         </div>
-                        <RenderUrls></RenderUrls>
                     </div>
+                    <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
+                        'activity_type': activity,
+                        rating,
+                        text,
+                        visibility,
+                        beach_id: beachid,
+                    })}>
+                        Submit
+                    </PrimaryButton>
                 </div>
-                <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
-                    'activity_type': activity,
-                    rating,
-                    text,
-                    visibility,
-                    beach_id: beachid,
-                })}>
-                    Submit
-                </PrimaryButton>
-            </div>
+            </MaxWidth>
         </Layout>
     )
 }

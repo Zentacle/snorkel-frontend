@@ -1,5 +1,4 @@
 .container {
-    
     height: 100vh;
     background-color: #eaeaea;
     display: grid;
@@ -8,9 +7,6 @@
 
 .main {
     max-height: 100%;
-    max-width: 720px;
     margin: 0 auto;
     width: 100%;
 }
-
-
