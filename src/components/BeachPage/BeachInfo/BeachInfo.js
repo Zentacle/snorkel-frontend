@@ -39,7 +39,7 @@ const BeachInfo = ({
                 data-gyg-widget="activities"
                 data-gyg-number-of-items="3"
                 data-gyg-partner-id="215UJOG"
-                data-gyg-q={`${latitude}, ${longitude}`}
+                data-gyg-q={`${latitude},${longitude}`}
             ></div> }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
             <BeachReviews beachid={id} reviews={reviews}></BeachReviews>
