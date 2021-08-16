@@ -99,6 +99,7 @@ const Beach = (props) => {
                 <meta name="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}`} key="description" />
                 <link rel="canonical" href={`https://www.zentacle.com${beach.url}`} />
                 <link rel="preload" as="image" href={beach.hero_img} />
+                <script async defer src="https://widget.getyourguide.com/dist/pa.umd.production.min.js" data-gyg-partner-id="215UJOG"/>
             </Head>
             <MaxWidth>
                 <BeachPage beach={beach} beachid={beach.id} reviews={props.reviews} nearbyBeaches={nearbyBeaches}></BeachPage>
