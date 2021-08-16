@@ -31,7 +31,7 @@ const Footer = () =>{
             Snorkel and Scuba Diving Reviews
           </h3>
           <div>
-            Zentacle encourages the use of reef safe sunscreen that doesn't contain oxybenzone and octinoxate. Learn&nbsp;more&nbsp;at&nbsp;<Link href="https://vimeo.com/442787740">Reefs at Risk</Link>.
+            Zentacle encourages the use of reef safe sunscreen that doesn&apos;t contain oxybenzone and octinoxate. Learn&nbsp;more&nbsp;at&nbsp;<Link href="https://vimeo.com/442787740">Reefs at Risk</Link>.
           </div>
           <div className={ styles.footerLinkContainer }>
             <a style={{ display: 'block' }} className={ styles.footerLink } href="mailto:mjmayank@gmail.com">Report an issue</a>
