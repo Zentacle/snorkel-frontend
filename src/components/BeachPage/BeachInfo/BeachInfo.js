@@ -14,12 +14,13 @@ const EntryMap = ({ src }) => (
 
 const BeachInfo = ({
     id,
-    name,
     description,
     difficulty,
     entry_map,
     last_review_date,
     last_review_viz,
+    latitude,
+    longitude,
     ratings,
     rating,
     num_reviews,
@@ -32,14 +33,14 @@ const BeachInfo = ({
             <VizDepth date={ last_review_date } difficulty={difficulty} viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
             <BeachAbout description={ description }></BeachAbout>
             { entry_map && <EntryMap src={ entry_map }/> }
-            <div
+            { latitude && longitude && <div
                 data-gyg-href="https://widget.getyourguide.com/default/activities.frame"
                 data-gyg-locale-code="en-US"
                 data-gyg-widget="activities"
                 data-gyg-number-of-items="3"
                 data-gyg-partner-id="215UJOG"
-                data-gyg-q="maui"
-            ></div>
+                data-gyg-q={`${latitude}, ${longitude}`}
+            ></div> }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
             <BeachReviews beachid={id} reviews={reviews}></BeachReviews>
         </div>
