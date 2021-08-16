@@ -7,6 +7,12 @@
   margin-left: 0;
 }
 
+@media (max-width: 720px){
+  .locBreadcrumb:first-child{
+    margin-left: 16px;
+  }
+}
+
 .locBreadcrumbContainer {
   margin: 16px 0;
   font-size: 12px;
