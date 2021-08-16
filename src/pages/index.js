@@ -97,6 +97,7 @@ const Home = (props) => {
         <Banner isShown={shouldShowBanner}></Banner>
         <MaxWidth>
           <SelectMenu
+            closeOnSelect
             title="Select location"
             options={[{ label: 'Maui', value: "maui" }, { label: 'Big Island', value: "big-island" }]}
             selected={selected}
