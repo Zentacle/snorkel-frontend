@@ -1,0 +1,25 @@
+.undetermined, .beginner, .intermediate, .advanced {
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: auto;
+  margin-right: 2px;
+}
+
+.beginner {
+  background-color: #69a041;
+  color: white;
+}
+
+.undetermined {
+  background-color: #cecece;
+}
+
+.intermediate {
+  background-color: #4bafe1;
+  color: white;
+}
+
+.advanced {
+  background-color: #676767;
+  color: white;
+}

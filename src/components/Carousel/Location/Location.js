@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Rating from "react-rating";
 import Star from "@material-ui/icons/Star";
 import Link from "next/link";
+import DifficultyTag from "components/DifficultyTag";
 const SlideLocation = ({ ...props }) => {
     const router = useRouter();
 
@@ -24,6 +25,7 @@ const SlideLocation = ({ ...props }) => {
                     <div className={styles.spotName}>{props.info.name}</div>
                     <div className={styles.location}>{props.info.location_city}</div>
                     <div className={styles.ratingContainer} title={ props.info.rating }>
+                        <DifficultyTag difficulty={props.info.difficulty}/>
                         <Rating
                             fractions={2}
                             emptySymbol={(<Star className={styles.starempty}></Star>)}

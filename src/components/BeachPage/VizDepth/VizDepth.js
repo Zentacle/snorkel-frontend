@@ -1,6 +1,7 @@
 import styles from "../VizDepth/VizDepth.module.css";
 import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
+import DifficultyTag from "components/DifficultyTag";
 
 const VizDepth = ({
     date,
@@ -15,24 +16,11 @@ const VizDepth = ({
         hours = '<1'
     }
 
-    let difficultyClassName = styles.undetermined
-    switch (difficulty) {
-        case 'advanced':
-            difficultyClassName = styles.advanced;
-            break;
-        case 'intermediate':
-            difficultyClassName = styles.intermediate;
-            break;
-        case 'beginner':
-            difficultyClassName = styles.beginner;
-            break;
-    }
-
     return (
         <div className={styles.container}>
             <div className={styles.itemContainer}>
                 <div className={styles.header}>Difficulty</div>
-                <div className={styles.value}> <span className={difficultyClassName}>{difficulty || 'Not ranked yet'}</span></div>
+                <div className={styles.value}><DifficultyTag difficulty={difficulty}/></div>
             </div>
             <div className={styles.itemContainer}>
                 <div className={styles.header}>Viz {date && `(last reported ${hours}h ago)`}
