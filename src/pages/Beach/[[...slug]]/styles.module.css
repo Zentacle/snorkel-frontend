@@ -1,0 +1,13 @@
+.locBreadcrumb {
+  margin: 0 4px;
+  color: #414141;
+}
+
+.locBreadcrumb:first-child{
+  margin-left: 0;
+}
+
+.locBreadcrumbContainer {
+  margin: 16px 0;
+  font-size: 12px;
+}

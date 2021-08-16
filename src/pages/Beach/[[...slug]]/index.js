@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import Layout from "components/Layout/Layout";
 import BeachPage from "components/BeachPage/BeachPage";
@@ -9,6 +10,7 @@ import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from 'hooks/useGoogleOneTap';
 import { useRouter } from 'next/router';
 import MaxWidth from 'components/MaxWidth';
+import styles from './styles.module.css';
 
 export async function getStaticProps(context) {
     const startTime = Date.now();
@@ -101,6 +103,15 @@ const Beach = (props) => {
                 <link rel="preload" as="image" href={beach.hero_img} />
             </Head>
             <MaxWidth>
+                {
+                    beach.country_id && beach.area_one_id && beach.area_two_id && <div className={styles.locBreadcrumbContainer}>
+                        <span className={styles.locBreadcrumb}>{beach.country.name}</span>
+                        <span className={styles.locBreadcrumb}>›</span>
+                        <span className={styles.locBreadcrumb}>{beach.area_one.name}</span>
+                        <span className={styles.locBreadcrumb}>›</span>
+                        <Link href={`/loc/${beach.country.short_name}/${beach.area_one.short_name}/${beach.area_two.short_name}`}><a className={styles.locBreadcrumb}>{beach.area_two.name}</a></Link>
+                    </div>
+                }
                 <BeachPage beach={beach} beachid={beach.id} reviews={props.reviews} nearbyBeaches={nearbyBeaches}></BeachPage>
             </MaxWidth>
         </Layout>
