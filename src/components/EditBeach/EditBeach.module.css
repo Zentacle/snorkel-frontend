@@ -1,0 +1,36 @@
+.titlecontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--text-weight-bold);
+    font-size: 24px;
+    height: 28px;
+}
+
+.dropzone{
+    border: 1px dashed grey;
+    height: 40px;
+    border-radius: 8px;
+    margin-top: 12px;
+}
+
+.fileupload{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    color: grey;
+}
+
+.imageContainer{
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.image{
+    max-height: 400px;
+    max-width: 400px;
+}
+
