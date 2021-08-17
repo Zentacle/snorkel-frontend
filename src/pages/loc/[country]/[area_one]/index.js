@@ -13,6 +13,9 @@ export async function getServerSideProps(context) {
     )
     const data = await res.json()
     props[sort] = data.data || null;
+    if (data.area) {
+      props['area'] = data.area;
+    }
     return data;
   }))
 
