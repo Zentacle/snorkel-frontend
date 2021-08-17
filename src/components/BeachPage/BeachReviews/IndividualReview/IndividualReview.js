@@ -89,7 +89,7 @@ const IndividualReview = ({ review, user }) => {
                 <div>
                     <div className={styles.outerupper}>
                         <div className={styles.imageouter}>
-                            <ProfilePic size={48}/>
+                            <ProfilePic user={user} size={48}/>
                         </div>
                         <div className={styles.centerouter}>
                             {
