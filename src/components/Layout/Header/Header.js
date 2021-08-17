@@ -3,12 +3,15 @@ import Image from 'next/image';
 import Link from "next/link";
 import React from "react";
 import { useCurrentUser } from 'context/usercontext';
+import ProfilePic from "components/ProfilePic";
 
 const Profile = ({ user }) => {
     if (user) {
         return (
             <Link href={`/user/${user.username}`}>
-                <a className={styles.outerprofile}>{user.username}</a>
+                <a className={styles.outerprofile}>
+                    {user.username}
+                </a>
             </Link>
         )
     }
@@ -26,7 +29,7 @@ const Header = () => {
                 <div className={styles.headerbutton}>
                     <Link className={styles.innerheaderbutton} href='/'>
                         <a className={styles.headertitlelink}>
-                            <Image src='/logo.png' height='32' width='32' alt="logo"/>
+                            <Image src='/logo.png' height='32' width='32' alt="logo" />
                             <span className={styles.headertitle}>Zentacle</span>
                         </a>
                     </Link>
@@ -45,6 +48,7 @@ const Header = () => {
                             </Link>
                         }
                     </div>
+                    {currentUser && <ProfilePic user={currentUser} size={32}/> }
                 </div>
             </div>
         </div>
