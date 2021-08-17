@@ -48,7 +48,7 @@ const Header = () => {
                             </Link>
                         }
                     </div>
-                    {currentUser && <ProfilePic user={currentUser} size={32}/> }
+                    {currentUser && currentUser.id && <ProfilePic user={currentUser} size={32}/> }
                 </div>
             </div>
         </div>
