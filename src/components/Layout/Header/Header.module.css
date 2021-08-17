@@ -23,6 +23,7 @@
 .spaceholder {
     margin-left: auto;
     display: flex;
+    align-items: center;
 }
 
 .innerheaderbutton:hover{
@@ -49,3 +50,6 @@
     cursor: pointer;
 }
 
+.outerprofile {
+    margin-right: 8px;
+}

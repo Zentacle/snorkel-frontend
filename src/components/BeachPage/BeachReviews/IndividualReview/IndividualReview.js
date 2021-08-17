@@ -1,10 +1,12 @@
-import styles from "../IndividualReview/IndividualReview.module.css";
-import Rating from "react-rating";
 import Star from "@material-ui/icons/Star";
-import Image from 'next/image';
-import Link from 'next/link';
 import React from "react";
+import Rating from "react-rating";
+import Link from 'next/link';
 import { ReactPhotoCollage } from "react-photo-collage";
+
+import ProfilePic from "components/ProfilePic";
+import styles from "./IndividualReview.module.css";
+
 const IndividualReview = ({ review, user }) => {
 
     const PhotoGrid = ({ indreview }) => {
@@ -87,10 +89,7 @@ const IndividualReview = ({ review, user }) => {
                 <div>
                     <div className={styles.outerupper}>
                         <div className={styles.imageouter}>
-                            {user.profile_pic
-                                ? <Image className={styles.profilePic} alt={user.display_name} src={user.profile_pic} height='48' width='48' />
-                                : <Image className={styles.profilePic} alt={user.display_name} src='/default_profile.png' height='48' width='48' />
-                            }
+                            <ProfilePic user={user} size={48}/>
                         </div>
                         <div className={styles.centerouter}>
                             {
