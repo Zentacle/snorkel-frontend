@@ -1,8 +1,5 @@
 .container {
-    height: 100vh;
     background-color: #eaeaea;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
 }
 
 .main {

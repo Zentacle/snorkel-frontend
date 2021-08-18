@@ -38,10 +38,10 @@ const Footer = () => {
             <span className={styles.headertitle}>Zentacle</span>
           </div>
           <div className={styles.footerLinkContainer}>
+            <Link href='/directory'><a className={styles.footerLink}>Directory</a></Link>
+            <Link href='/add/spot'><a className={styles.footerLink}>Add a new location</a></Link>
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mjmayank@gmail.com">Report an issue</a>
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mjmayank@gmail.com">Suggest an edit</a>
-            <Link href='/add/spot'><a className={styles.footerLink}>Add a new location</a></Link>
-            <Link href='/directory'><a className={styles.footerLink}>Directory</a></Link>
           </div>
         </div>
         <div className={styles.rightColumn}>
