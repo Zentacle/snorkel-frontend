@@ -12,12 +12,12 @@ import { rootDomain } from 'lib/constants';
 const CreateAccount = (props) => {
   const [username, setUsername] = React.useState('')
 
-  const patchUser = () => () => {
+  const patchUser = () => {
     const body = {
       username,
     }
     fetch(`${rootDomain}/user/patch`, {
-      method: 'POST',
+      method: 'PATCH',
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'
