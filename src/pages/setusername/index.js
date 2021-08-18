@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import React, { useEffect } from 'react';
 import { toaster } from 'evergreen-ui';
 
@@ -20,7 +21,8 @@ const CreateAccount = (props) => {
       method: 'PATCH',
       body: JSON.stringify(body),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
       }
     }).then(response => {
       response.json().then(data => {
