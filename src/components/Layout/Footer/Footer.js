@@ -3,15 +3,18 @@ import React from 'react';
 import { sendEvent } from "hooks/amplitude";
 import styles from "./Footer.module.css";
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Footer = () =>{
     const [email, setEmail] = React.useState('');
     const [hasSubmitted, setHasSubmitted] = React.useState(false);
+    const router = useRouter();
 
     const onClick = () => {
       sendEvent('submit_email', {
         email,
       });
+      router.push('/register');
     }
 
     return (
