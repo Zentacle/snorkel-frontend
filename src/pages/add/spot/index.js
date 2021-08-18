@@ -35,7 +35,7 @@ const NewSpot = (props) => {
       if (response.ok) {
         sendEvent('spot_add');
         toaster.success('Successfully submitted! Check your email for next steps.')
-        router.push(`/`)
+        response.json().then(data => router.push(data.data.url));
       } else {
         setIsSubmitDisabled(false);
         response.json().then(({ msg }) => toaster.danger(msg));
