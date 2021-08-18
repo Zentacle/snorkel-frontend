@@ -1,12 +1,16 @@
 .footer {
-    text-align: center;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 24px 0;
+    background-color: white;
 }
 
 .emailContainer {
-    margin-bottom: 12px;
+    padding: 24px;
+    color: white;
+    background-color: var(--primary-color);
+}
+
+.emailTitle {
+    text-align: center;
+    font-weight: var(--text-weight-bold);
 }
 
 .emailBox {
@@ -41,27 +45,60 @@
 .footertext{
     margin-top: 8px;
     font-weight: var(--text-weight-bold);
+    font-size: 18px;
 }
 
-@media (max-width: 720px) {
-    .footerLinkContainer {
-        flex-direction: column !important;
-    }
-    .footerLink {
-        flex: 1 !important;
-    }
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.headertitle {
+    font-weight: var(--text-weight-bold);
+    font-size: 24px;
+    margin-left: 4px;
+}
+
+.footerLinksContainer {
+    display: flex;
+    justify-content: center;
+    padding: 32px;
 }
 
 .footerLinkContainer {
     margin-top: 8px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     /* flex-wrap: wrap; */
 }
 
 .footerLink{
-    padding: 16px;
-    color: white;
+    margin: 8px 0;
     text-decoration: none;
-    flex: 1 0 180px;
+}
+
+.leftColumn {
+  flex: 0 0 320px;
+}
+
+.rightColumn {
+    flex: 0 0 320px;
+}
+
+@media (max-width: 720px) {
+    .footerLinksContainer {
+        flex-direction: column !important;
+        max-width: 320px;
+        margin: auto;
+    }
+    .footerLink {
+        flex: 1 !important;
+    }
+    .leftColumn {
+        flex: 1;
+    }
+    .rightColumn {
+        flex: 1;
+        margin-top: 8px;
+    }
 }
