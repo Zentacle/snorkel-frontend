@@ -28,12 +28,15 @@
 }
 
 .averagecontainer{
-   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .averagerating{
     text-align: center;
     margin-bottom: 5px;
     font-size: 64px;
+    line-height: 1em;
 }
 .starempty{
     color: Grey;

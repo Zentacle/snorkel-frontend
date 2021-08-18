@@ -40,6 +40,7 @@ const Header = () => {
                             <a className={styles.addSpot}>Add New Spot</a>
                         </Link>}
                     </div>
+                    {currentUser && currentUser.id && <ProfilePic user={currentUser} size={32}/> }
                     <div className={styles.rightButton}>
                         {currentUser && currentUser.id
                             ? <Profile user={currentUser}></Profile>
@@ -48,7 +49,6 @@ const Header = () => {
                             </Link>
                         }
                     </div>
-                    {currentUser && currentUser.id && <ProfilePic user={currentUser} size={32}/> }
                 </div>
             </div>
         </div>
