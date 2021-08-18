@@ -41,8 +41,9 @@ const DiveLog = (props) => {
     <Layout>
       <Head>
         <title key="title">{`Zentacle - ${user.display_name} (${user.username}) Dive Log`}</title>
+        <meta name="description" content={`${user.display_name} - Dive Log with ${user.reviews.length} dives`} key="description" />
         <meta property="og:title" content={`Zentacle - ${user.display_name}'s Dive Log`} key="og-title" />
-        <meta property="og:description" content={user.display_name} key="og-description" />
+        <meta property="og:description" content={`${user.display_name} - Dive Log with ${user.reviews.length} dives`} key="og-description" />
         <meta property="og:image" content={user.profile_pic} key="og-image" />
         <meta property="description" content={user.display_name} key="description" />
         <link rel="canonical" href={`https://www.zentacle.com/user/${user.username}`} />
