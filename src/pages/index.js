@@ -88,7 +88,7 @@ const Home = (props) => {
       <div className={styles.container}>
         <div className={styles.image}>
           <div className={styles.imageinner} style={{ 'backgroundImage': `url(\'/hero.jpg\')` }}>
-            <h1 className={styles.pagetitle}>Find your next underwater adventure</h1>
+            <h2 className={styles.pagetitle}>Find your next underwater adventure</h2>
           </div>
           <div className={styles.menu}>
             <SearchBar></SearchBar>
