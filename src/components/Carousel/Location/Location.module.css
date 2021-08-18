@@ -1,6 +1,5 @@
 .slide {
     width: 256px;
-    
     margin-right: 16px;
     border-radius: 8px;
     background-color: white;
@@ -8,12 +7,14 @@
     overflow: hidden;
     position: relative;
     transform: translateZ(0);
-    -webkit-transition: left 0.5s ease-in-out, transform 0.1s ease-in-out;
-    -moz-transition: left 0.5s ease-in-out, transform 0.1s ease-in-out;
-    -o-transition: left 0.5s ease-in-out, transform 0.1s ease-in-out;
-    transition: left 0.5s ease-in-out, transform 0.1s ease-in-out;
+    -webkit-transition: left 0.5s ease-in-out, transform 0.2s ease-in-out;
+    -moz-transition: left 0.5s ease-in-out, transform 0.2s ease-in-out;
+    -o-transition: left 0.5s ease-in-out, transform 0.2s ease-in-out;
+    transition: left 0.5s ease-in-out, transform 0.2s ease-in-out;
+}
 
-
+.slide:hover {
+    transform: scale(1.02);
 }
 
 .slide:active {
