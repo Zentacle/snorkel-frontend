@@ -47,6 +47,7 @@ export async function getStaticProps(context) {
 const Home = (props) => {
   const [shouldShowBanner, setShouldShowBanner] = React.useState(false);
   const [recs, setRecs] = React.useState(null);
+  const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
   React.useEffect(() => {
@@ -65,6 +66,14 @@ const Home = (props) => {
       setRecs(data.data)
     })
   }, [state.user])
+
+  React.useEffect(() => {
+    fetch(`${rootDomain}/locality/area_two`).then(res =>
+      res.json()
+    ).then(data => {
+      setAreas(data.data)
+    })
+  }, [])
 
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
@@ -101,7 +110,10 @@ const Home = (props) => {
           <SelectMenu
             closeOnSelect
             title="Select location"
-            options={[{ label: 'Maui', value: "maui" }, { label: 'Big Island', value: "big-island" }]}
+            options={areas.map(area => ({
+              label: area.name,
+              value: area.short_name,
+            }))}
             selected={selected}
             onSelect={(item) => router.push(`/loc/us/hi/${item.value}`)}
           >
