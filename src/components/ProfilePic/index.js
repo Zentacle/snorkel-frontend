@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 
 const ProfilePic = ({ user, size }) => (
   <Link href={user.username ? `/user/${user.username}` : `/setusername`}>
-    <a>
+    <a className={styles.link}>
       {
         user.profile_pic
           ? <Image className={styles.profilePic} alt={user.display_name} src={user.profile_pic} height={size} width={size} />

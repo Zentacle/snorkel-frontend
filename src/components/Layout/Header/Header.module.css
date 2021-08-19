@@ -31,8 +31,11 @@
 }
 
 .addSpot {
-    margin-right: 16px;
-    color: var(--primary-color);
+    margin-right: 8px;
+    color: white;
+    background: var(--primary-color);
+    border-radius: 8px;
+    padding: 4px 8px;
 }
 
 .rightButton {

@@ -1,3 +1,7 @@
+.link {
+  display: flex;
+}
+
 .profilePic {
   height: 48px;
   width: 48px;
