@@ -66,6 +66,7 @@ const LoginPage = () => {
                     className={styles.googleButton}
                 >
                 </div>
+                <div className={styles.orSeparator}>OR</div>
                 <SignupInput value={email} onChange={setEmail} type="Email"></SignupInput>
                 <SignupInput value={password} onChange={setPassword} type="Password"></SignupInput>
                 <PrimaryButton onClick={loginUser(email, password)}>Log In</PrimaryButton>

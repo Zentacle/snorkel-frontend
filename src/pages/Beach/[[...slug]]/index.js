@@ -43,7 +43,7 @@ export async function getStaticProps(context) {
             'beach': beach_data.data,
             'reviews': review_data.data,
         }, // will be passed to the page component as props
-        revalidate: 3600,
+        revalidate: 600,
     }
 }
 
