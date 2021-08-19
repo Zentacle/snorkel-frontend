@@ -1,3 +1,7 @@
+.container {
+    margin-bottom: 32px;
+}
+
 .image{
     width: 100%;
     
@@ -49,21 +53,15 @@
 .areaTitle {
     font-size: 36px;
     font-weight: var(--text-weight-bold);
-    margin-left: 8px;
     margin-bottom: 0;
-    padding: 8px;
     border-radius: 4px;
     transition: background-color .2s, transform .2s;
 }
 
 .carouseltitle{
-    margin: 32px 16px 0 16px;
+    margin-top: 32px;
     font-weight: var(--text-weight-bold);
-}
-
-.container{
-    height: auto;
-    margin-bottom: 32px;
+    margin-bottom: 0px;
 }
 
 .locationContainer {
@@ -78,7 +76,7 @@
     padding: 8px 16px;
     margin: 8px 8px;
     font-weight: var(--text-weight-bold);
-    flex: 0 1 160px;
+    flex: 0 1 148px;
     background: white;
     box-shadow: 0px 6px 16px rgb(0 0 0 / 12%);
     text-align: center;

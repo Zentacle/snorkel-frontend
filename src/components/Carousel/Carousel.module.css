@@ -8,17 +8,16 @@
     overflow: hidden;
     white-space: nowrap;
     flex-wrap: nowrap;
-    width: 100vw;
     max-width: 720px;
-    padding: 16px 16px 0 16px;
+    padding-top: 16px;
 }
 
 .nextButton{
-    right: 0;
+    right: -40px;
 }
 
 .prevButton {
-    left: 0;
+    left: -40px;
 }
 
 .button {
