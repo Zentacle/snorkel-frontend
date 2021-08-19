@@ -110,7 +110,7 @@ const Home = (props) => {
         <MaxWidth>
           <div className={styles.locationContainer}>
             {areas.map(area => (
-              <Link href={`/loc/us/hi/${area.short_name}`}>
+              <Link key={area.short_name} href={`/loc/us/hi/${area.short_name}`}>
                 <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
                   {area.name}
                 </a>

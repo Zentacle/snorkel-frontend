@@ -5,7 +5,8 @@
 .emailContainer {
     padding: 24px;
     color: white;
-    background-color: var(--primary-color);
+    background: rgb(11,34,224);
+    background: linear-gradient(90deg, rgba(11,34,224,1) 0%, rgba(11,224,188,1) 100%);
 }
 
 .emailTitle {
