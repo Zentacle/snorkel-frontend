@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Head from 'next/head';
 import Link from 'next/link';
-import { SelectMenu } from 'evergreen-ui'
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import styles from "components/Home/Home.module.css"
 import SearchBar from "components/SearchBar"
@@ -14,7 +12,6 @@ import Cookies from "js-cookie";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import { useRouter } from "next/router";
-import MaxWidth from "components/MaxWidth";
 
 export async function getStaticProps(context) {
   const sorts = ['top', 'latest', 'default']
@@ -107,7 +104,7 @@ const Home = (props) => {
           </div>
         </div>
         <Banner isShown={shouldShowBanner}></Banner>
-        <MaxWidth>
+        <div className={styles.contentContainer}>
           <div className={styles.locationContainer}>
             {areas.map(area => (
               <Link key={area.short_name} href={`/loc/us/hi/${area.short_name}`}>
@@ -134,7 +131,7 @@ const Home = (props) => {
             <div className={styles.carouseltitle}>Conditions Reported Recently</div>
             <Carousel data={props.latest}></Carousel>
           </div>
-        </MaxWidth>
+        </div>
       </div>
     </Layout>
   )

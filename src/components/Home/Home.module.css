@@ -2,6 +2,16 @@
     margin-bottom: 32px;
 }
 
+.contentContainer {
+    margin: 0 64px;
+}
+
+@media (hover: none) {
+    .contentContainer {
+        margin: auto
+    }
+}
+
 .image{
     width: 100%;
     
