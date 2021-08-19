@@ -9,7 +9,7 @@
     white-space: nowrap;
     flex-wrap: nowrap;
     max-width: 720px;
-    padding-top: 16px;
+    padding: 16px;
 }
 
 .nextButton{
@@ -17,7 +17,7 @@
 }
 
 .prevButton {
-    left: -40px;
+    left: -24px;
 }
 
 .button {
@@ -47,39 +47,4 @@
 
 .caret {
     margin: auto;
-}
-
-.sliderTray{
-    display: inline;
-}
-
-.wholecarousel{
-    display: flex;
-    
-}
-
-.buttons{
-    position: relative;
-    z-index: 33;
-    display: flex;
-    justify-content: space-between;
-    margin-top: -120px;
-}
-
-.inner-slide{
-    max-height: 300px !important;
-}
-
-.buttonback, .buttonnext{
-    background-color: transparent;
-    color: rgba(0, 0, 0, .5);
-    border: none;
-
-}
-.buttonback{
-    margin-left: -8px;
-}
-
-.buttonnext{
-    margin-right: -8px;
 }
