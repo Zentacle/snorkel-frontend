@@ -14,10 +14,6 @@
     transition: left 0.5s ease-in-out, transform 0.2s ease-in-out;
 }
 
-.slide:hover {
-    transform: scale(1.02);
-}
-
 .slide:active {
     transform: scale(.95);
 }
