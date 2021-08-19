@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Head from 'next/head';
+import Link from 'next/link';
 import { SelectMenu } from 'evergreen-ui'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
@@ -107,21 +108,16 @@ const Home = (props) => {
         </div>
         <Banner isShown={shouldShowBanner}></Banner>
         <MaxWidth>
-          <SelectMenu
-            closeOnSelect
-            title="Select location"
-            options={areas.map(area => ({
-              label: area.name,
-              value: area.short_name,
-            }))}
-            selected={selected}
-            onSelect={(item) => router.push(`/loc/us/hi/${item.value}`)}
-          >
-            <div className={styles.areaDropdown}>
-              <h1 className={styles.areaTitle}>{props.area.name}</h1>
-              <ArrowDropDownIcon />
-            </div>
-          </SelectMenu>
+          <div className={styles.locationContainer}>
+            {areas.map(area => (
+              <Link href={`/loc/us/hi/${area.short_name}`}>
+                <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
+                  {area.name}
+                </a>
+              </Link>)
+            )}
+          </div>
+          <h1 className={styles.areaTitle}>{props.area.name}</h1>
           {recs && Object.keys(recs).length > 0 && <div>
             <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
             <Carousel data={recs}></Carousel>

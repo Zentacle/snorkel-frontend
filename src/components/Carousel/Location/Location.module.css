@@ -7,6 +7,7 @@
     overflow: hidden;
     position: relative;
     transform: translateZ(0);
+    border: 1px solid #cecece;
     -webkit-transition: left 0.5s ease-in-out, transform 0.2s ease-in-out;
     -moz-transition: left 0.5s ease-in-out, transform 0.2s ease-in-out;
     -o-transition: left 0.5s ease-in-out, transform 0.2s ease-in-out;

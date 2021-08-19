@@ -27,7 +27,11 @@ const Footer = () => {
           {
             hasSubmitted
               ? <div>Submitted!</div>
-              : <button className={styles.emailSubmit} type="submit" onClick={onClick}>Submit</button>
+              : <button className={styles.emailSubmit} type="submit" onClick={onClick}>
+                <span className={styles.emailSubmitText}>
+                  Submit
+                </span>
+              </button>
           }
         </div>
       </div>

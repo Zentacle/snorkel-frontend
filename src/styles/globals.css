@@ -44,3 +44,7 @@ button {
   background: none;
   border: none;
 }
+
+.MuiInputBase-input {
+  padding-left: 8px!important;
+}
