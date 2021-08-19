@@ -48,9 +48,7 @@
 
 .container{
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 10px 0 10px 0 rgba(0, 0, 0, .5);
-  margin: 16px;
+  margin: 0 16px;
   padding: 16px;
 }
 
@@ -71,6 +69,5 @@
 
 .googleMap {
   height: 360px;
-  border-radius: 32px;
   margin: 0 16px 32px 16px;
 }
