@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta property="og:type" content="website" key="og:type" />
       </Head>
       <UserProvider>
         <SetUser></SetUser>
