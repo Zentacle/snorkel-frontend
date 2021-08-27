@@ -114,17 +114,17 @@ const Home = (props) => {
               </Link>)
             )}
           </div>
-          <h1 className={styles.areaTitle}>{props.area.name}</h1>
+          <h1 className={styles.areaTitle}>Best Snorkeling and Scuba Diving in {props.area.name}</h1>
           {recs && Object.keys(recs).length > 0 && <div>
             <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
             <Carousel data={recs}></Carousel>
           </div>}
           <div>
-            <h2 className={styles.carouseltitle}>{`Local Snorkel and Scuba Favorites in ${props.area.name}`}</h2>
+            <h2 className={styles.carouseltitle}>{`Most Popular Snorkel and Scuba Diving Locations in ${props.area.name}`}</h2>
             <Carousel data={props.default}></Carousel>
           </div>
           <div>
-            <h2 className={styles.carouseltitle}>{`Top Rated Snorkel and Scuba in ${props.area.name}`}</h2>
+            <h2 className={styles.carouseltitle}>{`Top Rated Snorkel and Scuba Diving Locations in ${props.area.name}`}</h2>
             <Carousel data={props.top}></Carousel>
           </div>
           <div>

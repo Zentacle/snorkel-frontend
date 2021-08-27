@@ -46,7 +46,6 @@ const DiveLog = (props) => {
         <meta property="og:description" content={`${user.display_name} - Dive Log with ${user.reviews.length} dives`} key="og-description" />
         <meta property="og:image" content={user.profile_pic} key="og-image" />
         <meta property="og:url" content={`https://www.zentacle.com/user/${user.username}`} key="og-url" />
-        <meta property="description" content={user.display_name} key="description" />
         <link rel="canonical" href={`https://www.zentacle.com/user/${user.username}`} />
       </Head>
       <MaxWidth>
