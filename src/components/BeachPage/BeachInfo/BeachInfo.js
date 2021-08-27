@@ -1,9 +1,7 @@
 import styles from "../BeachInfo/BeachInfo.module.css";
 import VizDepth from "../VizDepth/VizDepth";
-import BeachAbout from "../BeachAbout/BeachAbout";
 import BeachReviews from "../BeachReviews/BeachReviews";
 import ReviewSummary from 'components/BeachPage/ReviewSummary';
-import AdCarousel from "components/AdCarousel";
 
 const EntryMap = ({ src }) => (
     <a className={ styles.entryMap } style={{ backgroundImage: `url(\'${src}\')` }} href={ src }>
@@ -19,6 +17,7 @@ const BeachInfo = ({
     entry_map,
     last_review_date,
     last_review_viz,
+    name,
     ratings,
     rating,
     num_reviews,
@@ -29,7 +28,10 @@ const BeachInfo = ({
     return (
         <div className={styles.container}>
             <VizDepth date={ last_review_date } difficulty={difficulty} viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
-            <BeachAbout description={ description }></BeachAbout>
+            <h2 className={styles.sectionTitle}>About {name} Snorkeling and Scuba Diving</h2>
+            <div className={styles.description}>
+                { description }
+            </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
             <BeachReviews beachid={id} reviews={reviews}></BeachReviews>

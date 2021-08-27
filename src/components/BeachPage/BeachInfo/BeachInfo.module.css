@@ -3,6 +3,19 @@
     
 }
 
+.sectionTitle {
+    font-size: 18px;
+    padding: 12px 24px 0 24px;
+    font-weight: var(--text-weight-bold);
+}
+
+.description{
+    font-size: 14px;
+    margin: 0 24px 24px 24px;
+    line-height: 20px;
+    white-space: pre-line;
+}
+
 .entryMap {
     margin: 16px;
     border-radius: 8px;
