@@ -41,9 +41,17 @@ const DiveLog = (props) => {
     <Layout>
       <Head>
         <title key="title">{`Zentacle - ${user.display_name} (${user.username}) Dive Log`}</title>
-        <meta name="description" content={`${user.display_name} - Dive Log with ${user.reviews.length} dives`} key="description" />
+        <meta
+          name="description"
+          content={`${user.display_name} (${user.username}) is a scuba diver and snorkeler with ${user.reviews.length} dives`}
+          key="description"
+        />
         <meta property="og:title" content={`Zentacle - ${user.display_name}'s Dive Log`} key="og-title" />
-        <meta property="og:description" content={`${user.display_name} - Dive Log with ${user.reviews.length} dives`} key="og-description" />
+        <meta
+          property="og:description"
+          content={`${user.display_name} (${user.username}) is a scuba diver and snorkeler with ${user.reviews.length} dives`}
+          key="og-description"
+        />
         <meta property="og:image" content={user.profile_pic} key="og-image" />
         <meta property="og:url" content={`https://www.zentacle.com/user/${user.username}`} key="og-url" />
         <link rel="canonical" href={`https://www.zentacle.com/user/${user.username}`} />
