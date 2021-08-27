@@ -63,9 +63,9 @@ const CreateAccount = () => {
     return (
         <Layout>
             <BackgroundCard>
-                <div className={styles.titlecontainer}>
+                <h1 className={styles.titlecontainer}>
                     Create your Free account
-                </div>
+                </h1>
                 <div
                     id="google_button"
                     className={styles.googleButton}

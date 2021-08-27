@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:type" content="website" key="og:type" />
+        <meta name="twitter:card" content="summary_large_image" key="twitter-card"></meta>
       </Head>
       <UserProvider>
         <SetUser></SetUser>

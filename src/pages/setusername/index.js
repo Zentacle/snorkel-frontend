@@ -38,9 +38,9 @@ const CreateAccount = (props) => {
   return (
     <Layout>
       <BackgroundCard>
-        <div className={styles.titlecontainer}>
+        <h1 className={styles.titlecontainer}>
           Set up your profile by choosing a username!
-        </div>
+        </h1>
         <form onSubmit={e => { e.preventDefault(); }}>
           <SignupInput value={username} onChange={setUsername} id='username-input' type="Username"></SignupInput>
           <PrimaryButton onClick={patchUser}>Set Username</PrimaryButton>
