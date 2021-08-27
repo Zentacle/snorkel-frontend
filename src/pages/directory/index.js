@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Layout from 'components/Layout/Layout';
 import { rootDomain } from 'lib/constants';
 import styles from './styles.module.css';
+import Head from 'next/head';
 
 export const getStaticProps = async (ctx) => {
   // Method to source urls from cms
@@ -28,20 +29,34 @@ export const getStaticProps = async (ctx) => {
 // Default export to prevent next.js errors
 const Directory = ({ data }) => {
   return (
-    <Layout>
-      <div className={ styles.container }>
-        <h1 className={ styles.title }>Locations Directory</h1>
-        {
-          data.map(location => (
-            <div className={ styles.link } key={location.url}>
-              <Link href={location.url}>
-                <a>{location.name} ({location.city})</a>
-              </Link>
-            </div>
-          ))
-        }
-      </div>
-    </Layout>
+    <>
+      <Head>
+        <meta
+          name="description"
+          content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
+          key="description"
+        />
+        <meta
+          property="og:description"
+          content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
+          key="og:description"
+        />
+      </Head>
+      <Layout>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Locations Directory</h1>
+          {
+            data.map(location => (
+              <div className={styles.link} key={location.url}>
+                <Link href={location.url}>
+                  <a>{location.name} ({location.city})</a>
+                </Link>
+              </div>
+            ))
+          }
+        </div>
+      </Layout>
+    </>
   )
 }
 

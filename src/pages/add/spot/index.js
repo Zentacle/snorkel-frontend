@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 import useDebounce from 'hooks/useDebounce';
 import MaxWidth from 'components/MaxWidth';
+import Head from 'next/head';
 
 const NewSpot = (props) => {
   const router = useRouter();
@@ -114,6 +115,11 @@ const NewSpot = (props) => {
 
   return (
     <Layout>
+      <Head>
+        <link rel="canonical" href={`https://www.zentacle.com/add/spot`} />
+        <meta name="description" content="Submit your favorite dive or snorkel spot to Zentacle!" key="description" />
+        <meta property="og:description" content="Submit your favorite dive or snorkel spot to Zentacle!" key="og:description" />
+      </Head>
       <MaxWidth>
         <div className={styles.container}>
           <h1 className={styles.title}>Add a new dive spot!</h1>
