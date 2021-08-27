@@ -96,10 +96,10 @@ const Beach = (props) => {
             <Head>
                 <title key="title">{`Zentacle - ${beach.name} - Scuba Diving and Snorkel Reviews, Maps, and Photos`}</title>
                 <meta property="og:title" content={`Zentacle - ${beach.name} - Scuba Diving and Snorkel Reviews, Maps, and Photos`} key="og-title" />
-                <meta property="og:description" content={beach.description} key="og-description" />
+                <meta property="og:description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="og-description" />
                 <meta property="og:image" content={beach.hero_img} key="og-image" />
                 <meta property="og:url" content={`https://www.zentacle.com${beach.url}`} key="og-url" />
-                <meta name="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}`} key="description" />
+                <meta name="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="description" />
                 <link rel="canonical" href={`https://www.zentacle.com${beach.url}`} />
                 <link rel="preload" as="image" href={beach.hero_img} />
             </Head>
