@@ -48,7 +48,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-    const res = await fetch(`${rootDomain}/spots/get?limit=none&ssg=true`)
+    const res = await fetch(`${rootDomain}/spots/get?limit=100&ssg=true`)
     const data = await res.json()
     return {
         paths: data.data.map(beach => ({
@@ -80,7 +80,7 @@ const Beach = (props) => {
         }).then(res =>
             res.json()
         ).then(beach_data => {
-            setNearbyBeaches([...beach_data.data])
+            //setNearbyBeaches([...beach_data.data])
         });
     }, [router.isReady, router.query.slug])
 

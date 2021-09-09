@@ -27,6 +27,8 @@
 
 .image{
     object-fit: cover !important;
+    height: 160px;
+    width: 256px;
 }
 
 .locationInfoContainer{
