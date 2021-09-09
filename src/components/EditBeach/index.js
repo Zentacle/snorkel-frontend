@@ -202,6 +202,8 @@ const BeachEditComponent = () => {
                 <SignupInput value={getValueForKey('location_city')} onChange={changeNewData('location_city')}></SignupInput>
                 <div>location_google</div>
                 <SignupInput value={getValueForKey('location_google')} onChange={changeNewData('location_google')}></SignupInput>
+                <div>google_place_id</div>
+                <SignupInput value={getValueForKey('google_place_id')} onChange={changeNewData('google_place_id')}></SignupInput>
                 <PrimaryButton disabled={isSubmitDisabled} className={styles.submit} onClick={submit}>Submit</PrimaryButton>
             </div>
         </div>
