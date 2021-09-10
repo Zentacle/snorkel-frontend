@@ -213,6 +213,10 @@ const BeachEditComponent = () => {
                 <div className={styles.titlecontainer}>{oldData.name}</div>
                 <div>name</div>
                 <SignupInput value={getValueForKey('name')} onChange={changeNewData('name')}></SignupInput>
+                <div>description</div>
+                <SignupInput value={getValueForKey('description')} onChange={changeNewData('description')}></SignupInput>
+                <div>max depth</div>
+                <SignupInput value={getValueForKey('max_depth')} onChange={changeNewData('max_depth')}></SignupInput>
                 <div>hero_img</div>
                 <DropZoneArea type="hero_img"></DropZoneArea>
                 <div>entry_map</div>
