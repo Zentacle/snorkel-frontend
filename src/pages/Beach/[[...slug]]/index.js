@@ -80,7 +80,7 @@ const Beach = (props) => {
         }).then(res =>
             res.json()
         ).then(beach_data => {
-            //setNearbyBeaches([...beach_data.data])
+            setNearbyBeaches([...beach_data.data])
         });
     }, [router.isReady, router.query.slug])
 
