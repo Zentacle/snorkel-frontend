@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from 'uuid';
 import PrimaryButton from "components/PrimaryButton";
 import { toaster } from 'evergreen-ui';
 import Cookies from 'js-cookie';
+import GooglePlaceSelector from "components/GooglePlaceSelector";
+import searchGoogleMapsAPI from "lib/searchGoogleMapsAPI";
 
 const BeachEditComponent = () => {
     const [oldData, setOldData] = React.useState('');
@@ -17,11 +19,34 @@ const BeachEditComponent = () => {
     const [newHeroImage, setNewHeroImage] = React.useState('');
     const [newEntryMap, setNewEntryMap] = React.useState('');
 
+    const [googlePlaceCandidates, setGooglePlaceCandidates] = React.useState(null);
+    const [selectedGooglePlace, setSelectedGooglePlace] = React.useState(null);
+
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
 
     let router = useRouter();
     const { beachid } = router.query;
 
+    const conductSearch = (name) => () => {
+        searchGoogleMapsAPI(name).then(results => {
+            setGooglePlaceCandidates(results);
+            if (results.length === 1) {
+                setSelectedGooglePlace(results[0]);
+            }
+        });
+    }
+
+    const setSelected = (index) => () => {
+        setSelectedGooglePlace(googlePlaceCandidates[index])
+        if(index !== null) {
+            changeNewData('google_place_id')(googlePlaceCandidates[index]['place_id'])
+        } else {
+            delete newData.google_place_id;
+            setNewData({
+                ...newData,
+            })
+        }
+    }
 
     React.useEffect(() => {
         if (beachid) {
@@ -37,10 +62,6 @@ const BeachEditComponent = () => {
             })
         }
     }, [router.isReady])
-
-    React.useEffect(()=> {
-        console.log(newData)
-    }, [newData])
 
     function FileSubmit({ submittedFile, type }) {
         let f = null;
@@ -202,6 +223,12 @@ const BeachEditComponent = () => {
                 <SignupInput value={getValueForKey('location_city')} onChange={changeNewData('location_city')}></SignupInput>
                 <div>location_google</div>
                 <SignupInput value={getValueForKey('location_google')} onChange={changeNewData('location_google')}></SignupInput>
+                <button onClick={conductSearch(getValueForKey('name'))}>Search Google</button>
+                <GooglePlaceSelector
+                    setSelected={setSelected}
+                    selectedGooglePlace={selectedGooglePlace}
+                    googlePlaceCandidates={googlePlaceCandidates}
+                />
                 <div>google_place_id</div>
                 <SignupInput value={getValueForKey('google_place_id')} onChange={changeNewData('google_place_id')}></SignupInput>
                 <PrimaryButton disabled={isSubmitDisabled} className={styles.submit} onClick={submit}>Submit</PrimaryButton>
