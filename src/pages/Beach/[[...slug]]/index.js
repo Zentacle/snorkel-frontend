@@ -105,19 +105,22 @@ const Beach = (props) => {
             </Head>
             <MaxWidth>
                 {
-                    beach.country_id && beach.area_one_id && <div className={styles.locBreadcrumbContainer}>
+                    beach.country_id && <div className={styles.locBreadcrumbContainer}>
                         <Link href={`/loc/${beach.country.short_name}`}>
                             <a className={styles.locBreadcrumb}>
                                 {beach.country.name}
                             </a>
                         </Link>
-                        <span className={styles.locBreadcrumb}>›</span>
-                        <Link href={`/loc/${beach.country.short_name}/${beach.area_one.short_name}`}>
-                            <a className={styles.locBreadcrumb}>
-                                {beach.area_one.name}
-                            </a>
-                        </Link>
-                        { beach.area_two_id && <>
+                        {beach.area_one_id && <>
+                            <span className={styles.locBreadcrumb}>›</span>
+                            <Link href={`/loc/${beach.country.short_name}/${beach.area_one.short_name}`}>
+                                <a className={styles.locBreadcrumb}>
+                                    {beach.area_one.name}
+                                </a>
+                            </Link>
+                        </>
+                        }
+                        {beach.area_two_id && <>
                             <span className={styles.locBreadcrumb}>›</span>
                             <Link href={`/loc/${beach.country.short_name}/${beach.area_one.short_name}/${beach.area_two.short_name}`}>
                                 <a className={styles.locBreadcrumb}>
