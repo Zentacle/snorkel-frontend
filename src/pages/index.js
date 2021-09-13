@@ -32,7 +32,7 @@ export async function getStaticProps(context) {
   }
 
   props['area'] = {
-    'name': 'us',
+    'name': 'the World',
   }
 
   props['loc'] = 'country';
@@ -73,13 +73,13 @@ const Home = (props) => {
     ).then(data => {
       setAreas(data.data)
     })
-  }, [areas])
+  }, [props.area])
 
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
   let title = "Zentacle - Snorkel and Scuba Diving Reviews, Maps, and Photos"
   let description = "Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you."
-  if (props.area && props.area.name && props.area.name !== 'Maui') {
+  if (props.area && props.area.name && props.area.name !== 'the world') {
     title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
     description = `Search dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
   }
