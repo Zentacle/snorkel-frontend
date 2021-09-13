@@ -32,8 +32,10 @@ export async function getStaticProps(context) {
   }
 
   props['area'] = {
-    'name': 'Maui',
+    'name': 'us',
   }
+
+  props['loc'] = 'country';
 
   return {
     props, // will be passed to the page component as props
@@ -66,24 +68,21 @@ const Home = (props) => {
   }, [state.user])
 
   React.useEffect(() => {
-    fetch(`${rootDomain}/locality/area_two`).then(res =>
+    fetch(`${rootDomain}/locality/${props.loc}`).then(res =>
       res.json()
     ).then(data => {
       setAreas(data.data)
     })
-  }, [])
+  }, [areas])
 
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
   let title = "Zentacle - Snorkel and Scuba Diving Reviews, Maps, and Photos"
   let description = "Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you."
-  if (props.area.name && props.area.name !== 'Maui') {
+  if (props.area && props.area.name && props.area.name !== 'Maui') {
     title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
     description = `Search dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
   }
-
-  const [selected, setSelected] = React.useState(null)
-  const router = useRouter();
 
   return (
     <Layout>
@@ -107,7 +106,7 @@ const Home = (props) => {
         <div className={styles.contentContainer}>
           <div className={styles.locationContainer}>
             {areas.map(area => (
-              <Link key={area.short_name} href={`/loc/us/hi/${area.short_name}`}>
+              <Link key={area.short_name} href={area.url}>
                 <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
                   {area.name}
                 </a>
