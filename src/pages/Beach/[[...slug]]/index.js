@@ -71,7 +71,7 @@ const Beach = (props) => {
 
     useEffect(() => {
         if (!router.isReady) { return }
-        const beachid = router.query.slug[0];
+        const beachid = props.beach.id;
         fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`, {
             method: 'GET',
             headers: {
@@ -80,7 +80,9 @@ const Beach = (props) => {
         }).then(res =>
             res.json()
         ).then(beach_data => {
-            setNearbyBeaches([...beach_data.data])
+            if (beach_data.data) {
+                setNearbyBeaches([...beach_data.data])
+            }
         });
     }, [router.isReady, router.query.slug])
 
