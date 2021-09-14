@@ -22,6 +22,8 @@ const NewSpot = (props) => {
       'name': locationName,
       'location_city': locationCity,
       'description': description,
+      'difficulty': difficulty,
+      'max_depth': maxDepth,
     }
     if (selectedGooglePlace) {
       body['place_id'] = selectedGooglePlace.place_id;
@@ -52,6 +54,8 @@ const NewSpot = (props) => {
   const [description, setDescription] = React.useState('');
   const [googlePlaceCandidates, setGooglePlaceCandidates] = React.useState(null);
   const [selectedGooglePlace, setSelectedGooglePlace] = React.useState(null);
+  const [difficulty, setDifficulty] = React.useState(null);
+  const [maxDepth, setMaxDepth] = React.useState(null);
 
   const debouncedSearchTerm = useDebounce(locationName, 2000);
 
@@ -109,6 +113,16 @@ const NewSpot = (props) => {
             <div className={styles.sectiontitle}>City/State/Country</div>
             <div className={styles.helper}>(ie. Monterey, CA, United States)</div>
             <input className={styles.text} value={locationCity} onChange={e => setLocationCity(e.target.value)} />
+          </div>
+          <div className={styles.spacer}>
+            <div className={styles.sectiontitle}>Difficulty</div>
+            <div className={styles.helper}>Must choose either beginner, intermediate, or advanced (optional)</div>
+            <input className={styles.text} value={difficulty} onChange={e => setDifficulty(e.target.value)} />
+          </div>
+          <div className={styles.spacer}>
+            <div className={styles.sectiontitle}>Max Depth</div>
+            <div className={styles.helper}>ie. "120ft" or "15m" (optional)</div>
+            <input className={styles.text} value={maxDepth} onChange={e => setMaxDepth(e.target.value)} />
           </div>
           <div className={styles.spacer}>
             <div className={styles.sectiontitle}>Extra info</div>
