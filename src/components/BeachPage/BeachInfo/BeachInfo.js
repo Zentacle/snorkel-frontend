@@ -23,6 +23,7 @@ const BeachInfo = ({
     num_reviews,
     reviews,
     max_depth,
+    url,
 }) => {
     
     return (
@@ -34,7 +35,7 @@ const BeachInfo = ({
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
-            <BeachReviews beachid={id} reviews={reviews}></BeachReviews>
+            <BeachReviews beachid={id} url={url} reviews={reviews}></BeachReviews>
         </div>
     )
 }

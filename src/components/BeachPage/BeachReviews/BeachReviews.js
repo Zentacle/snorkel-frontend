@@ -7,7 +7,7 @@ import { PrimaryLink } from 'components/PrimaryButton';
 import { sendEvent } from 'hooks/amplitude';
   
 const BeachReviews = (props) => {
-    const { beachid } = props;
+    const { beachid, url } = props;
     
     
     const onReviewClick = () => {
@@ -18,7 +18,7 @@ const BeachReviews = (props) => {
  
     const { state } = useCurrentUser();
     const link = state.user && state.user.id
-        ? `./${beachid}/review`
+        ? `${url}/review`
         : '/Login'
 
     return (
