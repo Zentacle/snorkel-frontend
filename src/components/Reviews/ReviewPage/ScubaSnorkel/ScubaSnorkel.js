@@ -1,22 +1,32 @@
 import styles from "./ScubaSnorkel.module.css";
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import React from "react";
 const ScubaSnorkel = ({ value, onChange }) => {
 
-    const handleToggle = (event, newType) => {
+    const handleToggle = (newType) => {
         onChange(newType);
     }
 
     return (
-        <ToggleButtonGroup value={value} onChange={handleToggle} exclusive style={{ width: "100%" }}>
-            <ToggleButton className={styles.button} value="snorkel">
+        <div>
+            <button
+                onClick={e => handleToggle('snorkel')}
+                className={value === 'snorkel' ? styles.active : styles.pill}
+            >
                 Snorkel
-            </ToggleButton>
-            <ToggleButton className={styles.button} value="scuba">
+            </button>
+            <button
+                onClick={e => handleToggle('scuba')}
+                className={value === 'scuba' ? styles.active : styles.pill}
+            >
                 Scuba
-            </ToggleButton>
-        </ToggleButtonGroup>
+            </button>
+            <button
+                onClick={e => handleToggle('freediving')}
+                className={value === 'freediving' ? styles.active : styles.pill}
+            >
+                Freediving
+            </button>
+        </div>
     )
 }
 
