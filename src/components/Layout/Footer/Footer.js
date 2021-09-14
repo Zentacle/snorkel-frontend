@@ -50,7 +50,7 @@ const Footer = () => {
         </div>
         <div className={styles.rightColumn}>
           <h3 className={styles.footertext}>
-            Snorkel and Scuba Diving Reviews, Reef Maps, and Photos
+            Snorkel, Scuba Diving, Shore Diving, and Free Diving Reviews, Reef Maps, and Photos
           </h3>
           <div>
             Zentacle encourages the use of reef safe sunscreen that doesn&apos;t contain oxybenzone and octinoxate. Learn&nbsp;more&nbsp;at&nbsp;<Link href="https://vimeo.com/442787740">Reefs at Risk</Link>.

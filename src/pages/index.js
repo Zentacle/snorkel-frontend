@@ -79,7 +79,7 @@ const Home = (props) => {
 
   let title = "Zentacle - Snorkel and Scuba Diving Reviews, Maps, and Photos"
   let description = "Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you."
-  if (props.area && props.area.name && props.area.name !== 'the world') {
+  if (props.area && props.area.name && props.area.name !== 'the World') {
     title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
     description = `Search dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
   }
