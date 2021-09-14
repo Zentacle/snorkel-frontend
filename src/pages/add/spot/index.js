@@ -121,7 +121,7 @@ const NewSpot = (props) => {
           </div>
           <div className={styles.spacer}>
             <div className={styles.sectiontitle}>Max Depth</div>
-            <div className={styles.helper}>ie. "120ft" or "15m" (optional)</div>
+            <div className={styles.helper}>ie. 120ft (optional)</div>
             <input className={styles.text} value={maxDepth} onChange={e => setMaxDepth(e.target.value)} />
           </div>
           <div className={styles.spacer}>
