@@ -69,12 +69,12 @@ const Home = (props) => {
 
   React.useEffect(() => {
     const filter = {}
-    if (props.country) {
-      filter['country'] = props.country
-    }
     let url = `${rootDomain}/locality/${props.loc}`
-    if (filter['country']) {
+    if (props.country) {
       url += `?country=${props.country}`
+    }
+    if (props.area_one) {
+      url += `&area_one=${props.area_one}`
     }
     fetch(url).then(res =>
       res.json()
