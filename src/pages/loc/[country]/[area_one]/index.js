@@ -26,6 +26,8 @@ export async function getServerSideProps(context) {
   }
 
   props['loc'] = 'area_two'
+  props['country'] = country
+  props['area_one'] = area_one
 
   return {
     props, // will be passed to the page component as props

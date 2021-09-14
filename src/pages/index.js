@@ -68,7 +68,15 @@ const Home = (props) => {
   }, [state.user])
 
   React.useEffect(() => {
-    fetch(`${rootDomain}/locality/${props.loc}`).then(res =>
+    const filter = {}
+    if (props.country) {
+      filter['country'] = props.country
+    }
+    let url = `${rootDomain}/locality/${props.loc}`
+    if (filter['country']) {
+      url += `?country=${props.country}`
+    }
+    fetch(url).then(res =>
       res.json()
     ).then(data => {
       setAreas(data.data)
