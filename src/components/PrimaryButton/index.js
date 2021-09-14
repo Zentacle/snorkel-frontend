@@ -3,15 +3,15 @@ import styles from './styles.module.css';
 
 const PrimaryButton = ({ children, disabled, onClick }) => {
   return (
-    <button onClick={onClick} className={styles.button} disabled={disabled}>
+    <button onClick={onClick} className={`${styles.button} ${className}`} disabled={disabled}>
       {children}
     </button>
   )
 }
 
-export const PrimaryLink = ({ children, href, onClick }) => (
+export const PrimaryLink = ({ children, href, onClick, className }) => (
   <Link href={href}>
-    <a onClick={onClick} className={styles.button}>
+    <a onClick={onClick} className={`${styles.button} ${className}`}>
       {children}
     </a>
   </Link>

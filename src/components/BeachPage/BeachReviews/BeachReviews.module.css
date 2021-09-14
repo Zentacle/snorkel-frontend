@@ -1,3 +1,17 @@
+.reviewbutton {
+    background: linear-gradient(270deg, #0b22e0, #0be0bc);
+    background-size: 200% 200%;
+
+    -webkit-animation: gradient-movement 30s ease infinite;
+    -moz-animation: gradient-movement 30s ease infinite;
+    animation: gradient-movement 30s ease infinite;
+    font-size: 20px;
+}
+
+.reviewbutton:hover {
+    animation: none;
+}
+
 .reviewbuttoncontainer{
     display: flex;
     justify-content: space-around;
@@ -11,4 +25,20 @@
 
 .reviewContainer {
     padding: 16px;
+}
+
+@-webkit-keyframes gradient-movement {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes gradient-movement {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes gradient-movement {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
