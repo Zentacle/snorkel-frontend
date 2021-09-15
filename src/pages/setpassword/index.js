@@ -30,7 +30,11 @@ const CreateAccount = (props) => {
                 if (response.ok) {
                     if (data.auth_token) {
                         sendEvent('partial_register_password_success');
-                        window.location.href = "/";
+                        if (data.username) {
+                            window.location.href = "/";
+                        } else {
+                            window.location.href = "/setusername"
+                        }
                     } else {
                         sendEvent('partial_register_password_error');
                     }
