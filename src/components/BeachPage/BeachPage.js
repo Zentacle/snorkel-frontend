@@ -193,7 +193,7 @@ const BeachPage = (props) => {
     return (
         <>
             <BackImage beach={props.beach} photoState={photoState} />
-            <BeachInfo {...props.beach} reviews={props.reviews} />
+            <BeachInfo {...props.beach} tides={props.tides} reviews={props.reviews} />
             <div className={styles.carouselSpacer}>
                 <div className={styles.carouseltitle}>Other Locations Nearby</div>
                 <Carousel data={[...props.nearbyBeaches]}></Carousel>

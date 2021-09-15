@@ -30,6 +30,25 @@
     background-position-y: center;
 }
 
+.tideRowHeader {
+    font-weight: var(--text-weight-bold);
+}
+
+.tideRow {
+    margin: 4px 24px;
+    display: flex;
+    flex: 1;
+}
+
+.tideItem {
+    padding: 0 8px;
+    flex: 1;
+}
+
+.tideItem:first-child {
+    padding-left: 0;
+}
+
 .viewButton {
     outline: none;
     background-color: white;

@@ -24,6 +24,7 @@ const BeachInfo = ({
     reviews,
     max_depth,
     url,
+    tides,
 }) => {
     
     return (
@@ -34,6 +35,19 @@ const BeachInfo = ({
                 { description }
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
+            <div>
+            <h3 className={styles.sectionTitle}>{name} Tide Chart</h3>
+            <div className={`${styles.tideRow} ${styles.tideRowHeader}`}>
+                <div className={styles.tideItem}>Date</div>
+                <div className={styles.tideItem}>Height</div>
+                <div className={styles.tideItem}>High/Low Tide</div>
+            </div>
+            { tides.slice(0, 2).map(tide => <div className={styles.tideRow} key={tide.t}>
+                <div className={styles.tideItem}>{new Date(tide.t).toLocaleString()}</div>
+                <div className={styles.tideItem}>{tide.v}ft</div>
+                <div className={styles.tideItem}>{tide.type}</div>
+                </div>)}
+            </div>
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
             <BeachReviews beachid={id} url={url} reviews={reviews}></BeachReviews>
         </div>
