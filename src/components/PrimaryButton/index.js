@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from './styles.module.css';
 
-const PrimaryButton = ({ children, disabled, onClick }) => {
+const PrimaryButton = ({ children, disabled, onClick, className }) => {
   return (
     <button onClick={onClick} className={`${styles.button} ${className}`} disabled={disabled}>
       {children}
