@@ -33,6 +33,8 @@ const BeachInfo = ({
     React.useEffect(() => {
         setTides([...tidesArray]);
     }, [])
+
+    console.log(description)
     
     return (
         <div className={styles.container}>
@@ -40,8 +42,8 @@ const BeachInfo = ({
             <h2 className={styles.sectionTitle}>About {name} Snorkeling and Scuba Diving</h2>
             <div className={styles.description}>
                 { description.length < 3
-                    ? description
-                    : `${name} is a ${rating}-star rated scuba dive and snorkel destination in ${location_city} with ${ratings} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.` }
+                    ? `${name} is a ${Math.round(rating * 100) / 100}-star rated scuba dive and snorkel destination in ${location_city} with ${ratings} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.`
+                    :  description }
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             <div>
