@@ -69,12 +69,12 @@ export async function getStaticProps(context) {
             'reviews': review_data.data,
             'tides': tides,
         }, // will be passed to the page component as props
-        revalidate: 10,
+        revalidate: 3600,
     }
 }
 
 export async function getStaticPaths() {
-    const res = await fetch(`${rootDomain}/spots/get?limit=100&ssg=true`)
+    const res = await fetch(`${rootDomain}/spots/get?limit=1000&ssg=true`)
     const data = await res.json()
     return {
         paths: data.data.map(beach => ({
