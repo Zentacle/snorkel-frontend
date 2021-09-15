@@ -74,7 +74,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-    const res = await fetch(`${rootDomain}/spots/get?limit=1000&ssg=true`)
+    const res = await fetch(`${rootDomain}/spots/get?limit=100&ssg=true`)
     const data = await res.json()
     return {
         paths: data.data.map(beach => ({
