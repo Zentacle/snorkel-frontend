@@ -38,7 +38,9 @@ const BeachInfo = ({
             <VizDepth date={ last_review_date } difficulty={difficulty} viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
             <h2 className={styles.sectionTitle}>About {name} Snorkeling and Scuba Diving</h2>
             <div className={styles.description}>
-                { description || `${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}.` }
+                { description.length < 3
+                    ? description
+                    : `${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}.` }
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             <div>
