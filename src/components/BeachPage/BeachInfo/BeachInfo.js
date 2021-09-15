@@ -2,6 +2,7 @@ import styles from "../BeachInfo/BeachInfo.module.css";
 import VizDepth from "../VizDepth/VizDepth";
 import BeachReviews from "../BeachReviews/BeachReviews";
 import ReviewSummary from 'components/BeachPage/ReviewSummary';
+import React from "react";
 
 const EntryMap = ({ src }) => (
     <a className={ styles.entryMap } style={{ backgroundImage: `url(\'${src}\')` }} href={ src }>
@@ -26,6 +27,11 @@ const BeachInfo = ({
     url,
     tides,
 }) => {
+    const [tidesArray, setTides] = React.useState(tides)
+
+    React.useEffect(() => {
+        setTides([...tidesArray]);
+    }, [])
     
     return (
         <div className={styles.container}>
@@ -36,13 +42,15 @@ const BeachInfo = ({
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             <div>
-            <h3 className={styles.sectionTitle}>{name} Tide Chart</h3>
-            <div className={`${styles.tideRow} ${styles.tideRowHeader}`}>
-                <div className={styles.tideItem}>Date</div>
-                <div className={styles.tideItem}>Height</div>
-                <div className={styles.tideItem}>High/Low Tide</div>
-            </div>
-            { tides.slice(0, 2).map(tide => <div className={styles.tideRow} key={tide.t}>
+            { tidesArray.length ? <>
+                <h3 className={styles.sectionTitle}>{name} Tide Chart</h3>
+                <div className={`${styles.tideRow} ${styles.tideRowHeader}`}>
+                    <div className={styles.tideItem}>Date</div>
+                    <div className={styles.tideItem}>Height</div>
+                    <div className={styles.tideItem}>High/Low Tide</div>
+                </div>
+            </> : <></> }
+            { tidesArray.slice(0, 2).map(tide => <div className={styles.tideRow} key={tide.t}>
                 <div className={styles.tideItem}>{new Date(tide.t).toLocaleString()}</div>
                 <div className={styles.tideItem}>{tide.v}ft</div>
                 <div className={styles.tideItem}>{tide.type}</div>
