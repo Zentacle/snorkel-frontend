@@ -19,6 +19,7 @@ const BeachInfo = ({
     last_review_date,
     last_review_viz,
     name,
+    location_city,
     ratings,
     rating,
     num_reviews,
@@ -40,7 +41,7 @@ const BeachInfo = ({
             <div className={styles.description}>
                 { description.length < 3
                     ? description
-                    : `${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}.` }
+                    : `${name} is a ${rating}-star rated scuba dive and snorkel destination in ${location_city} with ${ratings} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.` }
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             <div>
