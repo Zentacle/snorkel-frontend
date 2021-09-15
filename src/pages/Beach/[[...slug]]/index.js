@@ -48,8 +48,7 @@ export async function getStaticProps(context) {
         var begin_date = currentDate.toISOString().slice(0,10).replace(/-/g,"");
         currentDate.setDate(currentDate.getDate() + 3); 
         var end_date = currentDate.toISOString().slice(0,10).replace(/-/g,"");
-        response = await fetch(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=${begin_date}&end_date=${end_date}&datum=MLLW&station=${stationId}&time_zone=LST&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`)
-        console.log(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=20210913&end_date=20210916&datum=MLLW&station=${stationId}&time_zone=LST&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`)
+        response = await fetch(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=${begin_date}&end_date=${end_date}&datum=MLLW&station=${stationId}&time_zone=GMT&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`)
         const tideData = await response.json()
         if (tideData && tideData.predictions) {
             tides = tideData.predictions;
