@@ -55,7 +55,7 @@ const BeachInfo = ({
                     <div className={styles.tideItem}>High/Low Tide</div>
                 </div>
             </> : <></> }
-            { tidesArray.slice(0, 2).map(tide => <div className={styles.tideRow} key={tide.t}>
+            { tidesArray.slice(0, 4).map(tide => <div className={styles.tideRow} key={tide.t}>
                 <div className={styles.tideItem}>{new Date(`${tide.t} GMT`).toLocaleString()}</div>
                 <div className={styles.tideItem}>{tide.v}ft</div>
                 <div className={styles.tideItem}>{tide.type}</div>
