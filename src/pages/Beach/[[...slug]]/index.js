@@ -32,23 +32,23 @@ export async function getStaticProps(context) {
 
     const review_data = await response.json();
 
-    let stationId = null;
+    let stationData = null;
     if (beach_data.data.latitude) {
         response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
         console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-        const station_data = await response.json()
-        if (station_data.stationList && station_data.stationList.length) {
-            stationId = station_data.stationList[0].stationId
+        const stations_data = await response.json()
+        if (stations_data.stationList && stations_data.stationList.length) {
+            stationData = stations_data.stationList[0]
         }
     }
 
     let tides = []
-    if (stationId) {
+    if (stationData && stationData.stationId) {
         var currentDate = new Date();
         var begin_date = currentDate.toISOString().slice(0,10).replace(/-/g,"");
         currentDate.setDate(currentDate.getDate() + 3); 
         var end_date = currentDate.toISOString().slice(0,10).replace(/-/g,"");
-        response = await fetch(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=${begin_date}&end_date=${end_date}&datum=MLLW&station=${stationId}&time_zone=GMT&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`)
+        response = await fetch(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=${begin_date}&end_date=${end_date}&datum=MLLW&station=${stationData.stationId}&time_zone=GMT&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`)
         const tideData = await response.json()
         if (tideData && tideData.predictions) {
             tides = tideData.predictions;
@@ -67,6 +67,7 @@ export async function getStaticProps(context) {
             'beach': beach_data.data,
             'reviews': review_data.data,
             'tides': tides,
+            'stationData': stationData,
         }, // will be passed to the page component as props
         revalidate: 3600,
     }
@@ -164,6 +165,7 @@ const Beach = (props) => {
                     reviews={props.reviews}
                     nearbyBeaches={nearbyBeaches}
                     tides={props.tides}
+                    stationData={props.stationData}
                 />
             </MaxWidth>
         </Layout>

@@ -16,6 +16,11 @@
     white-space: pre-line;
 }
 
+.helper {
+    font-size: 12px;
+    margin: 0px 24px;
+}
+
 .entryMap {
     margin: 16px;
     border-radius: 8px;

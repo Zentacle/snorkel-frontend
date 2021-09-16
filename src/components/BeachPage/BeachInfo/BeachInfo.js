@@ -27,14 +27,13 @@ const BeachInfo = ({
     max_depth,
     url,
     tides,
+    stationData,
 }) => {
     const [tidesArray, setTides] = React.useState(tides)
 
     React.useEffect(() => {
         setTides([...tidesArray]);
     }, [])
-
-    console.log(description)
     
     return (
         <div className={styles.container}>
@@ -48,7 +47,8 @@ const BeachInfo = ({
             { entry_map && <EntryMap src={ entry_map }/> }
             <div>
             { tidesArray.length ? <>
-                <h3 className={styles.sectionTitle}>{name} Tide Chart</h3>
+                <h3 className={styles.sectionTitle}>{name} Tide Chart (Beta)</h3>
+                <div className={styles.helper}>Nearest tide station in {stationData.name}, {stationData.region} ({Math.round(stationData.distance * 100) / 100} mi away)</div>
                 <div className={`${styles.tideRow} ${styles.tideRowHeader}`}>
                     <div className={styles.tideItem}>Date</div>
                     <div className={styles.tideItem}>Height</div>
