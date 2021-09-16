@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Error from 'next/error'
 
 import Layout from "components/Layout/Layout";
 import BeachPage from "components/BeachPage/BeachPage";
@@ -21,7 +22,16 @@ export async function getStaticProps(context) {
             'Content-Type': 'application/json'
         }
     })
+    if (res.status == 404) {
+        return {
+            props: {
+                errorCode: 404,
+            }
+        }
+    }
     const beach_data = await res.json()
+
+    console.log(beach_data)
 
     let response = await fetch(`${rootDomain}/review/get?beach_id=${beachid}`, {
         method: 'GET',
@@ -87,6 +97,9 @@ export async function getStaticPaths() {
 }
 
 const Beach = (props) => {
+    if (props.errorCode) {
+        return <Error statusCode={props.errorCode}/>
+    }
     const [beach, setBeach] = useState(props.beach)
 
     const router = useRouter();
