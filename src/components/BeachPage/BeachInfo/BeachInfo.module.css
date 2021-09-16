@@ -45,6 +45,11 @@
     flex: 1;
 }
 
+.past {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
 .tideItem {
     padding: 0 8px;
     flex: 1;

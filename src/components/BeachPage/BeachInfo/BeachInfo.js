@@ -55,10 +55,10 @@ const BeachInfo = ({
                     <div className={styles.tideItem}>High/Low Tide</div>
                 </div>
             </> : <></> }
-            { tidesArray.slice(0, 4).map(tide => <div className={styles.tideRow} key={tide.t}>
-                <div className={styles.tideItem}>{new Date(`${tide.t} GMT`).toLocaleString([], {hour: '2-digit', minute:'2-digit'})}</div>
-                <div className={styles.tideItem}>{tide.v}ft</div>
-                <div className={styles.tideItem}>{tide.type}</div>
+            { tidesArray.slice(0, 5).map(tide => <div className={styles.tideRow} key={tide.t}>
+                <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{new Date(`${tide.t} GMT`).toLocaleString([], {'weekday': 'short', 'day': 'numeric', 'month': 'short', hour: 'numeric', minute:'2-digit'})}</div>
+                <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{tide.v}ft</div>
+                <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{tide.type}</div>
                 </div>)}
             </div>
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
