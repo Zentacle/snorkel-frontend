@@ -1,5 +1,5 @@
 .slide {
-    width: 256px;
+    width: 270px;
     margin-right: 16px;
     border-radius: 8px;
     background-color: white;
@@ -28,7 +28,7 @@
 .image{
     object-fit: cover !important;
     height: 160px;
-    width: 256px;
+    width: 270px;
 }
 
 .locationInfoContainer{
