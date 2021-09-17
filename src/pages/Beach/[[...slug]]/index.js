@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import Error from 'next/error'
 
 import Layout from "components/Layout/Layout";
@@ -11,7 +10,7 @@ import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from 'hooks/useGoogleOneTap';
 import { useRouter } from 'next/router';
 import MaxWidth from 'components/MaxWidth';
-import styles from './styles.module.css';
+import Breadcrumbs from 'components/Breadcrumbs';
 
 export async function getStaticProps(context) {
     const startTime = Date.now();
@@ -144,33 +143,11 @@ const Beach = (props) => {
                 <link rel="preload" as="image" href={beach.hero_img} />
             </Head>
             <MaxWidth>
-                {
-                    beach.country_id && <div className={styles.locBreadcrumbContainer}>
-                        <Link href={`/loc/${beach.country.short_name}`}>
-                            <a className={styles.locBreadcrumb}>
-                                {beach.country.name}
-                            </a>
-                        </Link>
-                        {beach.area_one_id && <>
-                            <span className={styles.locBreadcrumb}>›</span>
-                            <Link href={`/loc/${beach.country.short_name}/${beach.area_one.short_name}`}>
-                                <a className={styles.locBreadcrumb}>
-                                    {beach.area_one.name}
-                                </a>
-                            </Link>
-                        </>
-                        }
-                        {beach.area_two_id && <>
-                            <span className={styles.locBreadcrumb}>›</span>
-                            <Link href={`/loc/${beach.country.short_name}/${beach.area_one.short_name}/${beach.area_two.short_name}`}>
-                                <a className={styles.locBreadcrumb}>
-                                    {beach.area_two.name}
-                                </a>
-                            </Link>
-                        </>
-                        }
-                    </div>
-                }
+                <Breadcrumbs
+                    country={beach.country}
+                    area_one={beach.area_one}
+                    arae_two={beach.area_two}
+                />
                 <BeachPage
                     beach={beach}
                     beachid={beach.id}

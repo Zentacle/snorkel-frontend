@@ -27,6 +27,7 @@
   flex-direction: column;
   margin-left: 16px;
   overflow: hidden;
+  flex-grow: 1;
 }
 
 .spotName {

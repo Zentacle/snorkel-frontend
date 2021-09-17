@@ -1,23 +1,18 @@
-import Page from 'pages/index';
+import Page from 'pages/loc/[country]/index';
 import { rootDomain } from "src/lib/constants";
 
 export async function getServerSideProps(context) {
   const area_one = context.query.area_one;
   const country = context.query.country;
-  const sorts = ['top', 'latest', 'default']
   const props = {};
-  await Promise.all(sorts.map(async sort => {
-    let res;
-    res = await fetch(
-      `${rootDomain}/spots/get?sort=${sort}&area_one=${area_one}&country=${country}`
-    )
-    const data = await res.json()
-    props[sort] = data.data || null;
-    if (data.area) {
-      props['area'] = data.area;
-    }
-    return data;
-  }))
+  const res = await fetch(
+    `${rootDomain}/spots/get?sort=top&area_one=${area_one}&country=${country}`
+  )
+  const data = await res.json()
+  props['default'] = data.data || null;
+  if (data.area) {
+    props['area'] = data.area;
+  }
 
   if (!props.default) {
     return {

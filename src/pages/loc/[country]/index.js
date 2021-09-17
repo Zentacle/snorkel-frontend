@@ -8,6 +8,7 @@ import LocationCard from 'components/LocationCard';
 import { rootDomain } from "src/lib/constants";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
+import Breadcrumbs from 'components/Breadcrumbs';
 
 export async function getServerSideProps(context) {
   const country = context.query.country;
@@ -61,6 +62,8 @@ const Home = (props) => {
   const title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
   const description = `Search dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
 
+  const area = props.area;
+
   return (
     <Layout>
       <Head>
@@ -72,6 +75,13 @@ const Home = (props) => {
       </Head>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
+          <div className={styles.marginContainer}>
+            <Breadcrumbs
+              country={area.country}
+              area_one={area.area_one}
+              area_two={area.area_two}
+            />
+          </div>
           <div className={styles.locationContainer}>
             {areas.map(area => (
               <Link key={area.short_name} href={area.url}>
