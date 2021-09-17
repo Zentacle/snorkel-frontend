@@ -146,7 +146,7 @@ const Beach = (props) => {
                 <Breadcrumbs
                     country={beach.country}
                     area_one={beach.area_one}
-                    arae_two={beach.area_two}
+                    area_two={beach.area_two}
                 />
                 <BeachPage
                     beach={beach}
