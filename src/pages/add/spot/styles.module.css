@@ -36,4 +36,6 @@
   padding: 8px;
   min-height: 200px;
   width: 100%;
+  border: 1px solid #ceceec;
+  border-radius: 4px;
 }

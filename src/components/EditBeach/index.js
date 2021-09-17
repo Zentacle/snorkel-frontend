@@ -214,7 +214,7 @@ const BeachEditComponent = () => {
                 <div>name</div>
                 <SignupInput value={getValueForKey('name')} onChange={changeNewData('name')}></SignupInput>
                 <div>description</div>
-                <SignupInput value={getValueForKey('description')} onChange={changeNewData('description')}></SignupInput>
+                <textarea className={styles.textarea} value={getValueForKey('description')} onChange={e => changeNewData('description')(e.target.value)}></textarea>
                 <div>max depth</div>
                 <SignupInput value={getValueForKey('max_depth')} onChange={changeNewData('max_depth')}></SignupInput>
                 <div>hero_img</div>

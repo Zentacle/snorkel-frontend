@@ -125,7 +125,7 @@ const NewSpot = (props) => {
             <input className={styles.text} value={maxDepth} onChange={e => setMaxDepth(e.target.value)} />
           </div>
           <div className={styles.spacer}>
-            <div className={styles.sectiontitle}>Extra info</div>
+            <div className={styles.sectiontitle}>Description</div>
             <div className={styles.helper}>Any extra info/links you&apos;re aware of about the dive site</div>
             <textarea className={styles.textArea} value={description} onChange={e => setDescription(e.target.value)} />
           </div>
