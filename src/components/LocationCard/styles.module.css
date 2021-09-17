@@ -43,3 +43,19 @@
 .ratingContainer {
   display: flex;
 }
+
+@media (max-width: 720px) {
+  .slide {
+    flex-direction: column;
+    max-height: none;
+  }
+
+  .slidepic {
+    width: 100%;
+    flex: none;
+  }
+
+  .locationInfoContainer {
+    margin-left: 0;
+  }
+}
