@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
   const props = {};
   let res;
   res = await fetch(
-    `${rootDomain}/spots/get?sort=top&country=${country}`
+    `${rootDomain}/spots/get?sort=top&country=${country}&limit=100`
   )
   const data = await res.json()
   props['default'] = data.data || null;
