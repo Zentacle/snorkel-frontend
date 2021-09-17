@@ -88,7 +88,7 @@ const Home = (props) => {
           <div>
             {
               props.default.map(location => (
-                <LocationCard info={location}/>
+                <LocationCard key={location.id} info={location}/>
               ))
             }
           </div>

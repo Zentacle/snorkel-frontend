@@ -95,9 +95,6 @@ export async function getStaticPaths() {
 }
 
 const Beach = (props) => {
-    if (props.errorCode) {
-        return <Error statusCode={props.errorCode}/>
-    }
     const [beach, setBeach] = useState(props.beach)
 
     const router = useRouter();
@@ -129,6 +126,10 @@ const Beach = (props) => {
 
     const [nearbyBeaches, setNearbyBeaches] = useState([])
     useEffect(() => setBeach(props.beach), [props.beach])
+
+    if (props.errorCode) {
+        return <Error statusCode={props.errorCode}/>
+    }
 
     return (
         <Layout>
