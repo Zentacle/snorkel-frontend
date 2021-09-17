@@ -11,7 +11,6 @@ import Banner from "components/EmailBanner";
 import Cookies from "js-cookie";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
-import { useRouter } from "next/router";
 
 export async function getStaticProps(context) {
   const sorts = ['top', 'latest', 'default']

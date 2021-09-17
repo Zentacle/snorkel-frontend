@@ -110,3 +110,7 @@
 .location:hover {
     transform: scale(1.05);
 }
+
+.marginContainer {
+    padding: 0 16px;
+}

@@ -1,10 +1,12 @@
-import styles from "./Location.module.css"
+import styles from "./styles.module.css"
 import Image from "next/image";
+import { useRouter } from "next/router";
 import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
 import Link from "next/link";
 import DifficultyTag from "components/DifficultyTag";
-const SlideLocation = ({ ...props }) => {
+
+const Location = (props) => {
     return (
         <Link href={props.info.url}>
             <a className={styles.slide} style={props.style}>
@@ -14,23 +16,26 @@ const SlideLocation = ({ ...props }) => {
                         src={props.info.hero_img || '/generic_beach.jpeg'}
                         alt="picture"
                         objectFit="contain"
-                        height="160"
-                        width="256"
+                        height="154"
+                        width="280"
                     />
                 </div>
                 <div className={styles.locationInfoContainer}>
-                    <div className={styles.spotName}>{props.info.name}</div>
-                    <div className={styles.location}>{props.info.location_city}</div>
-                    <div className={styles.ratingContainer} title={ props.info.rating }>
-                        <DifficultyTag difficulty={props.info.difficulty}/>
+                    <h2 className={styles.spotName}>{props.info.name}</h2>
+                    <h3 className={styles.location}>{props.info.location_city}</h3>
+                    <div className={styles.ratingContainer} title={props.info.rating}>
+                        <DifficultyTag difficulty={props.info.difficulty} />
                         <Rating
                             fractions={2}
-                            emptySymbol={(<EmptyStar className={styles.starempty}/>)}
-                            fullSymbol={(<FullStar className={styles.starfull}/>)}
+                            emptySymbol={(<EmptyStar/>)}
+                            fullSymbol={(<FullStar/>)}
                             initialRating={props.info.rating}
                             readonly
                         />
                         <div className={styles.numReviews}>({props.info.num_reviews})</div>
+                    </div>
+                    <div>
+                        {props.info.description}
                     </div>
                 </div>
             </a>
@@ -38,4 +43,4 @@ const SlideLocation = ({ ...props }) => {
     )
 }
 
-export default SlideLocation;
+export default Location;

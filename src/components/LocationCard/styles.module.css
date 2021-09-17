@@ -1,0 +1,45 @@
+.slide {
+  display: flex;
+  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  margin: 24px 16px;
+  padding: 16px;
+  max-height: 188px;
+}
+
+.slidepic {
+  height: 100%;
+  width: 260px;
+  position: relative;
+
+  flex: 280px;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.image {
+  object-fit: cover !important;
+  border-radius: 8px;
+}
+
+.locationInfoContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  overflow: hidden;
+}
+
+.spotName {
+  margin: 0;
+  font-size: 24px;
+  font-weight: var(--text-weight-bold);
+}
+
+.location {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.ratingContainer {
+  display: flex;
+}

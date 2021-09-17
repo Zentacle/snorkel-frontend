@@ -1,22 +1,26 @@
-import Page from 'pages/index';
+import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+
+import styles from "components/Home/Home.module.css"
+import Layout from 'components/Layout/Layout';
+import LocationCard from 'components/LocationCard';
 import { rootDomain } from "src/lib/constants";
+import { useCurrentUser } from 'context/usercontext';
+import useGoogleOneTap from "hooks/useGoogleOneTap";
 
 export async function getServerSideProps(context) {
   const country = context.query.country;
-  const sorts = ['top', 'latest', 'default']
   const props = {};
-  await Promise.all(sorts.map(async sort => {
-    let res;
-    res = await fetch(
-      `${rootDomain}/spots/get?sort=${sort}&country=${country}`
-    )
-    const data = await res.json()
-    props[sort] = data.data || null;
-    if (data.area) {
-      props['area'] = data.area;
-    }
-    return data;
-  }))
+  let res;
+  res = await fetch(
+    `${rootDomain}/spots/get?sort=top&country=${country}`
+  )
+  const data = await res.json()
+  props['default'] = data.data || null;
+  if (data.area) {
+    props['area'] = data.area;
+  }
 
   if (!props.default) {
     return {
@@ -32,4 +36,66 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default Page
+const Home = (props) => {
+  const [areas, setAreas] = React.useState([]);
+  const { state } = useCurrentUser();
+
+  React.useEffect(() => {
+    const filter = {}
+    let url = `${rootDomain}/locality/${props.loc}`
+    if (props.country) {
+      url += `?country=${props.country}`
+    }
+    if (props.area_one) {
+      url += `&area_one=${props.area_one}`
+    }
+    fetch(url).then(res =>
+      res.json()
+    ).then(data => {
+      setAreas(data.data)
+    })
+  }, [props.area])
+
+  React.useEffect(useGoogleOneTap('/', state.user), [state])
+
+  const title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
+  const description = `Search dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
+
+  return (
+    <Layout>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:title" content={title} key="og:title" />
+        <meta property="og:description" content={description} key="og:description" />
+        <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
+        <meta name="description" content={description} key="description" />
+      </Head>
+      <div className={styles.container}>
+        <div className={styles.contentContainer}>
+          <div className={styles.locationContainer}>
+            {areas.map(area => (
+              <Link key={area.short_name} href={area.url}>
+                <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
+                  {area.name}
+                </a>
+              </Link>)
+            )}
+          </div>
+          <h1 className={styles.areaTitle}>Top Snorkeling and Scuba Diving in {props.area.name}</h1>
+          <div className={styles.marginContainer}>
+            {props.area.description}
+          </div>
+          <div>
+            {
+              props.default.map(location => (
+                <LocationCard info={location}/>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </Layout>
+  )
+}
+
+export default Home;
