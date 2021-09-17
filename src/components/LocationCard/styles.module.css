@@ -48,7 +48,7 @@
 @media (max-width: 720px) {
   .slide {
     flex-direction: column;
-    max-height: none;
+    max-height: 450px;
   }
 
   .slidepic {
