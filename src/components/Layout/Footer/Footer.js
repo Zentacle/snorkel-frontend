@@ -46,6 +46,7 @@ const Footer = () => {
             <Link href='/add/spot'><a className={styles.footerLink}>Add a new location</a></Link>
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mayank@zentacle.com">Report an issue</a>
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mayank@zentacle.com">Suggest an edit</a>
+            <Link href='https://www.shorediving.com'><a className={styles.footerLink}>ShoreDiving.com</a></Link>
             <Link href='https://www.patreon.com/ShoreDiving'><a className={styles.footerLink}>Donate</a></Link>
           </div>
         </div>
