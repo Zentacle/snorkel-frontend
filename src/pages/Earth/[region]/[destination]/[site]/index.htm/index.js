@@ -38,6 +38,13 @@ export async function getStaticProps(context) {
         }, // will be passed to the page component as props
         revalidate: 10,
     }
+
+    // return {
+    //     redirect: {
+    //         destination: beach_data.data.url,
+    //         permanent: false,
+    //     }
+    // }
 }
 
 export async function getStaticPaths() {
