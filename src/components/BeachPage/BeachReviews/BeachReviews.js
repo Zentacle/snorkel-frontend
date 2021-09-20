@@ -19,7 +19,7 @@ const BeachReviews = (props) => {
     const { state } = useCurrentUser();
     const link = state.user && state.user.id
         ? `${url}/review`
-        : '/Login'
+        : '/login'
 
     return (
         <div className={styles.reviewContainer}>

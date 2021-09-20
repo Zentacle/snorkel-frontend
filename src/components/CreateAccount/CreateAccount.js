@@ -82,7 +82,7 @@ const CreateAccount = () => {
                 </form>
                 <div className={styles.bottominfo}>
                     Already have an account?&nbsp;
-                    <Link href="/Login">
+                    <Link href="/login">
                         <a className={styles.createone}>
                             Login!
                         </a>
