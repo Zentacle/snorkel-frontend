@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { useCurrentUser } from 'context/usercontext';
 import ProfilePic from "components/ProfilePic";
+import { useRouter } from "next/router";
 
 const Profile = ({ user }) => {
     if (user) {
@@ -22,17 +23,29 @@ const Profile = ({ user }) => {
 const Header = () => {
     let { state } = useCurrentUser();
     const currentUser = state.user;
+    const router = useRouter();
+
+    const isShorediving = router.query.isShorediving;
+
+    const Logo = isShorediving
+        ? () => (
+            <a className={styles.headertitlelink}>
+                <Image src='/sdlogo.gif' height='32' width='78' alt="Shore Diving logo" />
+            </a>
+        )
+        : () => (<Link href='/'>
+                <a className={styles.headertitlelink}>
+                    <Image src='/logo.png' height='32' width='32' alt="Zentacle logo" />
+                    <span className={styles.headertitle}>Zentacle</span>
+                </a>
+            </Link>
+        )
 
     return (
         <div className={styles.header}>
             <div className={styles.headercontainer}>
                 <div className={styles.headerbutton}>
-                    <Link className={styles.innerheaderbutton} href='/'>
-                        <a className={styles.headertitlelink}>
-                            <Image src='/logo.png' height='32' width='32' alt="logo" />
-                            <span className={styles.headertitle}>Zentacle</span>
-                        </a>
-                    </Link>
+                    <Logo/>
                 </div>
                 <div className={styles.spaceholder}>
                     <div>
