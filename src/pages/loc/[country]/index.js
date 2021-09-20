@@ -10,8 +10,8 @@ import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
 
-export async function getServerSideProps(context) {
-  const country = context.query.country;
+export async function getStaticProps(context) {
+  const country = context.params.country;
   const props = {};
   let res;
   res = await fetch(
@@ -34,6 +34,19 @@ export async function getServerSideProps(context) {
 
   return {
     props, // will be passed to the page component as props
+  }
+}
+
+export async function getStaticPaths() {
+  const res = await fetch(`${rootDomain}/locality/country`)
+  const data = await res.json()
+  return {
+      paths: data.data.map(loc => ({
+          params: {
+              country: loc.short_name,
+          }
+      })),
+      fallback: 'blocking',
   }
 }
 
