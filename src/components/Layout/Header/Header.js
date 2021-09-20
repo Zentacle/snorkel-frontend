@@ -20,12 +20,11 @@ const Profile = ({ user }) => {
 }
 
 
-const Header = () => {
+const Header = (props) => {
     let { state } = useCurrentUser();
     const currentUser = state.user;
-    const router = useRouter();
 
-    const isShorediving = router.query.isShorediving;
+    const isShorediving = props.isShorediving;
 
     const Logo = isShorediving
         ? () => (
