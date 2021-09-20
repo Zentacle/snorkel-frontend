@@ -35,6 +35,7 @@ export async function getStaticProps(context) {
             'beach': beach_data.data,
             'reviews': review_data.data,
             'tides': [],
+            'isShorediving': true,
         }, // will be passed to the page component as props
         revalidate: 10,
     }

@@ -131,7 +131,7 @@ const Beach = (props) => {
     }
 
     return (
-        <Layout>
+        <Layout isShorediving={props.isShorediving}>
             <Head>
                 <title key="title">{`Zentacle - ${beach.name} - Scuba Diving and Snorkel Reviews, Maps, and Photos`}</title>
                 <meta property="og:title" content={`Zentacle - ${beach.name} - Scuba Diving and Snorkel Reviews, Maps, and Photos`} key="og-title" />
