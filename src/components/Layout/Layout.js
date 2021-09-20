@@ -2,7 +2,7 @@ import Head from "next/head";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer"
 import styles from "./Layout.module.css";
-const Layout = ({children, props}) => {
+const Layout = ({children, ...props}) => {
     return (
         <div className={styles.container}>
         <Head>
