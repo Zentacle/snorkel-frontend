@@ -39,7 +39,7 @@ const SearchPage = () => {
                     { results.length
                         ? results.map(result => <div key={ result.id } className={styles.slide}><Location info={result}/></div>)
                         : <div>
-                            No results found. We&apos;re currently starting in Maui and plan to expand soon. We would love to add more with your help. Make sure to create and account so you&apos;re on our email list.
+                            No results found. We would love to add more locations with your help. Make sure to create an account so you&apos;re on our email list.
                             <Link href={ `/add/spot?name=${searchTerm}` }><a className={styles.requestAdd}> Click here to submit a new location</a></Link>
                         </div>
                     }
