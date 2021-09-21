@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 import Cookies from 'js-cookie';
-import { rootDomain } from 'lib/constants';
+import { clientSideDomain } from 'lib/constants';
 
 const Banner = (props) => {
   const [firstName, setFirstName] = React.useState('');
@@ -20,7 +20,7 @@ const Banner = (props) => {
       'first_name': firstName,
       'last_name': lastName,
     }
-    fetch(`${rootDomain}/user/register`, {
+    fetch(`${clientSideDomain}/user/register`, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {

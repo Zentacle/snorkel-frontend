@@ -8,7 +8,7 @@ import Layout from "../Layout/Layout";
 import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
-import { rootDomain } from 'lib/constants';
+import { clientSideDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import useGoogleButton from 'hooks/useGoogleButton';
 import * as ga from 'lib/ga';
@@ -28,7 +28,7 @@ const CreateAccount = () => {
             'last_name': lastName,
             username,
         }
-        fetch(`${rootDomain}/user/register`, {
+        fetch(`${clientSideDomain}/user/register`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

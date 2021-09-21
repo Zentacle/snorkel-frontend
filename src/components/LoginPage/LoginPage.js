@@ -8,7 +8,7 @@ import BackgroundCard from "../Layout/BackgroundCard/BackgroundCard";
 import styles from "../LoginPage/LoginPage.module.css";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
-import { rootDomain } from 'lib/constants';
+import { clientSideDomain } from 'lib/constants';
 import { useCurrentUser } from '../../context/usercontext'
 import useGoogleButton from 'hooks/useGoogleButton';
 import { sendEvent, setAmplitudeUserId } from "hooks/amplitude";
@@ -24,7 +24,7 @@ const LoginPage = () => {
             email,
             password,
         }
-        fetch(`${rootDomain}/user/login`, {
+        fetch(`${clientSideDomain}/user/login`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

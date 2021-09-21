@@ -8,7 +8,7 @@ import Layout from "components/Layout/Layout";
 import BackgroundCard from "components/Layout/BackgroundCard/BackgroundCard";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
-import { rootDomain } from 'lib/constants';
+import { clientSideDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 
 const CreateAccount = (props) => {
@@ -19,7 +19,7 @@ const CreateAccount = (props) => {
             password,
             'user_id': props.userId,
         }
-        fetch(`${rootDomain}/user/register/password`, {
+        fetch(`${clientSideDomain}/user/register/password`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

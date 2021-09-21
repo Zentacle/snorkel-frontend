@@ -1,11 +1,11 @@
 import * as React from "react";
-import { rootDomain } from 'lib/constants';
+import { clientSideDomain } from 'lib/constants';
 
 const UserContext = React.createContext();
 
 function userReducer(state, user) {
     if (user == null) {
-        fetch(`${rootDomain}/user/me`, {
+        fetch(`${clientSideDomain}/user/me`, {
             method: 'POST',
             //body: JSON.stringify(body),
             headers: {
