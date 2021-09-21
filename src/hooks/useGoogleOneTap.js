@@ -1,5 +1,5 @@
 import { sendEvent } from 'hooks/amplitude';
-import { rootDomain } from "src/lib/constants";
+import { clientSideDomain } from "src/lib/constants";
 import * as ga from 'lib/ga';
 
 const useGoogleOneTap = (redirectURL, user) => () => {
@@ -7,7 +7,7 @@ const useGoogleOneTap = (redirectURL, user) => () => {
   if (user && user.id) { return }
   const handleLogin = (response) => {
     if (response.credential) {
-      fetch(`${rootDomain}/user/google_register`, {
+      fetch(`${clientSideDomain}/user/google_register`, {
         method: 'POST',
         body: JSON.stringify(response),
         headers: {
