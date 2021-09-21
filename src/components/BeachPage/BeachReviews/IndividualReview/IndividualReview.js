@@ -8,32 +8,24 @@ import ProfilePic from "components/ProfilePic";
 import styles from "./IndividualReview.module.css";
 
 const PhotoGrid = ({ review }) => {
-    const [photosArray, setPhotosArray] = React.useState(review.signedUrls.map(photo => ({
-        source: photo.signedurl.data
-    })));
+    const photosArray = review.signedUrls.map(photo => ({
+        source: photo.data
+    }));
+    const layoutArray = [Math.min(4, photosArray.length)];
+    const heightArray = ['50px'];
+    const width = `${Math.min(200, photosArray.length * 50)}px`;
 
-    React.useEffect(() => {
-        setPhotosArray(review.signedUrls.map(photo => ({
-            source: photo.signedurl.data
-        })))
-    }, [review])
-
-    let layoutArray = [Math.min(4, photosArray.length)];
-    let heightArray = ['50px'];
-    let width = `${Math.min(200, photosArray.length * 50)}px`;
-
-    let setting = {
+    const settings = {
         width: width,
         height: heightArray,
         layout: layoutArray,
         photos: photosArray,
         showNumOfRemainingPhotos: true
-    };
-
+    }
 
     return (
         <div className={styles.gridcontainer}>
-            {setting && photosArray && photosArray.length > 0 && <ReactPhotoCollage {...setting} />}
+            { settings.photos && <ReactPhotoCollage {...settings} /> }
         </div>
 
     )
@@ -44,6 +36,8 @@ const IndividualReview = ({ review, user }) => {
         [],
         { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' }
     );
+
+    console.log(review)
 
     return (
         <div className={styles.outercontainer}>
@@ -86,7 +80,7 @@ const IndividualReview = ({ review, user }) => {
             </div>
             {review.shorediving_data && <div className={styles.helper}>Originally posted on shorediving.com</div>}
             <div className={styles.photos}>
-                {review && <PhotoGrid review={review}></PhotoGrid>}
+                {<PhotoGrid review={review}></PhotoGrid>}
             </div>
         </div>
     )

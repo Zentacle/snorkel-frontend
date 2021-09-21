@@ -132,11 +132,6 @@ const BackImage = (props) => {
 
 const BeachPage = (props) => {
     const photoState = React.useState([]);
-    const [photos, setPhotos] = photoState;
-
-    for (let i = 0; i < props.reviews.length; i++) {
-        props.reviews[i].signedUrls = photos.filter((element) => element.review_id == props.reviews[i].id);
-    }
 
     return (
         <>
