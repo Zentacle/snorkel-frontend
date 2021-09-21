@@ -7,8 +7,8 @@ import { ReactPhotoCollage } from "react-photo-collage";
 import ProfilePic from "components/ProfilePic";
 import styles from "./IndividualReview.module.css";
 
-const PhotoGrid = ({ review }) => {
-    const photosArray = review.signedUrls.map(photo => ({
+const PhotoGrid = ({ signedUrls }) => {
+    const photosArray = signedUrls.map(photo => ({
         source: photo.data
     }));
     const layoutArray = [Math.min(4, photosArray.length)];
@@ -78,7 +78,7 @@ const IndividualReview = ({ review, user }) => {
             </div>
             {review.shorediving_data && <div className={styles.helper}>Originally posted on shorediving.com</div>}
             <div className={styles.photos}>
-                {<PhotoGrid review={review}></PhotoGrid>}
+                {review.signedUrls && review.signedUrls.length && <PhotoGrid signedUrls={review.signedUrls}></PhotoGrid>}
             </div>
         </div>
     )
