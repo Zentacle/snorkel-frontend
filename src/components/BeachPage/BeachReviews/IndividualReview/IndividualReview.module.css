@@ -15,7 +15,6 @@
 }
 .starempty{
     color: Grey;
-    
 }
 
 .starfull{
@@ -44,6 +43,7 @@
 
 .outerlower {
     margin: 8px 0;
+    white-space: pre-line;
 }
 
 .centerlower {
