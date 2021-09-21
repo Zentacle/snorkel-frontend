@@ -59,6 +59,11 @@
     padding-left: 0;
 }
 
+.patronName {
+    color: var(--primary-color);
+    font-weight: var(--text-weight-bold);
+}
+
 .viewButton {
     outline: none;
     background-color: white;

@@ -13,6 +13,7 @@ const EntryMap = ({ src }) => (
 
 const BeachInfo = ({
     id,
+    area_two_id,
     description,
     difficulty,
     entry_map,
@@ -45,7 +46,6 @@ const BeachInfo = ({
                     :  description }
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
-            <div>
             { tidesArray.length ? <>
                 <h3 className={styles.sectionTitle}>{name} Tide Chart (Beta)</h3>
                 <div className={styles.helper}>Nearest tide station in {stationData.name}, {stationData.region} ({Math.round(stationData.distance * 100) / 100} mi away)</div>
@@ -54,13 +54,18 @@ const BeachInfo = ({
                     <div className={styles.tideItem}>Height</div>
                     <div className={styles.tideItem}>High/Low Tide</div>
                 </div>
-            </> : <></> }
-            { tidesArray.slice(0, 5).map(tide => <div className={styles.tideRow} key={tide.t}>
-                <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{new Date(`${tide.t} GMT`).toLocaleString([], {'weekday': 'short', 'day': 'numeric', 'month': 'short', hour: 'numeric', minute:'2-digit'})}</div>
-                <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{tide.v}ft</div>
-                <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{tide.type}</div>
-                </div>)}
-            </div>
+                { tidesArray.slice(0, 5).map(tide => <div className={styles.tideRow} key={tide.t}>
+                    <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{new Date(`${tide.t} GMT`).toLocaleString([], {'weekday': 'short', 'day': 'numeric', 'month': 'short', hour: 'numeric', minute:'2-digit'})}</div>
+                    <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{tide.v}ft</div>
+                    <div className={`${styles.tideItem} ${new Date(`${tide.t} GMT`) < new Date() ? styles.past : '' }`}>{tide.type}</div>
+                    </div>)}
+                </> : <></> }
+            {
+                area_two_id == 2 && <div>
+                    <h3 className={styles.sectionTitle}>{name} Patrons</h3>
+                    <div className={styles.description}><a className={styles.patronName} href="https://www.konashoredivers.com">Kone Shore Divers</a> - Our goal is to give you the opportunity to share and explore the underwater world in and around the near shore waters of Kailua-Kona. We focus on small group sizes and strive to offer the best personalized service we can to our guests. From the first timer to the old timer come with us and see what the Kona Shore has to offer!</div>
+                </div>
+            }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
             <BeachReviews beachid={id} url={url} reviews={reviews}></BeachReviews>
         </div>
