@@ -1,16 +1,12 @@
 import styles from "components/PhotoPage/PhotoPage.module.css"
 import Layout from "components/Layout/Layout";
 import BackgroundImageOnly from "components/BeachPage/BackgroundImage";
-import { useRouter } from "next/router";
 import { ReactPhotoCollage } from "react-photo-collage";
 import React from "react";
 import { rootDomain } from 'lib/constants';
-import ReviewSummary from "components/BeachPage/ReviewSummary";
-import { RateReviewOutlined } from "@material-ui/icons";
 
 const PhotoGrid = ({ isReview, beach_id, indreview }) => {
     const [photoArray, setPhotoArray] = React.useState(null);
-    let review = indreview
     const reviewRef = React.createRef();
     reviewRef.current = indreview
    
@@ -34,7 +30,7 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
                 console.log(reviewRef.current.signedUrls)
             }
         
-    }, [])
+    }, [beach_id])
  
 
     //this is the array that will be used as the settings for the collage
@@ -129,23 +125,28 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
 }
 
 
-const PhotoPage = () => {
-    const Router = useRouter();
-    const { beach_id, hero_img, name, rating, location_city } = Router.query;
+const PhotoPage = (props) => {
+    const {
+        id,
+        hero_img,
+        name,
+        rating,
+        location_city
+    } = props.beach;
+
     return (
         <Layout>
             <BackgroundImageOnly
-                beach_id={beach_id}
+                beach_id={id}
                 hero_img={hero_img}
                 name={name}
                 rating={rating}
                 location_city={location_city}
             />
             <PhotoGrid
-                beach_id={beach_id}
+                beach_id={id}
                 isReview={false}
             />
-
         </Layout>
     )
 }

@@ -23,16 +23,7 @@ const BackImage = (props) => {
             toaster.danger(`Sorry, we don\'t have any photos for this location yet!`)
         }
         else {
-            router.push({
-                pathname: '/Beach/Photos', query: {
-                    beach_id: props.beach.id,
-                    hero_img: props.beach.hero_img,
-                    name: props.beach.name,
-                    rating: props.beach.rating,
-                    location_city: props.beach.location_city
-
-                }
-            })
+            router.push(`${props.beach.url}/photos`)
         }
     }
 
