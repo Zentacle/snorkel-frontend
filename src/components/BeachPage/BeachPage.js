@@ -27,18 +27,11 @@ const BackImage = (props) => {
         }
     }
 
-
-
     const router = useRouter();
     const [photosHeight, setPhotosHeight] = React.useState(0);
     const [photoArray, setPhotoArray] = props.photoState;
 
-
-
-
     React.useEffect(() => {
-
-
         if (!props.name) {
             fetch(`${rootDomain}/beachimages?beach_id=` + props.beach.id, {
                 method: 'GET',
@@ -52,46 +45,21 @@ const BackImage = (props) => {
                 if (data.data.length != 0) {
                     setPhotosHeight(145)
                 }
-
-
-
             })
         }
-
     }, [])
 
     const [settings1, setSettings1] = React.useState(null);
-    const [settings2, setSettings2] = React.useState(null);
-    const [settings3, setSettings3] = React.useState(null);
-    React.useEffect(() => {
 
+    React.useEffect(() => {
         if (photoArray.length > 0) {
-            const arLen = photoArray.length;
             setSettings1({
-                width: '100px',
-                height: ['100px'],
-                layout: [1],
-                photos: [{ source: photoArray[arLen - 1].signedurl.data }],
-                showNumOfRemainingPhotos: false
+                width: '320px',
+                height: ['100px', '100px', '100px'],
+                layout: [Math.min(3, photoArray.length)],
+                photos: photoArray.map(photo => ({ source: photo.signedurl.data })),
+                showNumOfRemainingPhotos: true
             })
-            if (photoArray.length > 1) {
-                setSettings2({
-                    width: '100px',
-                    height: ['100px'],
-                    layout: [1],
-                    photos: [{ source: photoArray[arLen - 2].signedurl.data }],
-                    showNumOfRemainingPhotos: false
-                })
-            }
-            if (photoArray.length > 2) {
-                setSettings3({
-                    width: '100px',
-                    height: ['100px'],
-                    layout: [1],
-                    photos: [{ source: photoArray[arLen - 3].signedurl.data }],
-                    showNumOfRemainingPhotos: false
-                })
-            }
         }
 
     }, [photoArray])
@@ -153,8 +121,6 @@ const BackImage = (props) => {
             <div className={styles.photoouterwrapper} style={{ height: photosHeight }}>
                 {settings1 && settings1.photos[0].source && <div className={styles.photocontainer}>
                     <ReactPhotoCollage {...settings1}></ReactPhotoCollage>
-                    {settings2 && settings2.photos[0].source && <ReactPhotoCollage {...settings2}></ReactPhotoCollage>}
-                    {settings3 && settings3.photos[0].source && <ReactPhotoCollage {...settings3}></ReactPhotoCollage>}
                 </div>}
                 {!settings1 && <div className={styles.photocontainer}>No photos yet!
                 </div>}
@@ -167,19 +133,10 @@ const BackImage = (props) => {
 const BeachPage = (props) => {
     const photoState = React.useState([]);
     const [photos, setPhotos] = photoState;
-    
-
-
 
     for (let i = 0; i < props.reviews.length; i++) {
         props.reviews[i].signedUrls = photos.filter((element) => element.review_id == props.reviews[i].id);
-
     }
-
-   
-    
-
-
 
     return (
         <>

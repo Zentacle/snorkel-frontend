@@ -11,7 +11,6 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
     reviewRef.current = indreview
    
     React.useEffect(() => {
-        
         if (beach_id != -1)
             fetch(`${rootDomain}/beachimages?beach_id=` + beach_id, {
                 method: 'GET',
@@ -22,12 +21,9 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
                 return response.json();
             }).then(data => {
                 setPhotoArray([...data.data]);
-
-
             })
             else{
                 setPhotoArray([...reviewRef.current.signedUrls])
-                console.log(reviewRef.current.signedUrls)
             }
         
     }, [beach_id])
