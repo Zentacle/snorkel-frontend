@@ -134,8 +134,8 @@ const Beach = (props) => {
         ? 'ShoreDiving.com'
         : 'Zentacle'
 
-    let canonicalURL = props.isShorediving
-        ? `https://www.shorediving.com${beach.sd_url}`
+    let canonicalURL = props.isShorediving && beach.sd_url
+        ? `https://www.shorediving.com${beach.sd_url}/index.htm`
         : `https://www.zentacle.com${beach.url}`
 
     return (
