@@ -19,6 +19,22 @@ const Profile = ({ user }) => {
     else return null;
 }
 
+const Logo = ({isShorediving}) => {
+    isShorediving
+        ? (
+            <a className={styles.headertitlelink}>
+                <Image src='/sdlogo.gif' height='32' width='78' alt="Shore Diving logo" />
+            </a>
+        )
+        : (<Link href='/'>
+                <a className={styles.headertitlelink}>
+                    <Image src='/logo.png' height='32' width='32' alt="Zentacle logo" />
+                    <span className={styles.headertitle}>Zentacle</span>
+                </a>
+            </Link>
+        )
+}
+
 
 const Header = (props) => {
     let { state } = useCurrentUser();
@@ -26,25 +42,11 @@ const Header = (props) => {
 
     const isShorediving = props.isShorediving;
 
-    const Logo = isShorediving
-        ? () => (
-            <a className={styles.headertitlelink}>
-                <Image src='/sdlogo.gif' height='32' width='78' alt="Shore Diving logo" />
-            </a>
-        )
-        : () => (<Link href='/'>
-                <a className={styles.headertitlelink}>
-                    <Image src='/logo.png' height='32' width='32' alt="Zentacle logo" />
-                    <span className={styles.headertitle}>Zentacle</span>
-                </a>
-            </Link>
-        )
-
     return (
         <div className={styles.header}>
             <div className={styles.headercontainer}>
                 <div className={styles.headerbutton}>
-                    <Logo/>
+                    <Logo isShorediving={isShorediving}/>
                 </div>
                 <div className={styles.spaceholder}>
                     <div>
