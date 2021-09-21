@@ -114,6 +114,7 @@ const ReviewPage = (props) => {
             if (upload.ok) {
                 console.log('Uploaded successfully!');
             } else {
+                setIsSubmitDisabled(false);
                 console.error('Upload failed.');
             }
         };

@@ -105,20 +105,10 @@
     margin: 32px 0;
 }
 
-.photoouterwrapper{
-    overflow: hidden;
-    height: 0px;
-    transition: height 1s;
-    background-color: white;
-   
-
-}
-
 .photopage{
     width: auto;
     height: 100px;
     overflow: hidden;
-    
 }
 
 .individualphoto{

@@ -118,14 +118,9 @@ const BackImage = (props) => {
                     </div>
                 </div>
             </div>
-            <div className={styles.photoouterwrapper} style={{ height: photosHeight }}>
-                {settings1 && settings1.photos[0].source && <div className={styles.photocontainer}>
-                    <ReactPhotoCollage {...settings1}></ReactPhotoCollage>
-                </div>}
-                {!settings1 && <div className={styles.photocontainer}>No photos yet!
-                </div>}
-
-            </div>
+            {settings1 && settings1.photos[0].source && <div className={styles.photocontainer}>
+                <ReactPhotoCollage {...settings1}></ReactPhotoCollage>
+            </div>}
         </div>
     )
 }
