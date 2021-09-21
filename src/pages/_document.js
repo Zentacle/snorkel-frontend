@@ -51,6 +51,9 @@ export default class MyDocument extends Document {
                   gtag('js', new Date());
                   gtag('config', 'G-WFH58XWN7D', {
                     page_path: window.location.pathname,
+                    'linker': {
+                      'domains': ['zentacle.com', 'shorediving.com']
+                    }
                   });
                 `,
             }}
