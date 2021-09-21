@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import '../styles/globals.css'
 import { UserProvider, useCurrentUser } from 'src/context/usercontext';
-import { rootDomain } from "src/lib/constants";
+import { clientSideDomain } from "src/lib/constants";
 
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
@@ -36,7 +36,7 @@ function SetUser() {
   const { dispatch } = useCurrentUser();
 
   React.useEffect(() => {
-    fetch(`${rootDomain}/user/me`, {
+    fetch(`${clientSideDomain}/user/me`, {
       method: 'GET',
       
       headers: {
