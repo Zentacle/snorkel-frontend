@@ -63,7 +63,9 @@ const BeachInfo = ({
             {
                 area_two_id == 2 && <div>
                     <h3 className={styles.sectionTitle}>{name} Patrons</h3>
-                    <div className={styles.description}><a className={styles.patronName} href="https://www.konashoredivers.com">Kone Shore Divers</a> - Our goal is to give you the opportunity to share and explore the underwater world in and around the near shore waters of Kailua-Kona. We focus on small group sizes and strive to offer the best personalized service we can to our guests. From the first timer to the old timer come with us and see what the Kona Shore has to offer!</div>
+                    <div className={styles.description}>
+                        <a className={styles.patronName} href="https://www.konashoredivers.com">Kone Shore Divers</a> - Our goal is to give you the opportunity to share and explore the underwater world in and around the near shore waters of Kailua-Kona. We focus on small group sizes and strive to offer the best personalized service we can to our guests. From the first timer to the old timer come with us and see what the Kona Shore has to offer!
+                    </div>
                 </div>
             }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
