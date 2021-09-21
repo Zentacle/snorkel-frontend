@@ -22,7 +22,7 @@ const Profile = ({ user }) => {
 const Logo = ({isShorediving}) => {
     isShorediving
         ? (
-            <a href='/' className={styles.headertitlelink}>
+            <a href='https://shorediving.com' className={styles.headertitlelink}>
                 <Image src='/sdlogo.gif' height='32' width='78' alt="Shore Diving logo" />
             </a>
         )
