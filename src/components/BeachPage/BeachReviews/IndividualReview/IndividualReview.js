@@ -37,8 +37,6 @@ const IndividualReview = ({ review, user }) => {
         { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' }
     );
 
-    console.log(review)
-
     return (
         <div className={styles.outercontainer}>
             <div className={styles.container}>
