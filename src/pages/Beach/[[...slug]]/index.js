@@ -148,7 +148,7 @@ const Beach = (props) => {
                 <meta property="og:url" content={canonicalURL} key="og-url" />
                 <meta name="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="description" />
                 <link rel="canonical" href={canonicalURL} key="canonical"/>
-                <link rel="preload" as="image" href={beach.hero_img} />
+                {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
             </Head>
             <MaxWidth>
                 <Breadcrumbs
