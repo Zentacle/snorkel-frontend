@@ -78,7 +78,7 @@ const IndividualReview = ({ review, user }) => {
             </div>
             {review.shorediving_data && <div className={styles.helper}>Originally posted on shorediving.com</div>}
             <div className={styles.photos}>
-                {review.signedUrls && review.signedUrls.length && <PhotoGrid signedUrls={review.signedUrls}></PhotoGrid>}
+                {review.signedUrls && review.signedUrls.length ? <PhotoGrid signedUrls={review.signedUrls}/> : <></>}
             </div>
         </div>
     )
