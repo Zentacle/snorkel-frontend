@@ -1,8 +1,10 @@
+import React from "react";
+
 import styles from "../BeachInfo/BeachInfo.module.css";
 import VizDepth from "../VizDepth/VizDepth";
 import BeachReviews from "../BeachReviews/BeachReviews";
 import ReviewSummary from 'components/BeachPage/ReviewSummary';
-import React from "react";
+import * as ga from 'lib/ga';
 
 const EntryMap = ({ src }) => (
     <a className={ styles.entryMap } style={{ backgroundImage: `url(\'${src}\')` }} href={ src }>
@@ -64,7 +66,12 @@ const BeachInfo = ({
                 area_two_id == 2 && <div>
                     <h3 className={styles.sectionTitle}>{name} Patrons</h3>
                     <div className={styles.description}>
-                        <a className={styles.patronName} href="https://www.konashoredivers.com">Kone Shore Divers</a> - Our goal is to give you the opportunity to share and explore the underwater world in and around the near shore waters of Kailua-Kona. We focus on small group sizes and strive to offer the best personalized service we can to our guests. From the first timer to the old timer come with us and see what the Kona Shore has to offer!
+                        <a
+                            onClick={ () => { ga.event({ action: "purchase", params: { eventLabel: 'Kona Shore Divers' } })} }
+                            className={styles.patronName}
+                            href="https://www.konashoredivers.com"
+                        >Kone Shore Divers</a>
+                        <span> - Our goal is to give you the opportunity to share and explore the underwater world in and around the near shore waters of Kailua-Kona. We focus on small group sizes and strive to offer the best personalized service we can to our guests. From the first timer to the old timer come with us and see what the Kona Shore has to offer!</span>
                     </div>
                 </div>
             }
