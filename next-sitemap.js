@@ -1,6 +1,6 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://www.zentacle.com',
-  generateRobotsTxt: true, // (optional)
+  generateRobotsTxt: false, // (optional)
   exclude: [
     '/shorediving-sitemap.xml',
     '/server-sitemap.xml',

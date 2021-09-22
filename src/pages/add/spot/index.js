@@ -50,6 +50,7 @@ const NewSpot = (props) => {
 
   const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
   const [locationName, setLocationName] = React.useState(props.query['name'] || '');
+  const [mapsLocationName, setMapsLocationName] = React.useState(props.query['name'] || '')
   const [locationCity, setLocationCity] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [googlePlaceCandidates, setGooglePlaceCandidates] = React.useState(null);
@@ -57,7 +58,7 @@ const NewSpot = (props) => {
   const [difficulty, setDifficulty] = React.useState(null);
   const [maxDepth, setMaxDepth] = React.useState(null);
 
-  const debouncedSearchTerm = useDebounce(locationName, 2000);
+  const debouncedSearchTerm = useDebounce(mapsLocationName, 2000);
 
   React.useEffect(() => {
     if (selectedGooglePlace) {
@@ -103,6 +104,10 @@ const NewSpot = (props) => {
           <div className={styles.spacer}>
             <div className={styles.sectiontitle}>Dive Location Name</div>
             <input className={styles.text} value={locationName} onChange={e => setLocationName(e.target.value)} />
+          </div>
+          <div className={styles.spacer}>
+            <div className={styles.sectiontitle}>Search on Google Maps</div>
+            <input className={styles.text} value={mapsLocationName} onChange={e => setMapsLocationName(e.target.value)} />
           </div>
           <GooglePlaceSelector
             setSelected={setSelected}
