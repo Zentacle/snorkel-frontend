@@ -6,7 +6,7 @@ export async function getStaticProps(context) {
     const region = context.params.region;
     const destination = context.params.destination;
     const site = context.params.site;
-    const review_url = context.params.site;
+    const review_url = context.params.review_id;
     const review_id = review_url.split(/[^A-Za-z0-9]/)[1];
     const res = await fetch(`${rootDomain}/spots/get?region=${region}&destination=${destination}&site=${site}`, {
         method: 'GET',
