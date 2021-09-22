@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Layout from "components/Layout/Layout";
 import Location from "components/Carousel/Location/Location";
 import { rootDomain } from 'lib/constants';
-import {Menu as SearchBar} from 'components/SearchBar';
+import SearchBar from 'components/SearchBar';
 import styles from './styles.module.css';
 import Link from 'next/link';
 
@@ -35,7 +35,9 @@ const SearchPage = () => {
         <Layout>
             <div className={ styles.searchContainer}>
             <div className={styles.menu}>
-                <SearchBar value={ searchTerm } onChange={ setSearchTerm } width={'50%'}></SearchBar>
+                <div className={styles.search}>
+                    <SearchBar value={ searchTerm } onChange={ setSearchTerm }></SearchBar>
+                </div>
             </div>
                 <div className={ styles.searchResultsContainer }>
                     { results.length

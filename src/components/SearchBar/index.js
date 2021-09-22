@@ -5,10 +5,9 @@ import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 import SearchIcon from '@material-ui/icons/Search';
 
-const Menu = (props) => {
+const SearchBar = (props) => {
   const router = useRouter();
   const [search, setSearch] = React.useState(props.value || '');
-  const width = props.width;
 
   const conductSearch = () => {
     sendEvent('submit_search', {
@@ -18,7 +17,7 @@ const Menu = (props) => {
 }
 
   return (
-<div className={ styles.container } style={{'width':width}}>
+<div className={ styles.container }>
             <div className={ styles.inputContainer }>
                 <input
                     placeholder="Search"
@@ -39,4 +38,4 @@ const Menu = (props) => {
     )
 }
 
-export {Menu}
+export default SearchBar

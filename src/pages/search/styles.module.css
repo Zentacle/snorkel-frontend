@@ -32,3 +32,13 @@
   margin: auto;
   margin-top: -24px;    
 }
+
+.search {
+  width: 50%;
+}
+
+@media (max-width: 720px) {
+  body .search{
+    width: 100%!important;
+  }
+}

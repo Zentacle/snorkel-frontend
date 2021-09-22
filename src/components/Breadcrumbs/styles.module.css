@@ -21,3 +21,13 @@
   margin: 16px 0;
   font-size: 12px;
 }
+
+.search {
+  width: 33%;
+}
+
+@media (max-width: 720px) {
+  body .search{
+    width: 100%!important;
+  }
+}

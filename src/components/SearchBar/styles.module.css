@@ -17,11 +17,10 @@
 }
 
 .container {
-  /* width: 100%; */
   display: flex;
   justify-content: center;
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-  border-radius: 4px;
+  border-radius: 20px;
   background-color: white;
   overflow: hidden;
   height: 48px;
@@ -47,12 +46,11 @@
   width: 48px;
   outline: none;
   border: none;
-  background-color: inherit;
+  background-color: #0087D3;
   padding: 12px;
   cursor: pointer;
 }
 
 .searchButton:hover {
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: #0087D3BB;
 }

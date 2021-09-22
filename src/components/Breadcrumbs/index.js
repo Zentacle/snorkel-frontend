@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {Menu as SearchBar} from 'components/SearchBar';
+import SearchBar from 'components/SearchBar';
 import styles from './styles.module.css';
 
 const Breadcrumbs = ({country, area_one, area_two}) => {
@@ -30,7 +30,9 @@ const Breadcrumbs = ({country, area_one, area_two}) => {
         </>
         }
         </div>
-        <SearchBar width={'33%'}></SearchBar>
+        <div className={styles.search}>
+            <SearchBar></SearchBar>
+        </div>
     </div> : <></>
   )
 }

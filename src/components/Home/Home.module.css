@@ -115,3 +115,12 @@
 .marginContainer {
     padding: 0 16px;
 }
+
+.search {
+    width: 50%;
+}
+@media (max-width: 720px) {
+    body .search{
+      width: 100%!important;
+    }
+}
