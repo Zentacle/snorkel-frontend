@@ -63,6 +63,9 @@ const Home = (props) => {
     if (props.area_one) {
       url += `&area_one=${props.area_one}`
     }
+    if (props.area_two) {
+      url += `&area_two=${props.area_two}`
+    }
     fetch(url).then(res =>
       res.json()
     ).then(data => {
