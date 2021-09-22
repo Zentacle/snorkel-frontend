@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import styles from "components/Home/Home.module.css"
-import SearchBar from "components/SearchBar"
+import {Menu as SearchBar} from "components/SearchBar"
 import Layout from 'components/Layout/Layout';
 import Carousel from "components/Carousel/Carousel"
 import { rootDomain } from "src/lib/constants";
@@ -106,7 +106,7 @@ const Home = (props) => {
             <h2 className={styles.pagetitle}>Find your next underwater adventure</h2>
           </div>
           <div className={styles.menu}>
-            <SearchBar></SearchBar>
+            <SearchBar width={'50%'}></SearchBar>
           </div>
         </div>
         <Banner isShown={shouldShowBanner}></Banner>

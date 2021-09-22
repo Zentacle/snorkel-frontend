@@ -6,3 +6,53 @@
   overflow: hidden;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
 }
+
+.innermenu{
+  max-width: 720px;
+  margin: auto;
+  width: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  border-radius: 4px;
+  background-color: white;
+  overflow: hidden;
+  height: 48px;
+}
+@media (max-width: 720px) {
+  body .container{
+    width: 100%!important;
+  }
+}
+
+.inputContainer {
+  width: calc(100% - 80px);
+  margin: auto 16px;
+}
+
+.searchbar {
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.searchButton {
+  width: 48px;
+  outline: none;
+  border: none;
+  background-color: inherit;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.04);
+}

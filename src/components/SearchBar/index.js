@@ -1,32 +1,42 @@
 import { useRouter } from 'next/router';
-import SearchBar from "material-ui-search-bar"
 import React from "react";
 
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
+import SearchIcon from '@material-ui/icons/Search';
 
 const Menu = (props) => {
   const router = useRouter();
   const [search, setSearch] = React.useState(props.value || '');
+  const width = props.width;
 
-  React.useEffect(() => setSearch(props.value), [props.value])
-
-  return (
-      <div className={styles.innermenu}>
-          <SearchBar
-              value={search}
-              className={styles.searchbar}
-              onChange={ setSearch }
-              onRequestSearch={() => {
-                  if (!search) { return }
-                  sendEvent('submit_search', {
-                      'query': search.toLowerCase(),
-                  });
-                  router.push(`/search?search_term=${search}`
-              )}}
-          />
-      </div>
-  )
+  const conductSearch = () => {
+    sendEvent('submit_search', {
+        'query': search,
+    });
+    router.push(`/search?search_term=${search}`)
 }
 
-export default Menu
+  return (
+<div className={ styles.container } style={{'width':width}}>
+            <div className={ styles.inputContainer }>
+                <input
+                    placeholder="Search"
+                    value={search}
+                    className={styles.searchbar}
+                    onChange={ e => setSearch(e.target.value) }
+                    onKeyPress={ (e) => {
+                        if (e.key === 'Enter') {
+                            conductSearch()
+                        }
+                    }}
+                />
+            </div>
+            <button className={ styles.searchButton } onClick={ conductSearch }>
+                <SearchIcon className={ styles.icon }/>
+            </button>
+        </div>
+    )
+}
+
+export {Menu}

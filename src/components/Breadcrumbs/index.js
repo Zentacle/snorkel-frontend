@@ -1,10 +1,11 @@
 import Link from 'next/link';
-
+import {Menu as SearchBar} from 'components/SearchBar';
 import styles from './styles.module.css';
 
 const Breadcrumbs = ({country, area_one, area_two}) => {
   return (
     country && country.short_name ? <div className={styles.locBreadcrumbContainer}>
+        <div>
         <Link href={country.url}>
             <a className={styles.locBreadcrumb}>
                 {country.name}
@@ -28,6 +29,8 @@ const Breadcrumbs = ({country, area_one, area_two}) => {
             </Link>
         </>
         }
+        </div>
+        <SearchBar width={'33%'}></SearchBar>
     </div> : <></>
   )
 }
