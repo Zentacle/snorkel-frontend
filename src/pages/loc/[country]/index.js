@@ -99,15 +99,18 @@ const Home = (props) => {
               area_two={area.area_two}
             />
           </div>
-          <div className={styles.locationContainer}>
-            {areas.map(area => (
-              <Link key={area.short_name} href={area.url}>
-                <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
-                  {area.name}
-                </a>
-              </Link>)
-            )}
-          </div>
+          { areas.length
+            ? <div className={styles.locationContainer}>
+              {areas.map(area => (
+                <Link key={area.short_name} href={area.url}>
+                  <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
+                    {area.name}
+                  </a>
+                </Link>)
+              )}
+            </div>
+            : <></>
+          }
           <h1 className={styles.areaTitle}>Top Snorkeling and Scuba Diving in {props.area.name}</h1>
           <div className={styles.marginContainer}>
             {props.area.description}
