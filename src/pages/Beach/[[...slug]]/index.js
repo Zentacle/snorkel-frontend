@@ -143,10 +143,10 @@ const Beach = (props) => {
             <Head>
                 <title key="title">{`${beach.name} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`}</title>
                 <meta property="og:title" content={`${beach.name} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`} key="og-title" />
-                <meta property="og:description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="og-description" />
+                <meta property="og:description" content={`${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="og-description" />
                 <meta property="og:image" content={beach.hero_img} key="og-image" />
                 <meta property="og:url" content={canonicalURL} key="og-url" />
-                <meta name="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="description" />
+                <meta name="description" content={`${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="description" />
                 <link rel="canonical" href={canonicalURL} key="canonical"/>
                 {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
             </Head>
