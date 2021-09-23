@@ -23,6 +23,12 @@ export async function getStaticProps(context) {
     }
   }
 
+  props['loc'] = 'locality'
+  props['country'] = country
+  props['area_one'] = area_one
+  props['area_two'] = area_two
+  props['locality'] = locality
+
   return {
     props, // will be passed to the page component as props
     revalidate: 3600,
