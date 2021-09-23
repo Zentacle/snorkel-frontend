@@ -49,7 +49,7 @@ const BeachInfo = ({
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             { tidesArray.length ? <>
-                <h3 className={styles.sectionTitle}>{name} Tide Chart (Beta)</h3>
+                <h3 className={styles.sectionTitle}>{name} Tide Chart and Surf Report (Beta)</h3>
                 <div className={styles.helper}>Nearest tide station in {stationData.name}, {stationData.region} ({Math.round(stationData.distance * 100) / 100} mi away)</div>
                 <div className={`${styles.tideRow} ${styles.tideRowHeader}`}>
                     <div className={styles.tideItem}>Date</div>
