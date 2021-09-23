@@ -64,7 +64,7 @@ const IndividualReview = ({ review, user }) => {
                                     initialRating={review.rating}
                                     readonly
                                 />
-                                <span className={styles.reviewDate}>{review_date}</span>
+                                <span className={styles.reviewDate} title={review.id}>{review_date}</span>
                             </div>
                         </div>
                     </div>
