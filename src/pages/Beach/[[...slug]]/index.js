@@ -138,15 +138,21 @@ const Beach = (props) => {
         ? `https://www.shorediving.com${beach.sd_url}/index.htm`
         : `https://www.zentacle.com${beach.url}`
 
+    const description = beach.description
+        ? `${beach.description} ${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel site in ${beach.location_city}.`
+        : `${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel site in ${beach.location_city}.`
+
+    const pageTitle = `${beach.name} in ${beach.location_city} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`
+
     return (
         <Layout isShorediving={props.isShorediving}>
             <Head>
-                <title key="title">{`${beach.name} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`}</title>
-                <meta property="og:title" content={`${beach.name} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`} key="og-title" />
-                <meta property="og:description" content={`${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="og-description" />
+                <title key="title">{pageTitle}</title>
+                <meta property="og:title" content={pageTitle} key="og-title" />
+                <meta property="og:description" content={description} key="og-description" />
                 <meta property="og:image" content={beach.hero_img} key="og-image" />
                 <meta property="og:url" content={canonicalURL} key="og-url" />
-                <meta name="description" content={`${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="description" />
+                <meta name="description" content={description} key="description" />
                 <link rel="canonical" href={canonicalURL} key="canonical"/>
                 {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
             </Head>
