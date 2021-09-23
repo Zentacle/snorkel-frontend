@@ -134,9 +134,7 @@ const Beach = (props) => {
         ? 'ShoreDiving.com'
         : 'Zentacle'
 
-    let canonicalURL = props.isShorediving && beach.sd_url
-        ? `https://www.shorediving.com${beach.sd_url}/index.htm`
-        : `https://www.zentacle.com${beach.url}`
+    let canonicalURL = `https://www.zentacle.com${beach.url}`
 
     const description = beach.description
         ? `${beach.description} ${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel site in ${beach.location_city}.`
