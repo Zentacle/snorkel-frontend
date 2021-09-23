@@ -141,8 +141,8 @@ const Beach = (props) => {
     return (
         <Layout isShorediving={props.isShorediving}>
             <Head>
-                <title key="title">{`${siteName} - ${beach.name} - Scuba Diving and Snorkel Reviews, Maps, and Photos`}</title>
-                <meta property="og:title" content={`${siteName} - ${beach.name} - Scuba Diving and Snorkel Reviews, Maps, and Photos`} key="og-title" />
+                <title key="title">{`${beach.name} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`}</title>
+                <meta property="og:title" content={`${beach.name} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`} key="og-title" />
                 <meta property="og:description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="og-description" />
                 <meta property="og:image" content={beach.hero_img} key="og-image" />
                 <meta property="og:url" content={canonicalURL} key="og-url" />
