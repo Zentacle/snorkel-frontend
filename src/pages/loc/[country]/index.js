@@ -75,8 +75,8 @@ const Home = (props) => {
 
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
-  const title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
-  const description = `Search dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
+  const title = `Zentacle - Top Snorkel and Scuba Dive Sites in ${props.area.name} - Reviews, Maps, and Photos`;
+  const description = `Top scuba dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
 
   const area = props.area;
 
