@@ -88,6 +88,7 @@ const Home = (props) => {
         <meta property="og:description" content={description} key="og:description" />
         <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
         <meta name="description" content={description} key="description" />
+        {props.area.url && <link rel="canonical" href={`https://www.zentacle.com${props.area.url}`}/>}
       </Head>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
