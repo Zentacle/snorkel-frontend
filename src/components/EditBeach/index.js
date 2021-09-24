@@ -2,7 +2,7 @@
 import styles from "components/EditBeach/EditBeach.module.css"
 import { useRouter } from "next/router";
 import React from "react";
-import { rootDomain } from "lib/constants";
+import { clientSideDomain, rootDomain } from "lib/constants";
 import SignupInput from "components/SignupInput";
 import { useDropzone } from "react-dropzone";
 import { v4 as uuidv4 } from 'uuid';
@@ -154,7 +154,7 @@ const BeachEditComponent = () => {
         };
 
         async function patchBeach(patchBody) {
-            fetch(`${rootDomain}/spots/patch`, {
+            fetch(`${clientSideDomain}/spots/patch`, {
                 method: 'PATCH',
                 body: JSON.stringify({
                     ...patchBody

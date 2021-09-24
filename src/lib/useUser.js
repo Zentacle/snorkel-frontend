@@ -1,7 +1,7 @@
 import { rootDomain } from "src/lib/constants";
 export default () => {
   fetch(`${rootDomain}/user/me`, {
-    method: 'POST',
+    method: 'GET',
     body: JSON.stringify(body),
     headers: {
         'Content-Type': 'application/json'

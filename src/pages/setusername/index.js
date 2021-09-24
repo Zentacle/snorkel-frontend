@@ -8,7 +8,7 @@ import Layout from "components/Layout/Layout";
 import BackgroundCard from "components/Layout/BackgroundCard/BackgroundCard";
 import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
-import { rootDomain } from 'lib/constants';
+import { clientSideDomain } from 'lib/constants';
 
 const CreateAccount = (props) => {
   const [username, setUsername] = React.useState('')
@@ -17,7 +17,7 @@ const CreateAccount = (props) => {
     const body = {
       username,
     }
-    fetch(`${rootDomain}/user/patch`, {
+    fetch(`${clientSideDomain}/user/patch`, {
       method: 'PATCH',
       body: JSON.stringify(body),
       headers: {
