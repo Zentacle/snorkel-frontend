@@ -39,7 +39,10 @@ const CreateAccount = () => {
                 if (response.ok) {
                     if (data.auth_token) {
                         ga.event({
-                            action: "signup",
+                            action: "sign_up",
+                            params: {
+                                'method': "Standard"
+                            }
                         })
                         sendEvent('register_success');
                         window.location.href = "/";

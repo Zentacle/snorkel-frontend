@@ -16,7 +16,10 @@ const useGoogleButton = (redirectURL, user) => () => {
       }).then(() => {
         sendEvent('google_register_success');
         ga.event({
-          action: "signup",
+          action: "sign_up",
+          params: {
+            'method': "Google Button"
+          }
         })
         window.location.href = redirectURL
       })
