@@ -39,14 +39,16 @@ export async function getStaticPaths() {
   const res = await fetch(`${rootDomain}/locality/locality`)
   const data = await res.json()
   return {
-      paths: data.data.map(loc => ({
-          params: {
-              country: loc.country.short_name,
-              area_one: loc.area_one.short_name,
-              area_two: loc.area_two.short_name,
-              locality: loc.short_name,
-          }
-      })),
+      paths: data.data
+        .filter(loc => loc.area_one && loc.area_two)
+        .map(loc => ({
+            params: {
+                country: loc.country.short_name,
+                area_one: loc.area_one.short_name,
+                area_two: loc.area_two.short_name,
+                locality: loc.short_name,
+            }
+        })),
       fallback: 'blocking',
   }
 }
