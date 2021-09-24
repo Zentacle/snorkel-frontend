@@ -11,7 +11,7 @@ import StarRate from "./StarRate/StarRate";
 import Layout from "../../Layout/Layout";
 import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
-import { clientSideDomain } from 'lib/constants';
+import { clientSideDomain, rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
 import CancelIcon from '@material-ui/icons/Cancel';
