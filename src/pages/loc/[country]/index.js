@@ -9,6 +9,7 @@ import { rootDomain } from "src/lib/constants";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
+import Patron from 'components/Patron';
 
 export async function getStaticProps(context) {
   const country = context.params.country;
@@ -78,8 +79,6 @@ const Home = (props) => {
   const title = `Top Snorkel and Scuba Dive Sites in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
   const description = `Top scuba dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
 
-  const area = props.area;
-
   return (
     <Layout>
       <Head>
@@ -94,9 +93,9 @@ const Home = (props) => {
         <div className={styles.contentContainer}>
           <div className={styles.marginContainer}>
             <Breadcrumbs
-              country={area.country}
-              area_one={area.area_one}
-              area_two={area.area_two}
+              country={props.area.country}
+              area_one={props.area.area_one}
+              area_two={props.area.area_two}
             />
           </div>
           { areas.length
@@ -116,17 +115,7 @@ const Home = (props) => {
             {props.area.description}
           </div>
           {
-              area.area_two && area.area_two.id == 2 && <div>
-                  <h3 className={styles.sectionTitle}>{name} Patrons</h3>
-                  <div className={styles.description}>
-                      <a
-                          onClick={ () => { ga.event({ action: "purchase", params: { eventLabel: 'Kona Shore Divers' } })} }
-                          className={styles.patronName}
-                          href="https://www.konashoredivers.com"
-                      >Kone Shore Divers</a>
-                      <span> - Our goal is to give you the opportunity to share and explore the underwater world in and around the near shore waters of Kailua-Kona. We focus on small group sizes and strive to offer the best personalized service we can to our guests. From the first timer to the old timer come with us and see what the Kona Shore has to offer!</span>
-                  </div>
-              </div>
+              props.area.short_name == 'big-island' && <Patron name={props.area.name}/>
           }
           <div>
             {

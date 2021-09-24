@@ -3,12 +3,6 @@
     
 }
 
-.sectionTitle {
-    font-size: 18px;
-    padding: 12px 24px 0 24px;
-    font-weight: var(--text-weight-bold);
-}
-
 .description{
     font-size: 14px;
     margin: 0 24px 24px 24px;
@@ -57,11 +51,6 @@
 
 .tideItem:first-child {
     padding-left: 0;
-}
-
-.patronName {
-    color: var(--primary-color);
-    font-weight: var(--text-weight-bold);
 }
 
 .viewButton {

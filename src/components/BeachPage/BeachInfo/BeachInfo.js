@@ -1,10 +1,11 @@
 import React from "react";
 
-import styles from "../BeachInfo/BeachInfo.module.css";
-import VizDepth from "../VizDepth/VizDepth";
-import BeachReviews from "../BeachReviews/BeachReviews";
+import styles from "./styles.module.css";
+import VizDepth from "components/BeachPage/VizDepth/VizDepth";
+import BeachReviews from "components/BeachPage/BeachReviews/BeachReviews";
 import ReviewSummary from 'components/BeachPage/ReviewSummary';
-import * as ga from 'lib/ga';
+import Patron from 'components/Patron';
+import SectionTitle from "components/SectionTitle";
 
 const EntryMap = ({ src }) => (
     <a className={ styles.entryMap } style={{ backgroundImage: `url(\'${src}\')` }} href={ src }>
@@ -41,7 +42,7 @@ const BeachInfo = ({
     return (
         <div className={styles.container}>
             <VizDepth date={ last_review_date } difficulty={difficulty} viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
-            <h2 className={styles.sectionTitle}>About {name} Snorkeling and Scuba Diving</h2>
+            <SectionTitle text={`About ${name} Snorkeling and Scuba Diving`}/>
             <div className={styles.description}>
                 { description.length < 3
                     ? `${name} is a ${Math.round(rating * 100) / 100}-star rated scuba dive and snorkel destination in ${location_city} based on ${num_reviews} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.`
@@ -68,17 +69,7 @@ const BeachInfo = ({
                 })}
                 </> : <></> }
             {
-                area_two_id == 2 && <div>
-                    <h3 className={styles.sectionTitle}>{name} Patrons</h3>
-                    <div className={styles.description}>
-                        <a
-                            onClick={ () => { ga.event({ action: "purchase", params: { eventLabel: 'Kona Shore Divers' } })} }
-                            className={styles.patronName}
-                            href="https://www.konashoredivers.com"
-                        >Kone Shore Divers</a>
-                        <span> - Our goal is to give you the opportunity to share and explore the underwater world in and around the near shore waters of Kailua-Kona. We focus on small group sizes and strive to offer the best personalized service we can to our guests. From the first timer to the old timer come with us and see what the Kona Shore has to offer!</span>
-                    </div>
-                </div>
+                area_two_id == 2 && <Patron name={name}/>
             }
             <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
             <BeachReviews beachid={id} url={url} reviews={reviews}></BeachReviews>
