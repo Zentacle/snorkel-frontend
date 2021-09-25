@@ -42,7 +42,7 @@ const BeachInfo = ({
     return (
         <div className={styles.container}>
             <VizDepth date={ last_review_date } difficulty={difficulty} viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
-            <SectionTitle text={`About ${name} Snorkeling and Scuba Diving`}/>
+            <SectionTitle text={`Snorkeling and Scuba Diving at ${name}`}/>
             <div className={styles.description}>
                 { description.length < 3
                     ? `${name} is a ${Math.round(rating * 100) / 100}-star rated scuba dive and snorkel destination in ${location_city} based on ${num_reviews} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.`
