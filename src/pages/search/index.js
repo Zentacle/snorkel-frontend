@@ -35,9 +35,7 @@ const SearchPage = () => {
         <Layout>
             <div className={ styles.searchContainer}>
             <div className={styles.menu}>
-                <div className={styles.search}>
-                    <SearchBar value={ searchTerm } onChange={ setSearchTerm }></SearchBar>
-                </div>
+                <SearchBar value={ searchTerm } onChange={ setSearchTerm } largeSearchBar={ true }></SearchBar>
             </div>
                 <div className={ styles.searchResultsContainer }>
                     { results.length

@@ -8,7 +8,9 @@ import SearchIcon from '@material-ui/icons/Search';
 const SearchBar = (props) => {
   const router = useRouter();
   const [search, setSearch] = React.useState(props.value || '');
-
+  const largeSearchBar = props.largeSearchBar;
+  const barSize = largeSearchBar ? styles.lgBar : ''; 
+    
   const conductSearch = () => {
     sendEvent('submit_search', {
         'query': search,
@@ -17,7 +19,7 @@ const SearchBar = (props) => {
 }
 
   return (
-<div className={ styles.container }>
+<div className={ `${barSize} ${styles.container}` }>
             <div className={ styles.inputContainer }>
                 <input
                     placeholder="Search"
@@ -31,7 +33,7 @@ const SearchBar = (props) => {
                     }}
                 />
             </div>
-            <button className={ styles.searchButton } onClick={ conductSearch }>
+            <button className={ `${barSize} ${styles.searchButton}` } onClick={ conductSearch }>
                 <SearchIcon className={ styles.icon }/>
             </button>
         </div>

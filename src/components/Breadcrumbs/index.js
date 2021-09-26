@@ -31,7 +31,7 @@ const Breadcrumbs = ({country, area_one, area_two}) => {
         }
         </div>
         <div className={styles.search}>
-            <SearchBar></SearchBar>
+            <SearchBar largeSearchBar={ false }></SearchBar>
         </div>
     </div> : <></>
   )

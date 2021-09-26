@@ -107,7 +107,7 @@ const Home = (props) => {
           </div>
           <div className={styles.menu}>
             <div className={styles.search}>
-              <SearchBar></SearchBar>
+              <SearchBar largeSearchBar={ true }></SearchBar>
             </div>
           </div>
         </div>
