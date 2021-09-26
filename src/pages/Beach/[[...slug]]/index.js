@@ -163,6 +163,7 @@ const Beach = (props) => {
                 <BeachPage
                     beach={beach}
                     beachid={beach.id}
+                    isSingularReview={props.isSingularReview}
                     reviews={props.reviews}
                     nearbyBeaches={nearbyBeaches}
                     tides={props.tides}

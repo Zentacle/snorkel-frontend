@@ -20,6 +20,7 @@ const BeachInfo = ({
     description,
     difficulty,
     entry_map,
+    isSingularReview,
     last_review_date,
     last_review_viz,
     name,
@@ -71,8 +72,17 @@ const BeachInfo = ({
             {
                 area_two_id == 2 && <Patron name={name}/>
             }
-            <ReviewSummary ratings={ ratings } rating={ rating } num_reviews={num_reviews}></ReviewSummary>
-            <BeachReviews beachid={id} url={url} reviews={reviews}></BeachReviews>
+            <ReviewSummary
+                ratings={ ratings }
+                rating={ rating }
+                num_reviews={num_reviews}
+            />
+            <BeachReviews
+                beachid={id}
+                url={url}
+                reviews={reviews}
+                isSingularReview={isSingularReview}
+            />
         </div>
     )
 }

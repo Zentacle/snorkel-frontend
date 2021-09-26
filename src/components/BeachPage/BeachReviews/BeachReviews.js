@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link';
 
 import styles from "../BeachReviews/BeachReviews.module.css";
 import IndividualReview from "./IndividualReview/IndividualReview";
@@ -24,10 +25,32 @@ const BeachReviews = (props) => {
     return (
         <div className={styles.reviewContainer}>
             <div className={styles.reviewbuttoncontainer}>
-                <PrimaryLink onClick={ onReviewClick } className={styles.reviewbutton} href={ link }>Write a Review</PrimaryLink>
+                <PrimaryLink
+                    onClick={ onReviewClick }
+                    className={styles.reviewbutton}
+                    href={ link }
+                >
+                    Write a Review
+                </PrimaryLink>
             </div>
+            { props.isSingularReview
+                && <div>
+                    Currently viewing a specific review.&nbsp;
+                    <Link href={url}>
+                        <a className={styles.viewAll}>
+                            View all reviews
+                        </a>
+                    </Link>
+                </div>
+            }
             { props.reviews && props.reviews.length
-                ? props.reviews.map((review) => <IndividualReview key={ review.id } review={review} user={review.user}></IndividualReview>)
+                ? props.reviews.map((review) =>
+                    <IndividualReview
+                        key={ review.id }
+                        review={review}
+                        user={review.user}
+                    />
+                )
                 : <div className={ styles.emptyState }>No reviews yet. Be the first!</div>
             }
         </div>
