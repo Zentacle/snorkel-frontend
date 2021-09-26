@@ -1,10 +1,7 @@
 .container{
-    display: flex;
-    justify-content: space-between;
     overflow: auto;
 }
 .photos{
-    
     padding: 12px 0;
 }
 
