@@ -115,7 +115,7 @@ const Home = (props) => {
             {props.area.description}
           </div>
           {
-              props.area.short_name == 'big-island' && <Patron name={props.area.name}/>
+              (props.area.short_name == 'big-island' || props.area_two.short_name == 'big-island') && <Patron name={props.area.name}/>
           }
           <div>
             {
