@@ -34,7 +34,9 @@ const SearchPage = () => {
     return (
         <Layout>
             <div className={ styles.searchContainer}>
-                <SearchBar value={ searchTerm } onChange={ setSearchTerm }/>
+            <div className={styles.menu}>
+                <SearchBar value={ searchTerm } onChange={ setSearchTerm } largeSearchBar={ true }></SearchBar>
+            </div>
                 <div className={ styles.searchResultsContainer }>
                     { results.length
                         ? results.map(result => <div key={ result.id } className={styles.slide}><Location info={result}/></div>)

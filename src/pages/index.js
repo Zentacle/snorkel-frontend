@@ -90,7 +90,9 @@ const Home = (props) => {
             <h2 className={styles.pagetitle}>Find your next underwater adventure</h2>
           </div>
           <div className={styles.menu}>
-            <SearchBar></SearchBar>
+            <div className={styles.search}>
+              <SearchBar largeSearchBar={ true }></SearchBar>
+            </div>
           </div>
         </div>
         <Banner isShown={shouldShowBanner}></Banner>
