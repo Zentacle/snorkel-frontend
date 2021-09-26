@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/router';
 import { toaster } from 'evergreen-ui';
 
-import { rootDomain } from 'lib/constants';
+import { clientSideDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import GooglePlaceSelector from 'components/GooglePlaceSelector';
 import Head from 'next/head';
@@ -29,7 +29,7 @@ const NewSpot = (props) => {
       body['place_id'] = selectedGooglePlace.place_id;
     }
 
-    fetch(`${rootDomain}/spots/add`, {
+    fetch(`${clientSideDomain}/spots/add`, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
