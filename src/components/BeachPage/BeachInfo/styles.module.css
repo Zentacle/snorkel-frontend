@@ -8,6 +8,7 @@
     margin: 0 24px 24px 24px;
     line-height: 20px;
     white-space: pre-line;
+    overflow-wrap: break-word;
 }
 
 .helper {
