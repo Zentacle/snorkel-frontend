@@ -9,12 +9,12 @@ import { rootDomain } from 'lib/constants';
 
 const Review = () => {
     const router = useRouter()
-    const { beachid, fsite } = router.query
+    const { beachid } = router.query
     const [beach, setBeach] = React.useState({});
     React.useEffect(() => {
         if (!router.isReady) return;
 
-        fetch(`${rootDomain}/spots/get?beach_id=${beachid}&fsite=${fsite}`, {
+        fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
