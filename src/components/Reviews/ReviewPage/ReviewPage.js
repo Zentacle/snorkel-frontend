@@ -1,14 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
-import { useRouter } from 'next/router';
 import Cookies from 'js-cookie'
 import { toaster } from 'evergreen-ui';
 
 import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
-import Layout from "../../Layout/Layout";
 import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
 import { clientSideDomain, rootDomain } from 'lib/constants';
@@ -27,35 +25,14 @@ const visibilityLabel = {
 }
 
 const ReviewPage = (props) => {
-
-    const router = useRouter()
-    const { beachid } = router.query
     const [activity, setActivity] = React.useState('snorkel');
     const [rating, setRating] = React.useState(0);
-    const [name, setName] = React.useState(props.name);
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
     //where the files are stored along with their urls
     const [fileRecords, setFileRecords] = React.useState([]);
     const [visibilityHover, setVisibilityHover] = React.useState(undefined)
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
-
-    React.useEffect(() => {
-        if (!router.isReady) return;
-
-        if (!props.name) {
-            fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                return response.json();
-            }).then(data => {
-                setName(data.data.name);
-            })
-        }
-    }, [router.isReady])
 
     //creates an image for each of the urls the user has submitted
     const RenderUrls = () => {
@@ -215,61 +192,59 @@ const ReviewPage = (props) => {
     }
 
     return (
-        <Layout>
-            <MaxWidth>
-                <div className={styles.container}>
-                    <div className={styles.beachtitle}>{name}</div>
-                    <div className={styles.spacer}>
-                        <ScubaSnorkel value={activity} onChange={setActivity}></ScubaSnorkel>
+        <MaxWidth>
+            <div className={styles.container}>
+                <div className={styles.beachtitle}>{props.name}</div>
+                <div className={styles.spacer}>
+                    <ScubaSnorkel value={activity} onChange={setActivity}></ScubaSnorkel>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Rating
                     </div>
-                    <div className={styles.spacer}>
-                        <div className={styles.reviewtitle}>
-                            Rating
-                        </div>
-                        <StarRate value={rating} onChange={setRating}></StarRate>
+                    <StarRate value={rating} onChange={setRating}></StarRate>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Review
                     </div>
-                    <div className={styles.spacer}>
-                        <div className={styles.reviewtitle}>
-                            Review
-                        </div>
-                        <textarea value={text} onChange={e => setText(e.target.value)} className={styles.paragraphreview}>
-                        </textarea>
+                    <textarea value={text} onChange={e => setText(e.target.value)} className={styles.paragraphreview}>
+                    </textarea>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Visibility
                     </div>
-                    <div className={styles.spacer}>
-                        <div className={styles.reviewtitle}>
-                            Visibility
-                        </div>
-                        <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
-                        <div className={styles.visibilityLabel}>{visibilityLabel[visibility || visibilityHover]}</div>
+                    <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
+                    <div className={styles.visibilityLabel}>{visibilityLabel[visibility || visibilityHover]}</div>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Photos
                     </div>
-                    <div className={styles.spacer}>
-                        <div className={styles.reviewtitle}>
-                            Photos
-                        </div>
-                        <div className={styles.photoscontainer}>
-                            <div className={styles.photooutercontainer}>
-                                <div className={styles.individualphotoupload}>
-                                    <div className={styles.containerdropzone}>
-                                        <DropZoneArea></DropZoneArea>
-                                        <br />
-                                    </div>
+                    <div className={styles.photoscontainer}>
+                        <div className={styles.photooutercontainer}>
+                            <div className={styles.individualphotoupload}>
+                                <div className={styles.containerdropzone}>
+                                    <DropZoneArea></DropZoneArea>
+                                    <br />
                                 </div>
                             </div>
-                            <RenderUrls></RenderUrls>
                         </div>
+                        <RenderUrls></RenderUrls>
                     </div>
-                    <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
-                        'activity_type': activity,
-                        rating,
-                        text,
-                        visibility,
-                        beach_id: beachid,
-                    })}>
-                        Submit
-                    </PrimaryButton>
                 </div>
-            </MaxWidth>
-        </Layout>
+                <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
+                    'activity_type': activity,
+                    rating,
+                    text,
+                    visibility,
+                    beach_id: beachid,
+                })}>
+                    Submit
+                </PrimaryButton>
+            </div>
+        </MaxWidth>
     )
 }
 

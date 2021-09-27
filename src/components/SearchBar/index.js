@@ -4,6 +4,7 @@ import React from "react";
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 import SearchIcon from '@material-ui/icons/Search';
+import * as ga from 'lib/ga';
 
 const SearchBar = (props) => {
     const router = useRouter();
@@ -14,6 +15,10 @@ const SearchBar = (props) => {
     const conductSearch = () => {
         sendEvent('submit_search', {
             'query': search.toLowerCase(),
+        });
+        ga.event({
+            action: 'search',
+            params: { 'search_term': search.toLowerCase() }
         });
         router.push(`/search?search_term=${search}`)
     }
