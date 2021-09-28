@@ -239,7 +239,7 @@ const ReviewPage = (props) => {
                     rating,
                     text,
                     visibility,
-                    beach_id: beachid,
+                    beach_id: props.beachid,
                 })}>
                     Submit
                 </PrimaryButton>

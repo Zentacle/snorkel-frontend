@@ -36,6 +36,7 @@ const Review = () => {
             <ReviewPage
                 name={beach.name}
                 url={beach.url}
+                id={beach.id}
             />
         </Layout>
     )
