@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
       return {
         redirect: {
           destination: data.data.url + '/review',
-          permanent: false,
+          permanent: true,
         },
       }
     } else {

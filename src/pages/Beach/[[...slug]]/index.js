@@ -15,6 +15,8 @@ import Breadcrumbs from 'components/Breadcrumbs';
 export async function getStaticProps(context) {
     const startTime = Date.now();
     const beachid = context.params.slug[0];
+    const beachNameFromURL = context.params.slug[1];
+
     const res = await fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
         method: 'GET',
         headers: {
@@ -28,7 +30,17 @@ export async function getStaticProps(context) {
             }
         }
     }
+
     const beach_data = await res.json()
+
+    if (`/Beach/${beachid}/${beachNameFromURL}` != beach_data.data.url) {
+        return {
+            redirect: {
+                destination: beach_data.data.url,
+                permanent: true,
+            }
+        }
+    }
 
     let response = await fetch(`${rootDomain}/review/get?beach_id=${beachid}`, {
         method: 'GET',
