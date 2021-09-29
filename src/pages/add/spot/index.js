@@ -101,12 +101,14 @@ const NewSpot = (props) => {
     <Layout>
       <Head>
         <link rel="canonical" href={`https://www.zentacle.com/add/spot`} />
+        <title key="title">Add a new dive or snorkel spot | Zentacle</title>
+        <meta property="og:title" content="Add a new dive or snorkel spot | Zentacle" key="og:title" />
         <meta name="description" content="Submit your favorite dive or snorkel spot to Zentacle!" key="description" />
         <meta property="og:description" content="Submit your favorite dive or snorkel spot to Zentacle!" key="og:description" />
       </Head>
       <MaxWidth>
         <div className={styles.container}>
-          <h1 className={styles.title}>Add a new dive spot!</h1>
+          <h1 className={styles.title}>Add a new dive/snorkel spot!</h1>
           <h2 className={styles.subtitle}>
             New dive spots you add will credit you as the discoverer once approved
           </h2>
