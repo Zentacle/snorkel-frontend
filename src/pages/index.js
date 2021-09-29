@@ -98,7 +98,7 @@ const Home = (props) => {
         <Banner isShown={shouldShowBanner}></Banner>
         <div className={styles.contentContainer}>
           <div className={styles.locationContainer}>
-            {areas.map(area => (
+            {areas.slice(0, 7).map(area => (
               <Link key={area.short_name} href={area.url}>
                 <a className={styles.location}>
                   {area.name}
@@ -123,6 +123,15 @@ const Home = (props) => {
             <div className={styles.carouseltitle}>Conditions Reported Recently</div>
             <Carousel data={props.latest}></Carousel>
           </div>
+          {areas.length > 7 && <div className={styles.locationContainer}>
+            {areas.slice(7).map(area => (
+              <Link key={area.short_name} href={area.url}>
+                <a className={styles.location}>
+                  {area.name}
+                </a>
+              </Link>)
+            )}
+          </div>}
         </div>
       </div>
     </Layout>
