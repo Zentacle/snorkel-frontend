@@ -27,6 +27,11 @@ const BeachEditComponent = () => {
     let router = useRouter();
     const { beachid } = router.query;
 
+    const setLatLng = (latitude, longitude) => {
+        changeNewData('latitude')(latitude);
+        changeNewData('longitude')(longitude);
+    }
+
     const conductSearch = (name) => () => {
         searchGoogleMapsAPI(name).then(results => {
             setGooglePlaceCandidates(results);
@@ -232,6 +237,7 @@ const BeachEditComponent = () => {
                     setSelected={setSelected}
                     selectedGooglePlace={selectedGooglePlace}
                     googlePlaceCandidates={googlePlaceCandidates}
+                    setLatLng={setLatLng}
                 />
                 <div>google_place_id</div>
                 <SignupInput value={getValueForKey('google_place_id')} onChange={changeNewData('google_place_id')}></SignupInput>
