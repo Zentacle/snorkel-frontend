@@ -24,6 +24,8 @@ const NewSpot = (props) => {
       'description': description,
       'difficulty': difficulty,
       'max_depth': maxDepth,
+      'latitude': latitude,
+      'longitude': longitude,
     }
     if (selectedGooglePlace) {
       body['place_id'] = selectedGooglePlace.place_id;
@@ -57,8 +59,15 @@ const NewSpot = (props) => {
   const [selectedGooglePlace, setSelectedGooglePlace] = React.useState(null);
   const [difficulty, setDifficulty] = React.useState(null);
   const [maxDepth, setMaxDepth] = React.useState(null);
+  const [latitude, setLatitude] = React.useState(null);
+  const [longitude, setLongitude] = React.useState(null);
 
   const debouncedSearchTerm = useDebounce(mapsLocationName, 2000);
+
+  const setLatLng = (latitude, longitude) => {
+    setLatitude(latitude);
+    setLongitude(longitude);
+  }
 
   React.useEffect(() => {
     if (selectedGooglePlace) {
@@ -113,6 +122,7 @@ const NewSpot = (props) => {
             setSelected={setSelected}
             selectedGooglePlace={selectedGooglePlace}
             googlePlaceCandidates={googlePlaceCandidates}
+            setLatLng={setLatLng}
           />
           <div className={styles.spacer}>
             <div className={styles.sectiontitle}>City/State/Country</div>

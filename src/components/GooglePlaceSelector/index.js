@@ -1,13 +1,38 @@
 import React from 'react';
 import styles from './styles.module.css';
 
-const GooglePlaceSelector = ({setSelected, selectedGooglePlace, googlePlaceCandidates}) => {
+const GooglePlaceSelector = ({
+  setSelected,
+  selectedGooglePlace,
+  googlePlaceCandidates,
+  setLatLng,
+}) => {
   React.useEffect(() => {
     const initializeMap = () => {
       window.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 9,
         center: new google.maps.LatLng(20.83674343601845, -156.4178040410507),
         mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      // https://developers.google.com/maps/documentation/javascript/examples/event-click-latlng
+      let infoWindow = null;
+      map.addListener("rightclick", (mapsMouseEvent) => {
+        // Close the current InfoWindow.
+        if (infoWindow) {
+          infoWindow.close();
+        }
+
+        // Create a new InfoWindow.
+        infoWindow = new google.maps.InfoWindow({
+          position: mapsMouseEvent.latLng,
+        });
+        infoWindow.setContent(
+          'The lat/lng of this pin will be submitted. The lat/lng of the selected named location will be ignored'
+        );
+        // https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLng
+        setLatLng(mapsMouseEvent.latLng.lat(), mapsMouseEvent.latLng.lng())
+        infoWindow.open(map);
       });
     }
     const script = document.createElement('script')
