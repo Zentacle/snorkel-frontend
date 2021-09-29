@@ -28,8 +28,11 @@ const BeachEditComponent = () => {
     const { beachid } = router.query;
 
     const setLatLng = (latitude, longitude) => {
-        changeNewData('latitude')(latitude);
-        changeNewData('longitude')(longitude);
+        setNewData({
+            ...newData,
+            latitude,
+            longitude,
+        });
     }
 
     const conductSearch = (name) => () => {
