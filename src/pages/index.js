@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -72,10 +72,13 @@ const Home = (props) => {
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
   let title = "Zentacle - Snorkel and Scuba Diving Reviews, Maps, and Photos"
+  if (props.isShorediving) {
+    title = "ShoreDiving.com - Shore Diving, Snorkeling, and Scuba Diving Reviews, Maps, and Photos"
+  }
   let description = "Search scuba diving, shore diving and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you."
 
   return (
-    <Layout>
+    <Layout isShorediving={props.isShorediving}>
       <Head>
         <title>{title}</title>
         <meta property="og:title" content={title} key="og:title" />
@@ -87,7 +90,7 @@ const Home = (props) => {
       <div className={styles.container}>
         <div className={styles.image}>
           <div className={styles.imageinner} style={{ 'backgroundImage': `url(\'/hero.jpg\')` }}>
-            <h2 className={styles.pagetitle}>Find your next underwater adventure</h2>
+            <h2 className={styles.pagetitle}>Find your next shore diving adventure</h2>
           </div>
           <div className={styles.menu}>
             <div className={styles.search}>
@@ -106,7 +109,7 @@ const Home = (props) => {
               </Link>)
             )}
           </div>
-          <h1 className={styles.areaTitle}>Best Snorkeling and Scuba Diving in the World</h1>
+          <h1 className={styles.areaTitle}>Best Snorkeling and Scuba Diving Sites in the World</h1>
           {recs && Object.keys(recs).length > 0 && <div>
             <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
             <Carousel data={recs}></Carousel>
