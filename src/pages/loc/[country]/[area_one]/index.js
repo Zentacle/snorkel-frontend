@@ -20,7 +20,7 @@ export async function getStaticProps(context) {
     }
   }
 
-  props['loc'] = 'area_two'
+  props['loc'] = 'area_one'
   props['country'] = country
   props['area_one'] = area_one
 

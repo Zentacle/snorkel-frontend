@@ -30,7 +30,7 @@ export async function getStaticProps(context) {
     }
   }
 
-  props['loc'] = 'area_one'
+  props['loc'] = 'country'
   props['country'] = country
 
   return {
@@ -52,13 +52,20 @@ export async function getStaticPaths() {
   }
 }
 
+const getPillLocalityLevel = {
+  'country': 'area_one',
+  'area_one': 'area_two',
+  'area_two': 'locality',
+  'locality': 'locality',
+}
+
 const Home = (props) => {
   const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
   React.useEffect(() => {
-    const filter = {}
-    let url = `${rootDomain}/locality/${props.loc}`
+    const localityType = getPillLocalityLevel[props.loc];
+    let url = `${rootDomain}/locality/${localityType}`
     if (props.country) {
       url += `?country=${props.country}`
     }
@@ -84,6 +91,23 @@ const Home = (props) => {
       && props.area_two.short_name == 'big-island'
     )
   )
+
+  const isMaui = (
+    props.area.short_name == 'maui'
+    || (
+      props.area_two
+      && props.area_two.short_name == 'maui'
+    )
+  )
+
+  let areaPatronKey = null;
+  if (props.loc === 'locality') {
+    areaPatronKey = props.area_two.short_name;
+  } else if (props.loc === 'area_two') {
+    areaPatronKey = props.area.short_name
+  }
+
+  const hasPatron = isMaui || isBigIsland;
 
   const title = `Top Snorkel and Scuba Dive Sites in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
   const description = `Top scuba dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
@@ -124,7 +148,7 @@ const Home = (props) => {
             {props.area.description}
           </div>
           {
-              isBigIsland && <Patron name={props.area.name}/>
+              hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name}/>
           }
           <div>
             {

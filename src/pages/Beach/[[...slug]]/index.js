@@ -53,11 +53,15 @@ export async function getStaticProps(context) {
 
     let stationData = null;
     if (beach_data.data.latitude) {
-        response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-        console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-        const stations_data = await response.json()
-        if (stations_data.stationList && stations_data.stationList.length) {
-            stationData = stations_data.stationList[0]
+        try {
+            response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+            console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+            const stations_data = await response.json()
+            if (stations_data.stationList && stations_data.stationList.length) {
+                stationData = stations_data.stationList[0]
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 

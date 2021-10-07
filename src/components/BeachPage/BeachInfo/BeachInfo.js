@@ -16,6 +16,7 @@ const EntryMap = ({ src }) => (
 
 const BeachInfo = ({
     id,
+    area_two,
     area_two_id,
     description,
     difficulty,
@@ -70,7 +71,7 @@ const BeachInfo = ({
                 })}
                 </> : <></> }
             {
-                area_two_id == 2 && <Patron name={name}/>
+                (area_two_id == 2 || area_two_id == 1) && <Patron areaPatronKey={area_two.short_name} name={name}/>
             }
             <ReviewSummary
                 ratings={ ratings }
