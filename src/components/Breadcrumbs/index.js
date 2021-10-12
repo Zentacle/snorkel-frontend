@@ -5,16 +5,16 @@ import styles from './styles.module.css';
 const Breadcrumbs = ({ country, area_one, area_two }) => {
     return (
         <div className={styles.locBreadcrumbContainer}>
-            <div>
+            <div itemScope={true} itemType="http://schema.org/BreadcrumbList">
                 {country && country.short_name && <Link href={country.url}>
-                    <a className={styles.locBreadcrumb}>
+                    <a className={styles.locBreadcrumb} itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
                         {country.name}
                     </a>
                 </Link>}
                 {area_one && area_one.short_name && <>
                     <span className={styles.locBreadcrumb}>›</span>
                     <Link href={area_one.url}>
-                        <a className={styles.locBreadcrumb}>
+                        <a className={styles.locBreadcrumb}  itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
                             {area_one.name}
                         </a>
                     </Link>
@@ -23,7 +23,7 @@ const Breadcrumbs = ({ country, area_one, area_two }) => {
                 {area_two && area_two.short_name && <>
                     <span className={styles.locBreadcrumb}>›</span>
                     <Link href={area_two.url}>
-                        <a className={styles.locBreadcrumb}>
+                        <a className={styles.locBreadcrumb}  itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
                             {area_two.name}
                         </a>
                     </Link>
