@@ -8,6 +8,7 @@ import { toaster } from 'evergreen-ui';
 import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
+import DiveBuddies from "./DiveBuddies/DiveBuddies";
 import Layout from "../../Layout/Layout";
 import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
@@ -15,6 +16,7 @@ import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
 import CancelIcon from '@material-ui/icons/Cancel';
+// import CheckIcon from '@material-ui/icons/Check';
 import { v4 as uuidv4 } from 'uuid';
 import MaxWidth from 'components/MaxWidth';
 
@@ -37,8 +39,9 @@ const ReviewPage = (props) => {
     const [visibility, setVisibility] = React.useState('');
     //where the files are stored along with their urls
     const [fileRecords, setFileRecords] = React.useState([]);
-    const [visibilityHover, setVisibilityHover] = React.useState(undefined)
+    const [visibilityHover, setVisibilityHover] = React.useState(undefined);
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
+    const [buddyArray, setBuddyArray] = React.useState([]);
 
     React.useEffect(() => {
         if (!router.isReady) return;
@@ -214,6 +217,10 @@ const ReviewPage = (props) => {
 
     }
 
+    const addBuddyEmails = ( updatedBuddies ) => {
+        setBuddyArray(updatedBuddies);
+    }
+
     return (
         <Layout>
             <MaxWidth>
@@ -258,12 +265,19 @@ const ReviewPage = (props) => {
                             <RenderUrls></RenderUrls>
                         </div>
                     </div>
+                    <div className={styles.spacer}>
+                        <div className={styles.reviewtitle}>
+                            <DiveBuddies ScubaSnorkel={activity} addBuddyEmails={addBuddyEmails}></DiveBuddies>
+                             
+                        </div>
+                    </div>
                     <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
                         'activity_type': activity,
                         rating,
                         text,
                         visibility,
                         beach_id: beachid,
+                        buddy_array: buddyArray,
                     })}>
                         Submit
                     </PrimaryButton>
