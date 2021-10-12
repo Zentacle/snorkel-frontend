@@ -2,8 +2,6 @@ import React from "react";
 
 import styles from "./styles.module.css";
 import VizDepth from "components/BeachPage/VizDepth/VizDepth";
-import BeachReviews from "components/BeachPage/BeachReviews/BeachReviews";
-import ReviewSummary from 'components/BeachPage/ReviewSummary';
 import Patron from 'components/Patron';
 import SectionTitle from "components/SectionTitle";
 
@@ -15,23 +13,18 @@ const EntryMap = ({ src }) => (
 )
 
 const BeachInfo = ({
-    id,
     area_two,
     area_two_id,
     description,
     difficulty,
     entry_map,
-    isSingularReview,
     last_review_date,
     last_review_viz,
     name,
     location_city,
-    ratings,
     rating,
     num_reviews,
-    reviews,
     max_depth,
-    url,
     tides,
     stationData,
 }) => {
@@ -73,17 +66,6 @@ const BeachInfo = ({
             {
                 (area_two_id == 2 || area_two_id == 1) && <Patron areaPatronKey={area_two.short_name} name={name}/>
             }
-            <ReviewSummary
-                ratings={ ratings }
-                rating={ rating }
-                num_reviews={num_reviews}
-            />
-            <BeachReviews
-                beachid={id}
-                url={url}
-                reviews={reviews}
-                isSingularReview={isSingularReview}
-            />
         </div>
     )
 }
