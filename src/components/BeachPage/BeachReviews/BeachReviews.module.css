@@ -27,6 +27,11 @@
     padding: 16px;
 }
 
+.viewAll {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
 @-webkit-keyframes gradient-movement {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}

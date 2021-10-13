@@ -53,3 +53,9 @@
 .outerprofile {
     margin-left: 8px;
 }
+
+@media (max-width: 720px) {
+    .outerprofile {
+        display: none;
+    }
+}

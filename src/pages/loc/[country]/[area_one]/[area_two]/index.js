@@ -8,7 +8,7 @@ export async function getStaticProps(context) {
   const props = {};
   let res;
   res = await fetch(
-    `${rootDomain}/spots/get?sort=top&area_one=${area_one}&country=${country}&area_two=${area_two}`
+    `${rootDomain}/spots/get?sort=top&area_one=${area_one}&country=${country}&area_two=${area_two}&limit=none`
   )
   const data = await res.json()
   props['default'] = data.data || null;
@@ -22,7 +22,7 @@ export async function getStaticProps(context) {
     }
   }
 
-  props['loc'] = 'locality'
+  props['loc'] = 'area_two'
   props['country'] = country
   props['area_one'] = area_one
   props['area_two'] = area_two

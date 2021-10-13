@@ -25,7 +25,7 @@ const PhotoGrid = ({ signedUrls }) => {
 
     return (
         <div className={styles.gridcontainer}>
-            { settings.photos && <ReactPhotoCollage {...settings} /> }
+            {settings.photos && <ReactPhotoCollage {...settings} />}
         </div>
 
     )
@@ -40,45 +40,43 @@ const IndividualReview = ({ review, user }) => {
     return (
         <div className={styles.outercontainer}>
             <div className={styles.container}>
-                <div>
-                    <div className={styles.outerupper}>
-                        <div className={styles.imageouter}>
-                            <ProfilePic user={user} size={48}/>
-                        </div>
-                        <div className={styles.centerouter}>
-                            {
-                                user.username
-                                    ? (
-                                        <Link href={`/user/${user.username}`}>
-                                            <a className={styles.centerupper}>
-                                                {user.display_name}
-                                            </a>
-                                        </Link>
-                                    ) : <div className={styles.centerupper}>{user.display_name}</div>
-                            }
-                            <div className={styles.centerlower}>
-                                <Rating
-                                    fractions={2}
-                                    emptySymbol={(<Star className={styles.starempty}></Star>)}
-                                    fullSymbol={(<Star className={styles.starfull}></Star>)}
-                                    initialRating={review.rating}
-                                    readonly
-                                />
-                                <span className={styles.reviewDate}>{review_date}</span>
-                            </div>
+                <div className={styles.outerupper}>
+                    <div className={styles.imageouter}>
+                        <ProfilePic user={user} size={48} />
+                    </div>
+                    <div className={styles.centerouter}>
+                        {
+                            user.username
+                                ? (
+                                    <Link href={`/user/${user.username}`}>
+                                        <a className={styles.centerupper}>
+                                            {user.display_name}
+                                        </a>
+                                    </Link>
+                                ) : <div className={styles.centerupper}>{user.display_name}</div>
+                        }
+                        <div className={styles.centerlower}>
+                            <Rating
+                                fractions={2}
+                                emptySymbol={(<Star className={styles.starempty}></Star>)}
+                                fullSymbol={(<Star className={styles.starfull}></Star>)}
+                                initialRating={review.rating}
+                                readonly
+                            />
+                            <span className={styles.reviewDate} title={review.id}>{review_date}</span>
                         </div>
                     </div>
-                    <div className={styles.activityContainer}>
-                        <span className={styles.activity}>{review.activity_type}</span>
-                    </div>
-                    <div className={styles.outerlower}>
-                        {review.text}
-                    </div>
+                </div>
+                <div className={styles.activityContainer}>
+                    <span className={styles.activity}>{review.activity_type}</span>
+                </div>
+                <div className={styles.reviewText}>
+                    {review.text}
                 </div>
             </div>
             {review.shorediving_data && <div className={styles.helper}>Originally posted on shorediving.com</div>}
             {review.signedUrls && review.signedUrls.length ? <div className={styles.photos}>
-                <PhotoGrid signedUrls={review.signedUrls}/>
+                <PhotoGrid signedUrls={review.signedUrls} />
             </div> : <></>}
         </div>
     )

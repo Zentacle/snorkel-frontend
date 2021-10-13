@@ -6,7 +6,7 @@ export async function getStaticProps(context) {
   const country = context.params.country;
   const props = {};
   const res = await fetch(
-    `${rootDomain}/spots/get?sort=top&area_one=${area_one}&country=${country}`
+    `${rootDomain}/spots/get?sort=top&area_one=${area_one}&country=${country}&limit=none`
   )
   const data = await res.json()
   props['default'] = data.data || null;
@@ -20,12 +20,13 @@ export async function getStaticProps(context) {
     }
   }
 
-  props['loc'] = 'area_two'
+  props['loc'] = 'area_one'
   props['country'] = country
   props['area_one'] = area_one
 
   return {
     props, // will be passed to the page component as props
+    revalidate: 3600,
   }
 }
 

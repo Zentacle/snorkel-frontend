@@ -40,13 +40,13 @@ const DiveLog = (props) => {
   return (
     <Layout>
       <Head>
-        <title key="title">{`Zentacle - ${user.display_name} (${user.username}) Dive Log`}</title>
+        <title key="title">{`${user.display_name} | Zentacle - (${user.username}) Dive Log`}</title>
         <meta
           name="description"
           content={`${user.display_name} (${user.username}) is a scuba diver and snorkeler with ${user.reviews.length} dives`}
           key="description"
         />
-        <meta property="og:title" content={`Zentacle - ${user.display_name}'s Dive Log`} key="og-title" />
+        <meta property="og:title" content={`${user.display_name}'s Dive Log on Zentacle`} key="og-title" />
         <meta
           property="og:description"
           content={`${user.display_name} (${user.username}) is a scuba diver and snorkeler with ${user.reviews.length} dives`}

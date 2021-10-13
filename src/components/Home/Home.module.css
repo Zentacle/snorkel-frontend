@@ -80,6 +80,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: 32px 8px 0;
+    justify-content: space-around;
 }
 
 .location {
@@ -114,6 +115,7 @@
 
 .marginContainer {
     padding: 0 16px;
+    white-space: pre-line;
 }
 
 .search {

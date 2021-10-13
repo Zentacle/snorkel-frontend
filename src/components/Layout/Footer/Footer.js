@@ -48,6 +48,7 @@ const Footer = () => {
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mayank@zentacle.com">Suggest an edit</a>
             <Link href='https://www.shorediving.com'><a className={styles.footerLink}>ShoreDiving.com</a></Link>
             <Link href='https://www.patreon.com/ShoreDiving'><a className={styles.footerLink}>Donate</a></Link>
+            <Link href='https://www.shorediving.com/content/dive_clubs.htm'><a className={styles.footerLink}>Dive Clubs</a></Link>
           </div>
         </div>
         <div className={styles.rightColumn}>

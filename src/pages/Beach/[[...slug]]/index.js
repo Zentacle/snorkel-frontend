@@ -15,6 +15,8 @@ import Breadcrumbs from 'components/Breadcrumbs';
 export async function getStaticProps(context) {
     const startTime = Date.now();
     const beachid = context.params.slug[0];
+    const beachNameFromURL = context.params.slug[1];
+
     const res = await fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
         method: 'GET',
         headers: {
@@ -28,7 +30,17 @@ export async function getStaticProps(context) {
             }
         }
     }
+
     const beach_data = await res.json()
+
+    if (`/Beach/${beachid}/${beachNameFromURL}` != beach_data.data.url) {
+        return {
+            redirect: {
+                destination: beach_data.data.url,
+                permanent: true,
+            }
+        }
+    }
 
     let response = await fetch(`${rootDomain}/review/get?beach_id=${beachid}`, {
         method: 'GET',
@@ -41,11 +53,15 @@ export async function getStaticProps(context) {
 
     let stationData = null;
     if (beach_data.data.latitude) {
-        response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-        console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-        const stations_data = await response.json()
-        if (stations_data.stationList && stations_data.stationList.length) {
-            stationData = stations_data.stationList[0]
+        try {
+            response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+            console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+            const stations_data = await response.json()
+            if (stations_data.stationList && stations_data.stationList.length) {
+                stationData = stations_data.stationList[0]
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -76,7 +92,7 @@ export async function getStaticProps(context) {
             'tides': tides,
             'stationData': stationData,
         }, // will be passed to the page component as props
-        revalidate: 3600,
+        revalidate: 60,
     }
 }
 
@@ -134,19 +150,23 @@ const Beach = (props) => {
         ? 'ShoreDiving.com'
         : 'Zentacle'
 
-    let canonicalURL = props.isShorediving && beach.sd_url
-        ? `https://www.shorediving.com${beach.sd_url}/index.htm`
-        : `https://www.zentacle.com${beach.url}`
+    let canonicalURL = `https://www.zentacle.com${beach.url}`
+
+    const description = beach.description
+        ? `${beach.description} ${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel site in ${beach.location_city}.`
+        : `${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel site in ${beach.location_city}.`
+
+    const pageTitle = `${beach.name} in ${beach.location_city} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`
 
     return (
         <Layout isShorediving={props.isShorediving}>
             <Head>
-                <title key="title">{`${siteName} - ${beach.name} - Scuba Diving and Snorkel Reviews, Maps, and Photos`}</title>
-                <meta property="og:title" content={`${siteName} - ${beach.name} - Scuba Diving and Snorkel Reviews, Maps, and Photos`} key="og-title" />
-                <meta property="og:description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="og-description" />
+                <title key="title">{pageTitle}</title>
+                <meta property="og:title" content={pageTitle} key="og-title" />
+                <meta property="og:description" content={description} key="og-description" />
                 <meta property="og:image" content={beach.hero_img} key="og-image" />
                 <meta property="og:url" content={canonicalURL} key="og-url" />
-                <meta name="description" content={`${beach.name} is a ${beach.rating}-star rated scuba dive and snorkel destination in ${beach.location_city}. ${beach.description}`} key="description" />
+                <meta name="description" content={description} key="description" />
                 <link rel="canonical" href={canonicalURL} key="canonical"/>
                 {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
             </Head>
@@ -159,6 +179,7 @@ const Beach = (props) => {
                 <BeachPage
                     beach={beach}
                     beachid={beach.id}
+                    isSingularReview={props.isSingularReview}
                     reviews={props.reviews}
                     nearbyBeaches={nearbyBeaches}
                     tides={props.tides}

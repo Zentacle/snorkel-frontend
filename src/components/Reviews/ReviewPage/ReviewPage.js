@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
-import { useRouter } from 'next/router';
 import Cookies from 'js-cookie'
 import { toaster } from 'evergreen-ui';
 
@@ -12,13 +11,14 @@ import DiveBuddies from "./DiveBuddies/DiveBuddies";
 import Layout from "../../Layout/Layout";
 import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
-import { rootDomain } from 'lib/constants';
+import { clientSideDomain, rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
 import CancelIcon from '@material-ui/icons/Cancel';
 // import CheckIcon from '@material-ui/icons/Check';
 import { v4 as uuidv4 } from 'uuid';
 import MaxWidth from 'components/MaxWidth';
+import CheckIcon from '@material-ui/icons/Check';
 
 const visibilityLabel = {
     1: 'Extremely poor (<5ft)',
@@ -29,12 +29,8 @@ const visibilityLabel = {
 }
 
 const ReviewPage = (props) => {
-
-    const router = useRouter()
-    const { beachid } = router.query
     const [activity, setActivity] = React.useState('snorkel');
     const [rating, setRating] = React.useState(0);
-    const [name, setName] = React.useState(props.name);
     const [text, setText] = React.useState('');
     const [visibility, setVisibility] = React.useState('');
     //where the files are stored along with their urls
@@ -42,23 +38,7 @@ const ReviewPage = (props) => {
     const [visibilityHover, setVisibilityHover] = React.useState(undefined);
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
     const [buddyArray, setBuddyArray] = React.useState([]);
-
-    React.useEffect(() => {
-        if (!router.isReady) return;
-
-        if (!props.name) {
-            fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                return response.json();
-            }).then(data => {
-                setName(data.data.name);
-            })
-        }
-    }, [router.isReady])
+    const [email, setEmail] = React.useState('');
 
     //creates an image for each of the urls the user has submitted
     const RenderUrls = () => {
@@ -130,7 +110,7 @@ const ReviewPage = (props) => {
             await uploadPhoto(file);
         }
 
-        fetch(`${rootDomain}/review/add`, {
+        fetch(`${clientSideDomain}/review/add`, {
             method: 'POST',
             body: JSON.stringify({
                 ...body,
@@ -220,70 +200,101 @@ const ReviewPage = (props) => {
     const addBuddyEmails = ( updatedBuddies ) => {
         setBuddyArray(updatedBuddies);
     }
+    
+    const save_email = () => {
+        if (email !== '') {
+            addBuddyEmails([...buddyArray, email]);
+        }
+        setEmail('');
+    }
+
+    const handleChange = (e) => {
+        setEmail(e.target.value);
+    }
+
 
     return (
-        <Layout>
-            <MaxWidth>
-                <div className={styles.container}>
-                    <div className={styles.beachtitle}>{name}</div>
-                    <div className={styles.spacer}>
-                        <ScubaSnorkel value={activity} onChange={setActivity}></ScubaSnorkel>
+        <MaxWidth>
+            <div className={styles.container}>
+                <div className={styles.beachtitle}>{props.name}</div>
+                <div className={styles.spacer}>
+                    <ScubaSnorkel value={activity} onChange={setActivity}></ScubaSnorkel>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Rating
                     </div>
-                    <div className={styles.spacer}>
-                        <div className={styles.reviewtitle}>
-                            Rating
-                        </div>
-                        <StarRate value={rating} onChange={setRating}></StarRate>
+                    <StarRate value={rating} onChange={setRating}></StarRate>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Review
                     </div>
-                    <div className={styles.spacer}>
-                        <div className={styles.reviewtitle}>
-                            Review
-                        </div>
-                        <textarea value={text} onChange={e => setText(e.target.value)} className={styles.paragraphreview}>
-                        </textarea>
+                    <textarea value={text} onChange={e => setText(e.target.value)} className={styles.paragraphreview}>
+                    </textarea>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Visibility
                     </div>
-                    <div className={styles.spacer}>
-                        <div className={styles.reviewtitle}>
-                            Visibility
-                        </div>
-                        <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
-                        <div className={styles.visibilityLabel}>{visibilityLabel[visibility || visibilityHover]}</div>
+                    <StarRate value={visibility} onChange={setVisibility} onHover={setVisibilityHover}></StarRate>
+                    <div className={styles.visibilityLabel}>{visibilityLabel[visibility || visibilityHover]}</div>
+                </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        Photos
                     </div>
-                    <div className={styles.spacer}>
-                        <div className={styles.reviewtitle}>
-                            Photos
-                        </div>
-                        <div className={styles.photoscontainer}>
-                            <div className={styles.photooutercontainer}>
-                                <div className={styles.individualphotoupload}>
-                                    <div className={styles.containerdropzone}>
-                                        <DropZoneArea></DropZoneArea>
-                                        <br />
-                                    </div>
+                    <div className={styles.photoscontainer}>
+                        <div className={styles.photooutercontainer}>
+                            <div className={styles.individualphotoupload}>
+                                <div className={styles.containerdropzone}>
+                                    <DropZoneArea></DropZoneArea>
+                                    <br />
                                 </div>
                             </div>
-                            <RenderUrls></RenderUrls>
                         </div>
+                        <RenderUrls></RenderUrls>
                     </div>
                     <div className={styles.spacer}>
                         <div className={styles.reviewtitle}>
-                            <DiveBuddies ScubaSnorkel={activity} addBuddyEmails={addBuddyEmails}></DiveBuddies>
+                            <DiveBuddies ScubaSnorkel={activity} addBuddyEmails={addBuddyEmails} buddyEmails={buddyArray}></DiveBuddies>
                              
                         </div>
                     </div>
-                    <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
-                        'activity_type': activity,
-                        rating,
-                        text,
-                        visibility,
-                        beach_id: beachid,
-                        buddy_array: buddyArray,
-                    })}>
-                        Submit
-                    </PrimaryButton>
+                <section>
+                    {buddyArray.length < 5 ? (         
+                        //input field
+                        <div className={styles.enter_email_div} onKeyPress={(e) => {e.key === 'Enter' ? save_email() : ''}}>
+                            <input 
+                                value={email} 
+                                onChange={handleChange} 
+                                className={styles.email_input}
+                                placeholder="email"
+                            />
+                            <button className={styles.btn}>
+                                <CheckIcon fontSize="small" onClick={() => {save_email()}}></CheckIcon>
+                            </button>
+                        </div>
+                    ) : (
+                        //no more inputs available
+                        <div className={styles.buddyEmail}>
+                            Sorry, you can only list 5 buddies
+                        </div>
+                    )}
+                </section>
                 </div>
-            </MaxWidth>
-        </Layout>
+                <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
+                    'activity_type': activity,
+                    rating,
+                    text,
+                    visibility,
+                    beach_id: props.id,
+                    buddy_array: buddyArray,
+                })}>
+                    Submit
+                </PrimaryButton>
+            </div>
+        </MaxWidth>
     )
 }
 

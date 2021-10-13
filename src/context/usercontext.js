@@ -6,7 +6,7 @@ const UserContext = React.createContext();
 function userReducer(state, user) {
     if (user == null) {
         fetch(`${clientSideDomain}/user/me`, {
-            method: 'POST',
+            method: 'GET',
             //body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json'

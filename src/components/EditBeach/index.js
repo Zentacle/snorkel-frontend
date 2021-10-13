@@ -2,7 +2,7 @@
 import styles from "components/EditBeach/EditBeach.module.css"
 import { useRouter } from "next/router";
 import React from "react";
-import { rootDomain } from "lib/constants";
+import { clientSideDomain, rootDomain } from "lib/constants";
 import SignupInput from "components/SignupInput";
 import { useDropzone } from "react-dropzone";
 import { v4 as uuidv4 } from 'uuid';
@@ -26,6 +26,14 @@ const BeachEditComponent = () => {
 
     let router = useRouter();
     const { beachid } = router.query;
+
+    const setLatLng = (latitude, longitude) => {
+        setNewData({
+            ...newData,
+            latitude,
+            longitude,
+        });
+    }
 
     const conductSearch = (name) => () => {
         searchGoogleMapsAPI(name).then(results => {
@@ -154,7 +162,7 @@ const BeachEditComponent = () => {
         };
 
         async function patchBeach(patchBody) {
-            fetch(`${rootDomain}/spots/patch`, {
+            fetch(`${clientSideDomain}/spots/patch`, {
                 method: 'PATCH',
                 body: JSON.stringify({
                     ...patchBody
@@ -232,6 +240,7 @@ const BeachEditComponent = () => {
                     setSelected={setSelected}
                     selectedGooglePlace={selectedGooglePlace}
                     googlePlaceCandidates={googlePlaceCandidates}
+                    setLatLng={setLatLng}
                 />
                 <div>google_place_id</div>
                 <SignupInput value={getValueForKey('google_place_id')} onChange={changeNewData('google_place_id')}></SignupInput>

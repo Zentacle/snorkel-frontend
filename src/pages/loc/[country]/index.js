@@ -9,6 +9,7 @@ import { rootDomain } from "src/lib/constants";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
+import Patron from 'components/Patron';
 
 export async function getStaticProps(context) {
   const country = context.params.country;
@@ -29,11 +30,12 @@ export async function getStaticProps(context) {
     }
   }
 
-  props['loc'] = 'area_one'
+  props['loc'] = 'country'
   props['country'] = country
 
   return {
     props, // will be passed to the page component as props
+    revalidate: 3600,
   }
 }
 
@@ -50,13 +52,20 @@ export async function getStaticPaths() {
   }
 }
 
+const getPillLocalityLevel = {
+  'country': 'area_one',
+  'area_one': 'area_two',
+  'area_two': 'locality',
+  'locality': 'locality',
+}
+
 const Home = (props) => {
   const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
   React.useEffect(() => {
-    const filter = {}
-    let url = `${rootDomain}/locality/${props.loc}`
+    const localityType = getPillLocalityLevel[props.loc];
+    let url = `${rootDomain}/locality/${localityType}`
     if (props.country) {
       url += `?country=${props.country}`
     }
@@ -75,10 +84,33 @@ const Home = (props) => {
 
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
-  const title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
-  const description = `Search dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
+  const isBigIsland = (
+    props.area.short_name == 'big-island'
+    || (
+      props.area_two
+      && props.area_two.short_name == 'big-island'
+    )
+  )
 
-  const area = props.area;
+  const isMaui = (
+    props.area.short_name == 'maui'
+    || (
+      props.area_two
+      && props.area_two.short_name == 'maui'
+    )
+  )
+
+  let areaPatronKey = null;
+  if (props.loc === 'locality') {
+    areaPatronKey = props.area_two.short_name;
+  } else if (props.loc === 'area_two') {
+    areaPatronKey = props.area.short_name
+  }
+
+  const hasPatron = isMaui || isBigIsland;
+
+  const title = `Top Snorkel and Scuba Dive Sites in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
+  const description = `Top scuba dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
 
   return (
     <Layout>
@@ -88,29 +120,36 @@ const Home = (props) => {
         <meta property="og:description" content={description} key="og:description" />
         <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
         <meta name="description" content={description} key="description" />
+        {props.area.url && <link rel="canonical" href={`https://www.zentacle.com${props.area.url}`}/>}
       </Head>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.marginContainer}>
             <Breadcrumbs
-              country={area.country}
-              area_one={area.area_one}
-              area_two={area.area_two}
+              country={props.area.country}
+              area_one={props.area.area_one}
+              area_two={props.area.area_two}
             />
           </div>
-          <div className={styles.locationContainer}>
-            {areas.map(area => (
-              <Link key={area.short_name} href={area.url}>
-                <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
-                  {area.name}
-                </a>
-              </Link>)
-            )}
-          </div>
+          { areas.length
+            ? <div className={styles.locationContainer}>
+              {areas.map(area => (
+                <Link key={area.short_name} href={area.url}>
+                  <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
+                    {area.name}
+                  </a>
+                </Link>)
+              )}
+            </div>
+            : <></>
+          }
           <h1 className={styles.areaTitle}>Top Snorkeling and Scuba Diving in {props.area.name}</h1>
           <div className={styles.marginContainer}>
             {props.area.description}
           </div>
+          {
+              hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name}/>
+          }
           <div>
             {
               props.default.map(location => (

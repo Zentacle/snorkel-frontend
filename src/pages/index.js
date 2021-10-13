@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -29,12 +29,6 @@ export async function getStaticProps(context) {
       notFound: true,
     }
   }
-
-  props['area'] = {
-    'name': 'the World',
-  }
-
-  props['loc'] = 'country';
 
   return {
     props, // will be passed to the page component as props
@@ -67,14 +61,7 @@ const Home = (props) => {
   }, [state.user])
 
   React.useEffect(() => {
-    const filter = {}
-    let url = `${rootDomain}/locality/${props.loc}`
-    if (props.country) {
-      url += `?country=${props.country}`
-    }
-    if (props.area_one) {
-      url += `&area_one=${props.area_one}`
-    }
+    let url = `${rootDomain}/locality/country`
     fetch(url).then(res =>
       res.json()
     ).then(data => {
@@ -85,25 +72,25 @@ const Home = (props) => {
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
   let title = "Zentacle - Snorkel and Scuba Diving Reviews, Maps, and Photos"
-  let description = "Search dive and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you."
-  if (props.area && props.area.name && props.area.name !== 'the World') {
-    title = `Zentacle - ${props.area.name} - Snorkel and Scuba Diving Reviews, Maps, and Photos`;
-    description = `Search dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
+  if (props.isShorediving) {
+    title = "ShoreDiving.com - Shore Diving, Snorkeling, and Scuba Diving Reviews, Maps, and Photos"
   }
+  let description = "Search scuba diving, shore diving and snorkel spots around the world with maps, detailed reviews, and photos curated by oceans lovers like you."
 
   return (
-    <Layout>
+    <Layout isShorediving={props.isShorediving}>
       <Head>
         <title>{title}</title>
         <meta property="og:title" content={title} key="og:title" />
         <meta property="og:description" content={description} key="og:description" />
         <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
         <meta name="description" content={description} key="description" />
+        <link rel="canonical" href="https://www.zentacle.com" />
       </Head>
       <div className={styles.container}>
         <div className={styles.image}>
           <div className={styles.imageinner} style={{ 'backgroundImage': `url(\'/hero.jpg\')` }}>
-            <h2 className={styles.pagetitle}>Find your next underwater adventure</h2>
+            <h2 className={styles.pagetitle}>Find your next shore diving adventure</h2>
           </div>
           <div className={styles.menu}>
             <div className={styles.search}>
@@ -114,31 +101,40 @@ const Home = (props) => {
         <Banner isShown={shouldShowBanner}></Banner>
         <div className={styles.contentContainer}>
           <div className={styles.locationContainer}>
-            {areas.map(area => (
+            {areas.slice(0, 7).map(area => (
               <Link key={area.short_name} href={area.url}>
-                <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
+                <a className={styles.location}>
                   {area.name}
                 </a>
               </Link>)
             )}
           </div>
-          <h1 className={styles.areaTitle}>Best Snorkeling and Scuba Diving in {props.area.name}</h1>
+          <h1 className={styles.areaTitle}>Best Snorkeling and Scuba Diving Sites in the World</h1>
           {recs && Object.keys(recs).length > 0 && <div>
             <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
             <Carousel data={recs}></Carousel>
           </div>}
           <div>
-            <h2 className={styles.carouseltitle}>{`Most Popular Snorkel and Scuba Diving Locations in ${props.area.name}`}</h2>
+            <h2 className={styles.carouseltitle}>Most Popular Snorkel and Scuba Diving Locations in the World</h2>
             <Carousel data={props.default}></Carousel>
           </div>
           <div>
-            <h2 className={styles.carouseltitle}>{`Top Rated Snorkel and Scuba Diving Locations in ${props.area.name}`}</h2>
+            <h2 className={styles.carouseltitle}>Top Rated Snorkel and Scuba Diving Locations in the World</h2>
             <Carousel data={props.top}></Carousel>
           </div>
           <div>
             <div className={styles.carouseltitle}>Conditions Reported Recently</div>
             <Carousel data={props.latest}></Carousel>
           </div>
+          {areas.length > 7 && <div className={styles.locationContainer}>
+            {areas.slice(7).map(area => (
+              <Link key={area.short_name} href={area.url}>
+                <a className={styles.location}>
+                  {area.name}
+                </a>
+              </Link>)
+            )}
+          </div>}
         </div>
       </div>
     </Layout>
