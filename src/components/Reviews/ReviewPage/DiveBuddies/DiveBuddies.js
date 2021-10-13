@@ -2,7 +2,6 @@ import React from "react";
 import EditableBuddy from "./Buddy.js";
 
 
-
 const DiveBuddies = (props) => {
     const ScubaSnorkel = props.ScubaSnorkel;
     const buddyEmails = props.buddyEmails;
@@ -15,8 +14,8 @@ const DiveBuddies = (props) => {
         let newEmails = [];
 
         if (email !== '') { //updates within array
-            newEmails = buddyEmails.map((email, index) => {
-                return (index===i ? email : email);
+            newEmails = buddyEmails.map((current_email, index) => {
+                return (index===i ? email : current_email);
             })
         } else { //removes from array
             newEmails = [...buddyEmails];

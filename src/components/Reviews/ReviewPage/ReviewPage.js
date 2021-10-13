@@ -255,33 +255,33 @@ const ReviewPage = (props) => {
                         </div>
                         <RenderUrls></RenderUrls>
                     </div>
-                    <div className={styles.spacer}>
+                </div>
+                <div className={styles.spacer}>
                         <div className={styles.reviewtitle}>
-                            <DiveBuddies ScubaSnorkel={activity} addBuddyEmails={addBuddyEmails} buddyEmails={buddyArray}></DiveBuddies>
-                             
+                            <DiveBuddies ScubaSnorkel={activity} addBuddyEmails={addBuddyEmails} buddyEmails={buddyArray}></DiveBuddies> 
                         </div>
-                    </div>
-                <section>
-                    {buddyArray.length < 5 ? (         
-                        //input field
-                        <div className={styles.enter_email_div} onKeyPress={(e) => {e.key === 'Enter' ? save_email() : ''}}>
-                            <input 
-                                value={email} 
-                                onChange={handleChange} 
-                                className={styles.email_input}
-                                placeholder="email"
-                            />
-                            <button className={styles.btn}>
-                                <CheckIcon fontSize="small" onClick={() => {save_email()}}></CheckIcon>
-                            </button>
-                        </div>
-                    ) : (
-                        //no more inputs available
-                        <div className={styles.buddyEmail}>
-                            Sorry, you can only list 5 buddies
-                        </div>
-                    )}
-                </section>
+                    
+                    <section>
+                        {buddyArray.length < 5 ? (         
+                            //input field
+                            <div className={styles.enter_email_div} onKeyPress={(e) => {e.key === 'Enter' ? save_email() : ''}}>
+                                <input 
+                                    value={email} 
+                                    onChange={handleChange} 
+                                    className={styles.email_input}
+                                    placeholder="email"
+                                />
+                                <button className={styles.btn}>
+                                    <CheckIcon fontSize="small" onClick={() => {save_email()}}></CheckIcon>
+                                </button>
+                            </div>
+                        ) : (
+                            //no more inputs available
+                            <div className={styles.buddyEmail}>
+                                Sorry, you can only list 5 buddies
+                            </div>
+                        )}
+                    </section>
                 </div>
                 <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
                     'activity_type': activity,
