@@ -64,7 +64,7 @@ const BeachInfo = ({
                 })}
                 </> : <></> }
             {
-                (area_two_id == 2 || area_two_id == 1) && <Patron areaPatronKey={area_two.short_name} name={name}/>
+                (area_two_id == 2 || area_two_id == 1) && area_two && <Patron areaPatronKey={area_two.short_name} name={name}/>
             }
         </div>
     )
