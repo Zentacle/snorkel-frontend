@@ -23,7 +23,7 @@ const Patron = (props) => {
   const getAreaPatronWebsiteLink = (areaPatronKey) => {
     return areaPatronKey == 'big-island'
       ? "https://www.konashoredivers.com"
-      : "https://www.mauidreams.com"
+      : "https://www.mauidreamsdiveco.com"
   }
 
   const getAreaPatronFareharborLink = (areaPatronKey) => {
@@ -74,7 +74,7 @@ const Patron = (props) => {
 
   return (
     <div>
-        <SectionTitle text={`${props.name} Patrons`} />
+        <SectionTitle text='Find a Guide' />
         <div className={styles.description}>
             <a
                 onClick={ sendClickEvent }
