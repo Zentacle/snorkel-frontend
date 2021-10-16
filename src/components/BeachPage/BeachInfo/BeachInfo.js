@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image';
 
 import styles from "./styles.module.css";
 import VizDepth from "components/BeachPage/VizDepth/VizDepth";
@@ -47,21 +48,18 @@ const BeachInfo = ({
             { tidesArray.length ? <>
                 <SectionTitle text={`${name} Tide Chart and Surf Report (Beta)`}/>
                 <div className={styles.helper}>Nearest tide station in {stationData.name}, {stationData.region} ({Math.round(stationData.distance * 100) / 100} mi away)</div>
-                <div className={`${styles.tideRow} ${styles.tideRowHeader}`}>
-                    <div className={styles.tideItem}>Date</div>
-                    <div className={styles.tideItem}>Height</div>
-                    <div className={styles.tideItem}>High/Low Tide</div>
+                <div className={styles.tideContainer}>
+                    { tidesArray.slice(0, 5).map(tide => {
+                        const tideData = new Date(`${tide.t.replace(/ /g,"T")}Z`);
+                        return (
+                            <div className={styles.tideRow} key={tide.t}>
+                                <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tideData.toLocaleString([], {'weekday': 'long'})}</div>
+                                <div className={styles.tideImage}><Image src={tide.type === 'H' ? '/high_tide.png' : '/low_tide.png'} height='30' width='30'/></div>
+                                <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tideData.toLocaleString([], {hour: 'numeric', minute:'2-digit'})} / {tide.v}ft</div>
+                            </div>
+                        )
+                    })}
                 </div>
-                { tidesArray.slice(0, 5).map(tide => {
-                    const tideData = new Date(`${tide.t.replace(/ /g,"T")}Z`);
-                    return (
-                        <div className={styles.tideRow} key={tide.t}>
-                            <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tideData.toLocaleString([], {'weekday': 'short', 'day': 'numeric', 'month': 'short', hour: 'numeric', minute:'2-digit'})}</div>
-                            <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tide.v}ft</div>
-                            <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tide.type}</div>
-                        </div>
-                    )
-                })}
                 </> : <></> }
             {
                 (area_two_id == 2 || area_two_id == 1) && area_two && <Patron areaPatronKey={area_two.short_name} name={name}/>
