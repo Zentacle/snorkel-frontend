@@ -77,7 +77,7 @@ const Patron = (props) => {
         <SectionTitle text='Find a Guide' />
         <div className={styles.description}>
             <a
-                onClick={ sendClickEvent }
+                onClick={ sendClickEvent(props.areaPatronKey) }
                 className={styles.patronName}
                 href={getAreaPatronWebsiteLink(props.areaPatronKey)}
             >
