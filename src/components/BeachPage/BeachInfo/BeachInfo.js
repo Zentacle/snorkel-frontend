@@ -27,7 +27,6 @@ const BeachInfo = ({
     num_reviews,
     max_depth,
     tides,
-    stationData,
 }) => {
     const [tidesArray, setTides] = React.useState(tides)
 
@@ -47,7 +46,6 @@ const BeachInfo = ({
             { entry_map && <EntryMap src={ entry_map }/> }
             { tidesArray.length ? <>
                 <SectionTitle text={`${name} Tide Chart and Surf Report (Beta)`}/>
-                <div className={styles.helper}>Nearest tide station in {stationData.name}, {stationData.region} ({Math.round(stationData.distance * 100) / 100} mi away)</div>
                 <div className={styles.tideContainer}>
                     { tidesArray.slice(0, 5).map(tide => {
                         const tideData = new Date(`${tide.t.replace(/ /g,"T")}Z`);

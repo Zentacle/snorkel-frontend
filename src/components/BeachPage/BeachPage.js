@@ -97,7 +97,6 @@ const BeachPage = (props) => {
                 {...props.beach}
                 isSingularReview={props.isSingularReview}
                 tides={props.tides}
-                stationData={props.stationData}
                 reviews={props.reviews}
             />
             <PhotoPreview

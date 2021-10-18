@@ -51,27 +51,54 @@ export async function getStaticProps(context) {
 
     const review_data = await response.json();
 
-    let stationData = null;
-    if (beach_data.data.latitude) {
-        try {
-            response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-            console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-            const stations_data = await response.json()
-            if (stations_data.stationList && stations_data.stationList.length) {
-                stationData = stations_data.stationList[0]
+    let stationId = null;
+    if (beach_data.data.noaa_station_id) {
+        stationId = beach_data.data.noaa_station_id;
+        console.log('skipping...already have noaa station')
+    }
+    else {
+        if (beach_data.data.latitude) {
+            try {
+                response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+                console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+                const stations_data = await response.json()
+                if (stations_data.stationList && stations_data.stationList.length) {
+                    stationId = stations_data.stationList[0].stationId
+                    response = await fetch(`${rootDomain}/spot/setStationId`, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            'spotId': beachid,
+                            'stationId': stationId
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                } else {
+                    response = await fetch(`${rootDomain}/spot/setStationId`, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            'spotId': beachid,
+                            'stationId': '-1'
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                }
+            } catch (error) {
+                console.log(error)
             }
-        } catch (error) {
-            console.log(error)
         }
     }
 
     let tides = []
-    if (stationData && stationData.stationId) {
+    if (stationId && stationId !== '-1') {
         var currentDate = new Date();
         var begin_date = currentDate.toISOString().slice(0,10).replace(/-/g,"");
         currentDate.setDate(currentDate.getDate() + 3); 
         var end_date = currentDate.toISOString().slice(0,10).replace(/-/g,"");
-        response = await fetch(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=${begin_date}&end_date=${end_date}&datum=MLLW&station=${stationData.stationId}&time_zone=GMT&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`)
+        response = await fetch(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=${begin_date}&end_date=${end_date}&datum=MLLW&station=${stationId}&time_zone=GMT&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`)
         const tideData = await response.json()
         if (tideData && tideData.predictions) {
             tides = tideData.predictions;
@@ -90,7 +117,6 @@ export async function getStaticProps(context) {
             'beach': beach_data.data,
             'reviews': review_data.data,
             'tides': tides,
-            'stationData': stationData,
         }, // will be passed to the page component as props
         revalidate: 60,
     }
@@ -183,7 +209,6 @@ const Beach = (props) => {
                     reviews={props.reviews}
                     nearbyBeaches={nearbyBeaches}
                     tides={props.tides}
-                    stationData={props.stationData}
                 />
             </MaxWidth>
         </Layout>
