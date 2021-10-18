@@ -82,7 +82,7 @@ const Home = (props) => {
     })
   }, [props.area])
 
-  React.useEffect(useGoogleOneTap('/', state.user), [state])
+  React.useEffect(useGoogleOneTap(props.area.url, state.user), [state])
 
   const isBigIsland = (
     props.area.short_name == 'big-island'
