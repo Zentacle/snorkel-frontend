@@ -137,6 +137,8 @@ const Beach = (props) => {
 
     const { state } = useCurrentUser();
 
+    useEffect(useGoogleOneTap(beach.url, state.user), [state])
+
     const [nearbyBeaches, setNearbyBeaches] = useState([])
     useEffect(() => setBeach(props.beach), [props.beach])
 
@@ -149,8 +151,6 @@ const Beach = (props) => {
         : 'Zentacle'
 
     let canonicalURL = `https://www.zentacle.com${beach.url}`
-
-    useEffect(useGoogleOneTap(beach.url, state.user), [state])
 
     const description = beach.description
         ? `${beach.description} ${beach.name} is a ${Math.round(beach.rating * 100) / 100}-star rated scuba dive and snorkel site in ${beach.location_city}.`
