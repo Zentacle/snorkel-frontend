@@ -22,6 +22,21 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:type" content="website" key="og:type" />
         <meta name="twitter:card" content="summary_large_image" key="twitter-card"></meta>
+        <script type="application/ld+json">
+        {{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": "https://www.zentacle.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://www.zentacle.com/search?search_term={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }}
+        </script>
       </Head>
       <UserProvider>
         <SetUser></SetUser>
