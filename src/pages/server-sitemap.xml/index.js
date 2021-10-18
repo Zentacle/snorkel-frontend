@@ -52,7 +52,25 @@ export const getServerSideProps = async (ctx) => {
     }
   ))
 
-  return getServerSideSitemap(ctx, [...spot_fields, ...user_fields, ...area_one_fields, ...area_two_fields])
+  res = await fetch('https://zentacle.com/api/locality/locality?limit=none')
+  data = await res.json()
+
+  const locality_fields = data.data.filter(location => location.url).map(location => (
+    {
+      loc: `https://www.zentacle.com${location.url}`,
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly',
+      priority: 0.5,
+    }
+  ))
+
+  return getServerSideSitemap(ctx, [
+    ...spot_fields,
+    ...user_fields,
+    ...area_one_fields,
+    ...area_two_fields,
+    ...locality_fields,
+  ])
 }
 
 const SitemapNullComponent = () => {}
