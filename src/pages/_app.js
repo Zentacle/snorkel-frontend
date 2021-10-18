@@ -25,18 +25,21 @@ function MyApp({ Component, pageProps }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "url": "https://www.zentacle.com/",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://www.zentacle.com/search?search_term={search_term_string}"
-              },
-              "query-input": "required name=search_term_string"
+            __html: {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "url": "https://www.zentacle.com/",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://www.zentacle.com/search?search_term={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+              }
             }
           }}
+          key="seo-search"
         />
       </Head>
       <UserProvider>

@@ -42,6 +42,7 @@ export default class MyDocument extends Document {
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=G-WFH58XWN7D`}
+            key="google-tag-manager"
           />
           <script
             dangerouslySetInnerHTML={{
@@ -57,6 +58,7 @@ export default class MyDocument extends Document {
                   });
                 `,
             }}
+            key="ga-setup"
           />
         </Head>
         <body>
