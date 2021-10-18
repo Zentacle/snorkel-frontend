@@ -28,7 +28,19 @@ export const getServerSideProps = async (ctx) => {
     }
   ))
 
-  return getServerSideSitemap(ctx, [...spot_fields, ...user_fields])
+  res = await fetch('https://zentacle.com/api/locality/area_one?limit=none')
+  data = await res.json()
+
+  const area_one_fields = data.data.map(location => (
+    {
+      loc: `https://www.zentacle.com${location.url}`,
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly',
+      priority: 0.7,
+    }
+  ))
+
+  return getServerSideSitemap(ctx, [...spot_fields, ...user_fields, ...area_one_fields])
 }
 
 const SitemapNullComponent = () => {}
