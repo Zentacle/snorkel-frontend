@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: {
+            __html: `{
               "@context": "https://schema.org",
               "@type": "WebSite",
               "url": "https://www.zentacle.com/",
@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
                 },
                 "query-input": "required name=search_term_string"
               }
-            }
+            }`
           }}
           key="seo-search"
         />
