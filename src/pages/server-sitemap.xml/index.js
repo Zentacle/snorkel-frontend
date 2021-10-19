@@ -43,7 +43,7 @@ export const getServerSideProps = async (ctx) => {
   res = await fetch('https://zentacle.com/api/locality/area_two?limit=none')
   data = await res.json()
 
-  const area_two_fields = data.data.map(location => (
+  const area_two_fields = data.data.filter(location => location.url).map(location => (
     {
       loc: `https://www.zentacle.com${location.url}`,
       lastmod: new Date().toISOString(),
