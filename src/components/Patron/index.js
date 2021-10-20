@@ -58,6 +58,11 @@ const Patron = (props) => {
   const sendClickEvent = (areaPatronKey) => () => {
     const itemLabel = getAreaPatronName(areaPatronKey);
 
+  gtag('event', 'conversion', {
+      'send_to': 'AW-997844434/KNNbCMXBuP0CENLL59sD',
+      'transaction_id': ''
+  });
+
     ga.event({
       action: "purchase",
       params: {
