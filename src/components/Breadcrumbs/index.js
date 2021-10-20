@@ -2,7 +2,7 @@ import Link from 'next/link';
 import SearchBar from 'components/SearchBar';
 import styles from './styles.module.css';
 
-const Breadcrumbs = ({ country, area_one, area_two }) => {
+const Breadcrumbs = ({ country, area_one, area_two, locality }) => {
     return (
         <div className={styles.locBreadcrumbContainer}>
             <div itemScope={true} itemType="http://schema.org/BreadcrumbList">
@@ -34,6 +34,17 @@ const Breadcrumbs = ({ country, area_one, area_two }) => {
                             <a className={styles.locBreadcrumb} itemProp="item">
                                 <span itemProp="name">{area_two.name}</span>
                                 <meta itemProp="position" content="3" />
+                            </a>
+                        </Link>
+                    </span>
+                }
+                {locality && locality.short_name && locality.url &&
+                    <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
+                        <span className={styles.locBreadcrumb}>›</span>
+                        <Link href={locality.url}>
+                            <a className={styles.locBreadcrumb} itemProp="item">
+                                <span itemProp="name">{locality.name}</span>
+                                <meta itemProp="position" content="4" />
                             </a>
                         </Link>
                     </span>

@@ -201,6 +201,7 @@ const Beach = (props) => {
                     country={beach.country}
                     area_one={beach.area_one}
                     area_two={beach.area_two}
+                    locality={beach.locality}
                 />
                 <BeachPage
                     beach={beach}
