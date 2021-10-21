@@ -70,6 +70,8 @@ const Patron = (props) => {
         }]
       }
     })
+
+    ga.event({ action: 'conversion', params: {'send_to': 'AW-997844434/VRQkCKW2uP0CENLL59sD'} });
   }
 
   return (

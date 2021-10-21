@@ -56,6 +56,7 @@ export default class MyDocument extends Document {
                       'domains': ['zentacle.com', 'shorediving.com']
                     }
                   });
+                  gtag('config', 'AW-997844434');
                 `,
             }}
             key="ga-setup"
