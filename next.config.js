@@ -12,6 +12,7 @@ module.exports = {
       'scontent.fhnl3-2.fna.fbcdn.net',
       'lh3.googleusercontent.com',
       'www.lovebigisland.com',
-    ]
+    ],
+    minimumCacheTTL: 60,
   }
 }
