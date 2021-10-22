@@ -9,7 +9,7 @@ import styles from "./IndividualReview.module.css";
 
 const PhotoGrid = ({ signedUrls }) => {
     const photosArray = signedUrls.map(photo => ({
-        source: photo.data
+        source: photo
     }));
     const layoutArray = [Math.min(4, photosArray.length)];
     const heightArray = ['50px'];
