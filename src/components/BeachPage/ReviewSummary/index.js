@@ -31,7 +31,28 @@ const ReviewSummary = ({ratings, rating, num_reviews}) =>{
     return (
         <div className={styles.outerdiv}>
             <Head>
-                <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" as="style" onLoad="this.onload=null;this.rel='stylesheet'"/>
+                {/* <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" as="style" onLoad="this.onload=null;this.rel='stylesheet'"/> */}
+                <style>
+                    {` .progress-bar {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        overflow: hidden;
+                        color: #fff;
+                        text-align: center;
+                        white-space: nowrap;
+                        background-color: gold;
+                        transition: width .6s ease;
+                    }
+                    .progress {
+                        display: flex;
+                        height: 1rem;
+                        overflow: hidden;
+                        font-size: .75rem;
+                        background-color: #e9ecef;
+                        border-radius: .25rem;
+                    }`}
+                </style>
             </Head>
             <div className={styles.innergrid}>
                 <div className={styles.one}>5</div>
