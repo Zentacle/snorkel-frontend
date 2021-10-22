@@ -9,7 +9,6 @@ const EditableBuddy = (props) => {
 
   const [email, setEmail] = React.useState('');
   const [isEditing, setEditing] = React.useState(false);
-  const i = props.index;
 
   useEffect(() => {
     if (props.email) {
@@ -19,7 +18,7 @@ const EditableBuddy = (props) => {
 
   const updateEmail = () => {
     setEditing(false);
-    props.updateEmailFunc(email, i)
+    props.updateEmailFunc(email, props.index)
   }
 
   return (
@@ -52,10 +51,9 @@ const EditableBuddy = (props) => {
             {email}
           </div>  
           <button className={styles.btn} onClick={() => setEditing(true)}>
-            <EditIcon fontSize='small'/>
+            <EditIcon className={styles.icon} fontSize='small'/>
           </button>
         </div>
-
 
       )}
     </section>

@@ -8,7 +8,6 @@ import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
 import DiveBuddies from "./DiveBuddies/DiveBuddies";
-import Layout from "../../Layout/Layout";
 import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
 import { clientSideDomain, rootDomain } from 'lib/constants';
@@ -256,7 +255,7 @@ const ReviewPage = (props) => {
                 </div>
                 <div className={styles.spacer}>
                     <div className={styles.reviewtitle}>
-                        <DiveBuddies ScubaSnorkel={activity} addBuddyEmails={addBuddyEmails} buddyEmails={buddyArray}></DiveBuddies> 
+                        <DiveBuddies activityType={activity} addBuddyEmails={addBuddyEmails} buddyEmails={buddyArray}></DiveBuddies> 
                     </div>
                     <section>
                         {buddyArray.length < 5 ? (         

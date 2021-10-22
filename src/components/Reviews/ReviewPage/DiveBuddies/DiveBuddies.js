@@ -3,11 +3,11 @@ import EditableBuddy from "./Buddy.js";
 
 
 const DiveBuddies = (props) => {
-    const ScubaSnorkel = props.ScubaSnorkel;
+    const activityType = props.activityType;
     const buddyEmails = props.buddyEmails;
 
     const ActivityType = () => {
-        return ScubaSnorkel.toString() === 'snorkel' ? 'Snorkel Buddies' : 'Dive Buddies'
+        return activityType === 'snorkel' ? 'Snorkel Buddies' : 'Dive Buddies'
     }
 
     const update_email = (email, i) => {
