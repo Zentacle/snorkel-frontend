@@ -1,11 +1,48 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  -webkit-animation: fade-in 1s ease;
+  -moz-animation: fade-in 1s ease;
+  animation: fade-in 1s ease;
+  animation-fill-mode: forwards;  
+}
+
+.container {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  padding: 32px;
+  padding-bottom: 64px;
+  border-radius: 16px 16px 0 0;
+  max-width: 720px;
+  width: 100%;
+  -webkit-animation: slide-up 1s ease;
+  -moz-animation: slide-up 1s ease;
+  animation: slide-up 1s ease;
+}
+
 .title {
   font-size: 18px;
   font-weight: var(--text-weight-bold);
+  text-align: center;
 }
 
 .subtitle {
   font-size: 14px;
   margin-bottom: 12px;
+  text-align: center;
+}
+
+.googleButton {
+  margin: auto;
+}
+
+.orSpacer {
+  margin: 12px auto;
 }
 
 .formContainer {
@@ -19,21 +56,42 @@
   width: 100%;
 }
 
-.formLabel {
-  font-weight: var(--text-weight-bold);
-  font-size: 12px;
-}
-
-.spacer {
-  margin: 8px 0;
-}
-
-.bottominfo{
-  width: 100%;
+.center {
   text-align: center;
+  margin: auto;
+  margin-top: 8px;
 }
 
-.createone{
-  color: blue !important;
+.notNow {
+  color: var(--primary-color);
   cursor: pointer;
+  text-align: center;
+  text-decoration: underline;
+  margin: auto;
+}
+
+@-webkit-keyframes slide-up {
+  0%{bottom:-320px}
+  100%{bottom:0}
+}
+@-moz-keyframes slide-up {
+  0%{bottom:-320px}
+  100%{bottom:0}
+}
+@keyframes slide-up {
+  0%{bottom:-320px}
+  100%{bottom:0}
+}
+
+@-webkit-keyframes fade-in {
+  0%{background-color:prgba(0,0,0,0)}
+  100%{background-color:rgba(0,0,0,0.6)}
+}
+@-moz-keyframes fade-in {
+  0%{background-color:prgba(0,0,0,0)}
+  100%{background-color:rgba(0,0,0,0.6)}
+}
+@keyframes fade-in {
+  0%{background-color:prgba(0,0,0,0)}
+  100%{background-color:rgba(0,0,0,0.6)}
 }

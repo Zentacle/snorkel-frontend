@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Error from 'next/error'
+import Cookies from 'js-cookie';
 
 import Layout from "components/Layout/Layout";
 import BeachPage from "components/BeachPage/BeachPage";
@@ -11,6 +12,7 @@ import useGoogleOneTap from 'hooks/useGoogleOneTap';
 import { useRouter } from 'next/router';
 import MaxWidth from 'components/MaxWidth';
 import Breadcrumbs from 'components/Breadcrumbs';
+import EmailBanner from 'components/EmailBanner';
 
 export async function getStaticProps(context) {
     const startTime = Date.now();
@@ -136,13 +138,26 @@ export async function getStaticPaths() {
 }
 
 const Beach = (props) => {
-    const [beach, setBeach] = useState(props.beach)
+    const [beach, setBeach] = useState(props.beach);
+    const [isShown, setIsShown] = useState(false);
 
     const router = useRouter();
+
+    let { state } = useCurrentUser();
+    const currentUser = state.user;
 
     useEffect(() => {
         sendEvent('beach_view', { site_id: beach.id });
     }, [])
+
+    useEffect(() => {
+        if (!currentUser) {
+            return;
+        }
+        if (!Cookies.get('has_seen_banner') && !currentUser.username) {
+            setTimeout(() => setIsShown(true), 30000);
+        }
+    }, [currentUser])
 
     useEffect(() => {
         if (!router.isReady) { return }
@@ -161,9 +176,7 @@ const Beach = (props) => {
         });
     }, [router.isReady, router.query.slug])
 
-    const { state } = useCurrentUser();
-
-    useEffect(useGoogleOneTap(beach.url, state.user), [state])
+    useEffect(useGoogleOneTap(beach.url, currentUser), [state])
 
     const [nearbyBeaches, setNearbyBeaches] = useState([])
     useEffect(() => setBeach(props.beach), [props.beach])
@@ -212,6 +225,7 @@ const Beach = (props) => {
                     tides={props.tides}
                 />
             </MaxWidth>
+            {isShown && <EmailBanner setIsShown={setIsShown}/>}
         </Layout>
     )
 }
