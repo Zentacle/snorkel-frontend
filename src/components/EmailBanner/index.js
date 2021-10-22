@@ -12,6 +12,10 @@ const Banner = (props) => {
   const [email, setEmail] = React.useState('');
   const router = useRouter();
 
+  React.useEffect(() => {
+    sendEvent('bottom_banner_view');
+  }, [])
+
   React.useEffect(useGoogleButton('/', {}), [])
 
   const submitEmail = () => {
