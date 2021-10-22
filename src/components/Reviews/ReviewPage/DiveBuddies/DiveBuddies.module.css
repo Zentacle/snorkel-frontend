@@ -1,0 +1,38 @@
+.email_input {
+    width: 326px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    font-weight: normal;
+}
+
+.enter_email_div {
+    display: flex;
+    align-items: center;
+}
+
+.display_email_div {
+    display: flex;
+    align-items: center;
+}
+
+.buddyEmail {
+    margin: 0px 5px;
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.icon {
+    transform: scale(0.8);
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.24);
+}

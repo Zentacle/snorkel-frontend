@@ -7,12 +7,14 @@ import { toaster } from 'evergreen-ui';
 import styles from "../ReviewPage/ReviewPage.module.css";
 import ScubaSnorkel from "./ScubaSnorkel/ScubaSnorkel";
 import StarRate from "./StarRate/StarRate";
+import DiveBuddies from "./DiveBuddies/DiveBuddies";
 import Router from "next/router";
 import PrimaryButton from 'components/PrimaryButton';
 import { clientSideDomain, rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
 import CancelIcon from '@material-ui/icons/Cancel';
+import CheckIcon from '@material-ui/icons/Check';
 import { v4 as uuidv4 } from 'uuid';
 import MaxWidth from 'components/MaxWidth';
 
@@ -33,6 +35,8 @@ const ReviewPage = (props) => {
     const [fileRecords, setFileRecords] = React.useState([]);
     const [visibilityHover, setVisibilityHover] = React.useState(undefined)
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
+    const [buddyArray, setBuddyArray] = React.useState([]);
+    const [email, setEmail] = React.useState('');
 
     //creates an image for each of the urls the user has submitted
     const RenderUrls = () => {
@@ -191,6 +195,21 @@ const ReviewPage = (props) => {
 
     }
 
+    const addBuddyEmails = ( updatedBuddies ) => {
+        setBuddyArray(updatedBuddies);
+    }
+
+    const save_email = () => {
+        if (email !== '') {
+            addBuddyEmails([...buddyArray, email]);
+        }
+        setEmail('');
+    }
+
+    const handleChange = (e) => {
+        setEmail(e.target.value);
+    }
+
     return (
         <MaxWidth>
             <div className={styles.container}>
@@ -234,12 +253,39 @@ const ReviewPage = (props) => {
                         <RenderUrls></RenderUrls>
                     </div>
                 </div>
+                <div className={styles.spacer}>
+                    <div className={styles.reviewtitle}>
+                        <DiveBuddies activityType={activity} addBuddyEmails={addBuddyEmails} buddyEmails={buddyArray}></DiveBuddies> 
+                    </div>
+                    <section>
+                        {buddyArray.length < 5 ? (         
+                            //input field
+                            <div className={styles.enter_email_div} onKeyPress={(e) => {e.key === 'Enter' ? save_email() : ''}}>
+                                <input 
+                                    value={email} 
+                                    onChange={handleChange} 
+                                    className={styles.email_input}
+                                    placeholder="email"
+                                />
+                                <button className={styles.btn}>
+                                    <CheckIcon fontSize="small" onClick={() => {save_email()}}></CheckIcon>
+                                </button>
+                            </div>
+                        ) : (
+                            //no more inputs available
+                            <div className={styles.buddyEmail}>
+                                Sorry, you can only list 5 buddies
+                            </div>
+                        )}
+                    </section>
+                </div>
                 <PrimaryButton className={styles.nextbutton} disabled={isSubmitDisabled} onClick={() => submitReview({
                     'activity_type': activity,
                     rating,
                     text,
                     visibility,
                     beach_id: props.id,
+                    buddy_array: buddyArray,
                 })}>
                     Submit
                 </PrimaryButton>
