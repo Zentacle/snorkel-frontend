@@ -40,7 +40,7 @@ const BeachInfo = ({
             <SectionTitle text={`Snorkeling and Scuba Diving at ${name}`}/>
             <div className={styles.description}>
                 { description.length < 3
-                    ? `${name} is a ${Math.round(rating * 100) / 100}-star rated scuba dive and snorkel destination in ${location_city} based on ${num_reviews} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.`
+                    ? `${name} is a ${Math.round(rating * 100) / 100}-star rated scuba dive and snorkel destination in ${location_city} which is accessible from shore based on ${num_reviews} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.`
                     :  description }
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
