@@ -8,10 +8,13 @@ const Patron = (props) => {
   React.useEffect(() => {
     sendViewEvent(props.areaPatronKey);
 
-    const script = document.createElement('script')
-    script.src = 'https://fareharbor.com/embeds/api/v1/?autolightframe=yes'
-    script.async = true;
-    document.querySelector('body').appendChild(script)
+    const initializeFareharbor = () => {
+      const script = document.createElement('script')
+      script.src = 'https://fareharbor.com/embeds/api/v1/?autolightframe=yes'
+      script.async = true;
+      document.querySelector('body').appendChild(script)
+    }
+    setTimeout(initializeFareharbor, 1000)
   }, [])
 
   const getAreaPatronName = (areaPatronKey) => {
