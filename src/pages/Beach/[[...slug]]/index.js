@@ -154,7 +154,7 @@ const Beach = (props) => {
         if (!currentUser) {
             return;
         }
-        if (!Cookies.get('has_seen_banner') && !currentUser.username) {
+        if (!Cookies.get('has_seen_banner') && !currentUser.id) {
             setTimeout(() => setIsShown(true), 30000);
         }
     }, [currentUser])
