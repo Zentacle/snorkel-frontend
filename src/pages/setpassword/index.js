@@ -10,14 +10,16 @@ import SignupInput from 'components/SignupInput';
 import PrimaryButton from 'components/PrimaryButton';
 import { clientSideDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
+import { useCurrentUser } from 'context/usercontext';
 
 const CreateAccount = (props) => {
     const [password, setPassword] = React.useState('')
+    const { state } = useCurrentUser();
 
     const registerUser = () => {
         const body = {
             password,
-            'user_id': props.userId,
+            'user_id': state.user.id,
         }
         fetch(`${clientSideDomain}/user/register/password`, {
             method: 'POST',
