@@ -14,7 +14,7 @@ import { sendEvent } from 'hooks/amplitude';
 const CreateAccount = (props) => {
     const [password, setPassword] = React.useState('')
 
-    const registerUser = () => () => {
+    const registerUser = () => {
         const body = {
             password,
             'user_id': props.userId,
