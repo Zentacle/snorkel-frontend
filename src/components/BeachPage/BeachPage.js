@@ -21,12 +21,7 @@ const BackImage = (props) => {
     }
 
     const photoClick = () => {
-        if (photoArray.length == 0) {
-            toaster.danger(`Sorry, we don\'t have any photos for this location yet!`)
-        }
-        else {
-            router.push(`${props.beach.url}/photos`)
-        }
+        router.push(`${props.beach.url}/photos`)
     }
 
     const router = useRouter();
