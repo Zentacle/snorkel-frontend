@@ -7,7 +7,6 @@ import SearchBar from "components/SearchBar"
 import Layout from 'components/Layout/Layout';
 import Carousel from "components/Carousel/Carousel"
 import { rootDomain } from "src/lib/constants";
-import Banner from "components/EmailBanner";
 import Cookies from "js-cookie";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
@@ -98,7 +97,6 @@ const Home = (props) => {
             </div>
           </div>
         </div>
-        <Banner isShown={shouldShowBanner}></Banner>
         <div className={styles.contentContainer}>
           <div className={styles.locationContainer}>
             {areas.slice(0, 7).map(area => (
