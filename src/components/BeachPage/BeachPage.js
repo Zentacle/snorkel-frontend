@@ -12,6 +12,7 @@ import Carousel from 'components/Carousel/Carousel';
 import BeachReviews from "components/BeachPage/BeachReviews/BeachReviews";
 import BeachInfo from "components/BeachPage/BeachInfo/BeachInfo";
 import { EmptyStar, FullStar } from "components/StarRating";
+import { sendEvent } from 'hooks/amplitude';
 import PhotoPreview from './PhotoPreview';
 
 const BackImage = (props) => {
@@ -34,7 +35,11 @@ const BackImage = (props) => {
                     <div className={styles.nameContainer}>
                         <h1 className={styles.pagetitle}>{props.beach.name}</h1>
                         <Link href="/register">
-                            <a className={styles.favorite} alt="Mark as favorite">
+                            <a
+                                className={styles.favorite}
+                                alt="Mark as favorite"
+                                onClick={ () => sendEvent('favorite__click') }
+                            >
                                 <FavoriteBorder />
                             </a>
                         </Link>
