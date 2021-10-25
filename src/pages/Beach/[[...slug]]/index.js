@@ -147,8 +147,10 @@ const Beach = (props) => {
     const currentUser = state.user;
 
     useEffect(() => {
-        sendEvent('beach_view', { site_id: beach.id });
-    }, [])
+        if (currentUser) {
+            sendEvent('beach_view', { site_id: beach.id });
+        }
+    }, [state])
 
     useEffect(() => {
         if (!currentUser) {

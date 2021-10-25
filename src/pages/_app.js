@@ -66,11 +66,8 @@ function SetUser() {
     }).then(data => {
       initAmplitude(data.id);
       dispatch(data)
-
     }).catch((err) => {
-
       console.log(err)
-
     })
 
   }, [])
