@@ -63,6 +63,17 @@ const Home = (props) => {
   const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
+  useEffect(() => {
+    const currentUser = state.user;
+    if (currentUser) {
+        sendEvent('page_view', {
+            type: 'location',
+            loc_type: getPillLocalityLevel[props.loc],
+            loc_name: props.area.short_name,
+        });
+    }
+  }, [state])
+
   React.useEffect(() => {
     const localityType = getPillLocalityLevel[props.loc];
     let url = `${rootDomain}/locality/${localityType}`
