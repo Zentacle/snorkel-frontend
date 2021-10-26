@@ -28,6 +28,18 @@ export const getServerSideProps = async (ctx) => {
     }
   ))
 
+  res = await fetch('https://zentacle.com/api/locality/country?limit=none')
+  data = await res.json()
+
+  const country_fields = data.data.map(location => (
+    {
+      loc: `https://www.zentacle.com${location.url}`,
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly',
+      priority: 0.7,
+    }
+  ))
+
   res = await fetch('https://zentacle.com/api/locality/area_one?limit=none')
   data = await res.json()
 
@@ -67,6 +79,7 @@ export const getServerSideProps = async (ctx) => {
   return getServerSideSitemap(ctx, [
     ...spot_fields,
     ...user_fields,
+    ...country_fields,
     ...area_one_fields,
     ...area_two_fields,
     ...locality_fields,
