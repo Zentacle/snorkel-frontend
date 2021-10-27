@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useCurrentUser } from 'context/usercontext';
-import { useRouter } from 'next/router';
 import BeachInfo from "components/BeachPage/BeachInfo/BeachInfo";
 import BeachPageHero from 'components/BeachPageHero';
 import BeachReviews from "components/BeachPage/BeachReviews/BeachReviews";
@@ -159,10 +158,9 @@ export async function getStaticPaths() {
 
 const Beach = (props) => {
     const [beach, setBeach] = useState(props.beach);
+    const [nearbyBeaches, setNearbyBeaches] = useState(props.nearbyBeaches)
     const [isShown, setIsShown] = useState(false);
     const photoState = useState([]);
-
-    const router = useRouter();
 
     let { state } = useCurrentUser();
     const currentUser = state.user;
@@ -191,8 +189,7 @@ const Beach = (props) => {
     }, [currentUser])
 
     useEffect(useGoogleOneTap(beach.url, currentUser), [state])
-
-    const [nearbyBeaches, setNearbyBeaches] = useState(props.nearbyBeaches)
+    useEffect(() => setNearbyBeaches(props.nearbyBeaches), [props.nearbyBeaches])
     useEffect(() => setBeach(props.beach), [props.beach])
 
     if (props.errorCode) {
