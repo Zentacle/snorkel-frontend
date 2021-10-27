@@ -11,6 +11,10 @@
     padding: 16px;
 }
 
+.carousel.allowVertical {
+    flex-direction: column;
+}
+
 .nextButton{
     right: -40px;
 }
@@ -34,6 +38,24 @@
     cursor: pointer;
 }
 
+.button.allowVertical {
+    display: none;
+}
+
+.caret {
+    margin: auto;
+}
+
+@media (max-width: 968px) {
+    .carousel.allowVertical {
+        flex-direction: row;
+    }
+
+    .button.allowVertical {
+        display: flex;
+    }
+}
+
 @media (hover: none) {
     .carousel{
         overflow: scroll;
@@ -42,8 +64,8 @@
     .button {
         display: none;
     }
-}
 
-.caret {
-    margin: auto;
+    .button.allowVertical {
+        display: none;
+    }
 }

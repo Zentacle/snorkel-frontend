@@ -103,14 +103,14 @@ export async function getStaticProps(context) {
     let tides = []
     if (stationId && stationId !== '-1') {
         var currentDate = new Date();
-        var begin_date = currentDate.toISOString().slice(0,10).replace(/-/g,"");
-        currentDate.setDate(currentDate.getDate() + 3); 
-        var end_date = currentDate.toISOString().slice(0,10).replace(/-/g,"");
+        var begin_date = currentDate.toISOString().slice(0, 10).replace(/-/g, "");
+        currentDate.setDate(currentDate.getDate() + 3);
+        var end_date = currentDate.toISOString().slice(0, 10).replace(/-/g, "");
         response = await fetch(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&begin_date=${begin_date}&end_date=${end_date}&datum=MLLW&station=${stationId}&time_zone=GMT&units=english&interval=hilo&format=json&application=NOS.COOPS.TAC.TidePred`)
         const tideData = await response.json()
         if (tideData && tideData.predictions) {
             tides = tideData.predictions;
-        }   
+        }
     }
 
     if (!beach_data) {
@@ -199,7 +199,7 @@ const Beach = (props) => {
     useEffect(() => setBeach(props.beach), [props.beach])
 
     if (props.errorCode) {
-        return <Error statusCode={props.errorCode}/>
+        return <Error statusCode={props.errorCode} />
     }
 
     let siteName = props.isShorediving
@@ -223,7 +223,7 @@ const Beach = (props) => {
                 <meta property="og:image" content={beach.hero_img} key="og-image" />
                 <meta property="og:url" content={canonicalURL} key="og-url" />
                 <meta name="description" content={description} key="description" />
-                <link rel="canonical" href={canonicalURL} key="canonical"/>
+                <link rel="canonical" href={canonicalURL} key="canonical" />
                 {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
             </Head>
             <MaxWidth>
@@ -234,35 +234,39 @@ const Beach = (props) => {
                     locality={beach.locality}
                 />
                 <BeachPageHero beach={beach} photoState={photoState} />
-                <BeachInfo
-                    {...beach}
-                    isSingularReview={props.isSingularReview}
-                    tides={props.tides}
-                    reviews={props.reviews}
-                />
-                <PhotoPreview
-                    photoState={photoState}
-                    beach={beach}
-                />
-                <ReviewSummary
-                    ratings={beach.ratings}
-                    rating={beach.rating}
-                    num_reviews={beach.num_reviews}
-                />
-                <BeachReviews
-                    beachid={beach.id}
-                    url={beach.url}
-                    reviews={props.reviews}
-                    isSingularReview={props.isSingularReview}
-                />
-                {nearbyBeaches.length
-                    ? <div className={styles.carouselSpacer}>
-                        <div className={styles.carouseltitle}>Other Locations Nearby</div>
-                        <Carousel data={nearbyBeaches}></Carousel>
-                    </div> : <></>
-                }
+                <div className={styles.container}>
+                    <div className={styles.innerContainer}>
+                        <BeachInfo
+                            {...beach}
+                            isSingularReview={props.isSingularReview}
+                            tides={props.tides}
+                            reviews={props.reviews}
+                        />
+                        <PhotoPreview
+                            photoState={photoState}
+                            beach={beach}
+                        />
+                        <ReviewSummary
+                            ratings={beach.ratings}
+                            rating={beach.rating}
+                            num_reviews={beach.num_reviews}
+                        />
+                        <BeachReviews
+                            beachid={beach.id}
+                            url={beach.url}
+                            reviews={props.reviews}
+                            isSingularReview={props.isSingularReview}
+                        />
+                    </div>
+                    {nearbyBeaches.length
+                        ? <div className={styles.carouselSpacer}>
+                            <div className={styles.carouseltitle}>Other Locations Nearby</div>
+                            <Carousel data={nearbyBeaches} allowVertical />
+                        </div> : <></>
+                    }
+                </div>
             </MaxWidth>
-            {isShown && <EmailBanner setIsShown={setIsShown}/>}
+            {isShown && <EmailBanner setIsShown={setIsShown} />}
         </Layout>
     )
 }

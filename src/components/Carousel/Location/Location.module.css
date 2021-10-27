@@ -1,6 +1,7 @@
 .slide {
     width: 270px;
     margin-right: 16px;
+    margin-bottom: 16px;
     border-radius: 8px;
     background-color: white;
     flex-shrink: 0;

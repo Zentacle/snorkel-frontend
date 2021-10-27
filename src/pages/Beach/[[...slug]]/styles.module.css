@@ -1,9 +1,28 @@
+.container {
+  background-color: white;
+  display: flex;
+}
+
+.innerContainer {
+  border-right: 1px solid #eee;
+}
+
 .carouseltitle{
   margin-left: 16px;
   margin-top: 32px;
   font-weight: var(--text-weight-bold);
 }
 
-.carouselSpacer {
-  margin: 32px 0;
+@media (max-width: 968px) {
+  .container {
+    display: block;
+  }
+
+  .innerContainer {
+    border-right: none;
+  }
+
+  .carouselSpacer {
+    margin: 32px 0;
+  }
 }
