@@ -63,7 +63,7 @@ const Home = (props) => {
   const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const currentUser = state.user;
     if (currentUser) {
         sendEvent('page_view', {
