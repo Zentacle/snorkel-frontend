@@ -1,4 +1,4 @@
-import styles from "components/BeachPage/BeachPage.module.css";
+import styles from "components/BeachPageHero/styles.module.css";
 import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
 const BackgroundImageOnly = ({ ...props }) => {
