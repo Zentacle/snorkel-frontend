@@ -1,0 +1,9 @@
+.carouseltitle{
+  margin-left: 16px;
+  margin-top: 32px;
+  font-weight: var(--text-weight-bold);
+}
+
+.carouselSpacer {
+  margin: 32px 0;
+}

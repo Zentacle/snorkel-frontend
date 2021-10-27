@@ -2,17 +2,23 @@ import { useEffect, useState } from 'react';
 import Error from 'next/error'
 import Cookies from 'js-cookie';
 
-import Layout from "components/Layout/Layout";
-import BeachPage from "components/BeachPage/BeachPage";
 import { rootDomain } from 'lib/constants';
-import Head from 'next/head';
 import { sendEvent } from 'hooks/amplitude';
 import { useCurrentUser } from 'context/usercontext';
-import useGoogleOneTap from 'hooks/useGoogleOneTap';
 import { useRouter } from 'next/router';
-import MaxWidth from 'components/MaxWidth';
+import BeachInfo from "components/BeachPage/BeachInfo/BeachInfo";
+import BeachPageHero from 'components/BeachPageHero';
+import BeachReviews from "components/BeachPage/BeachReviews/BeachReviews";
 import Breadcrumbs from 'components/Breadcrumbs';
+import Carousel from 'components/Carousel/Carousel';
 import EmailBanner from 'components/EmailBanner';
+import Head from 'next/head';
+import Layout from "components/Layout/Layout";
+import MaxWidth from 'components/MaxWidth';
+import PhotoPreview from 'components/BeachPage/PhotoPreview';
+import ReviewSummary from 'components/BeachPage/ReviewSummary';
+import styles from "./styles.module.css";
+import useGoogleOneTap from 'hooks/useGoogleOneTap';
 
 export async function getStaticProps(context) {
     const startTime = Date.now();
@@ -140,6 +146,7 @@ export async function getStaticPaths() {
 const Beach = (props) => {
     const [beach, setBeach] = useState(props.beach);
     const [isShown, setIsShown] = useState(false);
+    const photoState = useState([]);
 
     const router = useRouter();
 
@@ -226,14 +233,34 @@ const Beach = (props) => {
                     area_two={beach.area_two}
                     locality={beach.locality}
                 />
-                <BeachPage
-                    beach={beach}
-                    beachid={beach.id}
+                <BeachPageHero beach={beach} photoState={photoState} />
+                <BeachInfo
+                    {...beach}
                     isSingularReview={props.isSingularReview}
-                    reviews={props.reviews}
-                    nearbyBeaches={nearbyBeaches}
                     tides={props.tides}
+                    reviews={props.reviews}
                 />
+                <PhotoPreview
+                    photoState={photoState}
+                    beach={beach}
+                />
+                <ReviewSummary
+                    ratings={beach.ratings}
+                    rating={beach.rating}
+                    num_reviews={beach.num_reviews}
+                />
+                <BeachReviews
+                    beachid={beach.id}
+                    url={beach.url}
+                    reviews={props.reviews}
+                    isSingularReview={props.isSingularReview}
+                />
+                {nearbyBeaches.length
+                    ? <div className={styles.carouselSpacer}>
+                        <div className={styles.carouseltitle}>Other Locations Nearby</div>
+                        <Carousel data={nearbyBeaches}></Carousel>
+                    </div> : <></>
+                }
             </MaxWidth>
             {isShown && <EmailBanner setIsShown={setIsShown}/>}
         </Layout>
