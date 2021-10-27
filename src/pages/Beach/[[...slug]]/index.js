@@ -113,6 +113,19 @@ export async function getStaticProps(context) {
         }
     }
 
+    const nearbyBeaches = await fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res =>
+        res.json()
+    ).then(beach_data => {
+        if (beach_data.data) {
+            return beach_data.data;
+        }
+    });
+
     if (!beach_data) {
         return {
             notFound: true,
@@ -125,6 +138,7 @@ export async function getStaticProps(context) {
             'beach': beach_data.data,
             'reviews': review_data.data,
             'tides': tides,
+            'nearbyBeaches': nearbyBeaches,
         }, // will be passed to the page component as props
         revalidate: 60,
     }
@@ -176,26 +190,9 @@ const Beach = (props) => {
         }
     }, [currentUser])
 
-    useEffect(() => {
-        if (!router.isReady) { return }
-        const beachid = props.beach.id;
-        fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res =>
-            res.json()
-        ).then(beach_data => {
-            if (beach_data.data) {
-                setNearbyBeaches([...beach_data.data])
-            }
-        });
-    }, [router.isReady, router.query.slug])
-
     useEffect(useGoogleOneTap(beach.url, currentUser), [state])
 
-    const [nearbyBeaches, setNearbyBeaches] = useState([])
+    const [nearbyBeaches, setNearbyBeaches] = useState(props.nearbyBeaches)
     useEffect(() => setBeach(props.beach), [props.beach])
 
     if (props.errorCode) {
