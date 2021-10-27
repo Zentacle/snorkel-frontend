@@ -10,6 +10,7 @@ import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
 import Patron from 'components/Patron';
+import { sendEvent } from 'hooks/amplitude';
 
 export async function getStaticProps(context) {
   const country = context.params.country;
