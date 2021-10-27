@@ -12,11 +12,13 @@ import styles from "./styles.module.css";
 
 const BeachPageHero = (props) => {
   const onEntryMapClick = () => {
+        sendEvent('entry_map__click')
       if (props.beach.entry_map) { return }
       toaster.danger(`Sorry, we don\'t have a map for this location yet!`)
   }
 
   const photoClick = () => {
+      sendEvent('photos__click')
       router.push(`${props.beach.url}/photos`)
   }
 
@@ -64,7 +66,7 @@ const BeachPageHero = (props) => {
                   </div>
                   <div className={styles.buttonouter}>
                       <Link href={props.beach.location_google || ''}>
-                          <a className={styles.buttoncircle}>
+                          <a className={styles.buttoncircle} onClick={() => sendEvent('directions__click')}>
                               <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
                           </a>
                       </Link>

@@ -69,7 +69,7 @@ const Home = (props) => {
     if (currentUser) {
         sendEvent('page_view', {
             type: 'location',
-            loc_type: getPillLocalityLevel[props.loc],
+            loc_type: props.loc,
             loc_name: props.area.short_name,
         });
     }
