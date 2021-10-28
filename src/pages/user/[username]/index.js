@@ -36,7 +36,7 @@ const DiveLog = (props) => {
 
   const { state } = useCurrentUser();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const currentUser = state.user;
     if (currentUser) {
         sendEvent('page_view', {
