@@ -23,7 +23,7 @@ export async function getStaticProps(context) {
     })
     const review_data = await response.json();
 
-    const nearbyBeaches = await fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`, {
+    const nearbyBeaches = await fetch(`${rootDomain}/spots/nearby?beach_id=${beach_id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
