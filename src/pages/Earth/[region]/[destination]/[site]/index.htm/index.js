@@ -23,6 +23,19 @@ export async function getStaticProps(context) {
     })
     const review_data = await response.json();
 
+    const nearbyBeaches = await fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res =>
+        res.json()
+    ).then(beach_data => {
+        if (beach_data.data) {
+            return beach_data.data;
+        }
+    });
+
     if (!beach_data) {
         return {
             notFound: true,
@@ -36,6 +49,7 @@ export async function getStaticProps(context) {
             'reviews': review_data.data,
             'tides': [],
             'isShorediving': true,
+            'nearbyBeaches': nearbyBeaches,
         }, // will be passed to the page component as props
         revalidate: 10,
     }

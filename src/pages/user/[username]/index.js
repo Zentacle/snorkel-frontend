@@ -33,9 +33,17 @@ export async function getServerSideProps(context) {
 const DiveLog = (props) => {
   const [user, setUser] = useState(props)
 
-  useEffect(() => {
-    sendEvent('user_profile_view', { profile_username: user.username });
-  }, [])
+  const { state } = useCurrentUser();
+
+  React.useEffect(() => {
+    const currentUser = state.user;
+    if (currentUser) {
+        sendEvent('page_view', {
+            type: 'user',
+            profile_username: user.username,
+        });
+    }
+  }, [state])
 
   return (
     <Layout>
