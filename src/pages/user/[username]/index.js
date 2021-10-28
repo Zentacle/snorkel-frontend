@@ -8,6 +8,7 @@ import IndividualReview from 'components/BeachPage/BeachReviews/IndividualReview
 import styles from './styles.module.css';
 import Link from 'next/link';
 import MaxWidth from 'components/MaxWidth';
+import { useCurrentUser } from 'context/usercontext';
 
 export async function getServerSideProps(context) {
   const username = context.query.username;
