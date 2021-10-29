@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
   })
   const data = await res.json()
 
-  if (!data) {
+  if (!data || data.msg) {
     return {
       notFound: true,
     }
