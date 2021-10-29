@@ -30,6 +30,20 @@ export async function getStaticProps(context) {
         }
     }
 
+    const beachid = beach_data.data.id;
+    const nearbyBeaches = await fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res =>
+        res.json()
+    ).then(beach_data => {
+        if (beach_data.data) {
+            return beach_data.data;
+        }
+    });
+
     console.log(`beach_api_timing: ${Date.now() - startTime}ms`)
     return {
         props: {
@@ -38,6 +52,7 @@ export async function getStaticProps(context) {
             'tides': [],
             'isShorediving': true,
             'isSingularReview': true,
+            'nearbyBeaches': nearbyBeaches,
         }, // will be passed to the page component as props
         revalidate: 10,
     }
