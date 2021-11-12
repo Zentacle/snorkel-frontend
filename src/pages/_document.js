@@ -44,7 +44,6 @@ export default class MyDocument extends Document {
             src={`https://www.googletagmanager.com/gtag/js?id=G-WFH58XWN7D`}
             key="google-tag-manager"
           />
-          // Add Google analytics + Ads
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -62,7 +61,6 @@ export default class MyDocument extends Document {
             }}
             key="ga-setup"
           />
-          // Add full story
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -91,7 +89,6 @@ export default class MyDocument extends Document {
               `
             }}
           />
-        // Add Segment
         <script
           dangerouslySetInnerHTML={{
             __html: `
