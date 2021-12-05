@@ -1,12 +1,27 @@
-export async function getServerSideProps(context) {
+import { rootDomain } from 'lib/constants';
+
+export async function getStaticProps(context) {
   const region = context.params.region;
   const destination = context.params.destination;
   const site = context.params.site;
+  const res = await fetch(`${rootDomain}/spots/get?region=${region}&destination=${destination}&site=${site}`, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+  const beach_data = await res.json()
+  if (!beach_data) {
+      return {
+          notFound: true,
+      }
+  }
+
   return {
-    redirect: {
-        destination: `/Earth/${region}/${destination}/${site}/index.htm`,
-        permanent: true,
-    }
+      redirect: {
+          destination: beach_data.data.url,
+          permanent: true,
+      }
   }
 }
 
