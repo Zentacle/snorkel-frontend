@@ -21,6 +21,8 @@ import useGoogleOneTap from 'hooks/useGoogleOneTap';
 
 export async function getStaticProps(context) {
     const startTime = Date.now();
+    console.log(context)
+    console.log(context.params)
     console.log(context.params.slug)
     const beachid = context.params.slug[0];
     const beachNameFromURL = context.params.slug[1];
