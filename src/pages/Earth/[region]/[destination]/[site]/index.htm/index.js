@@ -1,6 +1,6 @@
 import { rootDomain } from 'lib/constants';
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const region = context.params.region;
     const destination = context.params.destination;
     const site = context.params.site;
