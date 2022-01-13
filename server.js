@@ -14,7 +14,7 @@ const handle = app.getRequestHandler()
 const apiPaths = {
     '/api': {
         // target: 'https://snorkel-backend.herokuapp.com', 
-        target: 'http://localhost:5000', 
+        target: 'http://localhost:8000', 
         pathRewrite: {
             '^/api': ''
         },

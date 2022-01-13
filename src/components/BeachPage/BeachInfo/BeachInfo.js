@@ -4,7 +4,8 @@ import Image from 'next/image';
 import styles from "./styles.module.css";
 import VizDepth from "components/BeachPage/VizDepth/VizDepth";
 import Patron from 'components/Patron';
-import SectionTitle from "components/SectionTitle";
+import SectionTitle from 'components/SectionTitle';
+import Tag from 'components/Tag';
 
 const EntryMap = ({ src }) => (
     <a className={ styles.entryMap } style={{ backgroundImage: `url(\'${src}\')` }} href={ src }>
@@ -26,6 +27,7 @@ const BeachInfo = ({
     rating,
     num_reviews,
     max_depth,
+    access,
     tides,
 }) => {
     const [tidesArray, setTides] = React.useState(tides)
@@ -42,6 +44,10 @@ const BeachInfo = ({
                 { description.length < 3
                     ? `${name} is a ${Math.round(rating * 100) / 100}-star rated scuba dive and snorkel destination in ${location_city} which is accessible from shore based on ${num_reviews} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.`
                     :  description }
+            </div>
+            <div className={styles.outerSpacer}>
+                { access.length ? <div className={styles.tagHeader}>Access</div> : <></> }
+                { access.map(tag => (<Tag text={ tag.text } type={ 'entry' }/> )) }
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             { tidesArray.length ? <>

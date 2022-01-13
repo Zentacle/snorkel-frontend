@@ -91,3 +91,13 @@
     background: rgba(0,0,0,.2);
     height: 100%;
 }
+
+.outerSpacer {
+    margin: 0 24px
+}
+
+.tagHeader {
+    font-weight: var(--text-weight-bold);
+    font-size: 12px;
+    margin-bottom: 4px;
+}
