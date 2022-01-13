@@ -1,0 +1,33 @@
+.TypeAheadDropDown{
+    width: 100%;
+    box-shadow: 0 0 1px rgba(0,0,0,0.1), 0 2px 4px 1px rgba(0,0,0, .18);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    position: absolute;
+    top: 52px;
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 999;
+    background-color: white;
+}
+
+.TypeAheadDropDown ul::before{
+    content: '';
+}
+
+.TypeAheadDropDown ul{
+   list-style-type: none;
+   text-align: left;
+   margin: 0;
+   padding: 0;
+}
+
+.TypeAheadDropDown li{
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.TypeAheadDropDown li:hover{
+    background: var(--primary-color);
+    color: white;
+}
