@@ -46,8 +46,8 @@ const BeachInfo = ({
                     :  description }
             </div>
             <div className={styles.outerSpacer}>
-                { access.length ? <div className={styles.tagHeader}>Access</div> : <></> }
-                { access.map(tag => (<Tag key={tag.id} text={ tag.text } type={ 'entry' }/> )) }
+                { access && access.length ? <div className={styles.tagHeader}>Access</div> : <></> }
+                { access && access.map(tag => (<Tag key={tag.id} text={ tag.text } type={ 'entry' }/> )) }
             </div>
             { entry_map && <EntryMap src={ entry_map }/> }
             { tidesArray.length ? <>
