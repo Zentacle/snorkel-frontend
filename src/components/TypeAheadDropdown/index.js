@@ -2,6 +2,7 @@ import styles from './styles.module.css'
 import React from 'react';
 import { useRouter } from 'next/router';
 import { rootDomain } from 'lib/constants';
+import { sendEvent } from 'hooks/amplitude';
 
 /***
  * https://medium.com/@svsh227/create-your-own-type-ahead-dropdown-in-react-599c96bebfa
@@ -30,6 +31,9 @@ const TypeAheadDropDown = (props) => {
     const router = useRouter();
 
     const suggestionSelected = (value) => {
+        sendEvent('select_typeahead', {
+            'query': value.text,
+        });
         router.push(value.url)
     }
 
