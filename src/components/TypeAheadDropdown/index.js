@@ -35,6 +35,7 @@ const TypeAheadDropDown = (props) => {
             'query': value.text,
         });
         router.push(value.url)
+        setSuggestions([])
     }
 
     if (suggestions.length === 0) {
