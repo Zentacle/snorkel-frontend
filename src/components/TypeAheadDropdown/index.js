@@ -1,23 +1,28 @@
 import styles from './styles.module.css'
 import React from 'react';
 import { useRouter } from 'next/router';
+import { rootDomain } from 'lib/constants';
+
+/***
+ * https://medium.com/@svsh227/create-your-own-type-ahead-dropdown-in-react-599c96bebfa
+ ***/
 
 const TypeAheadDropDown = (props) => {
     const [suggestions, setSuggestions] = React.useState([])
 
     React.useEffect(() => {
-        const items = [
-            { text: 'maui', url: '/loc/us/hi/maui' },
-            { text: 'big island', url: '/loc/us/hi/big-island' },
-        ];
-        let newSuggestions = [];
-        const value = props.text.length
-        if (value > 0) {
-            const regex = new RegExp(`^${props.text}`, `i`);
-            newSuggestions = items.sort().filter(v => regex.test(v.text));
+        if(props.text.length) {
+            const items = fetch(`${rootDomain}/search/typeahead?query=` + props.text, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              }).then(response => {
+                return response.json();
+              }).then(data => {
+                setSuggestions(data.data)
+              })
         }
-
-        setSuggestions(newSuggestions);
     }, [props.text])
 
     const router = useRouter();
