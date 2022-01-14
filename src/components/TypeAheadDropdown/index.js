@@ -22,6 +22,8 @@ const TypeAheadDropDown = (props) => {
               }).then(data => {
                 setSuggestions(data.data)
               })
+        } else {
+            setSuggestions([])
         }
     }, [props.text])
 
