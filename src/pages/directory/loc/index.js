@@ -56,14 +56,15 @@ const Directory = ({
   return (
     <>
       <Head>
+        <title key="title">Directory - Regions | Zentacle</title>
         <meta
           name="description"
-          content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
+          content="View the full directory of all the scuba diving and snorkel regions around the world available on Zentacle"
           key="description"
         />
         <meta
           property="og:description"
-          content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
+          content="View the full directory of all the scuba diving and snorkel regions around the world available on Zentacle"
           key="og:description"
         />
       </Head>

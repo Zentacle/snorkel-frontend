@@ -31,6 +31,7 @@ const Directory = ({ data }) => {
   return (
     <>
       <Head>
+        <title key="title">Directory - Dive and Snorkel Spots | Zentacle</title>
         <meta
           name="description"
           content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
