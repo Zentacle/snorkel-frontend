@@ -70,7 +70,7 @@ const Directory = ({
       </Head>
       <Layout>
         <div className={styles.container}>
-          <h1 className={styles.title}>Locations Directory</h1>
+          <h1 className={styles.title}>Regions Directory</h1>
           <div className={styles.locationsContainer}>
             {
               area_one.map(location => (
