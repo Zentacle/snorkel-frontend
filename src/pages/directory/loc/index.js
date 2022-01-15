@@ -10,7 +10,27 @@ export const getStaticProps = async (ctx) => {
   const res = await fetch(`${rootDomain}/locality/area_one?limit=none`)
   const data = await res.json()
 
-  const fields = data.data.filter(location => location.url).map(location => (
+  const area_one = data.data.filter(location => location.url).map(location => (
+    {
+      url: `https://www.zentacle.com${location.url}`,
+      name: location.name,
+    }
+  ))
+
+  const res1 = await fetch(`${rootDomain}/locality/area_two?limit=none`)
+  const data1 = await res1.json()
+
+  const area_two = data1.data.filter(location => location.url).map(location => (
+    {
+      url: `https://www.zentacle.com${location.url}`,
+      name: location.name,
+    }
+  ))
+
+  const res2 = await fetch(`${rootDomain}/locality/locality?limit=none`)
+  const data2 = await res2.json()
+
+  const locality = data2.data.filter(location => location.url).map(location => (
     {
       url: `https://www.zentacle.com${location.url}`,
       name: location.name,
@@ -19,14 +39,20 @@ export const getStaticProps = async (ctx) => {
 
   return {
     props: {
-      'data': fields,
+      area_one,
+      area_two,
+      locality,
     },
     'revalidate': 86400,
   }
 }
 
 // Default export to prevent next.js errors
-const Directory = ({ data }) => {
+const Directory = ({
+    area_one,
+    area_two,
+    locality
+}) => {
   return (
     <>
       <Head>
@@ -46,7 +72,25 @@ const Directory = ({ data }) => {
           <h1 className={styles.title}>Locations Directory</h1>
           <div className={styles.locationsContainer}>
             {
-              data.map(location => (
+              area_one.map(location => (
+                <div className={styles.link} key={location.url}>
+                  <Link href={location.url}>
+                    <a>{location.name}</a>
+                  </Link>
+                </div>
+              ))
+            }
+            {
+              area_two.map(location => (
+                <div className={styles.link} key={location.url}>
+                  <Link href={location.url}>
+                    <a>{location.name}</a>
+                  </Link>
+                </div>
+              ))
+            }
+            {
+              locality.map(location => (
                 <div className={styles.link} key={location.url}>
                   <Link href={location.url}>
                     <a>{location.name}</a>
