@@ -157,6 +157,10 @@ const Home = (props) => {
           }
           <h1 className={styles.areaTitle}>Top Snorkeling and Scuba Diving in {props.area.name}</h1>
           <div className={styles.marginContainer}>
+            Ready to check out the best sites in {props.area.name} for scuba diving, snorkeling, shore diving, free diving or other ocean activities? Zentacle has {props.default.length} dive sites, snorkel spots, beaches, and more. Discover hand-curated maps, along with reviews and photos from nature lovers like you.
+            {'\n\n'}
+            No matter what you're looking for, you can find a diverse range of the best ocean activities in {props.area.name} to suit your needs.
+            {props.area.description && '\n\n'}
             {props.area.description}
           </div>
           {
