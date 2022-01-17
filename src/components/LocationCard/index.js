@@ -21,7 +21,7 @@ const Location = (props) => {
                     />
                 </div>
                 <div className={styles.locationInfoContainer}>
-                    <h2 className={styles.spotName}>{props.info.name}</h2>
+                    <h2 className={styles.spotName}>#{props.index+1} - {props.info.name}</h2>
                     <h3 className={styles.location}>{props.info.location_city}</h3>
                     <div className={styles.ratingContainer} title={props.info.rating}>
                         <DifficultyTag difficulty={props.info.difficulty} />
