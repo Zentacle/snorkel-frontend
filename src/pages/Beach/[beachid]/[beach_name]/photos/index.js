@@ -19,7 +19,6 @@ const ThePhotoPage = () => {
             }).then(response => {
                 return response.json();
             }).then(data => {
-                console.log(data.data);
                 setBeach(data.data);
             })
     }, [router.isReady])
