@@ -41,6 +41,8 @@ export async function getStaticProps(context) {
     ).then(beach_data => {
         if (beach_data.data) {
             return beach_data.data;
+        } else {
+            return [];
         }
     });
 

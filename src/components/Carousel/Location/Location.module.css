@@ -47,6 +47,15 @@
     font-size: 14px;
 }
 
+.locationLink {
+    position: relative;
+    z-index: 2;
+}
+
+.locationLink:hover {
+    text-decoration: underline;
+}
+
 .ratingContainer {
     display: flex;
     margin-top: 4px;
@@ -55,4 +64,12 @@
 .numReviews {
     padding-top: 2px;
     margin-left: 4px;
+}
+
+.cardLink {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
