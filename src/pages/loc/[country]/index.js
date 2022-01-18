@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import styles from "components/Home/Home.module.css"
 import Layout from 'components/Layout/Layout';
@@ -163,6 +164,7 @@ const Home = (props) => {
             {props.area.description && '\n\n'}
             {props.area.description}
           </div>
+          { props.area.map_image_url && <div className={styles.mapImageContainer}><Image src={props.area.map_image_url} className={styles.mapImage} objectFit="contain" height="300" width="600" alt={`${props.area.name} dive site map`}/></div> }
           {
               hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name}/>
           }

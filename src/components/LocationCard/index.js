@@ -13,7 +13,7 @@ const Location = (props) => {
                 <Image
                     className={styles.image}
                     src={props.info.hero_img || '/generic_beach.jpeg'}
-                    alt="picture"
+                    alt={props.info.name}
                     objectFit="contain"
                     height="154"
                     width="280"

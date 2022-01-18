@@ -126,3 +126,11 @@
       width: 100%!important;
     }
 }
+
+.mapImageContainer {
+    padding: 16px;
+}
+
+.mapImage {
+    border-radius: 8px;
+}
