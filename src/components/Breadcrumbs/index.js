@@ -18,7 +18,7 @@ const Breadcrumbs = ({ country, area_one, area_two, locality }) => {
                 }
                 {area_one && area_one.short_name &&
                     <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
-                        <span className={styles.locBreadcrumb}>›</span>
+                        <span className={styles.locBreadcrumbCaret}>›</span>
                         <Link href={area_one.url}>
                             <a className={styles.locBreadcrumb} itemProp="item">
                                 <span itemProp="name">{area_one.name}</span>
@@ -29,7 +29,7 @@ const Breadcrumbs = ({ country, area_one, area_two, locality }) => {
                 }
                 {area_two && area_two.short_name &&
                     <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
-                        <span className={styles.locBreadcrumb}>›</span>
+                        <span className={styles.locBreadcrumbCaret}>›</span>
                         <Link href={area_two.url}>
                             <a className={styles.locBreadcrumb} itemProp="item">
                                 <span itemProp="name">{area_two.name}</span>
@@ -40,7 +40,7 @@ const Breadcrumbs = ({ country, area_one, area_two, locality }) => {
                 }
                 {locality && locality.short_name && locality.url &&
                     <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
-                        <span className={styles.locBreadcrumb}>›</span>
+                        <span className={styles.locBreadcrumbCaret}>›</span>
                         <Link href={locality.url}>
                             <a className={styles.locBreadcrumb} itemProp="item">
                                 <span itemProp="name">{locality.name}</span>

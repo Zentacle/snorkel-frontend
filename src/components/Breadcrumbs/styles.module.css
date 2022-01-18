@@ -1,4 +1,4 @@
-.locBreadcrumb {
+.locBreadcrumb, .locBreadcrumbCaret {
   margin: 0 4px;
   color: #414141;
 }
