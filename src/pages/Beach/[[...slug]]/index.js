@@ -179,7 +179,7 @@ const Beach = (props) => {
                 site_name: beach.name,
             });
         }
-    }, [state])
+    }, [state, currentUser, beach.id, beach.name])
 
     useEffect(() => {
         if (!currentUser) {

@@ -20,6 +20,7 @@ const AdCarousel = (props) => {
           src="https://www.lovebigisland.com/wp-content/uploads/hokulani-kealakekua-bay-snorkel-620x427.jpg"
           objectFit="cover"
           layout="fill"
+          alt="Amazing snorkel tours"
         />
         </div>
         <div className={styles.slideContainer}>

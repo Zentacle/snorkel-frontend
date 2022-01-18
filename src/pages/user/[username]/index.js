@@ -44,7 +44,7 @@ const DiveLog = (props) => {
             profile_username: user.username,
         });
     }
-  }, [state])
+  }, [state, user.username])
 
   return (
     <Layout>

@@ -73,7 +73,7 @@ const Home = (props) => {
             loc_name: props.area.short_name,
         });
     }
-  }, [state])
+  }, [state, props.loc, props.area.short_name])
 
   React.useEffect(() => {
     const localityType = getPillLocalityLevel[props.loc];
@@ -92,7 +92,7 @@ const Home = (props) => {
     ).then(data => {
       setAreas(data.data)
     })
-  }, [props.area])
+  }, [props.area, props.country, props.area_one, props.area_two, props.loc])
 
   React.useEffect(useGoogleOneTap(props.area.url, state.user), [state])
 
