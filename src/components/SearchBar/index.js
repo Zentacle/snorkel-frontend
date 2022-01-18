@@ -28,7 +28,7 @@ const SearchBar = (props) => {
         <div className={`${barSize} ${styles.container}`}>
             <div className={styles.inputContainer}>
                 <input
-                    placeholder="Search"
+                    placeholder="Enter a city, state, or country"
                     value={search}
                     className={styles.searchbar}
                     onChange={e => setSearch(e.target.value)}
