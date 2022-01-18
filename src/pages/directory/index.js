@@ -50,7 +50,7 @@ const Directory = ({ data }) => {
             {
               data.map(location => (
                 <div className={styles.link} key={location.url}>
-                  <Link href={location.url}>
+                  <Link href={location.url} prefetch={false}>
                     <a>{location.name} ({location.city})</a>
                   </Link>
                 </div>

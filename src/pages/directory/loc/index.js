@@ -75,7 +75,7 @@ const Directory = ({
             {
               area_one.map(location => (
                 <div className={styles.link} key={location.url}>
-                  <Link href={location.url}>
+                  <Link href={location.url} prefetch={false}>
                     <a>{location.name}</a>
                   </Link>
                 </div>
@@ -84,7 +84,7 @@ const Directory = ({
             {
               area_two.map(location => (
                 <div className={styles.link} key={location.url}>
-                  <Link href={location.url}>
+                  <Link href={location.url} prefetch={false}>
                     <a>{location.name}</a>
                   </Link>
                 </div>
@@ -93,7 +93,7 @@ const Directory = ({
             {
               locality.map(location => (
                 <div className={styles.link} key={location.url}>
-                  <Link href={location.url}>
+                  <Link href={location.url} prefetch={false}>
                     <a>{location.name}</a>
                   </Link>
                 </div>
