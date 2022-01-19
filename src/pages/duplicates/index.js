@@ -47,7 +47,7 @@ const EditBeach = () => {
         })
     }
 
-    return (
+    return (spot1 && spot2) ? (
         <Layout>
             <div className={styles.container}>
                 <div className={styles.itemContainer}>
@@ -95,7 +95,7 @@ const EditBeach = () => {
             </div>
         </Layout>
 
-    )
+    ) : <></>
 }
 
 export default EditBeach;
