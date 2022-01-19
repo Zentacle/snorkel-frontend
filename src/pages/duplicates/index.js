@@ -39,12 +39,23 @@ const EditBeach = () => {
         }
     }, [router.isReady])
 
+    const remove = (id) => () => {
+        fetch(`${rootDomain}/spots/patch`, {
+            id,
+            is_deleted: 'true',
+        })
+    }
+
     return (
         <Layout>
             <div className={styles.container}>
                 <div className={styles.itemContainer}>
                     <div className={`${styles.item} ${styles.title}`}>
-                        {spot1.name}
+                        <Link href={spot1.url}>
+                            <a>
+                                {spot1.name}
+                            </a>
+                        </Link>
                     </div>
                     <div className={styles.item}>
                         {spot1.location_city}
@@ -55,10 +66,17 @@ const EditBeach = () => {
                     <div className={styles.item}>
                         {`${spot1.latitude}, ${spot1.longitude}`}
                     </div>
+                    <button className={styles.danger} onClick={ remove(spot1.id) }>
+                        Remove
+                    </button>
                 </div>
                 <div className={styles.itemContainer}>
                     <div className={`${styles.item} ${styles.title}`}>
-                        {spot2.name}
+                        <Link href={spot2.url}>
+                            <a>
+                                {spot2.name}
+                            </a>
+                        </Link>
                     </div>
                     <div className={styles.item}>
                         {spot2.location_city}
@@ -69,6 +87,9 @@ const EditBeach = () => {
                     <div className={styles.item}>
                         {`${spot2.latitude}, ${spot2.longitude}`}
                     </div>
+                    <button className={styles.danger} onClick={ remove(spot2.id) }>
+                        Remove
+                    </button>
                 </div>
             </div>
         </Layout>

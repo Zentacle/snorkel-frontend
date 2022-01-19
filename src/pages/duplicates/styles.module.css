@@ -13,3 +13,8 @@
 .title {
     font-weight: var(--text-weight-bold);
 }
+
+.danger {
+    background-color: darkred;
+    color: white;
+}
