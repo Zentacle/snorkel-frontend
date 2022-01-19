@@ -47,7 +47,7 @@ const EditBeach = () => {
             method: 'PATCH',
             body: JSON.stringify({
                 id,
-                is_deleted: 'true',
+                is_deleted: true,
             }),
             headers: {
                 'Content-Type': 'application/json',
