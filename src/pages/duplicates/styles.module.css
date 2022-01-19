@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+}
+
+.itemContainer {
+    padding: 16px;
+}
+
+.item{
+    margin: 8px 0;
+}
+
+.title {
+    font-weight: var(--text-weight-bold);
+}
