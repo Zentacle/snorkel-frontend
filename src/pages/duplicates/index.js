@@ -45,10 +45,10 @@ const EditBeach = () => {
     const remove = (id) => () => {
         fetch(`${rootDomain}/spots/patch`, {
             method: 'PATCH',
-            body: {
+            body: JSON.stringify({
                 id,
                 is_deleted: 'true',
-            },
+            }),
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
