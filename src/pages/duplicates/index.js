@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { rootDomain } from 'lib/constants';
+import { toaster } from 'evergreen-ui';
 
 import Layout from "components/Layout/Layout";
 import styles from "./styles.module.css"
@@ -42,8 +43,13 @@ const EditBeach = () => {
 
     const remove = (id) => () => {
         fetch(`${rootDomain}/spots/patch`, {
-            id,
-            is_deleted: 'true',
+            method: 'PATCH',
+            body: {
+                id,
+                is_deleted: 'true',
+            }
+        }).then(response => {
+            toaster.success('Done')
         })
     }
 
@@ -67,7 +73,7 @@ const EditBeach = () => {
                     <div className={styles.item}>
                         {`${spot1.latitude}, ${spot1.longitude}`}
                     </div>
-                    <button className={styles.danger} onClick={ remove(spot1.id) }>
+                    <button className={styles.danger} onClick={remove(spot1.id)}>
                         Remove
                     </button>
                 </div>
@@ -88,7 +94,7 @@ const EditBeach = () => {
                     <div className={styles.item}>
                         {`${spot2.latitude}, ${spot2.longitude}`}
                     </div>
-                    <button className={styles.danger} onClick={ remove(spot2.id) }>
+                    <button className={styles.danger} onClick={remove(spot2.id)}>
                         Remove
                     </button>
                 </div>
