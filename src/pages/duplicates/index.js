@@ -110,7 +110,7 @@ const EditBeach = () => {
                         {spot1.location_city}
                     </div>
                     <div className={styles.item}>
-                        {spot1.description}, {spot1.description}
+                        {spot1.description}
                     </div>
                     <div className={styles.item}>
                         {`${spot1.latitude}, ${spot1.longitude}`}
@@ -137,7 +137,7 @@ const EditBeach = () => {
                         {spot2.location_city}
                     </div>
                     <div className={styles.item}>
-                        {spot2.description}, {spot2.description}
+                        {spot2.description}
                     </div>
                     <div className={styles.item}>
                         {`${spot2.latitude}, ${spot2.longitude}`}

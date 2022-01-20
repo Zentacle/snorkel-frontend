@@ -8,6 +8,7 @@
 
 .item{
     margin: 8px 0;
+    white-space: pre-line;
 }
 
 .title {
