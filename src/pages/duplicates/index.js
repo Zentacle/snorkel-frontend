@@ -58,24 +58,30 @@ const EditBeach = () => {
                 'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
             },
         }).then(response => {
+            console.log(response)
             toaster.success('Done')
         })
     }
 
-    const copyLatLng = (id) => () => {
-        fetch(`${rootDomain}/spots/patch`, {
-            method: 'PATCH',
+    const merge = () => {
+        console.log(spot1_id)
+        console.log(spot2_id)
+        fetch(`${rootDomain}/spots/merge`, {
+            method: 'POST',
             body: JSON.stringify({
-                id,
-                latitude: spot2.latitude,
-                longitude: spot2.longitude,
+                'orig_id': spot1_id,
+                'dupe_id': spot2_id,
             }),
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
             },
         }).then(response => {
-            toaster.success('Done')
+            if(response.ok) {
+                toaster.success('Done')
+            } else {
+                toaster.error(response.status)
+            }
         })
     }
 
@@ -118,8 +124,8 @@ const EditBeach = () => {
                     <button className={styles.danger} onClick={remove(spot1.id)}>
                         Remove
                     </button>
-                    <button onClick={copyLatLng(spot1.id)}>
-                        Copy Lat/Lng
+                    <button onClick={merge}>
+                        Merge
                     </button>
                     <button onClick={saveDescription(spot1.id)}>
                         Save
