@@ -37,7 +37,6 @@ const EditBeach = () => {
             }).then(response => {
                 return response.json();
             }).then(data => {
-                console.log(data.data)
                 setSpot2(data.data);
             })
         }
@@ -64,8 +63,6 @@ const EditBeach = () => {
     }
 
     const merge = () => {
-        console.log(spot1_id)
-        console.log(spot2_id)
         fetch(`${rootDomain}/spots/merge`, {
             method: 'POST',
             body: JSON.stringify({
