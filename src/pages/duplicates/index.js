@@ -11,6 +11,7 @@ import styles from "./styles.module.css"
 const EditBeach = () => {
     const [spot1, setSpot1] = React.useState('');
     const [spot2, setSpot2] = React.useState('');
+    const [description, setDescription] = React.useState('');
 
     let router = useRouter();
     const { spot1_id, spot2_id } = router.query;
@@ -41,6 +42,42 @@ const EditBeach = () => {
             })
         }
     }, [router.isReady])
+
+    const copyLatLng = (id) => () => {
+        if (!description) {
+            return
+        }
+        fetch(`${rootDomain}/spots/patch`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                id,
+                description,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
+            },
+        }).then(response => {
+            toaster.success('Done')
+        })
+    }
+
+    const copyLatLng = (id) => () => {
+        fetch(`${rootDomain}/spots/patch`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                id,
+                latitude: spot2.latitude,
+                longitude: spot2.longitude,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
+            },
+        }).then(response => {
+            toaster.success('Done')
+        })
+    }
 
     const remove = (id) => () => {
         fetch(`${rootDomain}/spots/patch`, {
@@ -80,6 +117,12 @@ const EditBeach = () => {
                     </div>
                     <button className={styles.danger} onClick={remove(spot1.id)}>
                         Remove
+                    </button>
+                    <button onClick={copyLatLng(spot1.id)}>
+                        Copy Lat/Lng
+                    </button>
+                    <button onClick={saveDescription(spot1.id)}>
+                        Save
                     </button>
                 </div>
                 <div className={styles.itemContainer}>
