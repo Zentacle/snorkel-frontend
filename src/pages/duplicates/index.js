@@ -43,7 +43,7 @@ const EditBeach = () => {
         }
     }, [router.isReady])
 
-    const copyLatLng = (id) => () => {
+    const saveDescription = (id) => () => {
         if (!description) {
             return
         }
