@@ -49,26 +49,26 @@ export const getStaticProps = async (ctx) => {
 
 // Default export to prevent next.js errors
 const Directory = ({
-    area_one,
-    area_two,
-    locality
+  area_one,
+  area_two,
+  locality
 }) => {
   return (
     <>
-      <Head>
-        <title key="title">Directory - Regions | Zentacle</title>
-        <meta
-          name="description"
-          content="View the full directory of all the scuba diving and snorkel regions around the world available on Zentacle"
-          key="description"
-        />
-        <meta
-          property="og:description"
-          content="View the full directory of all the scuba diving and snorkel regions around the world available on Zentacle"
-          key="og:description"
-        />
-      </Head>
       <Layout>
+        <Head>
+          <title key="title">Directory - Regions | Zentacle</title>
+          <meta
+            name="description"
+            content="View the full directory of all the scuba diving and snorkel regions around the world available on Zentacle"
+            key="description"
+          />
+          <meta
+            property="og:description"
+            content="View the full directory of all the scuba diving and snorkel regions around the world available on Zentacle"
+            key="og:description"
+          />
+        </Head>
         <div className={styles.container}>
           <h1 className={styles.title}>Regions Directory</h1>
           <div className={styles.locationsContainer}>

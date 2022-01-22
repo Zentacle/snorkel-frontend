@@ -57,7 +57,6 @@ const EditBeach = () => {
                 'X-CSRF-TOKEN': Cookies.get('csrf_access_token'),
             },
         }).then(response => {
-            console.log(response)
             toaster.success('Done')
         })
     }

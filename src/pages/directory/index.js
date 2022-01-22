@@ -30,20 +30,20 @@ export const getStaticProps = async (ctx) => {
 const Directory = ({ data }) => {
   return (
     <>
-      <Head>
-        <title key="title">Directory - Dive and Snorkel Spots | Zentacle</title>
-        <meta
-          name="description"
-          content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
-          key="description"
-        />
-        <meta
-          property="og:description"
-          content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
-          key="og:description"
-        />
-      </Head>
       <Layout>
+        <Head>
+          <title key="title">Directory - Dive and Snorkel Spots | Zentacle</title>
+          <meta
+            name="description"
+            content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
+            key="description"
+          />
+          <meta
+            property="og:description"
+            content="View the full directory of all the scuba diving and snorkel locations around the world available on Zentacle"
+            key="og:description"
+          />
+        </Head>
         <div className={styles.container}>
           <h1 className={styles.title}>Locations Directory</h1>
           <div className={styles.locationsContainer}>
