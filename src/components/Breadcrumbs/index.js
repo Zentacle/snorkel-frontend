@@ -27,7 +27,7 @@ const Breadcrumbs = ({ country, area_one, area_two, locality }) => {
                         </Link>
                     </span>
                 }
-                {area_two && area_two.short_name &&
+                {area_two && area_two.short_name && area_two.url &&
                     <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
                         <span className={styles.locBreadcrumbCaret}>›</span>
                         <Link href={area_two.url}>
