@@ -71,7 +71,11 @@ const NewSpot = (props) => {
 
   React.useEffect(() => {
     if (selectedGooglePlace) {
-      const formatted_address = selectedGooglePlace.formatted_address.split(',')[1].trim()
+      var formatted_address = selectedGooglePlace.formatted_address
+      const split_address = formatted_address.split(',')
+      if (split_address.length > 1) {
+        formatted_address = split_address[1].trim()
+      }
       setLocationCity(formatted_address)
     }
   }, [selectedGooglePlace])
