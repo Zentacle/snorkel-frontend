@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
                 "@type": "SearchAction",
                 "target": {
                   "@type": "EntryPoint",
-                  "urlTemplate": "https://www.zentacle.com/search?search_term={search_term_string}"
+                  "urlTemplate": "https://www.zentacle.com/search?query={search_term_string}"
                 },
                 "query-input": "required name=search_term_string"
               }

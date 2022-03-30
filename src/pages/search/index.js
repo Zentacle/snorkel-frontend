@@ -17,9 +17,9 @@ const SearchPage = () => {
     useEffect(() => {
         if (!router.isReady) { return; }
 
-        setSearchTerm(router.query.search_term)
+        setSearchTerm(router.query.query)
 
-        fetch(`${rootDomain}/spots/search?search_term=${router.query.search_term}`, {
+        fetch(`${rootDomain}/spots/search?query=${router.query.query}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ const SearchPage = () => {
         }).then(data => {
             setResults(data.data);
         })
-    }, [router.isReady, router.query.search_term])
+    }, [router.isReady, router.query.query])
 
     return (
         <Layout>

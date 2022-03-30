@@ -21,7 +21,7 @@ const SearchBar = (props) => {
             action: 'search',
             params: { 'search_term': search.toLowerCase() }
         });
-        router.push(`/search?search_term=${search}`)
+        router.push(`/search?query=${search}`)
     }
 
     return (
