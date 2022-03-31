@@ -99,6 +99,16 @@ export default class MyDocument extends Document {
             `
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window._mNHandle = window._mNHandle || {};
+              window._mNHandle.queue = window._mNHandle.queue || [];
+              medianet_versionId = "3121199";
+            `
+          }}
+        />
+        <script src="https://contextual.media.net/dmedianet.js?cid=8CUYE4HN4" async="async"></script>
         </Head>
         <body>
           <Main />

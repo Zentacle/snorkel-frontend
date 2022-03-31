@@ -264,7 +264,7 @@ const Beach = (props) => {
                                 //<!-- below recommended -->
                             }
                             <ins className="adsbygoogle"
-                                style={{display:'block'}}
+                                style={{ display: 'block' }}
                                 data-ad-client="ca-pub-7099980041278313"
                                 data-ad-slot="4115340371"
                                 data-ad-format="auto"
@@ -272,6 +272,21 @@ const Beach = (props) => {
                             <script>
                                 (adsbygoogle = window.adsbygoogle || []).push({ });
                             </script>
+                            <div id="312754558">
+                                <script
+                                    type="text/javascript"
+                                    dangerouslySetInnerHTML={{
+                                        __html: `
+                                        try {
+                                            window._mNHandle.queue.push(function () {
+                                                window._mNDetails.loadTag("312754558", "300x250", "312754558");
+                                            });
+                                        }
+                                        catch (error) { }
+                                    `
+                                    }}
+                                />
+                            </div>
                         </div> : <></>
                     }
                 </div>
