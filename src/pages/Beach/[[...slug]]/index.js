@@ -258,8 +258,6 @@ const Beach = (props) => {
                         ? <div className={styles.carouselSpacer}>
                             <div className={styles.carouseltitle}>Other Locations Nearby</div>
                             <Carousel data={nearbyBeaches} allowVertical />
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-                                crossOrigin="anonymous"></script>
                             {
                                 //<!-- below recommended -->
                             }
