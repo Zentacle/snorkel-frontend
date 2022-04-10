@@ -41,7 +41,7 @@ export async function getStaticProps(context) {
     const beach_data = await res.json()
 
     if (!beach_data.country) {
-        fetch(`${rootDomain}/spots/geocode?id=${beachid}`)
+        fetch(`${rootDomain}/spot/geocode?id=${beachid}`)
     }
 
     if (`/Beach/${beachid}/${beachNameFromURL}` != beach_data.data.url) {
