@@ -69,7 +69,7 @@ const BeachEditComponent = () => {
                 setOldData(data.data);
             })
         }
-    }, [router.isReady])
+    }, [router.isReady, beachid])
 
     function FileSubmit({ submittedFile, type }) {
         let f = null;
@@ -104,10 +104,10 @@ const BeachEditComponent = () => {
             <div>
                 {type === 'hero_img' &&
                     <div className={styles.imageContainer}>
-                        <img className={styles.image} src={newHeroImage.url}></img>
+                        <img className={styles.image} src={newHeroImage.url} alt="hero image"></img>
                     </div>}
                 {type === 'entry_map' && <div className={styles.imageContainer}>
-                    <img className={styles.image} src={newEntryMap.url}></img>
+                    <img className={styles.image} src={newEntryMap.url} alt="entry map image"></img>
                 </div>}
             </div>
         )

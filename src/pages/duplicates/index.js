@@ -40,7 +40,7 @@ const EditBeach = () => {
                 setSpot2(data.data);
             })
         }
-    }, [router.isReady])
+    }, [router.isReady, spot1_id, spot2_id])
 
     const saveDescription = (id) => () => {
         if (!description) {

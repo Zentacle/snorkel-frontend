@@ -58,7 +58,14 @@ const BeachInfo = ({
                         return (
                             <div className={styles.tideRow} key={tide.t}>
                                 <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tideData.toLocaleString([], {'weekday': 'long'})}</div>
-                                <div className={styles.tideImage}><Image src={tide.type === 'H' ? '/high_tide.png' : '/low_tide.png'} height='30' width='30'/></div>
+                                <div className={styles.tideImage}>
+                                    <Image
+                                        src={tide.type === 'H' ? '/high_tide.png' : '/low_tide.png'}
+                                        height='30'
+                                        width='30'
+                                        alt={tide.type === 'H' ? 'high tide icon' : 'low tide icon'}
+                                    />
+                                </div>
                                 <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tideData.toLocaleString([], {hour: 'numeric', minute:'2-digit'})} / {tide.v}ft</div>
                             </div>
                         )
