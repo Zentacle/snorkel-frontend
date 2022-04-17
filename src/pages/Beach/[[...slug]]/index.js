@@ -53,7 +53,7 @@ export async function getStaticProps(context) {
         }
     }
 
-    let response = await fetch(`${rootDomain}/review/get?beach_id=${beachid}`, {
+    let response = await fetch(`${rootDomain}/reviews/get?beach_id=${beachid}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

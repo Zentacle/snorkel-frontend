@@ -16,7 +16,7 @@ export async function getStaticProps(context) {
     })
     const beach_data = await res.json()
 
-    const response = await fetch(`${rootDomain}/review/get?sd_review_id=${review_id}`, {
+    const response = await fetch(`${rootDomain}/reviews/get?sd_review_id=${review_id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

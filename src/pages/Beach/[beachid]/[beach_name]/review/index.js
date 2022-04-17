@@ -24,7 +24,7 @@ const Review = () => {
         }).then(data => {
             setBeach(data.data);
         })
-    }, [router.isReady])
+    }, [router.isReady, beachid])
 
     return (
         <Layout>

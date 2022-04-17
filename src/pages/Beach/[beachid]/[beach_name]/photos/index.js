@@ -21,7 +21,7 @@ const ThePhotoPage = () => {
             }).then(data => {
                 setBeach(data.data);
             })
-    }, [router.isReady])
+    }, [router.isReady, beachid])
 
     return (
         <PhotoPage beach={beach}></PhotoPage>
