@@ -62,7 +62,8 @@ const Footer = () => {
           <div>
             <div className={styles.popularSearchesTitle}>Popularly Searched Destinations</div>
             <div className={styles.popularSearches}>
-              <Link href="https://www.zentacle.com/Beach/300/devils-den">Devil's Den</Link>
+              <Link href="https://www.zentacle.com/Beach/142/bahia-honda-state-park">Bahia Honda State Park</Link>
+              <Link href="https://www.zentacle.com/Beach/300/devils-den">Devil&apos;s Den</Link>
               <Link href="https://www.zentacle.com/Beach/1251/possum-kingdom-lake">Possum Kingdom Lake</Link>
               <Link href="https://www.zentacle.com/Beach/84/tunnels-beach">Tunnels Beach</Link>
               <Link href="https://www.zentacle.com/Beach/407/homestead-crater">Homestead Crater</Link>
