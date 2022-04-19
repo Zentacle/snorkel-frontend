@@ -265,19 +265,20 @@ const Beach = (props) => {
                             {
                                 //<!-- below recommended -->
                             }
-                            <ins className="adsbygoogle"
-                                style={{ display: 'block' }}
-                                data-ad-client="ca-pub-7099980041278313"
-                                data-ad-slot="4115340371"
-                                data-ad-format="auto"
-                                data-full-width-responsive="true"></ins>
-                            <script
-                                type="text/javascript"
-                                dangerouslySetInnerHTML={{
-                                    __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
-                                }}
-                            >
-                            </script>
+                            <div className={styles.ad}>
+                                <ins className="adsbygoogle"
+                                    style={{ display: 'block' }}
+                                    data-ad-client="ca-pub-7099980041278313"
+                                    data-ad-slot="4115340371"
+                                    data-ad-format="auto"
+                                    data-full-width-responsive="true"></ins>
+                                <script
+                                    type="text/javascript"
+                                    dangerouslySetInnerHTML={{
+                                        __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
+                                    }}
+                                />
+                            </div>
                             <div id="312754558">
                                 <script
                                     type="text/javascript"
