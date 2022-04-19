@@ -271,8 +271,12 @@ const Beach = (props) => {
                                 data-ad-slot="4115340371"
                                 data-ad-format="auto"
                                 data-full-width-responsive="true"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({ });
+                            <script
+                                type="text/javascript"
+                                dangerouslySetInnerHTML={{
+                                    __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
+                                }}
+                            >
                             </script>
                             <div id="312754558">
                                 <script
