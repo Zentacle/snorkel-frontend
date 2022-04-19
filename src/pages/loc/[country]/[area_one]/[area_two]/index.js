@@ -37,7 +37,7 @@ export async function getStaticPaths() {
   const res = await fetch(`${rootDomain}/locality/area_two`)
   const data = await res.json()
   return {
-      paths: data.data.filter(loc => loc.area_one && loc.country).map(loc => ({
+      paths: data.data.filter(loc => loc.area_one && loc.country && loc.area_one.short_name).map(loc => ({
           params: {
               country: loc.country.short_name,
               area_one: loc.area_one.short_name,

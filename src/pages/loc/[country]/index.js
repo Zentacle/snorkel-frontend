@@ -42,7 +42,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`${rootDomain}/locality/country?limit=20`)
+  const res = await fetch(`${rootDomain}/locality/country`)
   const data = await res.json()
   return {
       paths: data.data.map(loc => ({

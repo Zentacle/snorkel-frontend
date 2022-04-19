@@ -40,7 +40,7 @@ export async function getStaticPaths() {
   const data = await res.json()
   return {
       paths: data.data
-        .filter(loc => loc.area_one && loc.area_two)
+        .filter(loc => loc.area_one && loc.area_two && loc.area_one.short_name && loc.area_two.short_name)
         .map(loc => ({
             params: {
                 country: loc.country.short_name,
