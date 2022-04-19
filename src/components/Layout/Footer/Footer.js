@@ -59,6 +59,18 @@ const Footer = () => {
           <div>
             Zentacle encourages the use of reef safe sunscreen that doesn&apos;t contain oxybenzone and octinoxate. Learn&nbsp;more&nbsp;at&nbsp;<Link href="https://vimeo.com/442787740">Reefs at Risk</Link>.
           </div>
+          <div>
+            <div className={styles.popularSearchesTitle}>Popularly Searched Destinations</div>
+            <div className={styles.popularSearches}>
+              <Link href="https://www.zentacle.com/Beach/300/devils-den">Devil's Den</Link>
+              <Link href="https://www.zentacle.com/Beach/1251/possum-kingdom-lake">Possum Kingdom Lake</Link>
+              <Link href="https://www.zentacle.com/Beach/84/tunnels-beach">Tunnels Beach</Link>
+              <Link href="https://www.zentacle.com/Beach/407/homestead-crater">Homestead Crater</Link>
+              <Link href="https://www.zentacle.com/Beach/1576/sharks-cove">Sharks Cove</Link>
+              <Link href="https://www.zentacle.com/Beach/1645/wailea-beach">Wailea Beach</Link>
+              <Link href="https://www.zentacle.com/Beach/109/alexander-springs">Alexander Springs</Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

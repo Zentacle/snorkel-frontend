@@ -101,6 +101,19 @@
     flex: 0 0 320px;
 }
 
+.popularSearchesTitle {
+    margin: 8px 0;
+    font-weight: bold;
+}
+
+.popularSearches > a {
+    margin: 0 4px;
+}
+
+.popularSearches > a:first-child {
+    margin-left: 0;
+}
+
 @media (max-width: 720px) {
     .footerLinksContainer {
         flex-direction: column !important;
