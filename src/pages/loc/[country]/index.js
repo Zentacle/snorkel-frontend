@@ -45,12 +45,12 @@ export async function getStaticPaths() {
   const res = await fetch(`${rootDomain}/locality/country`)
   const data = await res.json()
   return {
-      paths: data.data.map(loc => ({
-          params: {
-              country: loc.short_name,
-          }
-      })),
-      fallback: 'blocking',
+    paths: data.data.map(loc => ({
+      params: {
+        country: loc.short_name,
+      }
+    })),
+    fallback: 'blocking',
   }
 }
 
@@ -68,11 +68,11 @@ const Home = (props) => {
   React.useEffect(() => {
     const currentUser = state.user;
     if (currentUser) {
-        sendEvent('page_view', {
-            type: 'location',
-            loc_type: props.loc,
-            loc_name: props.area.short_name,
-        });
+      sendEvent('page_view', {
+        type: 'location',
+        loc_type: props.loc,
+        loc_name: props.area.short_name,
+      });
     }
   }, [state, props.loc, props.area.short_name])
 
@@ -133,7 +133,7 @@ const Home = (props) => {
         <meta property="og:description" content={description} key="og:description" />
         <meta property="og:image" content="https://www.zentacle.com/social_background_v2.jpg" key="og:image" />
         <meta name="description" content={description} key="description" />
-        {props.area.url && <link rel="canonical" href={`https://www.zentacle.com${props.area.url}`}/>}
+        {props.area.url && <link rel="canonical" href={`https://www.zentacle.com${props.area.url}`} />}
       </Head>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
@@ -144,7 +144,7 @@ const Home = (props) => {
               area_two={props.area.area_two}
             />
           </div>
-          { areas.length
+          {areas.length
             ? <div className={styles.locationContainer}>
               {areas.map(area => (
                 <Link key={area.short_name} href={area.url}>
@@ -164,14 +164,36 @@ const Home = (props) => {
             {props.area.description && '\n\n'}
             {props.area.description}
           </div>
-          { props.area.map_image_url && <div className={styles.mapImageContainer}><Image src={props.area.map_image_url} className={styles.mapImage} objectFit="contain" height="300" width="600" alt={`${props.area.name} dive site map`}/></div> }
+          {props.area.map_image_url && <div className={styles.mapImageContainer}><Image src={props.area.map_image_url} className={styles.mapImage} objectFit="contain" height="300" width="600" alt={`${props.area.name} dive site map`} /></div>}
           {
-              hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name}/>
+            hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
           }
           <div>
             {
-              props.default.map((location, index) => (
-                <LocationCard key={location.id} info={location} index={index}/>
+              props.default.slice(0, 10).map((location, index) => (
+                <LocationCard key={location.id} info={location} index={index} />
+              ))
+            }
+            {
+              //<!-- below recommended -->
+            }
+            <div className={styles.ad}>
+              <ins className="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-7099980041278313"
+                data-ad-slot="2151950611"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{
+                  __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
+                }}
+              />
+            </div>
+            {
+              props.default.slice(10).map((location, index) => (
+                <LocationCard key={location.id} info={location} index={index} />
               ))
             }
           </div>
