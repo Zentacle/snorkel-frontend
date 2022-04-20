@@ -193,7 +193,7 @@ const Home = (props) => {
             </div>
             {
               props.default.slice(10).map((location, index) => (
-                <LocationCard key={location.id} info={location} index={index} />
+                <LocationCard key={location.id} info={location} index={index+10} />
               ))
             }
           </div>
