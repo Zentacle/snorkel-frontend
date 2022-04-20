@@ -175,7 +175,7 @@ const Home = (props) => {
               ))
             }
             {
-              //<!-- below recommended -->
+              //<!-- region listing -->
             }
             <div className={styles.ad}>
               <ins className="adsbygoogle"
