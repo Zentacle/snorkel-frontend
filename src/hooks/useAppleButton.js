@@ -32,6 +32,7 @@ const useGoogleButton = (redirectURL, user) => () => {
         // Listen for authorization success.
         document.addEventListener('AppleIDSignInOnSuccess', (event) => {
             // Handle successful response.
+            console.log(event)
             console.log(event.detail.data);
         });
 
