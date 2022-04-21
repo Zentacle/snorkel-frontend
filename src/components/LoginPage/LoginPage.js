@@ -11,7 +11,9 @@ import PrimaryButton from 'components/PrimaryButton';
 import { clientSideDomain } from 'lib/constants';
 import { useCurrentUser } from '../../context/usercontext'
 import useGoogleButton from 'hooks/useGoogleButton';
+import useAppleButton from 'hooks/useAppleButton';
 import { sendEvent, setAmplitudeUserId } from "hooks/amplitude";
+import Head from "next/head";
 
 const LoginPage = () => {
     const router = useRouter();
@@ -54,9 +56,17 @@ const LoginPage = () => {
     }, [])
 
     useEffect(useGoogleButton('/', {}), [])
+    useEffect(useAppleButton('/', {}), [])
 
     return (
         <Layout>
+            <Head>
+                <meta name="appleid-signin-client-id" content="org.reactjs.native.example.Zentacle-ios"/>
+                <meta name="appleid-signin-scope" content="name email"/>
+                <meta name="appleid-signin-redirect-uri" content="https://www.zentacle.com/api/user/apple_register"/>
+                <meta name="appleid-signin-state" content="password"/>
+                <meta name="appleid-signin-use-popup" content="true"/>
+            </Head>
             <BackgroundCard>
                 <h1 className={styles.titlecontainer}>
                     Login to your account
@@ -64,8 +74,13 @@ const LoginPage = () => {
                 <div
                     id="google_button"
                     className={styles.googleButton}
-                >
-                </div>
+                />
+                <div
+                    id="appleid-signin"
+                    data-color="black"
+                    data-border="true"
+                    data-type="sign in"
+                />
                 <div className={styles.orSeparator}>OR</div>
                 <SignupInput value={email} onChange={setEmail} type="Email"></SignupInput>
                 <SignupInput value={password} onChange={setPassword} type="Password"></SignupInput>
