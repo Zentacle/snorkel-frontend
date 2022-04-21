@@ -33,6 +33,14 @@
     justify-content: center;
 }
 
+.appleButton {
+    height: 40px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: 210px;
+}
+
 .orSeparator {
     margin: 16px 0;
     font-size: 24px;

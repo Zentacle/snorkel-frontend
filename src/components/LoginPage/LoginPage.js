@@ -80,6 +80,7 @@ const LoginPage = () => {
                     data-color="black"
                     data-border="true"
                     data-type="sign in"
+                    className={styles.appleButton}
                 />
                 <div className={styles.orSeparator}>OR</div>
                 <SignupInput value={email} onChange={setEmail} type="Email"></SignupInput>
