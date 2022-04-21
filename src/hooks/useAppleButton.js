@@ -6,25 +6,25 @@ const useGoogleButton = (redirectURL, user) => () => {
     if (!user) { return }
     if (user && user.id) { return }
     const handleLogin = (response) => {
-        if (response.credential) {
-            fetch(`${clientSideDomain}/user/google_register`, {
+        if (response.authorization) {
+            fetch(`${clientSideDomain}/user/apple_register`, {
                 method: 'POST',
-                body: JSON.stringify(response),
+                body: JSON.stringify(response.authorization),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(() => {
-                sendEvent('google_register_success');
+                sendEvent('apple_register_success');
                 ga.event({
                     action: "sign_up",
                     params: {
-                        'method': "Google Button"
+                        'method': "Apple Button"
                     }
                 })
                 window.location.href = redirectURL
             })
         } else {
-            sendEvent('google_register_error');
+            sendEvent('apple_register_error');
         }
     }
 
@@ -32,8 +32,7 @@ const useGoogleButton = (redirectURL, user) => () => {
         // Listen for authorization success.
         document.addEventListener('AppleIDSignInOnSuccess', (event) => {
             // Handle successful response.
-            console.log(event)
-            console.log(event.detail.data);
+            handleLogin(event.detail)
         });
 
         // Listen for authorization failures.
