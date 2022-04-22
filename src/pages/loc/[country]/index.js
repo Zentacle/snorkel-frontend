@@ -196,7 +196,7 @@ const Home = (props) => {
                 <LocationCard key={location.id} info={location} index={index + 10} />
               ))
             }
-            <ins class="adsbygoogle"
+            <ins className="adsbygoogle"
               style={{ display: 'block' }}
               data-ad-format="fluid"
               data-ad-layout-key="-fb+5w+4e-db+86"
