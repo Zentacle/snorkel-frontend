@@ -126,7 +126,7 @@ const Home = (props) => {
           </div>
           {areas.length > 7 && <div className={styles.locationContainer}>
             {areas.slice(7).map(area => (
-              <Link key={area.short_name} href={area.url}>
+              <Link key={area.short_name} href={area.url} prefetch={false}>
                 <a className={styles.location}>
                   {area.name}
                 </a>
