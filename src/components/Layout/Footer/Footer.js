@@ -42,9 +42,9 @@ const Footer = () => {
             <span className={styles.headertitle}>Zentacle</span>
           </div>
           <div className={styles.footerLinkContainer}>
-            <Link href='/directory'><a className={styles.footerLink}>Dive Spot Directory</a></Link>
-            <Link href='/directory/loc'><a className={styles.footerLink}>Region Directory</a></Link>
-            <Link href='/add/spot'><a className={styles.footerLink}>Add a new location</a></Link>
+            <Link href='/directory' prefetch={false}><a className={styles.footerLink}>Dive Spot Directory</a></Link>
+            <Link href='/directory/loc' prefetch={false}><a className={styles.footerLink}>Region Directory</a></Link>
+            <Link href='/add/spot' prefetch={false}><a className={styles.footerLink}>Add a new location</a></Link>
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mayank@zentacle.com">Report an issue</a>
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mayank@zentacle.com">Suggest an edit</a>
             <Link href='https://www.shorediving.com'><a className={styles.footerLink}>ShoreDiving.com</a></Link>
@@ -62,14 +62,14 @@ const Footer = () => {
           <div>
             <div className={styles.popularSearchesTitle}>Popularly Searched Destinations</div>
             <div className={styles.popularSearches}>
-              <Link href="https://www.zentacle.com/Beach/142/bahia-honda-state-park">Bahia Honda State Park</Link>
-              <Link href="https://www.zentacle.com/Beach/300/devils-den">Devil&apos;s Den</Link>
-              <Link href="https://www.zentacle.com/Beach/1251/possum-kingdom-lake">Possum Kingdom Lake</Link>
-              <Link href="https://www.zentacle.com/Beach/84/tunnels-beach">Tunnels Beach</Link>
-              <Link href="https://www.zentacle.com/Beach/407/homestead-crater">Homestead Crater</Link>
-              <Link href="https://www.zentacle.com/Beach/1576/sharks-cove">Sharks Cove</Link>
-              <Link href="https://www.zentacle.com/Beach/1645/wailea-beach">Wailea Beach</Link>
-              <Link href="https://www.zentacle.com/Beach/109/alexander-springs">Alexander Springs</Link>
+              <Link href="https://www.zentacle.com/Beach/142/bahia-honda-state-park" prefetch={false}>Bahia Honda State Park</Link>
+              <Link href="https://www.zentacle.com/Beach/300/devils-den" prefetch={false}>Devil&apos;s Den</Link>
+              <Link href="https://www.zentacle.com/Beach/1251/possum-kingdom-lake" prefetch={false}>Possum Kingdom Lake</Link>
+              <Link href="https://www.zentacle.com/Beach/84/tunnels-beach" prefetch={false}>Tunnels Beach</Link>
+              <Link href="https://www.zentacle.com/Beach/407/homestead-crater" prefetch={false}>Homestead Crater</Link>
+              <Link href="https://www.zentacle.com/Beach/1576/sharks-cove" prefetch={false}>Sharks Cove</Link>
+              <Link href="https://www.zentacle.com/Beach/1645/wailea-beach" prefetch={false}>Wailea Beach</Link>
+              <Link href="https://www.zentacle.com/Beach/109/alexander-springs" prefetch={false}>Alexander Springs</Link>
             </div>
           </div>
         </div>
