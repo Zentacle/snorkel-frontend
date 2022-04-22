@@ -193,9 +193,21 @@ const Home = (props) => {
             </div>
             {
               props.default.slice(10).map((location, index) => (
-                <LocationCard key={location.id} info={location} index={index+10} />
+                <LocationCard key={location.id} info={location} index={index + 10} />
               ))
             }
+            <ins class="adsbygoogle"
+              style={{ display: 'block' }}
+              data-ad-format="fluid"
+              data-ad-layout-key="-fb+5w+4e-db+86"
+              data-ad-client="ca-pub-7099980041278313"
+              data-ad-slot="5483092474"></ins>
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{
+                __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
+              }}
+            />
           </div>
         </div>
       </div>
