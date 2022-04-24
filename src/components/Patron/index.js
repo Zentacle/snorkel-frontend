@@ -3,6 +3,8 @@ import React from 'react';
 import * as ga from 'lib/ga';
 import SectionTitle from 'components/SectionTitle';
 import styles from './styles.module.css';
+import { sendEvent } from 'hooks/amplitude';
+import Image from 'next/image';
 
 const Patron = (props) => {
   React.useEffect(() => {
@@ -17,32 +19,35 @@ const Patron = (props) => {
     setTimeout(initializeFareharbor, 1000)
   }, [])
 
-  const getAreaPatronName = (areaPatronKey) => {
+  const getPatron = (areaPatronKey) => {
     return areaPatronKey == 'big-island'
-      ? 'Kona Shore Divers'
-      : 'Maui Dreams'
-  }
-
-  const getAreaPatronWebsiteLink = (areaPatronKey) => {
-    return areaPatronKey == 'big-island'
-      ? "https://www.konashoredivers.com"
-      : "https://www.mauidreamsdiveco.com"
-  }
-
-  const getAreaPatronFareharborLink = (areaPatronKey) => {
-    return areaPatronKey == 'big-island'
-      ? "https://fareharbor.com/embeds/book/konashoredivers/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=101672"
-      : "https://fareharbor.com/embeds/book/mauidreamsdiveco/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=541902"
-  }
-
-  const getAreaPatronDescription = (areaPatronKey) => {
-    return areaPatronKey == 'big-island'
-      ? 'Our goal is to give you the opportunity to share and explore the underwater world in and around the near shore waters of Kailua-Kona. We focus on small group sizes and strive to offer the best personalized service we can to our guests. From the first timer to the old timer come with us and see what the Kona Shore has to offer!'
-      : 'Maui Dreams is the premiere dive shop serving the whole Maui area.'
+      ? {
+        'name': 'Kona Shore Divers',
+        'url': 'https://www.konashoredivers.com',
+        'fareharbor_url': 'https://fareharbor.com/embeds/book/konashoredivers/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=101672',
+        'address1': '75-5660 D5B, Kopiko St',
+        'address2': '',
+        'city': 'Kailua-Kona',
+        'state': 'HI',
+        'zip_code': '96740',
+        'logo_img': 'https://i.ytimg.com/vi/1Y-jraRZI0Y/mqdefault.jpg',
+      }
+      : {
+        'name': 'Maui Dreams',
+        'url': 'https://www.mauidreamsdiveco.com',
+        'fareharbor_url': 'https://fareharbor.com/embeds/book/mauidreamsdiveco/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=541902',
+        'address1': '1993 S Kihei Rd',
+        'address2': '',
+        'city': 'Kihei',
+        'state': 'HI',
+        'zip_code': '96753',
+        'logo_img': 'https://www.mauidreamsdiveco.com/uploads/images/logo_mauidreamsdiveco.png',
+      }
   }
 
   const sendViewEvent = (areaPatronKey) => {
-    const itemLabel = getAreaPatronName(areaPatronKey);
+    const itemLabel = getPatron(areaPatronKey).name;
+    sendEvent('view_patron')
 
     ga.event({
       action: "view_item",
@@ -59,7 +64,8 @@ const Patron = (props) => {
   }
 
   const sendClickEvent = (areaPatronKey) => () => {
-    const itemLabel = getAreaPatronName(areaPatronKey);
+    const itemLabel = getPatron(areaPatronKey).name;
+    sendEvent('click_patron')
 
     ga.event({
       action: "purchase",
@@ -74,28 +80,41 @@ const Patron = (props) => {
       }
     })
 
-    ga.event({ action: 'conversion', params: {'send_to': 'AW-997844434/VRQkCKW2uP0CENLL59sD'} });
+    ga.event({ action: 'conversion', params: { 'send_to': 'AW-997844434/VRQkCKW2uP0CENLL59sD' } });
   }
+
+  const patron = getPatron(props.areaPatronKey)
 
   return (
     <div>
-        <SectionTitle text='Find a Guide' />
-        <div className={styles.description}>
-            <a
-                onClick={ sendClickEvent(props.areaPatronKey) }
-                className={styles.patronName}
-                href={getAreaPatronWebsiteLink(props.areaPatronKey)}
-            >
-              {getAreaPatronName(props.areaPatronKey)}
-            </a>
-            <span> - {getAreaPatronDescription(props.areaPatronKey)}</span>
-            <a
-              className={styles.patronName}
-              href={getAreaPatronFareharborLink(props.areaPatronKey)}
-            >
-              &nbsp;Book Now
-            </a>
+      <SectionTitle text='Recommended dive shops' />
+      <div className={styles.patronCard}>
+        <div className={styles.image}>
+          <Image
+            src={patron.logo_img}
+            layout="fill"
+            objectFit='contain'
+          />
         </div>
+        <div className={styles.description}>
+          <a
+            onClick={sendClickEvent(props.areaPatronKey)}
+            className={styles.patronName}
+            href={patron.url}
+          >
+            {patron.name}
+          </a>
+          <div>{patron.address1}</div>
+          <div>{patron.address2}</div>
+          <div>{`${patron.city}, ${patron.state} ${patron.zip_code}`}</div>
+          <a
+            className={styles.bookNow}
+            href={patron.fareharbor_url}
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,11 +1,35 @@
 .patronName {
-  color: var(--primary-color);
   font-weight: var(--text-weight-bold);
 }
 
 .description{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   font-size: 14px;
-  margin: 0 24px 24px 24px;
   line-height: 20px;
+  margin-left: 8px;
   white-space: pre-line;
+}
+
+.bookNow {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+.patronCard {
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 20%);
+  display: flex;
+  margin: 0 16px 24px 16px;
+  max-width: 320px;
+  padding: 8px;
+}
+
+.image {
+  position: relative;
+  width: 88px;
 }
