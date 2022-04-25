@@ -179,7 +179,7 @@ const Home = (props) => {
             }
             <div className={styles.ad}>
               <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-                crossorigin="anonymous"></script>
+                crossOrigin="anonymous"></script>
               <ins className="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-7099980041278313"
@@ -199,7 +199,7 @@ const Home = (props) => {
               ))
             }
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-              crossorigin="anonymous"></script>
+              crossOrigin="anonymous"></script>
             <ins className="adsbygoogle"
               style={{ display: 'block' }}
               data-ad-format="fluid"
