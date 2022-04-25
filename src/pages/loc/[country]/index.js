@@ -178,6 +178,8 @@ const Home = (props) => {
               //<!-- region listing -->
             }
             <div className={styles.ad}>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
+                crossorigin="anonymous"></script>
               <ins className="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-7099980041278313"
@@ -196,6 +198,8 @@ const Home = (props) => {
                 <LocationCard key={location.id} info={location} index={index + 10} />
               ))
             }
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
+              crossorigin="anonymous"></script>
             <ins className="adsbygoogle"
               style={{ display: 'block' }}
               data-ad-format="fluid"

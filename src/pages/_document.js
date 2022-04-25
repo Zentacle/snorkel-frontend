@@ -108,10 +108,6 @@ export default class MyDocument extends Document {
             `
           }}
         />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-          crossOrigin="anonymous"></script>
         <script src="https://contextual.media.net/dmedianet.js?cid=8CUYE4HN4" async="async"></script>
         </Head>
         <body>
