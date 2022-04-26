@@ -72,7 +72,7 @@ const Home = (props) => {
         (adsbygoogle = window.adsbygoogle || []).push({});
       } catch (e) { }
     }
-  }, []);
+  }, [props.area]);
 
   React.useEffect(() => {
     const currentUser = state.user;

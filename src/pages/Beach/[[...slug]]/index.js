@@ -177,7 +177,7 @@ const Beach = (props) => {
                 (adsbygoogle = window.adsbygoogle || []).push({});
             } catch (e) { }
         }
-    }, []);
+    }, [beach.id]);
 
     useEffect(() => {
         if (currentUser) {
