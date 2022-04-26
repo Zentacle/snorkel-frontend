@@ -65,7 +65,7 @@ const Home = (props) => {
   const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
-  useEffect(() => {
+  React.useEffect(() => {
     var ads = document.getElementsByClassName("adsbygoogle").length;
     for (var i = 0; i < ads; i++) {
       try {
