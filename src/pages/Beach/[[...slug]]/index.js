@@ -233,7 +233,7 @@ const Beach = (props) => {
                         style={{ display: 'block' }}
                         data-ad-client="ca-pub-7099980041278313"
                         data-ad-slot="9831586937"
-                        data-ad-format="horizontal"
+                        data-ad-format="horizontal, horizontal"
                         data-full-width-responsive="true"></ins>
                     <script
                         type="text/javascript"
