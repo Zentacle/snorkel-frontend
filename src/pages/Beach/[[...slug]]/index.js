@@ -65,43 +65,42 @@ export async function getStaticProps(context) {
     let stationId = null;
     if (beach_data.data.noaa_station_id) {
         stationId = beach_data.data.noaa_station_id;
-        console.log('skipping...already have noaa station')
     }
-    else {
-        if (beach_data.data.latitude) {
-            try {
-                response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-                console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-                const stations_data = await response.json()
-                if (stations_data.stationList && stations_data.stationList.length) {
-                    stationId = stations_data.stationList[0].stationId
-                    response = await fetch(`${rootDomain}/spot/setStationId`, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            'spotId': beachid,
-                            'stationId': stationId
-                        }),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                } else {
-                    response = await fetch(`${rootDomain}/spot/setStationId`, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            'spotId': beachid,
-                            'stationId': '-1'
-                        }),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    }
+    // else {
+    //     if (beach_data.data.latitude) {
+    //         try {
+    //             response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+    //             console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+    //             const stations_data = await response.json()
+    //             if (stations_data.stationList && stations_data.stationList.length) {
+    //                 stationId = stations_data.stationList[0].stationId
+    //                 response = await fetch(`${rootDomain}/spot/setStationId`, {
+    //                     method: 'POST',
+    //                     body: JSON.stringify({
+    //                         'spotId': beachid,
+    //                         'stationId': stationId
+    //                     }),
+    //                     headers: {
+    //                         'Content-Type': 'application/json'
+    //                     }
+    //                 })
+    //             } else {
+    //                 response = await fetch(`${rootDomain}/spot/setStationId`, {
+    //                     method: 'POST',
+    //                     body: JSON.stringify({
+    //                         'spotId': beachid,
+    //                         'stationId': '-1'
+    //                     }),
+    //                     headers: {
+    //                         'Content-Type': 'application/json'
+    //                     }
+    //                 })
+    //             }
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    // }
 
     let tides = []
     if (stationId && stationId !== '-1') {
@@ -137,7 +136,7 @@ export async function getStaticProps(context) {
         }
     }
 
-    console.log(`beach_api_timing: ${Date.now() - startTime}ms`)
+    console.log(`beach_api_timing: ${Date.now() - startTime}ms, id: ${beachid}`)
     return {
         props: {
             'beach': beach_data.data,
