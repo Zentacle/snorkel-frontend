@@ -88,26 +88,30 @@ export default class MyDocument extends Document {
               `
             }}
           />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
             !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="VaV9xZTx1sjrlrGixQKCyc6hq5yq9wTv";;analytics.SNIPPET_VERSION="4.15.3";
             analytics.load("VaV9xZTx1sjrlrGixQKCyc6hq5yq9wTv");
             analytics.page();
             }}();
             `
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+            }}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
               window._mNHandle = window._mNHandle || {};
               window._mNHandle.queue = window._mNHandle.queue || [];
               medianet_versionId = "3121199";
             `
-          }}
-        />
-        <script src="https://contextual.media.net/dmedianet.js?cid=8CUYE4HN4" async="async"></script>
+            }}
+          />
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
+            crossOrigin="anonymous"></script>
+          <script src="https://contextual.media.net/dmedianet.js?cid=8CUYE4HN4" async="async"></script>
         </Head>
         <body>
           <Main />

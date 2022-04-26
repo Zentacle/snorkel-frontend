@@ -65,6 +65,15 @@ const Home = (props) => {
   const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
+  useEffect(() => {
+    var ads = document.getElementsByClassName("adsbygoogle").length;
+    for (var i = 0; i < ads; i++) {
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) { }
+    }
+  }, []);
+
   React.useEffect(() => {
     const currentUser = state.user;
     if (currentUser) {
@@ -178,40 +187,24 @@ const Home = (props) => {
               //<!-- region listing -->
             }
             <div className={styles.ad}>
-              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-                crossOrigin="anonymous"></script>
               <ins className="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-7099980041278313"
                 data-ad-slot="2151950611"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
-              <script
-                type="text/javascript"
-                dangerouslySetInnerHTML={{
-                  __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
-                }}
-              />
             </div>
             {
               props.default.slice(10).map((location, index) => (
                 <LocationCard key={location.id} info={location} index={index + 10} />
               ))
             }
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-              crossOrigin="anonymous"></script>
             <ins className="adsbygoogle"
               style={{ display: 'block' }}
               data-ad-format="fluid"
               data-ad-layout-key="-fb+5w+4e-db+86"
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="5483092474"></ins>
-            <script
-              type="text/javascript"
-              dangerouslySetInnerHTML={{
-                __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
-              }}
-            />
           </div>
         </div>
       </div>

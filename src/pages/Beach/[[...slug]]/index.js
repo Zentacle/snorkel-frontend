@@ -171,6 +171,15 @@ const Beach = (props) => {
     const currentUser = state.user;
 
     useEffect(() => {
+        var ads = document.getElementsByClassName("adsbygoogle").length;
+        for (var i = 0; i < ads; i++) {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) { }
+        }
+    }, []);
+
+    useEffect(() => {
         if (currentUser) {
             sendEvent('beach_view', {
                 site_id: beach.id,
@@ -227,20 +236,12 @@ const Beach = (props) => {
             </Head>
             <MaxWidth>
                 <div className={styles.ad}>
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-                        crossOrigin="anonymous"></script>
                     <ins className="adsbygoogle"
                         style={{ display: 'block' }}
                         data-ad-client="ca-pub-7099980041278313"
                         data-ad-slot="9831586937"
                         data-ad-format="horizontal, horizontal"
                         data-full-width-responsive="true"></ins>
-                    <script
-                        type="text/javascript"
-                        dangerouslySetInnerHTML={{
-                            __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
-                        }}
-                    />
                 </div>
                 <Breadcrumbs
                     country={beach.country}
@@ -281,20 +282,12 @@ const Beach = (props) => {
                                 //<!-- below recommended -->
                             }
                             <div className={styles.ad}>
-                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-                                    crossOrigin="anonymous"></script>
                                 <ins className="adsbygoogle"
                                     style={{ display: 'block' }}
                                     data-ad-client="ca-pub-7099980041278313"
                                     data-ad-slot="4115340371"
                                     data-ad-format="auto"
                                     data-full-width-responsive="true"></ins>
-                                <script
-                                    type="text/javascript"
-                                    dangerouslySetInnerHTML={{
-                                        __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
-                                    }}
-                                />
                             </div>
                             <div id="312754558">
                                 <script
