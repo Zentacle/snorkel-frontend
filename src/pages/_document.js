@@ -19,7 +19,6 @@ export default class MyDocument extends Document {
         })
 
       const initialProps = await Document.getInitialProps(ctx)
-      console.log(`styled_components_timing: ${Date.now() - startTime}ms`)
       return {
         ...initialProps,
         styles: (
