@@ -227,6 +227,22 @@ const Beach = (props) => {
                 {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
             </Head>
             <MaxWidth>
+                <div className={styles.ad}>
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
+                        crossOrigin="anonymous"></script>
+                    <ins className="adsbygoogle"
+                        style={{ display: 'block' }}
+                        data-ad-client="ca-pub-7099980041278313"
+                        data-ad-slot="9831586937"
+                        data-ad-format="horizontal"
+                        data-full-width-responsive="true"></ins>
+                    <script
+                        type="text/javascript"
+                        dangerouslySetInnerHTML={{
+                            __html: `(adsbygoogle = window.adsbygoogle || []).push({ });`
+                        }}
+                    />
+                </div>
                 <Breadcrumbs
                     country={beach.country}
                     area_one={beach.area_one}
