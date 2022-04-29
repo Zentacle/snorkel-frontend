@@ -20,8 +20,8 @@ const Patron = (props) => {
   }, [])
 
   const getPatron = (areaPatronKey) => {
-    return areaPatronKey == 'big-island'
-      ? {
+    if (areaPatronKey == 'big-island') {
+      return {
         'name': 'Kona Shore Divers',
         'url': 'https://www.konashoredivers.com',
         'fareharbor_url': 'https://fareharbor.com/embeds/book/konashoredivers/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=101672',
@@ -32,7 +32,9 @@ const Patron = (props) => {
         'zip_code': '96740',
         'logo_img': 'https://i.ytimg.com/vi/1Y-jraRZI0Y/mqdefault.jpg',
       }
-      : {
+    }
+    else if (areaPatronKey == 'maui') {
+      return {
         'name': 'Maui Dreams',
         'url': 'https://www.mauidreamsdiveco.com',
         'fareharbor_url': 'https://fareharbor.com/embeds/book/mauidreamsdiveco/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=541902',
@@ -43,6 +45,20 @@ const Patron = (props) => {
         'zip_code': '96753',
         'logo_img': 'https://www.mauidreamsdiveco.com/uploads/images/logo_mauidreamsdiveco.png',
       }
+    }
+    else if (areaPatronKey == 'oahu') {
+      return {
+        'name': 'Waikiki Diving Center',
+        'url': 'https://waikikidiving.com/',
+        'fareharbor_url': 'https://fareharbor.com/embeds/book/waikikidivecenter/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=522147',
+        'address1': '',
+        'address2': '',
+        'city': 'Honolulu',
+        'state': 'HI',
+        'zip_code': '',
+        'logo_img': '',
+      }
+    }
   }
 
   const sendViewEvent = (areaPatronKey) => {

@@ -122,6 +122,14 @@ const Home = (props) => {
     )
   )
 
+  const isOahu = (
+    props.area.short_name == 'oahu'
+    || (
+      props.area_two
+      && props.area_two.short_name == 'oahu'
+    )
+  )
+
   let areaPatronKey = null;
   if (props.loc === 'locality') {
     areaPatronKey = props.area_two.short_name;
@@ -129,7 +137,7 @@ const Home = (props) => {
     areaPatronKey = props.area.short_name
   }
 
-  const hasPatron = isMaui || isBigIsland;
+  const hasPatron = isMaui || isBigIsland || isOahu;
 
   const title = `Top Snorkel and Scuba Dive Sites in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
   const description = `Top scuba dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
