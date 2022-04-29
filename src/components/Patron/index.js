@@ -51,12 +51,12 @@ const Patron = (props) => {
         'name': 'Waikiki Diving Center',
         'url': 'https://waikikidiving.com/',
         'fareharbor_url': 'https://fareharbor.com/embeds/book/waikikidivecenter/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=522147',
-        'address1': '',
+        'address1': '424 Nāhua St',
         'address2': '',
         'city': 'Honolulu',
         'state': 'HI',
-        'zip_code': '',
-        'logo_img': '',
+        'zip_code': '96815',
+        'logo_img': 'https://fh-sites.imgix.net/sites/4671/2022/01/24213304/WaikikiDC_logo_Color.png?auto=compress%2Cformat&h=120&fit=max',
       }
     }
   }
@@ -124,6 +124,7 @@ const Patron = (props) => {
           <div>{patron.address2}</div>
           <div>{`${patron.city}, ${patron.state} ${patron.zip_code}`}</div>
           <a
+            onClick={sendClickEvent(props.areaPatronKey)}
             className={styles.bookNow}
             href={patron.fareharbor_url}
           >
