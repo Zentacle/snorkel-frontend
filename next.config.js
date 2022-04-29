@@ -14,6 +14,7 @@ module.exports = {
       'www.lovebigisland.com',
       'www.mauidreamsdiveco.com',
       'i.ytimg.com',
+      'fh-sites.imgix.net',
     ],
     minimumCacheTTL: 60,
   }

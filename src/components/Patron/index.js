@@ -124,7 +124,7 @@ const Patron = (props) => {
           <div>{patron.address2}</div>
           <div>{`${patron.city}, ${patron.state} ${patron.zip_code}`}</div>
           <a
-            onClick={sendClickEvent(props.areaPatronKey)}
+            onMouseDown={sendClickEvent(props.areaPatronKey)}
             className={styles.bookNow}
             href={patron.fareharbor_url}
           >
