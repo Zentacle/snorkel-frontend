@@ -232,7 +232,7 @@ const Home = (props) => {
               <ins className="adsbygoogle"
                 style={{ display: 'block' }}
                 data-ad-format="fluid"
-                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-layout-key="-fh-2s+hd-1e-1gn"
                 data-ad-client="ca-pub-7099980041278313"
                 data-ad-slot="5483092474"></ins>
             </div>
