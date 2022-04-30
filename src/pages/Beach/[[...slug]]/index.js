@@ -281,7 +281,7 @@ const Beach = (props) => {
                     {nearbyBeaches.length
                         ? <div className={styles.carouselSpacer}>
                             <div className={`${styles.ad} ${styles.adTop}`}>
-                                <ins class="adsbygoogle"
+                                <ins className="adsbygoogle"
                                     style={{
                                         display: 'inline-block',
                                         width: '268px',
