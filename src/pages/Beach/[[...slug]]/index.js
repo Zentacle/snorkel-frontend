@@ -237,11 +237,15 @@ const Beach = (props) => {
             <MaxWidth>
                 <div className={styles.ad}>
                     <ins className="adsbygoogle"
-                        style={{ display: 'block' }}
+                        style={{
+                            display: 'block',
+                            minWidth:'300px',
+                            maxWidth:'970px',
+                            width:'100%',
+                            height:'90px',
+                        }}
                         data-ad-client="ca-pub-7099980041278313"
-                        data-ad-slot="9831586937"
-                        data-ad-format="horizontal, horizontal"
-                        data-full-width-responsive="true"></ins>
+                        data-ad-slot="9831586937"></ins>
                 </div>
                 <Breadcrumbs
                     country={beach.country}
