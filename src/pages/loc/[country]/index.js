@@ -173,7 +173,7 @@ const Home = (props) => {
             </div>
             : <></>
           }
-          <div className={styles.ad}>
+          <div className={styles.ad} key={props.area}>
             <ins className="adsbygoogle"
               style={{
                 display: 'block',

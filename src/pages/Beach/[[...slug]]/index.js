@@ -235,7 +235,7 @@ const Beach = (props) => {
                 {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
             </Head>
             <MaxWidth>
-                <div className={styles.ad}>
+                <div className={styles.ad} key={beach.id}>
                     <ins className="adsbygoogle"
                         style={{
                             display: 'block',
@@ -280,7 +280,7 @@ const Beach = (props) => {
                     </div>
                     {nearbyBeaches.length
                         ? <div className={styles.carouselSpacer}>
-                            <div className={`${styles.ad} ${styles.adTop}`}>
+                            <div className={`${styles.ad} ${styles.adTop}`} key={beach.id}>
                                 <ins className="adsbygoogle"
                                     style={{
                                         display: 'inline-block',
@@ -295,7 +295,7 @@ const Beach = (props) => {
                             {
                                 //<!-- below recommended -->
                             }
-                            <div className={styles.ad}>
+                            <div className={styles.ad} key={beach.id}>
                                 <ins className="adsbygoogle"
                                     style={{ display: 'block' }}
                                     data-ad-client="ca-pub-7099980041278313"
