@@ -280,7 +280,7 @@ const Beach = (props) => {
                     </div>
                     {nearbyBeaches.length
                         ? <div className={styles.carouselSpacer}>
-                            <div className={`${styles.ad} ${styles.adTop}`} key={beach.id}>
+                            <div className={`${styles.ad} ${styles.adTop}`}>
                                 <ins className="adsbygoogle"
                                     style={{
                                         display: 'inline-block',
@@ -288,20 +288,22 @@ const Beach = (props) => {
                                         height: '250px',
                                     }}
                                     data-ad-client="ca-pub-7099980041278313"
-                                    data-ad-slot="9878800345"></ins>
+                                    data-ad-slot="9878800345"
+                                    key={beach.id}></ins>
                             </div>
                             <div className={styles.carouseltitle}>Other Locations Nearby</div>
                             <Carousel data={nearbyBeaches} allowVertical />
                             {
                                 //<!-- below recommended -->
                             }
-                            <div className={styles.ad} key={beach.id}>
+                            <div className={styles.ad}>
                                 <ins className="adsbygoogle"
                                     style={{ display: 'block' }}
                                     data-ad-client="ca-pub-7099980041278313"
                                     data-ad-slot="4115340371"
                                     data-ad-format="auto"
-                                    data-full-width-responsive="true"></ins>
+                                    data-full-width-responsive="true"
+                                    key={beach.id}></ins>
                             </div>
                             <div id="312754558">
                                 <script
