@@ -239,10 +239,10 @@ const Beach = (props) => {
                     <ins className="adsbygoogle"
                         style={{
                             display: 'block',
-                            minWidth:'300px',
-                            maxWidth:'970px',
-                            width:'100%',
-                            height:'90px',
+                            minWidth: '300px',
+                            maxWidth: '970px',
+                            width: '100%',
+                            height: '90px',
                         }}
                         data-ad-client="ca-pub-7099980041278313"
                         data-ad-slot="9831586937"></ins>
@@ -280,6 +280,16 @@ const Beach = (props) => {
                     </div>
                     {nearbyBeaches.length
                         ? <div className={styles.carouselSpacer}>
+                            <div className={`${styles.ad} ${styles.adTop}`}>
+                                <ins class="adsbygoogle"
+                                    style={{
+                                        display: 'inline-block',
+                                        width: '268px',
+                                        height: '250px',
+                                    }}
+                                    data-ad-client="ca-pub-7099980041278313"
+                                    data-ad-slot="9878800345"></ins>
+                            </div>
                             <div className={styles.carouseltitle}>Other Locations Nearby</div>
                             <Carousel data={nearbyBeaches} allowVertical />
                             {

@@ -18,6 +18,10 @@
 }
 
 @media (max-width: 968px) {
+  .adTop {
+    display: none;
+  }
+
   .container {
     display: block;
   }
