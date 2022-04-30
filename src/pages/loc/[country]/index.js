@@ -173,6 +173,26 @@ const Home = (props) => {
             </div>
             : <></>
           }
+          <h1 className={styles.areaTitle}>Top Snorkeling and Scuba Diving in {props.area.name}</h1>
+          <div className={styles.marginContainer}>
+            Ready to check out the best sites in {props.area.name} for scuba diving, snorkeling, shore diving, free diving or other ocean activities? Zentacle has {props.default.length} dive sites, snorkel spots, beaches, and more. Discover hand-curated maps, along with reviews and photos from nature lovers like you.
+            {'\n\n'}
+            No matter what you&apos;re looking for, you can find a diverse range of the best ocean activities in {props.area.name} to suit your needs.
+            {props.area.description && '\n\n'}
+            {props.area.description}
+          </div>
+          {props.area.map_image_url && <div className={styles.mapImageContainer}>
+            <Image
+              src={props.area.map_image_url}
+              className={styles.mapImage}
+              objectFit="contain"
+              height="300"
+              width="600"
+              alt={`${props.area.name} dive site map`}
+            /></div>}
+          {
+            hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
+          }
           <div className={styles.ad} key={props.area}>
             <ins className="adsbygoogle"
               style={{
@@ -186,18 +206,6 @@ const Home = (props) => {
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="5284949215"></ins>
           </div>
-          <h1 className={styles.areaTitle}>Top Snorkeling and Scuba Diving in {props.area.name}</h1>
-          <div className={styles.marginContainer}>
-            Ready to check out the best sites in {props.area.name} for scuba diving, snorkeling, shore diving, free diving or other ocean activities? Zentacle has {props.default.length} dive sites, snorkel spots, beaches, and more. Discover hand-curated maps, along with reviews and photos from nature lovers like you.
-            {'\n\n'}
-            No matter what you&apos;re looking for, you can find a diverse range of the best ocean activities in {props.area.name} to suit your needs.
-            {props.area.description && '\n\n'}
-            {props.area.description}
-          </div>
-          {props.area.map_image_url && <div className={styles.mapImageContainer}><Image src={props.area.map_image_url} className={styles.mapImage} objectFit="contain" height="300" width="600" alt={`${props.area.name} dive site map`} /></div>}
-          {
-            hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
-          }
           <div>
             {
               props.default.slice(0, 10).map((location, index) => (
