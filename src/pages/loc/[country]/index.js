@@ -173,6 +173,18 @@ const Home = (props) => {
             </div>
             : <></>
           }
+          <div className={styles.ad}>
+            <ins className="adsbygoogle"
+              style={{
+                display: 'block',
+                minWidth: '300px',
+                maxWidth: '970px',
+                width: '100%',
+                height: '90px',
+              }}
+              data-ad-client="ca-pub-7099980041278313"
+              data-ad-slot="5284949215"></ins>
+          </div>
           <h1 className={styles.areaTitle}>Top Snorkeling and Scuba Diving in {props.area.name}</h1>
           <div className={styles.marginContainer}>
             Ready to check out the best sites in {props.area.name} for scuba diving, snorkeling, shore diving, free diving or other ocean activities? Zentacle has {props.default.length} dive sites, snorkel spots, beaches, and more. Discover hand-curated maps, along with reviews and photos from nature lovers like you.
@@ -207,12 +219,14 @@ const Home = (props) => {
                 <LocationCard key={location.id} info={location} index={index + 10} />
               ))
             }
-            <ins className="adsbygoogle"
-              style={{ display: 'block' }}
-              data-ad-format="fluid"
-              data-ad-layout-key="-fb+5w+4e-db+86"
-              data-ad-client="ca-pub-7099980041278313"
-              data-ad-slot="5483092474"></ins>
+            <div className={styles.ad}>
+              <ins className="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-7099980041278313"
+                data-ad-slot="5483092474"></ins>
+            </div>
           </div>
         </div>
       </div>
