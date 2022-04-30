@@ -181,6 +181,7 @@ const Home = (props) => {
                 maxWidth: '970px',
                 width: '100%',
                 height: '90px',
+                margin: '16px auto',
               }}
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="5284949215"></ins>
