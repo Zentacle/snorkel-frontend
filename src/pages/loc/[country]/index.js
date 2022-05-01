@@ -208,33 +208,36 @@ const Home = (props) => {
           </div>
           <div>
             {
-              props.default.slice(0, 10).map((location, index) => (
-                <LocationCard key={location.id} info={location} index={index} />
-              ))
-            }
-            {
-              //<!-- region listing -->
-            }
-            <div className={`${styles.ad} ${styles.inFeedAdDesktop}`}>
-              <ins className={`adsbygoogle`}
-                style={{ display: 'block' }}
-                data-ad-format="fluid"
-                data-ad-layout-key="-fh-2s+hd-1e-1gn"
-                data-ad-client="ca-pub-7099980041278313"
-                data-ad-slot="8488292082"></ins>
-            </div>
-            <div className={`${styles.ad} ${styles.inFeedAdMobile}`}>
-              <ins className={`adsbygoogle`}
-                style={{ display: 'block' }}
-                data-ad-format="fluid"
-                data-ad-layout-key="-6d+e4+4h-78+7"
-                data-ad-client="ca-pub-7099980041278313"
-                data-ad-slot="4223983131"></ins>
-            </div>
-            {
-              props.default.slice(10).map((location, index) => (
-                <LocationCard key={location.id} info={location} index={index + 10} />
-              ))
+              props.default.map((location, index) => {
+                return (index+1) % 7 == 0
+                  ? (
+                    <>
+                      <LocationCard key={location.id} info={location} index={index} />
+                      {
+                        //<!-- region listing -->
+                      }
+                      <div className={`${styles.ad} ${styles.inFeedAdDesktop}`}>
+                        <ins className={`adsbygoogle`}
+                          style={{ display: 'block' }}
+                          data-ad-format="fluid"
+                          data-ad-layout-key="-fh-2s+hd-1e-1gn"
+                          data-ad-client="ca-pub-7099980041278313"
+                          data-ad-slot="8488292082"></ins>
+                      </div>
+                      <div className={`${styles.ad} ${styles.inFeedAdMobile}`}>
+                        <ins className={`adsbygoogle`}
+                          style={{ display: 'block' }}
+                          data-ad-format="fluid"
+                          data-ad-layout-key="-6d+e4+4h-78+7"
+                          data-ad-client="ca-pub-7099980041278313"
+                          data-ad-slot="4223983131"></ins>
+                      </div>
+                    </>
+                  )
+                  : (
+                    <LocationCard key={location.id} info={location} index={index} />
+                  )
+              })
             }
             <div className={styles.ad}>
               <ins className="adsbygoogle"
