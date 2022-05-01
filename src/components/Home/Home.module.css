@@ -124,6 +124,19 @@
 
 .inFeedAdMobile {
     display: none;
+    margin: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 16px;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 20%);
+}
+
+.inFeedAdDesktop {
+    margin: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 16px;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 20%);
 }
 
 @media (max-width: 720px) {
