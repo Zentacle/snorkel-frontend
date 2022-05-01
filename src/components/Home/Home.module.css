@@ -121,9 +121,22 @@
 .search {
     width: 50%;
 }
+
+.inFeedAdMobile {
+    display: none;
+}
+
 @media (max-width: 720px) {
     body .search{
       width: 100%!important;
+    }
+
+    .inFeedAdDesktop {
+        display: none;
+    }
+
+    .inFeedAdMobile {
+        display: block;
     }
 }
 

@@ -215,13 +215,21 @@ const Home = (props) => {
             {
               //<!-- region listing -->
             }
-            <div className={styles.ad}>
-              <ins className="adsbygoogle"
+            <div className={`${styles.ad} ${styles.inFeedAdDesktop}`}>
+              <ins className={`adsbygoogle`}
                 style={{ display: 'block' }}
+                data-ad-format="fluid"
+                data-ad-layout-key="-fh-2s+hd-1e-1gn"
                 data-ad-client="ca-pub-7099980041278313"
-                data-ad-slot="2151950611"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
+                data-ad-slot="8488292082"></ins>
+            </div>
+            <div className={`${styles.ad} ${styles.inFeedAdMobile}`}>
+              <ins className={`adsbygoogle`}
+                style={{ display: 'block' }}
+                data-ad-format="fluid"
+                data-ad-layout-key="-6d+e4+4h-78+7"
+                data-ad-client="ca-pub-7099980041278313"
+                data-ad-slot="4223983131"></ins>
             </div>
             {
               props.default.slice(10).map((location, index) => (
