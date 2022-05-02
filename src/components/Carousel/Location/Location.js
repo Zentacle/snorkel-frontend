@@ -6,7 +6,7 @@ import Link from "next/link";
 import DifficultyTag from "components/DifficultyTag";
 const SlideLocation = ({ ...props }) => {
     return (
-        <div className={styles.slide}>
+        <div className={styles.slide} style={props.style}>
             <div className={styles.slidepic}>
                 <Image
                     className={styles.image}

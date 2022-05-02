@@ -2,6 +2,7 @@ import styles from './Carousel.module.css';
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Location from './Location/Location';
+import { sendEvent } from 'hooks/amplitude';
 
 const MyCarousel = (props) => {
   const [data, setData] = React.useState(props.data);
@@ -9,6 +10,11 @@ const MyCarousel = (props) => {
   const carousel = React.useRef(null);
 
   const moveCarousel = (isForward) => () => {
+    if (isForward) {
+      sendEvent('click_carousel_forward')
+    } else {
+      sendEvent('click_carousel_backward')
+    }
     const direction = isForward ? -1 : 1;
     const cardWidth = 272;
     const numCards = Math.floor(carousel.current.offsetWidth / cardWidth);
