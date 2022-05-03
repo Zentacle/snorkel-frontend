@@ -37,7 +37,6 @@ const PhotoPreview = (props) => {
     }
   }, [])
 
-  console.log(settings1.photos)
   return (
     settings1 && settings1.photos && settings1.photos[0].source ? <div className={styles.photocontainer}>
       <ReactPhotoCollage {...settings1}></ReactPhotoCollage>
