@@ -117,7 +117,7 @@ const Home = (props) => {
               style={{ display: 'block' }}
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="7382383530"
-              data-ad-format="auto"
+              data-ad-format="horizontal"
               data-full-width-responsive="true"
               key={beach.id}></ins>
           </div>
@@ -130,7 +130,7 @@ const Home = (props) => {
               style={{ display: 'block' }}
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="7382383530"
-              data-ad-format="auto"
+              data-ad-format="horizontal"
               data-full-width-responsive="true"
               key={beach.id}></ins>
           </div>
@@ -143,7 +143,7 @@ const Home = (props) => {
               style={{ display: 'block' }}
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="7382383530"
-              data-ad-format="auto"
+              data-ad-format="horizontal"
               data-full-width-responsive="true"
               key={beach.id}></ins>
           </div>
