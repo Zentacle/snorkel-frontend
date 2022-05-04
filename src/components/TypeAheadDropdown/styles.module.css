@@ -35,3 +35,12 @@
     background: var(--primary-color);
     color: white;
 }
+
+.subtext {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.TypeAheadDropDown li:hover .subtext {
+    color: inherit;
+}

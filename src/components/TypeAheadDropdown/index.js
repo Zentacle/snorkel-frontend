@@ -45,7 +45,12 @@ const TypeAheadDropDown = (props) => {
         <div className={styles.TypeAheadDropDown}>
             {props.children}
             <ul>
-                {suggestions.map(city => <li key={city.text} onClick={(e) => suggestionSelected(city)}>{city.text}</li>)}
+                {suggestions.map(city =>
+                    <li key={city.text} onClick={(e) => suggestionSelected(city)}>
+                        <div className={styles.text}>{city.text}</div>
+                        <div className={styles.subtext}>{city.subtext}</div>
+                    </li>
+                )}
             </ul>
         </div>
     )
