@@ -119,7 +119,7 @@ const Home = (props) => {
               data-ad-slot="7382383530"
               data-ad-format="horizontal"
               data-full-width-responsive="true"
-              key={beach.id}></ins>
+            ></ins>
           </div>
           <div>
             <h2 className={styles.carouseltitle}>Most Popular Snorkel and Scuba Diving Locations in the World</h2>
@@ -132,7 +132,7 @@ const Home = (props) => {
               data-ad-slot="7382383530"
               data-ad-format="horizontal"
               data-full-width-responsive="true"
-              key={beach.id}></ins>
+            ></ins>
           </div>
           <div>
             <h2 className={styles.carouseltitle}>Top Rated Snorkel and Scuba Diving Locations in the World</h2>
@@ -145,7 +145,7 @@ const Home = (props) => {
               data-ad-slot="7382383530"
               data-ad-format="horizontal"
               data-full-width-responsive="true"
-              key={beach.id}></ins>
+            ></ins>
           </div>
           <div>
             <div className={styles.carouseltitle}>Conditions Reported Recently</div>
