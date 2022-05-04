@@ -48,6 +48,13 @@ const Home = (props) => {
     if (document.referrer.match(/^https?:\/\/([^\/]+\.)?google\.com(\/|$)/i)) {
       setShouldShowBanner(false);
     }
+
+    var ads = document.getElementsByClassName("adsbygoogle").length;
+    for (var i = 0; i < ads; i++) {
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) { }
+    }
   }, [])
 
   React.useEffect(() => {
@@ -112,15 +119,6 @@ const Home = (props) => {
             <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
             <Carousel data={recs}></Carousel>
           </div>}
-          <div className={styles.homeAd}>
-            <ins className="adsbygoogle"
-              style={{ display: 'block' }}
-              data-ad-client="ca-pub-7099980041278313"
-              data-ad-slot="7382383530"
-              data-ad-format="horizontal"
-              data-full-width-responsive="true"
-            ></ins>
-          </div>
           <div>
             <h2 className={styles.carouseltitle}>Most Popular Snorkel and Scuba Diving Locations in the World</h2>
             <Carousel data={props.default}></Carousel>
@@ -150,6 +148,15 @@ const Home = (props) => {
           <div>
             <div className={styles.carouseltitle}>Conditions Reported Recently</div>
             <Carousel data={props.latest}></Carousel>
+          </div>
+          <div className={styles.homeAd}>
+            <ins className="adsbygoogle"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-7099980041278313"
+              data-ad-slot="7382383530"
+              data-ad-format="horizontal"
+              data-full-width-responsive="true"
+            ></ins>
           </div>
           {areas.length > 7 && <div className={styles.locationContainer}>
             {areas.slice(7).map(area => (
