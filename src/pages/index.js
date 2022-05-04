@@ -93,7 +93,7 @@ const Home = (props) => {
           </div>
           <div className={styles.menu}>
             <div className={styles.search}>
-              <SearchBar largeSearchBar={ true }></SearchBar>
+              <SearchBar largeSearchBar={true}></SearchBar>
             </div>
           </div>
         </div>
@@ -112,13 +112,40 @@ const Home = (props) => {
             <div className={styles.carouseltitle}>Recommended Locations (Rate spots to personalize!)</div>
             <Carousel data={recs}></Carousel>
           </div>}
+          <div className={styles.homeAd}>
+            <ins className="adsbygoogle"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-7099980041278313"
+              data-ad-slot="7382383530"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+              key={beach.id}></ins>
+          </div>
           <div>
             <h2 className={styles.carouseltitle}>Most Popular Snorkel and Scuba Diving Locations in the World</h2>
             <Carousel data={props.default}></Carousel>
           </div>
+          <div className={styles.homeAd}>
+            <ins className="adsbygoogle"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-7099980041278313"
+              data-ad-slot="7382383530"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+              key={beach.id}></ins>
+          </div>
           <div>
             <h2 className={styles.carouseltitle}>Top Rated Snorkel and Scuba Diving Locations in the World</h2>
             <Carousel data={props.top}></Carousel>
+          </div>
+          <div className={styles.homeAd}>
+            <ins className="adsbygoogle"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-7099980041278313"
+              data-ad-slot="7382383530"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+              key={beach.id}></ins>
           </div>
           <div>
             <div className={styles.carouseltitle}>Conditions Reported Recently</div>
