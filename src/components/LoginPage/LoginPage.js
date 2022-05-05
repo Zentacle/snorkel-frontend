@@ -94,6 +94,13 @@ const LoginPage = () => {
                         </a>
                     </Link>
                 </div>
+                <div className={styles.bottominfo}>
+                    <Link href="/requestpassword">
+                        <a className={styles.createone}>
+                            Forgot your password?
+                        </a>
+                    </Link>
+                </div>
             </BackgroundCard>
         </Layout>
     )

@@ -75,19 +75,26 @@ const CreateAccount = () => {
                 >
                 </div>
                 <div className={styles.orSeparator}>OR</div>
-                <form onSubmit={ e => {e.preventDefault();}}>
-                    <SignupInput value={firstName} onChange={ setFirstName } id='first-name-input' type="First Name"></SignupInput>
-                    <SignupInput value={lastName} onChange={ setLastName } id='last-name-input' type="Last Name"></SignupInput>
-                    <SignupInput value={username} onChange={ setUsername} id='username-input' type="Username"></SignupInput>
-                    <SignupInput value={email} onChange={ setEmail } id='email-input' type="Email"></SignupInput>
-                    <SignupInput value={password} onChange={ setPassword } id='password-input' type="Password"></SignupInput>
-                    <PrimaryButton onClick={ registerUser }>Create Account</PrimaryButton>
+                <form onSubmit={e => { e.preventDefault(); }}>
+                    <SignupInput value={firstName} onChange={setFirstName} id='first-name-input' type="First Name"></SignupInput>
+                    <SignupInput value={lastName} onChange={setLastName} id='last-name-input' type="Last Name"></SignupInput>
+                    <SignupInput value={username} onChange={setUsername} id='username-input' type="Username"></SignupInput>
+                    <SignupInput value={email} onChange={setEmail} id='email-input' type="Email"></SignupInput>
+                    <SignupInput value={password} onChange={setPassword} id='password-input' type="Password"></SignupInput>
+                    <PrimaryButton onClick={registerUser}>Create Account</PrimaryButton>
                 </form>
                 <div className={styles.bottominfo}>
                     Already have an account?&nbsp;
                     <Link href="/login">
                         <a className={styles.createone}>
                             Login!
+                        </a>
+                    </Link>
+                </div>
+                <div className={styles.bottominfo}>
+                    <Link href="/requestpassword">
+                        <a className={styles.createone}>
+                            Forgot your password?
                         </a>
                     </Link>
                 </div>
