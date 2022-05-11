@@ -193,7 +193,7 @@ const Home = (props) => {
           {
             hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
           }
-          <div className={styles.ad} key={props.area}>
+          <div className={styles.homeAd} key={props.area}>
             <ins className="adsbygoogle"
               style={{
                 display: 'block',
