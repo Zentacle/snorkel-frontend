@@ -7,6 +7,10 @@
     {
       "source": "/api/:path*/",
       "destination": "https://snorkel-backend.herokuapp.com/:path*/"
+    },
+    {
+      "source": "/image/:path*",
+      "destination": "https://snorkel.s3.amazonaws.com/:path*"
     }
   ]
 }
