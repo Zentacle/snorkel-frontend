@@ -27,11 +27,11 @@ const BeachPageHero = (props) => {
   return (
       <div className={styles.image}>
           <div className={styles.imageinner}>
-              <Image
+              { props.beach.hero_img && <Image
                 src={props.beach.hero_img}
                 layout='fill'
                 objectFit='cover'
-              />
+              /> }
               <div className={styles.overlay} />
               <div className={styles.pageHeroInfo}>
                   <div className={styles.nameContainer}>
