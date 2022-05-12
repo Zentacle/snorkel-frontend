@@ -36,23 +36,26 @@
 
 .tideContainer {
     display: flex;
-    margin: 8px 24px 0;
+    margin: 0px 24px;
     overflow: scroll;
 }
 
 .tideRow {
     margin-right: 8px;
     display: flex;
-    flex: 1 0 164px;
+    flex: 1 0 112px;
     flex-direction: column;
-    border: 1px solid #cecece;
-    border-radius: 8px;
-    padding: 8px;
-    text-align: center;
+    padding: 4px;
 }
 
 .tideImage {
-    margin: 8px 0;
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+}
+
+.tideIcon {
+    margin-left: 4px;
 }
 
 .past {
