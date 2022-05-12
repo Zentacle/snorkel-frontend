@@ -8,7 +8,12 @@ import SectionTitle from 'components/SectionTitle';
 import Tag from 'components/Tag';
 
 const EntryMap = ({ src }) => (
-    <a className={ styles.entryMap } style={{ backgroundImage: `url(\'${src}\')` }} href={ src }>
+    <a className={ styles.entryMap } href={ src }>
+        <Image
+            src={src}
+            layout="fill"
+            objectFit='cover'
+        ></Image>
         <div className={ styles.overlay }></div>
         <div className={ styles.viewButton }>View Entry Map</div>
     </a>
