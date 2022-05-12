@@ -15,7 +15,10 @@ const PhotoPreview = (props) => {
         width: '320px',
         height: ['100px', '100px', '100px'],
         layout: [Math.min(3, photoArray.length)],
-        photos: photoArray.map(photo => ({ source: photo.signedurl })),
+        photos: photoArray.map(photo => ({
+          source: photo.signedurl,
+          alt: photo.caption,
+        })),
         showNumOfRemainingPhotos: true
       })
     }
