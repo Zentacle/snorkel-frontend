@@ -19,7 +19,6 @@ const PhotoPreview = (props) => {
         showNumOfRemainingPhotos: true
       })
     }
-
   }, [photoArray])
 
   React.useEffect(() => {
