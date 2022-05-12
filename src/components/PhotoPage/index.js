@@ -38,7 +38,10 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
 
 
             for (let i = 0; i < photoArray.length; i++) {
-                photos.push({ source: photoArray[i].signedurl })
+                photos.push({
+                    source: photoArray[i].signedurl,
+                    alt: photoArray[i].caption,
+                })
 
 
             }
