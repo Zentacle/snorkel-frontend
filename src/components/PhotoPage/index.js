@@ -4,12 +4,13 @@ import BackgroundImageOnly from "components/BeachPage/BackgroundImage";
 import { ReactPhotoCollage } from "react-photo-collage";
 import React from "react";
 import { rootDomain } from 'lib/constants';
+import Head from "next/head";
 
 const PhotoGrid = ({ isReview, beach_id, indreview }) => {
     const [photoArray, setPhotoArray] = React.useState(null);
     const reviewRef = React.createRef();
     reviewRef.current = indreview
-   
+
     React.useEffect(() => {
         if (beach_id != -1)
             fetch(`${rootDomain}/beachimages?beach_id=` + beach_id, {
@@ -22,17 +23,17 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
             }).then(data => {
                 setPhotoArray([...data.data]);
             })
-            else{
-                setPhotoArray([...reviewRef.current.signedUrls])
-            }
-        
+        else {
+            setPhotoArray([...reviewRef.current.signedUrls])
+        }
+
     }, [beach_id])
- 
+
 
     //this is the array that will be used as the settings for the collage
     const [photosArray, setPhotosArray] = React.useState([]);
     React.useEffect(() => {
-        
+
         let photos = [];
         if (photosArray.length < 1 && photoArray) {
 
@@ -112,7 +113,7 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
         photos: photosArray,
         showNumOfRemainingPhotos: true
     };
-    
+
 
 
     return (
@@ -130,11 +131,21 @@ const PhotoPage = (props) => {
         hero_img,
         name,
         rating,
-        location_city
+        location_city,
+        description,
     } = props.beach;
+
+    const pageTitle = `Photos of ${name} in ${location_city} | Zentacle`
 
     return (
         <Layout>
+            <Head>
+                <title key="title">{pageTitle}</title>
+                <meta property="og:title" content={pageTitle} key="og-title" />
+                <meta property="og:description" content={description} key="og-description" />
+                <meta property="og:image" content={beach.hero_img} key="og-image" />
+                <meta name="description" content={description} key="description" />
+            </Head>
             <BackgroundImageOnly
                 beach_id={id}
                 hero_img={hero_img}
