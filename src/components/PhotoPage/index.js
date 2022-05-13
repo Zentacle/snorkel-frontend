@@ -143,7 +143,7 @@ const PhotoPage = (props) => {
                 <title key="title">{pageTitle}</title>
                 <meta property="og:title" content={pageTitle} key="og-title" />
                 <meta property="og:description" content={description} key="og-description" />
-                <meta property="og:image" content={beach.hero_img} key="og-image" />
+                <meta property="og:image" content={hero_img} key="og-image" />
                 <meta name="description" content={description} key="description" />
             </Head>
             <BackgroundImageOnly
