@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+    initAmplitude();
   }, []);
 
   return (
@@ -64,7 +65,7 @@ function SetUser() {
     }).then(response => {
       return response.json()
     }).then(data => {
-      initAmplitude(data.id);
+      setAmplitudeUserId(data.id);
       dispatch(data)
     }).catch((err) => {
       console.log(err)
