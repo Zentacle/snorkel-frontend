@@ -1,0 +1,12 @@
+.exploreContainer {
+  display: flex;
+  height: 100vh;
+}
+
+.menu {
+  overflow-y: scroll;
+}
+
+.googleMap {
+  flex: 1;
+}
