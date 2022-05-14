@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { initAmplitude } from 'hooks/amplitude';
+import { initAmplitude, setAmplitudeUserId } from 'hooks/amplitude';
 import Head from 'next/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
