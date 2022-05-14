@@ -181,15 +181,20 @@ const Home = (props) => {
             {props.area.description && '\n\n'}
             {props.area.description}
           </div>
-          {props.area.map_image_url && <div className={styles.mapImageContainer}>
-            <Image
-              src={props.area.map_image_url}
-              className={styles.mapImage}
-              objectFit="contain"
-              height="300"
-              width="600"
-              alt={`${props.area.name} dive site map`}
-            /></div>}
+          {props.area.map_image_url &&
+            <Link href="/explore">
+              <a className={styles.mapImageContainer}>
+                <Image
+                  src={props.area.map_image_url}
+                  className={styles.mapImage}
+                  objectFit="contain"
+                  height="300"
+                  width="600"
+                  alt={`${props.area.name} dive site map`}
+                />
+              </a>
+            </Link>
+          }
           {
             hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
           }
@@ -209,7 +214,7 @@ const Home = (props) => {
           <div>
             {
               props.default.map((location, index) => {
-                return (index+1) % 7 == 0
+                return (index + 1) % 7 == 0
                   ? (
                     <>
                       <LocationCard key={location.id} info={location} index={index} />

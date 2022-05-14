@@ -7,6 +7,7 @@ import { rootDomain } from 'lib/constants';
 import SearchBar from 'components/SearchBar';
 import styles from './styles.module.css';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const ExplorePage = () => {
   const router = useRouter()
@@ -93,6 +94,9 @@ const ExplorePage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Explore | Zentacle</title>
+      </Head>
       <div className={styles.exploreContainer}>
         <div className={styles.menu}>
           <Carousel data={results} allowVertical />
