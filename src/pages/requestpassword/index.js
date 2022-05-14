@@ -49,7 +49,7 @@ const ResetPassword = () => {
         </div>
         <form onSubmit={e => { e.preventDefault(); }}>
           <SignupInput value={email} onChange={setEmail} id='email-input' type="email"></SignupInput>
-          <PrimaryButton onClick={requestPassword}>Rest Password Reset</PrimaryButton>
+          <PrimaryButton onClick={requestPassword}>Request Password Reset</PrimaryButton>
         </form>
       </BackgroundCard>
     </Layout>
