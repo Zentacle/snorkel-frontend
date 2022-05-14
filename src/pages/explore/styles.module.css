@@ -10,3 +10,9 @@
 .googleMap {
   flex: 1;
 }
+
+@media (max-width: 720px) {
+  .exploreContainer {
+    flex-direction: column;
+  }
+}
