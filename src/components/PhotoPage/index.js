@@ -3,54 +3,11 @@ import Layout from "components/Layout/Layout";
 import BackgroundImageOnly from "components/BeachPage/BackgroundImage";
 import { ReactPhotoCollage } from "react-photo-collage";
 import React from "react";
-import { rootDomain } from 'lib/constants';
 import Head from "next/head";
 
-const PhotoGrid = ({ isReview, beach_id, indreview }) => {
-    const [photoArray, setPhotoArray] = React.useState(null);
-    const reviewRef = React.createRef();
-    reviewRef.current = indreview
-
-    React.useEffect(() => {
-        if (beach_id != -1)
-            fetch(`${rootDomain}/beachimages?beach_id=` + beach_id, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                return response.json();
-            }).then(data => {
-                setPhotoArray([...data.data]);
-            })
-        else {
-            setPhotoArray([...reviewRef.current.signedUrls])
-        }
-
-    }, [beach_id])
-
-
+const PhotoGrid = ({ beachImages }) => {
     //this is the array that will be used as the settings for the collage
-    const [photosArray, setPhotosArray] = React.useState([]);
-    React.useEffect(() => {
-
-        let photos = [];
-        if (photosArray.length < 1 && photoArray) {
-
-
-            for (let i = 0; i < photoArray.length; i++) {
-                photos.push({
-                    source: photoArray[i].signedurl,
-                    alt: photoArray[i].caption,
-                })
-
-
-            }
-            setPhotosArray([...photos])
-
-
-        }
-    }, [photoArray])
+    const [photosArray, setPhotosArray] = React.useState(beachImages);
 
     let layoutArray = [];
     let heightArray = [];
@@ -81,30 +38,6 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
         layoutArray = [2, 4, 3, 5, 2, 1, 3]
     }
     let width = '600px';
-    if (isReview) {
-        if (photoslen == 1) {
-            width = '50px';
-            heightArray = ['50px']
-            layoutArray = [1]
-        }
-        else if (photoslen == 2) {
-            width = '100px';
-            heightArray = ["50px"]
-            layoutArray = [2]
-        }
-        else if (photoslen == 3) {
-            width = '150px';
-            heightArray = ["50px"]
-            layoutArray = [3]
-        }
-        else {
-            width = '200px'
-            heightArray = ["50px"]
-            layoutArray = [4]
-        }
-    }
-
-
 
     let setting = {
         width: width,
@@ -114,13 +47,10 @@ const PhotoGrid = ({ isReview, beach_id, indreview }) => {
         showNumOfRemainingPhotos: true
     };
 
-
-
     return (
         <div className={styles.gridcontainer}>
             {setting && photosArray && photosArray.length > 0 && <ReactPhotoCollage {...setting} />}
         </div>
-
     )
 }
 
@@ -155,8 +85,7 @@ const PhotoPage = (props) => {
                 location_city={location_city}
             />
             <PhotoGrid
-                beach_id={id}
-                isReview={false}
+                beachImages={props.beachImages}
             />
         </Layout>
     )
