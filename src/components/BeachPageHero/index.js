@@ -30,6 +30,7 @@ const BeachPageHero = (props) => {
           src={props.beach.hero_img}
           layout='fill'
           objectFit='cover'
+          alt={props.beach.name}
         />}
         <div className={styles.overlay} />
         <div className={styles.pageHeroInfo}>
