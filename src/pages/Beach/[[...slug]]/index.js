@@ -233,24 +233,24 @@ const Beach = (props) => {
                 <meta name="description" content={description} key="description" />
                 <link rel="canonical" href={canonicalURL} key="canonical" />
                 {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
-                <script
+                {beach.num_reviews && <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                         __html: `{
                             "@context": "https://schema.org",
-                            "@type": "AggregateRating",
-                            "itemReviewed": {
+                            "@type": "LocalBusiness",
+                            "name": "${beach.name}",
+                            "image": "${beach.hero_img}",
+                            "url": "https://www.zentacle.com${beach.url}",
+                            "aggregateRating": {
                                 "@type": "AggregateRating",
-                                "name": "${beach.name}",
-                                "image": "${beach.hero_img}"
-                            },
-                            "ratingValue": "${beach.rating}",
-                            "bestRating": "5",
-                            "ratingCount": "${beach.num_reviews}"
+                                "ratingValue": "${beach.rating}",
+                                "ratingCount": "${beach.num_reviews}"
+                            }
                         }`
                     }}
                     key="aggregate-rating-ld"
-                />
+                />}
             </Head>
             <MaxWidth>
                 <div className={styles.ad} key={beach.id}>
