@@ -145,6 +145,7 @@ const PhotoPage = (props) => {
                 <meta property="og:description" content={description} key="og-description" />
                 <meta property="og:image" content={hero_img} key="og-image" />
                 <meta name="description" content={description} key="description" />
+                <script async defer data-pin-hover="true" src="//assets.pinterest.com/js/pinit.js"></script>
             </Head>
             <BackgroundImageOnly
                 beach_id={id}
