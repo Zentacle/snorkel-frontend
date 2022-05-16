@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:type" content="website" key="og:type" />
         <meta name="twitter:card" content="summary_large_image" key="twitter-card"></meta>
+        <meta name="apple-itunes-app" content="app-id=1611242564"></meta>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
