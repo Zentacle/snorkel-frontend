@@ -12,27 +12,27 @@
     }
 }
 
-.image{
+.image {
     width: 100%;
     height: 300px;
     top: 0 !important;
     display: flex;
     flex-direction: column;
-    
+
     position: relative;
 }
 
-.menu{
+.menu {
     z-index: 1;
     width: 80%;
     display: flex;
     justify-content: center;
     height: auto;
     margin: auto;
-    margin-top: -24px;    
-  }
+    margin-top: -24px;
+}
 
-.imageinner{
+.imageinner {
     height: 100%;
     width: 100%;
     z-index: 0;
@@ -40,7 +40,7 @@
     background-position: center;
 }
 
-.pagetitle{
+.pagetitle {
     z-index: 2;
     width: 100%;
     color: white;
@@ -71,7 +71,7 @@
     margin-left: 16px;
 }
 
-.carouseltitle{
+.carouseltitle {
     margin: 32px 16px 0;
     font-weight: var(--text-weight-bold);
 }
@@ -100,8 +100,8 @@
 }
 
 .location.active {
-    background: rgb(11,34,224);
-    background: linear-gradient(90deg, rgba(11,34,224,1) 0%, rgba(11,224,188,1) 100%);
+    background: rgb(11, 34, 224);
+    background: linear-gradient(90deg, rgba(11, 34, 224, 1) 0%, rgba(11, 224, 188, 1) 100%);
     color: white;
 }
 
@@ -140,8 +140,8 @@
 }
 
 @media (max-width: 720px) {
-    body .search{
-      width: 100%!important;
+    body .search {
+        width: 100% !important;
     }
 
     .inFeedAdDesktop {
@@ -155,7 +155,8 @@
 
 .mapImageContainer {
     padding: 16px;
-    display: block;
+    display: inline-block;
+    position: relative;
 }
 
 .mapImage {
@@ -165,4 +166,22 @@
 .homeAd {
     text-align: center;
     margin: 16px 0;
+}
+
+.mapExpander {
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    border-radius: 50px;
+    padding: 8px;
+    right: 24px;
+    top: 24px;
+    height: 32px;
+    width: 32px;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.5s;
+}
+
+.mapExpander:hover {
+    transform: scale(1.2);
 }
