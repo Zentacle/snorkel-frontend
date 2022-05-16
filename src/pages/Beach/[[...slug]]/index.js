@@ -271,7 +271,7 @@ const Beach = (props) => {
                     area_two={beach.area_two}
                     locality={beach.locality}
                 />
-                <BeachPageHero beach={beach} photoState={photoState} />
+                <BeachPageHero beach={beach} />
                 <div className={styles.container}>
                     <div className={styles.innerContainer}>
                         <BeachInfo

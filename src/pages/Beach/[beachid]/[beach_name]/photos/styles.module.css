@@ -1,0 +1,9 @@
+.backTo {
+  align-items: center;
+  display: flex;
+  padding: 24px 0 0 8px;
+}
+
+.backIcon {
+  margin-right: 8px;
+}
