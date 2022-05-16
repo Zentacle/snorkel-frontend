@@ -20,7 +20,7 @@ export async function getStaticProps(context) {
   res = await fetch(
     `${rootDomain}/spots/get?sort=top&country=${country}&limit=100`
   )
-  const data = await res.json()
+  const data = await res.json().catch(err => console.log(res))
   props['default'] = data.data || null;
   if (data.area) {
     props['area'] = data.area;
