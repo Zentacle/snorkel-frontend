@@ -17,5 +17,14 @@ module.exports = {
       'fh-sites.imgix.net',
     ],
     minimumCacheTTL: 60,
+  },
+  async headers() {
+    return [{
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [{
+        "key": "Content-Type",
+        "value": "application/json"
+      }]
+    }]
   }
 }
