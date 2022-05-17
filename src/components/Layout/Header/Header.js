@@ -4,20 +4,12 @@ import Link from "next/link";
 import React from "react";
 import { useCurrentUser } from 'context/usercontext';
 import ProfilePic from "components/ProfilePic";
-import { useRouter } from "next/router";
-
-const Profile = ({ user }) => {
-    if (user) {
-        return (
-            <Link prefetch={false} href={`/user/${user.username}`}>
-                <a className={styles.outerprofile}>
-                    {user.username}
-                </a>
-            </Link>
-        )
-    }
-    else return null;
-}
+import {
+    Dropdown,
+    Item,
+    Trigger,
+} from 'controls/Dropdown';
+import { rootDomain } from 'lib/constants';
 
 const Logo = ({ isShorediving = false }) => {
     return isShorediving
@@ -56,10 +48,33 @@ const Header = (props) => {
                     </Link>
                 </div>
                 <div className={styles.spaceholder}>
-                    {currentUser && currentUser.id && <ProfilePic user={currentUser} size={32} />}
                     <div className={styles.rightButton}>
                         {currentUser && currentUser.id
-                            ? <Profile user={currentUser}></Profile>
+                            ? <Dropdown
+                                trigger={
+                                    <Trigger>
+                                        <div className={styles.profile}>
+                                            <ProfilePic user={currentUser} size={32} />
+                                            <div className={styles.outerprofile}>
+                                                {currentUser.username}
+                                            </div>
+                                        </div>
+                                    </Trigger>
+                                }
+                            >
+                                <Item>
+                                    <Link href={`/user/${currentUser.username}`}>
+                                        View Profile
+                                    </Link>
+                                </Item>
+                                <Item
+                                    onClick={() => {
+                                        fetch(`${rootDomain}/user/logout`).then(res => window.location.reload());
+                                    }}
+                                >
+                                    Logout
+                                </Item>
+                            </Dropdown>
                             : <Link prefetch={false} href='/register'>
                                 <a className={styles.loginbutton}>Sign Up</a>
                             </Link>
