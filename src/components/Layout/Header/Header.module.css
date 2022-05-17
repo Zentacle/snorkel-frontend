@@ -5,7 +5,7 @@
 .headercontainer {
     align-items: center;
     display: flex;
-    height: 44px;
+    height: 52px;
     margin: auto;
     padding: 0 16px;
 }
@@ -19,12 +19,25 @@
 
 .headertitle {
     margin-left: 4px;
+    font-size: 18px;
+    font-family: 'SF Pro Rounded', inherit;
 }
 
 .spaceholder {
     margin-left: auto;
     display: flex;
     align-items: center;
+}
+
+.explore {
+    margin-left: 12px;
+    font-weight: var(--text-weight-bold);
+    color: #414141;
+    transition: color 0.25s;
+}
+
+.explore:hover, .explore:active {
+    color: var(--primary-color);
 }
 
 .addSpot {
@@ -42,12 +55,8 @@
 .loginbutton {
     font-size: 14px;
     text-align: right;
-    font-weight: var(--text-weight-normal);
+    font-weight: var(--text-weight-bold);
     color: var(--primary-color);
-}
-
-.loginbutton:hover{
-    cursor: pointer;
 }
 
 .outerprofile {

@@ -48,18 +48,20 @@ const Header = (props) => {
                 <div className={styles.headerbutton}>
                     <Logo isShorediving={isShorediving} />
                 </div>
+                <div>
+                    <Link href="/explore">
+                        <a className={styles.explore}>
+                            Explore
+                        </a>
+                    </Link>
+                </div>
                 <div className={styles.spaceholder}>
-                    <div>
-                        {currentUser && currentUser.id && <Link prefetch={false} href="/add/spot">
-                            <a className={styles.addSpot}>Add New Spot</a>
-                        </Link>}
-                    </div>
                     {currentUser && currentUser.id && <ProfilePic user={currentUser} size={32} />}
                     <div className={styles.rightButton}>
                         {currentUser && currentUser.id
                             ? <Profile user={currentUser}></Profile>
                             : <Link prefetch={false} href='/register'>
-                                <a className={styles.loginbutton}>Create Account</a>
+                                <a className={styles.loginbutton}>Sign Up</a>
                             </Link>
                         }
                     </div>
