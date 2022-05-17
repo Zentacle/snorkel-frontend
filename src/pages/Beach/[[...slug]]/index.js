@@ -24,21 +24,25 @@ export async function getStaticProps(context) {
     const beachid = context.params.slug[0];
     const beachNameFromURL = context.params.slug[1];
 
-    const res = await fetch(`${rootDomain}/spots/get?beach_id=${beachid}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    if (res.status == 404) {
-        return {
-            props: {
-                errorCode: 404,
+    let beach_data = fetch(`${rootDomain}/spots/get?beach_id=${beachid}`)
+    let review_data = fetch(`${rootDomain}/reviews/get?beach_id=${beachid}`)
+    let nearbyBeaches = fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`)
+
+    beach_data = await beach_data.then(res => {
+        if (res.status == 404) {
+            return {
+                props: {
+                    errorCode: 404,
+                }
             }
         }
+        return res.json()
+    });
+    if (!beach_data) {
+        return {
+            notFound: true,
+        }
     }
-
-    const beach_data = await res.json()
 
     // if (!beach_data.country) {
     //     fetch(`${rootDomain}/spot/geocode?id=${beachid}`)
@@ -53,74 +57,46 @@ export async function getStaticProps(context) {
         }
     }
 
-    let response = await fetch(`${rootDomain}/reviews/get?beach_id=${beachid}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-
-    const review_data = await response.json();
-
-    let stationId = null;
-    if (beach_data.data.noaa_station_id) {
-        stationId = beach_data.data.noaa_station_id;
-    }
-    // else {
-    //     if (beach_data.data.latitude) {
-    //         try {
-    //             response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-    //             console.log(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-    //             const stations_data = await response.json()
-    //             if (stations_data.stationList && stations_data.stationList.length) {
-    //                 stationId = stations_data.stationList[0].stationId
-    //                 response = await fetch(`${rootDomain}/spot/setStationId`, {
-    //                     method: 'POST',
-    //                     body: JSON.stringify({
-    //                         'spotId': beachid,
-    //                         'stationId': stationId
-    //                     }),
-    //                     headers: {
-    //                         'Content-Type': 'application/json'
-    //                     }
-    //                 })
-    //             } else {
-    //                 response = await fetch(`${rootDomain}/spot/setStationId`, {
-    //                     method: 'POST',
-    //                     body: JSON.stringify({
-    //                         'spotId': beachid,
-    //                         'stationId': '-1'
-    //                     }),
-    //                     headers: {
-    //                         'Content-Type': 'application/json'
-    //                     }
-    //                 })
-    //             }
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    // }
+    let stationId = beach_data.data.noaa_station_id;
 
     let tides = []
+    let tideData;
     if (stationId && stationId !== '-1') {
         var currentDate = new Date();
         var begin_date = currentDate.toISOString().slice(0, 10).replace(/-/g, "");
         currentDate.setDate(currentDate.getDate() + 3);
         var end_date = currentDate.toISOString().slice(0, 10).replace(/-/g, "");
-        response = await fetch(`${rootDomain}/spot/tide?station_id=${stationId}&begin_date=${begin_date}&end_date=${end_date}`)
-        const tideData = await response.json()
-        if (tideData && tideData.predictions) {
-            tides = tideData.predictions;
-        }
+        tideData = fetch(
+            `${rootDomain}/spot/tide?station_id=${stationId}&begin_date=${begin_date}&end_date=${end_date}`
+        )
     }
-
-    const nearbyBeaches = await fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(res =>
+    // else {
+    //     if (beach_data.data.latitude) {
+    //         try {
+    //             response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
+    //             const stations_data = await response.json()
+    //             if (stations_data.stationList && stations_data.stationList.length) {
+    //                 stationId = stations_data.stationList[0].stationId
+    //             } else {
+    //                 stationId = '-1'
+    //             }
+    //             response = await fetch(`${rootDomain}/spot/setStationId`, {
+    //                 method: 'POST',
+    //                 body: JSON.stringify({
+    //                     'spotId': beachid,
+    //                     'stationId': stationId
+    //                 }),
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 }
+    //             })
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    // }
+    review_data = await review_data.then(resp => resp.json());
+    nearbyBeaches = await nearbyBeaches.then(res =>
         res.json()
     ).then(beach_data => {
         if (beach_data.data) {
@@ -129,10 +105,10 @@ export async function getStaticProps(context) {
             return [];
         }
     });
-
-    if (!beach_data) {
-        return {
-            notFound: true,
+    if (tideData) {
+        tideData = await tideData.then(resp => resp.json());
+        if (tideData && tideData.predictions) {
+            tides = tideData.predictions;
         }
     }
 
