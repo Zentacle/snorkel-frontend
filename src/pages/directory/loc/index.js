@@ -7,30 +7,28 @@ import Head from 'next/head';
 
 export const getStaticProps = async (ctx) => {
   // Method to source urls from cms
-  const res = await fetch(`${rootDomain}/locality/area_one?limit=none`)
-  const data = await res.json()
+  let res = fetch(`${rootDomain}/locality/area_one?limit=none`)
+  let res1 = fetch(`${rootDomain}/locality/area_two?limit=none`)
+  let res2 = fetch(`${rootDomain}/locality/locality?limit=none`)
 
-  const area_one = data.data.filter(location => location.url).map(location => (
+  res = await res.json()
+  const area_one = res.data.filter(location => location.url).map(location => (
     {
       url: `https://www.zentacle.com${location.url}`,
       name: location.name,
     }
   ))
 
-  const res1 = await fetch(`${rootDomain}/locality/area_two?limit=none`)
-  const data1 = await res1.json()
-
-  const area_two = data1.data.filter(location => location.url).map(location => (
+  res1 = await res1.json()
+  const area_two = res1.data.filter(location => location.url).map(location => (
     {
       url: `https://www.zentacle.com${location.url}`,
       name: location.name,
     }
   ))
 
-  const res2 = await fetch(`${rootDomain}/locality/locality?limit=none`)
-  const data2 = await res2.json()
-
-  const locality = data2.data.filter(location => location.url).map(location => (
+  res2 = await res2.json()
+  const locality = res2.data.filter(location => location.url).map(location => (
     {
       url: `https://www.zentacle.com${location.url}`,
       name: location.name,
