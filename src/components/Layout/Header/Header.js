@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 import styles from "./Header.module.css";
 import Image from 'next/image';
 import Link from "next/link";
@@ -7,7 +9,9 @@ import ProfilePic from "components/ProfilePic";
 import {
     Dropdown,
     Item,
+    Info,
     Trigger,
+    Separator
 } from 'controls/Dropdown';
 import { rootDomain } from 'lib/constants';
 
@@ -27,11 +31,21 @@ const Logo = ({ isShorediving = false }) => {
         )
 }
 
+const Name = styled.div`
+  color: #888;
+  font-weight: 600;
+`;
+
+const Email = styled.div`
+  color: #888;
+  margin-top: 4px;
+`;
 
 const Header = (props) => {
     let { state } = useCurrentUser();
     const currentUser = state.user;
 
+    console.log(currentUser)
     const isShorediving = props.isShorediving;
 
     return (
@@ -62,9 +76,21 @@ const Header = (props) => {
                                     </Trigger>
                                 }
                             >
+                                <Info>
+                                    <Name>
+                                        {currentUser.display_name}
+                                    </Name>
+                                    <Email>{currentUser.username}</Email>
+                                </Info>
+                                <Separator />
                                 <Item>
                                     <Link href={`/user/${currentUser.username}`}>
                                         View Profile
+                                    </Link>
+                                </Item>
+                                <Item>
+                                    <Link href='https://buy.stripe.com/00gcPhf2Octp3nOaEE'>
+                                        Zentacle Pro
                                     </Link>
                                 </Item>
                                 <Item

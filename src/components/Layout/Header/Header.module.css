@@ -69,6 +69,7 @@
     align-items: center;
     padding: 8px;
     border-radius: 16px;
+    transition: background-color 0.2s;
 }
 
 .profile:hover, .profile:focus {

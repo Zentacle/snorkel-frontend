@@ -18,13 +18,15 @@ export const Item = styled(DropdownMenu.Item)`
   border-radius: 4px;
   color: var(--color-text);
   cursor: pointer;
+  min-width: 172px;
   outline: none;
   padding: 4px 8px;
-  transition: background-color 0.15s;
+  transition: background-color 0.15s, color 0.15s;
 
   &:hover,
   &:focus {
     background-color: var(--primary-color);
+    color: white;
   }
 `;
 
