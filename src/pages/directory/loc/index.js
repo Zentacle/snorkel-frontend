@@ -11,7 +11,7 @@ export const getStaticProps = async (ctx) => {
   let res1 = fetch(`${rootDomain}/locality/area_two?limit=none`)
   let res2 = fetch(`${rootDomain}/locality/locality?limit=none`)
 
-  res = await res.json()
+  res = await res.then(res => res.json())
   const area_one = res.data.filter(location => location.url).map(location => (
     {
       url: `https://www.zentacle.com${location.url}`,
@@ -19,7 +19,7 @@ export const getStaticProps = async (ctx) => {
     }
   ))
 
-  res1 = await res1.json()
+  res1 = await res1.then(res => res1.json())
   const area_two = res1.data.filter(location => location.url).map(location => (
     {
       url: `https://www.zentacle.com${location.url}`,
@@ -27,7 +27,7 @@ export const getStaticProps = async (ctx) => {
     }
   ))
 
-  res2 = await res2.json()
+  res2 = await res2.then(res => res2.json())
   const locality = res2.data.filter(location => location.url).map(location => (
     {
       url: `https://www.zentacle.com${location.url}`,

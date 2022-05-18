@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { initAmplitude, setAmplitudeUserId } from 'hooks/amplitude';
 import Head from 'next/head';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 import '../styles/globals.css'
 import { UserProvider, useCurrentUser } from 'src/context/usercontext';
@@ -46,7 +45,6 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <UserProvider>
         <SetUser></SetUser>
-        <CssBaseline />
         <Component {...pageProps} />
       </UserProvider>
     </>
