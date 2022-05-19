@@ -1,0 +1,32 @@
+.partnerOuterContainer {
+  padding: 0 16px;
+}
+
+.partnerInnerContainer {
+  padding: 8px 4px;
+  display: flex;
+  overflow: scroll;
+}
+
+.partnerTitle {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.partnerContainer {
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 16px;
+  min-height: 180px;
+  padding: 8px 8px 0 8px;
+  text-align: center;
+  width: 160px;
+}
+
+.profilePic {
+  border-radius: 32px;
+}

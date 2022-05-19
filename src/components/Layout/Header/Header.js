@@ -45,7 +45,6 @@ const Header = (props) => {
     let { state } = useCurrentUser();
     const currentUser = state.user;
 
-    console.log(currentUser)
     const isShorediving = props.isShorediving;
 
     return (

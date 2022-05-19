@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import styles from './styles.module.css';
 
-const PrimaryButton = ({ children, disabled, onClick, className }) => {
+const PrimaryButton = ({
+  children,
+  disabled = false,
+  onClick = () => { },
+  className = ''
+}) => {
   return (
     <button onClick={onClick} className={`${styles.button} ${className}`} disabled={disabled}>
       {children}
@@ -9,7 +14,12 @@ const PrimaryButton = ({ children, disabled, onClick, className }) => {
   )
 }
 
-export const PrimaryLink = ({ children, href, onClick, className }) => (
+export const PrimaryLink = ({
+  children,
+  href,
+  onClick = () => { },
+  className = ''
+}) => (
   <Link href={href}>
     <a onClick={onClick} className={`${styles.button} ${className}`}>
       {children}

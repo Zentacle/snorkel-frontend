@@ -10,6 +10,7 @@ import { rootDomain } from "src/lib/constants";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
+import Partners from 'components/Partners';
 import Patron from 'components/Patron';
 import { sendEvent } from 'hooks/amplitude';
 
@@ -63,6 +64,7 @@ const getPillLocalityLevel = {
 
 const Home = (props) => {
   const [areas, setAreas] = React.useState([]);
+  const [partners, setPartners] = React.useState([]);
   const { state } = useCurrentUser();
 
   React.useEffect(() => {
@@ -100,7 +102,13 @@ const Home = (props) => {
     fetch(url).then(res =>
       res.json()
     ).then(data => {
-      setAreas(data.data)
+      setAreas(data.data);
+    })
+
+    fetch(`${rootDomain}/partner/get?${props.loc}=${props.area.short_name}`).then(res => 
+      res.json()
+    ).then(data => {
+      setPartners(data.data);
     })
   }, [props.area, props.country, props.area_one, props.area_two, props.loc])
 
@@ -199,6 +207,14 @@ const Home = (props) => {
                 />
               </a>
             </Link>
+          }
+          {
+            partners.length
+              ? <Partners
+                  partners={partners}
+                  loc={props.area.short_name}
+                />
+              : <></>
           }
           {
             hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
