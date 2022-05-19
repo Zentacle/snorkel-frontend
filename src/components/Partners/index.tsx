@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
+import { toaster } from 'evergreen-ui';
 
 import { rootDomain } from 'lib/constants';
 import * as ga from 'lib/ga';
@@ -69,7 +70,11 @@ export default function Partners(props: Props) {
                       'Content-Type': 'application/json',
                       'X-CSRF-TOKEN': Cookies.get('csrf_access_token') || '',
                     },
-                  })
+                  }).then(res =>
+                    res.json()
+                  ).then(
+                    res => toaster.success(res.msg)
+                  )
                 }}
               >
                 Reach Out
