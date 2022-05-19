@@ -37,7 +37,7 @@ export default function Partners(props: Props) {
       <div className={styles.partnerInnerContainer}>
         {
           props.partners.map(partner => (
-            <div className={styles.partnerContainer}>
+            <div key={partner.id} className={styles.partnerContainer}>
               <Image
                 className={styles.profilePic}
                 src={partner.user.profile_pic || 'https://snorkel.s3.amazonaws.com/default/default_hero_background.png'}
