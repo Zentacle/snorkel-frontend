@@ -105,7 +105,7 @@ const Home = (props) => {
       setAreas(data.data);
     })
 
-    fetch(`${rootDomain}/partner/get?${props.loc}=${props.area.short_name}`).then(res => 
+    fetch(`${rootDomain}/partner/get?${props.loc}=${props.area.id}`).then(res => 
       res.json()
     ).then(data => {
       setPartners(data.data);
