@@ -54,7 +54,7 @@ export default function Partners(props: Props) {
                     params: {
                       eventLabel: partner.user.id,
                       items: [{
-                        item_list_name: partner.user.id,
+                        item_list_name: props.loc,
                         item_name: 'Partner',
                         item_brand: partner.user.id,
                         item_category: 'Partner',
