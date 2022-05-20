@@ -51,26 +51,7 @@ export default function Partners(props: Props) {
               <Link href={`/user/${partner.user.username}`}>{partner.user.display_name}</Link>
               <div>{partner.user.hometown}</div>
               {state.user && state.user.id
-                ? <PrimaryLink
-                  onClick={() => {
-                    ga.event({
-                      action: "add_to_cart",
-                      params: {
-                        eventLabel: partner.user.id,
-                        items: [{
-                          item_list_name: props.loc,
-                          item_name: 'Partner',
-                          item_brand: partner.user.id,
-                          item_category: 'Partner',
-                        }]
-                      }
-                    })
-                  }}
-                  href='/register'
-                >
-                  Reach Out
-                </PrimaryLink>
-                : <PrimaryButton
+                ? <PrimaryButton
                   onClick={() => {
                     ga.event({
                       action: "purchase",
@@ -102,6 +83,25 @@ export default function Partners(props: Props) {
                 >
                   Reach Out
                 </PrimaryButton>
+                : <PrimaryLink
+                  onClick={() => {
+                    ga.event({
+                      action: "add_to_cart",
+                      params: {
+                        eventLabel: partner.user.id,
+                        items: [{
+                          item_list_name: props.loc,
+                          item_name: 'Partner',
+                          item_brand: partner.user.id,
+                          item_category: 'Partner',
+                        }]
+                      }
+                    })
+                  }}
+                  href='/register'
+                >
+                  Reach Out
+                </PrimaryLink>
               }
             </div>
           ))
