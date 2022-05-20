@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Cookies from 'js-cookie';
 import { toaster } from 'evergreen-ui';
 
+import { useCurrentUser } from 'context/usercontext';
 import { rootDomain } from 'lib/constants';
 import * as ga from 'lib/ga';
 import PrimaryButton, { PrimaryLink } from 'components/PrimaryButton';
@@ -32,6 +33,8 @@ export default function Partners(props: Props) {
     ))
   }, [])
 
+  const { state } = useCurrentUser();
+
   return (
     <div className={styles.partnerOuterContainer}>
       <h3 className={styles.partnerTitle}>Find a Dive Buddy</h3>
@@ -47,38 +50,59 @@ export default function Partners(props: Props) {
               />
               <Link href={`/user/${partner.user.username}`}>{partner.user.display_name}</Link>
               <div>{partner.user.hometown}</div>
-              <PrimaryButton
-                onClick={() => {
-                  ga.event({
-                    action: "purchase",
-                    params: {
-                      eventLabel: partner.user.id,
-                      items: [{
-                        item_list_name: props.loc,
-                        item_name: 'Partner',
-                        item_brand: partner.user.id,
-                        item_category: 'Partner',
-                      }]
-                    }
-                  })
-                  fetch(`${rootDomain}/partner/connect`, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                      userId: partner.user.id,
-                    }),
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'X-CSRF-TOKEN': Cookies.get('csrf_access_token') || '',
-                    },
-                  }).then(res =>
-                    res.json()
-                  ).then(
-                    res => toaster.success(res.msg)
-                  )
-                }}
-              >
-                Reach Out
-              </PrimaryButton>
+              {state.user && state.user.id
+                ? <PrimaryLink
+                  onClick={() => {
+                    ga.event({
+                      action: "add_to_cart",
+                      params: {
+                        eventLabel: partner.user.id,
+                        items: [{
+                          item_list_name: props.loc,
+                          item_name: 'Partner',
+                          item_brand: partner.user.id,
+                          item_category: 'Partner',
+                        }]
+                      }
+                    })
+                  }}
+                  href='/register'
+                >
+                  Reach Out
+                </PrimaryLink>
+                : <PrimaryButton
+                  onClick={() => {
+                    ga.event({
+                      action: "purchase",
+                      params: {
+                        eventLabel: partner.user.id,
+                        items: [{
+                          item_list_name: props.loc,
+                          item_name: 'Partner',
+                          item_brand: partner.user.id,
+                          item_category: 'Partner',
+                        }]
+                      }
+                    })
+                    fetch(`${rootDomain}/partner/connect`, {
+                      method: 'POST',
+                      body: JSON.stringify({
+                        userId: partner.user.id,
+                      }),
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': Cookies.get('csrf_access_token') || '',
+                      },
+                    }).then(res =>
+                      res.json()
+                    ).then(
+                      res => toaster.success(res.msg)
+                    )
+                  }}
+                >
+                  Reach Out
+                </PrimaryButton>
+              }
             </div>
           ))
         }
