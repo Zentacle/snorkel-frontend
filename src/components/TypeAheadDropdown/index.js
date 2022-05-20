@@ -3,6 +3,9 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
+import Flag from 'icons/Flag';
+import Pin from 'icons/Pin';
+import debounce from 'lodash/debounce';
 
 /***
  * https://medium.com/@svsh227/create-your-own-type-ahead-dropdown-in-react-599c96bebfa
@@ -11,18 +14,18 @@ import { sendEvent } from 'hooks/amplitude';
 const TypeAheadDropDown = (props) => {
     const [suggestions, setSuggestions] = React.useState([])
 
-    React.useEffect(() => {
-        if(props.text.length) {
-            const items = fetch(`${rootDomain}/search/typeahead?query=` + props.text, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
-              }).then(response => {
+    const fetchTypeahead = React.useCallback(debounce(
+        (query) => fetch(`${rootDomain}/search/typeahead?query=${query}`)
+            .then(response => {
                 return response.json();
-              }).then(data => {
+            }).then(data => {
                 setSuggestions(data.data)
-              })
+            }), 500
+    ), [])
+
+    React.useEffect(() => {
+        if (props.text.length) {
+            fetchTypeahead(props.text)
         } else {
             setSuggestions([])
         }
@@ -46,9 +49,16 @@ const TypeAheadDropDown = (props) => {
             {props.children}
             <ul>
                 {suggestions.map(city =>
-                    <li key={city.text} onClick={(e) => suggestionSelected(city)}>
-                        <div className={styles.text}>{city.text}</div>
-                        <div className={styles.subtext}>{city.subtext}</div>
+                    <li
+                        className={styles.item}
+                        key={`${city.url}_${city.id}`}
+                        onClick={(e) => suggestionSelected(city)}
+                    >
+                        <div>{city.type === 'location' ? <Flag /> : <Pin />}</div>
+                        <div className={styles.textContainer}>
+                            <div className={styles.text}>{city.text}</div>
+                            <div className={styles.subtext}>{city.subtext}</div>
+                        </div>
                     </li>
                 )}
             </ul>

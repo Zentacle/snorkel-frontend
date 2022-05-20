@@ -24,6 +24,7 @@
       "styles/*": ["src/styles/*"],
       "lib/*": ["src/lib/*"],
       "context/*": ["src/context/*"],
+      "icons/*": ["src/icons/*"],
       "@/": ["./"],
       "@/*": ["./*"]
     }
