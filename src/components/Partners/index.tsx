@@ -109,6 +109,20 @@ export default function Partners(props: Props) {
         <div className={styles.partnerContainer}>
           Want to get matched up with a dive buddy in your area?
           <PrimaryLink
+            onClick={() => {
+              ga.event({
+                action: "add_to_cart",
+                params: {
+                  eventLabel: 'Pro',
+                  items: [{
+                    item_list_name: props.loc,
+                    item_name: 'Pro',
+                    item_brand: props.loc,
+                    item_category: 'Pro',
+                  }]
+                }
+              })
+            }}
             href={'https://buy.stripe.com/00gcPhf2Octp3nOaEE'}
           >
             Get Pro
