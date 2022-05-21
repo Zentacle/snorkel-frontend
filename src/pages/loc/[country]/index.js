@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import styles from "components/Home/Home.module.css"
+import locStyles from './styles.module.css';
 import Layout from 'components/Layout/Layout';
 import LocationCard from 'components/LocationCard';
 import { rootDomain } from "src/lib/constants";
@@ -170,7 +171,7 @@ const Home = (props) => {
             />
           </div>
           {areas.length
-            ? <div className={styles.locationContainer}>
+            ? <div className={`${styles.locationContainer} ${locStyles.locationContainer}`}>
               {areas.map(area => (
                 <Link key={area.short_name} href={area.url}>
                   <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>

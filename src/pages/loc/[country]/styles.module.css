@@ -1,0 +1,7 @@
+@media (max-width: 720px) {
+  .locationContainer {
+    flex-wrap: nowrap;
+    justify-content: unset;
+    overflow: scroll;
+  }
+}
