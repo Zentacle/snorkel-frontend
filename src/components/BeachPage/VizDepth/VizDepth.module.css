@@ -20,4 +20,5 @@
 .value{
     font-size: 14px;
     font-weight: var(--text-weight-bold);
+    margin-top: 4px;
 }

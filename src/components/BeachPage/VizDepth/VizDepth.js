@@ -1,4 +1,4 @@
-import styles from "../VizDepth/VizDepth.module.css";
+import styles from "./VizDepth.module.css";
 import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
 import DifficultyTag from "components/DifficultyTag";
@@ -40,7 +40,7 @@ const VizDepth = ({
             <div className={styles.itemContainer}>
                 <div className={styles.header}>Max Depth
                 </div>
-                <div className={styles.value}>{max_depth || '40ft (unconfirmed)'}</div>
+                <div className={styles.value}>{max_depth || 'Unknown'}</div>
             </div>
         </div>
     )
