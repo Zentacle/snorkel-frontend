@@ -12,12 +12,12 @@ import styles from './styles.module.css';
 
 interface Props {
   loc: string;
-  partners: any[];
+  buddies: any[];
 }
 
-export default function Partners(props: Props) {
+export default function BuddyCarousel(props: Props) {
   React.useEffect(() => {
-    props.partners.map(partner => (
+    props.buddies.map(partner => (
       ga.event({
         action: "view_item",
         params: {
@@ -40,7 +40,7 @@ export default function Partners(props: Props) {
       <h3 className={styles.partnerTitle}>Find a Dive Buddy</h3>
       <div className={styles.partnerInnerContainer}>
         {
-          props.partners.map(partner => (
+          props.buddies.map(partner => (
             <div key={partner.id} className={styles.partnerContainer}>
               <Image
                 className={styles.profilePic}

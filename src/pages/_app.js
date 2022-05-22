@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { initAmplitude, setAmplitudeUserId } from 'hooks/amplitude';
+import { setGAUserID } from 'lib/ga';
 import Head from 'next/head';
 
 import '../styles/globals.css'
@@ -64,6 +65,7 @@ function SetUser() {
     }).then(response => {
       return response.json()
     }).then(data => {
+      setGAUserID(data.id);
       setAmplitudeUserId(data.id);
       dispatch(data)
     }).catch((err) => {

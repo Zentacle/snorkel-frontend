@@ -11,7 +11,7 @@ import { rootDomain } from "src/lib/constants";
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
-import Partners from 'components/Partners';
+import BuddyCarousel from 'components/BuddyCarousel';
 import Patron from 'components/Patron';
 import { sendEvent } from 'hooks/amplitude';
 
@@ -65,7 +65,7 @@ const getPillLocalityLevel = {
 
 const Home = (props) => {
   const [areas, setAreas] = React.useState([]);
-  const [partners, setPartners] = React.useState([]);
+  const [buddies, setBuddies] = React.useState([]);
   const { state } = useCurrentUser();
 
   React.useEffect(() => {
@@ -109,7 +109,7 @@ const Home = (props) => {
     fetch(`${rootDomain}/partner/get?${props.loc}=${props.area.id}`).then(res => 
       res.json()
     ).then(data => {
-      setPartners(data.data);
+      setBuddies(data.data);
     })
   }, [props.area, props.country, props.area_one, props.area_two, props.loc])
 
@@ -210,9 +210,9 @@ const Home = (props) => {
             </Link>
           }
           {
-            partners.length
-              ? <Partners
-                  partners={partners}
+            buddies.length
+              ? <BuddyCarousel
+                  buddies={buddies}
                   loc={props.area.short_name}
                 />
               : <></>
