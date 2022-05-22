@@ -2,10 +2,11 @@ import React from "react";
 import Head from 'next/head';
 import Link from 'next/link';
 
-import styles from "components/Home/Home.module.css"
-import SearchBar from "components/SearchBar"
+import styles from "components/Home/Home.module.css";
+import SearchBar from "components/SearchBar";
 import Layout from 'components/Layout/Layout';
-import Carousel from "components/Carousel/Carousel"
+import Carousel from "components/Carousel/Carousel";
+import AppBanner from 'components/AppBanner';
 import { rootDomain } from "src/lib/constants";
 import BuddyCarousel from 'components/BuddyCarousel';
 import { useCurrentUser } from 'context/usercontext';

@@ -103,7 +103,7 @@ export default function BuddyCarousel(props: Props) {
                 ? <PrimaryButton
                   onClick={() => onReachOutClick(partner)}
                 >
-                  Reach Out
+                  Message
                 </PrimaryButton>
                 : <PrimaryLink
                   onClick={() => {

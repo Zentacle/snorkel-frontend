@@ -1,0 +1,6 @@
+.outerContainer {
+  height: 400px;
+  background-image: url('/hero.jpg');
+  background-size: cover;
+}
+

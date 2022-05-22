@@ -7,10 +7,27 @@
     color: white;
     background: rgb(11,34,224);
     background: linear-gradient(90deg, rgba(11,34,224,1) 0%, rgba(11,224,188,1) 100%);
+    text-align: center;
 }
 
 .emailTitle {
     text-align: center;
+    font-weight: var(--text-weight-bold);
+    font-size: 32px;
+}
+
+.emailSubtitle {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.emailSubtitleText {
+    margin-bottom: 4px;
+    margin-right: 4px;
     font-weight: var(--text-weight-bold);
 }
 

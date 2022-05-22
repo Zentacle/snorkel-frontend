@@ -1,39 +1,55 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { sendEvent } from "hooks/amplitude";
+import Rating from "react-rating";
+import { EmptyStar, FullStar } from "components/StarRating";
 import styles from "./Footer.module.css";
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 const Footer = () => {
-  const [email, setEmail] = React.useState('');
-  const [hasSubmitted, setHasSubmitted] = React.useState(false);
-  const router = useRouter();
-
   const onClick = () => {
-    sendEvent('submit_email', {
-      email,
-    });
-    router.push('/register');
+    ga.event({
+      action: "add_to_cart",
+      params: {
+        eventLabel: 'iOS App',
+        items: [{
+          item_list_name: `Footer - ${window.location.url}`,
+          item_name: 'iOS App',
+          item_category: 'iOS App',
+        }]
+      }
+    })
   }
 
   return (
     <footer className={styles.footer}>
       <div className={styles.emailContainer}>
-        <div className={styles.emailTitle}>Sign up to get updates on local conditions</div>
-        <div className={styles.formContainer}>
-          <input value={email} onChange={e => setEmail(e.target.value)} className={styles.emailBox} placeholder="email" />
-          {
-            hasSubmitted
-              ? <div>Submitted!</div>
-              : <button className={styles.emailSubmit} type="submit" onClick={onClick}>
-                <span className={styles.emailSubmitText}>
-                  Submit
-                </span>
-              </button>
-          }
+        <div className={styles.emailTitle}>
+          Get the Zentacle app!
         </div>
+        <div className={styles.emailSubtitle}>
+          Full dive log with 15k+ locations, reviews, and photos
+        </div>
+        <div className={styles.emailSubtitle}>
+          <span className={styles.emailSubtitleText}>
+            5.0
+          </span>
+          <Rating
+            fractions={2}
+            emptySymbol={(<EmptyStar />)}
+            fullSymbol={(<FullStar />)}
+            initialRating={5}
+            readonly>
+          </Rating></div>
+        <Link href="https://apps.apple.com/us/app/zentacle/id1611242564">
+          <a onClick={onClick}>
+            <Image
+              src="/app_store_badge.png"
+              height="44"
+              width="150"
+            />
+          </a>
+        </Link>
       </div>
       <div className={styles.footerLinksContainer}>
         <div className={styles.leftColumn}>
