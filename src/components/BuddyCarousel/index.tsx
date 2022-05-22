@@ -10,9 +10,18 @@ import * as ga from 'lib/ga';
 import PrimaryButton, { PrimaryLink } from 'components/PrimaryButton';
 import styles from './styles.module.css';
 
+interface Buddy {
+  profile_pic: string;
+  username: string;
+  display_name: string;
+  id: string;
+  hometown?: string;
+  bio?: string;
+}
+
 interface Props {
   loc: string;
-  buddies: any[];
+  buddies: Buddy[];
 }
 
 export default function BuddyCarousel(props: Props) {
@@ -21,11 +30,11 @@ export default function BuddyCarousel(props: Props) {
       ga.event({
         action: "view_item",
         params: {
-          eventLabel: partner.user.id,
+          eventLabel: partner.id,
           items: [{
             item_list_name: props.loc,
             item_name: 'Partner',
-            item_brand: partner.user.id,
+            item_brand: partner.id,
             item_category: 'Partner',
           }]
         }
@@ -35,6 +44,35 @@ export default function BuddyCarousel(props: Props) {
 
   const { state } = useCurrentUser();
 
+  const onReachOutClick = (partner: Buddy) => {
+    ga.event({
+      action: "purchase",
+      params: {
+        eventLabel: partner.id,
+        items: [{
+          item_list_name: props.loc,
+          item_name: 'Partner',
+          item_brand: partner.id,
+          item_category: 'Partner',
+        }]
+      }
+    })
+    fetch(`${rootDomain}/partner/connect`, {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: partner.id,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': Cookies.get('csrf_access_token') || '',
+      },
+    }).then(res =>
+      res.json()
+    ).then(
+      res => toaster.success(res.msg)
+    )
+  }
+
   return (
     <div className={styles.partnerOuterContainer}>
       <h3 className={styles.partnerTitle}>Find a Dive Buddy</h3>
@@ -42,44 +80,28 @@ export default function BuddyCarousel(props: Props) {
         {
           props.buddies.map(partner => (
             <div key={partner.id} className={styles.partnerContainer}>
-              <Image
-                className={styles.profilePic}
-                src={partner.user.profile_pic || 'https://snorkel.s3.amazonaws.com/default/default_hero_background.png'}
-                width="64"
-                height="64"
-              />
-              <Link href={`/user/${partner.user.username}`}>{partner.user.display_name}</Link>
-              <div>{partner.user.hometown}</div>
+              <div className={styles.userLockup}>
+                <Image
+                  className={styles.profilePic}
+                  src={partner.profile_pic || 'https://snorkel.s3.amazonaws.com/default/default_hero_background.png'}
+                  width="64"
+                  height="64"
+                />
+                <div className={styles.nameLockup}>
+                  <Link
+                    href={`/user/${partner.username}`}
+                  >
+                    <a className={styles.name}>
+                      {partner.display_name}
+                    </a>
+                  </Link>
+                  <div className={styles.hometown}>{partner.hometown}</div>
+                </div>
+              </div>
+              <div className={styles.bio}>{partner.bio}</div>
               {state.user && state.user.id
                 ? <PrimaryButton
-                  onClick={() => {
-                    ga.event({
-                      action: "purchase",
-                      params: {
-                        eventLabel: partner.user.id,
-                        items: [{
-                          item_list_name: props.loc,
-                          item_name: 'Partner',
-                          item_brand: partner.user.id,
-                          item_category: 'Partner',
-                        }]
-                      }
-                    })
-                    fetch(`${rootDomain}/partner/connect`, {
-                      method: 'POST',
-                      body: JSON.stringify({
-                        userId: partner.user.id,
-                      }),
-                      headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': Cookies.get('csrf_access_token') || '',
-                      },
-                    }).then(res =>
-                      res.json()
-                    ).then(
-                      res => toaster.success(res.msg)
-                    )
-                  }}
+                  onClick={() => onReachOutClick(partner)}
                 >
                   Reach Out
                 </PrimaryButton>
@@ -88,11 +110,11 @@ export default function BuddyCarousel(props: Props) {
                     ga.event({
                       action: "add_to_cart",
                       params: {
-                        eventLabel: partner.user.id,
+                        eventLabel: partner.id,
                         items: [{
                           item_list_name: props.loc,
                           item_name: 'Partner',
-                          item_brand: partner.user.id,
+                          item_brand: partner.id,
                           item_category: 'Partner',
                         }]
                       }
@@ -100,7 +122,7 @@ export default function BuddyCarousel(props: Props) {
                   }}
                   href='/register'
                 >
-                  Reach Out
+                  Message
                 </PrimaryLink>
               }
             </div>
@@ -125,7 +147,7 @@ export default function BuddyCarousel(props: Props) {
             }}
             href={'https://buy.stripe.com/00gcPhf2Octp3nOaEE'}
           >
-            Get Pro
+            Get Zentacle Pro
           </PrimaryLink>
         </div>
       </div>

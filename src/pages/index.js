@@ -7,7 +7,7 @@ import SearchBar from "components/SearchBar"
 import Layout from 'components/Layout/Layout';
 import Carousel from "components/Carousel/Carousel"
 import { rootDomain } from "src/lib/constants";
-import Cookies from "js-cookie";
+import BuddyCarousel from 'components/BuddyCarousel';
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 
@@ -37,24 +37,26 @@ export async function getStaticProps(context) {
 
 // '/' route
 const Home = (props) => {
-  const [shouldShowBanner, setShouldShowBanner] = React.useState(false);
   const [recs, setRecs] = React.useState(null);
+  const [buddies, setBuddies] = React.useState([]);
   const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
   React.useEffect(() => {
-    setShouldShowBanner(!(Cookies.get('has_seen_banner') || Cookies.get('csrf_access_token')));
-
-    if (document.referrer.match(/^https?:\/\/([^\/]+\.)?google\.com(\/|$)/i)) {
-      setShouldShowBanner(false);
-    }
-
     var ads = document.getElementsByClassName("adsbygoogle").length;
     for (var i = 0; i < ads; i++) {
       try {
         (adsbygoogle = window.adsbygoogle || []).push({});
       } catch (e) { }
     }
+  }, [])
+
+  React.useEffect(() => {
+    fetch(`${rootDomain}/buddy/get`).then(res =>
+      res.json()
+    ).then(data => {
+      setBuddies(data.data);
+    })
   }, [])
 
   React.useEffect(() => {
@@ -123,40 +125,19 @@ const Home = (props) => {
             <h2 className={styles.carouseltitle}>Most Popular Snorkel and Scuba Diving Locations in the World</h2>
             <Carousel data={props.default}></Carousel>
           </div>
-          <div className={styles.homeAd}>
-            <ins className="adsbygoogle"
-              style={{ display: 'block' }}
-              data-ad-client="ca-pub-7099980041278313"
-              data-ad-slot="7382383530"
-              data-ad-format="horizontal"
-              data-full-width-responsive="true"
-            ></ins>
+          <div>
+            <BuddyCarousel
+              buddies={buddies}
+              loc={'home'}
+            />
           </div>
           <div>
             <h2 className={styles.carouseltitle}>Top Rated Snorkel and Scuba Diving Locations in the World</h2>
             <Carousel data={props.top}></Carousel>
           </div>
-          <div className={styles.homeAd}>
-            <ins className="adsbygoogle"
-              style={{ display: 'block' }}
-              data-ad-client="ca-pub-7099980041278313"
-              data-ad-slot="7382383530"
-              data-ad-format="horizontal"
-              data-full-width-responsive="true"
-            ></ins>
-          </div>
           <div>
             <div className={styles.carouseltitle}>Conditions Reported Recently</div>
             <Carousel data={props.latest}></Carousel>
-          </div>
-          <div className={styles.homeAd}>
-            <ins className="adsbygoogle"
-              style={{ display: 'block' }}
-              data-ad-client="ca-pub-7099980041278313"
-              data-ad-slot="7382383530"
-              data-ad-format="horizontal"
-              data-full-width-responsive="true"
-            ></ins>
           </div>
           {areas.length > 7 && <div className={styles.locationContainer}>
             {areas.slice(7).map(area => (

@@ -3,7 +3,7 @@
 }
 
 .partnerInnerContainer {
-  padding: 8px 4px;
+  padding: 8px 0px;
   display: flex;
   overflow: scroll;
 }
@@ -13,18 +13,35 @@
   font-size: 22px;
 }
 
-.partnerContainer {
+.userLockup {
+  display: flex;
   align-items: center;
+  margin-bottom: 4px;
+}
+
+.nameLockup {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.partnerContainer {
   border-radius: 8px;
-  box-shadow: var(--box-shadow);
+  border: 1px solid var(--separator-color);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-right: 16px;
-  min-height: 180px;
   padding: 8px 8px 0 8px;
-  text-align: center;
-  width: 160px;
+  width: 320px;
+}
+
+.name {
+  font-weight: var(--text-weight-bold);
+}
+
+.hometown {
+  color: var(--text-secondary);
 }
 
 .profilePic {
