@@ -77,7 +77,7 @@ const Banner = (props) => {
                 />
               </div>
               <div className={styles.appName}>
-                <Link href='https://zentacle.app.link'>
+                <Link href='https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=app_selector'>
                   <a onClick={clickApp}>
                     Zentacle App
                   </a>
