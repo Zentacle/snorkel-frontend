@@ -1,5 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import Cookies from 'js-cookie';
 
 import styles from './styles.module.css';
@@ -17,6 +19,10 @@ const Banner = (props) => {
   }, [])
 
   React.useEffect(useGoogleButton('/', {}), [])
+
+  const clickApp = () => {
+    sendEvent('bottom_banner_app');
+  }
 
   const submitEmail = () => {
     sendEvent('bottom_banner_email');
@@ -57,6 +63,45 @@ const Banner = (props) => {
           </div>
           <div className={styles.center}>
             <button onClick={submitCancel} className={styles.notNow}>Not now</button>
+          </div>
+        </div>
+        <div className={styles.mobileContainer}>
+          <div className={styles.top}>See this page in...</div>
+          <div className={styles.appRow}>
+            <div className={styles.app}>
+              <div className={styles.icon}>
+                <Image
+                  src='/logo.png'
+                  height='44'
+                  width='44'
+                />
+              </div>
+              <div className={styles.appName}>
+                <Link href='https://zentacle.app.link'>
+                  <a onClick={clickApp}>
+                    Zentacle App
+                  </a>
+                </Link>
+              </div>
+            </div>
+            <div className={`${styles.button} ${styles.active}`}>
+              Open
+            </div>
+          </div>
+          <div className={styles.app}>
+            <div className={styles.icon}>
+              <Image
+                src='/safari.png'
+                height='44'
+                width='44'
+              />
+            </div>
+            <div className={styles.appName}>
+              Browser
+            </div>
+            <div className={styles.button} onClick={submitCancel}>
+              Continue
+            </div>
           </div>
         </div>
       </MaxWidth>

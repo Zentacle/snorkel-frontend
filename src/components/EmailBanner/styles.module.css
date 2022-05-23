@@ -70,6 +70,83 @@
   margin: auto;
 }
 
+.mobileContainer {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  padding: 16px;
+  padding-bottom: 32px;
+  border-radius: 16px 16px 0 0;
+  max-width: 720px;
+  width: 100%;
+  -webkit-animation: slide-up 1s ease;
+  -moz-animation: slide-up 1s ease;
+  animation: slide-up 1s ease;
+}
+
+@media (max-width: 720px) {
+  .mobileContainer {
+    display: block;
+  }
+  .container {
+    display: none;
+  }
+}
+
+.top {
+  text-align: center;
+  font-weight: var(--text-weight-bold);
+  padding: 8px;
+  padding-bottom: 20px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid;
+  border-color: #edeff1;
+}
+
+.appRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  padding: 4px;
+  border: 1px solid #edeff1;
+  border-radius: 8px;
+  margin-right: 12px;
+  display: flex;
+}
+
+.appName {
+  font-weight: var(--text-weight-bold);
+}
+
+.button {
+  border-radius: 40px;
+  background-color: #f6f7f8;
+  border: 1px solid #d3d6da;
+  color: #787c7e;
+  font-size: 14px;
+  font-weight: var(--text-weight-bold);
+  line-height: 38px;
+  height: 40px;
+  margin-left: auto;
+  width: 94px;
+  text-align: center;
+}
+
+.active {
+  background-color: #24a0ed;
+  color: white;
+  border-color: #24a0ed;
+}
+
 @-webkit-keyframes slide-up {
   0%{bottom:-320px}
   100%{bottom:0}
