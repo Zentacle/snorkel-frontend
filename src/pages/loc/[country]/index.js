@@ -280,8 +280,8 @@ const Home = (props) => {
                 data-ad-slot="5483092474"></ins>
             </div>
           </div>
-          {isShown && <EmailBanner isShown={isShown} setIsShown={setIsShown} />}
         </div>
+        {isShown && <EmailBanner isShown={isShown} setIsShown={setIsShown} />}
       </div>
     </Layout>
   )
