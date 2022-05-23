@@ -10,7 +10,12 @@ import MaxWidth from 'components/MaxWidth';
 import useGoogleButton from 'hooks/useGoogleButton';
 import PrimaryButton from 'components/PrimaryButton';
 
-const Banner = (props) => {
+interface Props {
+  isShown: boolean;
+  setIsShown(isShown: boolean): void;
+}
+
+const Banner = (props: Props) => {
   const [email, setEmail] = React.useState('');
   const router = useRouter();
 
@@ -29,9 +34,11 @@ const Banner = (props) => {
     router.push('/register');
   }
 
-  const submitCancel = () => {
-    sendEvent('bottom_banner_skip');
-    Cookies.set('has_seen_banner', true, { expires: 7 });
+  const submitCancel = (type: string) => {
+    sendEvent('bottom_banner_skip', {
+      type,
+    });
+    Cookies.set('has_seen_banner', 'true', { expires: 7 });
     props.setIsShown(false);
   }
 
@@ -62,7 +69,7 @@ const Banner = (props) => {
             </PrimaryButton>
           </div>
           <div className={styles.center}>
-            <button onClick={submitCancel} className={styles.notNow}>Not now</button>
+            <button onClick={() => submitCancel('email')} className={styles.notNow}>Not now</button>
           </div>
         </div>
         <div className={styles.mobileContainer}>
@@ -99,7 +106,7 @@ const Banner = (props) => {
             <div className={styles.appName}>
               Browser
             </div>
-            <div className={styles.button} onClick={submitCancel}>
+            <div className={styles.button} onClick={() => submitCancel('app')}>
               Continue
             </div>
           </div>

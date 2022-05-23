@@ -209,7 +209,6 @@ const Beach = (props) => {
                 <meta name="description" content={description} key="description" />
                 <link rel="canonical" href={canonicalURL} key="canonical" />
                 <meta name="apple-itunes-app" content={`app-id=1611242564, app-argument=${beach.url}`} key="apple-app"></meta>
-                {beach.hero_img && <link rel="preload" as="image" href={beach.hero_img} />}
                 {beach.num_reviews && <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
@@ -319,7 +318,7 @@ const Beach = (props) => {
                     }
                 </div>
             </MaxWidth>
-            {isShown && <EmailBanner setIsShown={setIsShown} />}
+            {isShown && <EmailBanner isShown={isShown} setIsShown={setIsShown} />}
         </Layout>
     )
 }

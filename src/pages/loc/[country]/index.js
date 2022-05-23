@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import Cookies from 'js-cookie';
 
 import styles from "components/Home/Home.module.css"
 import locStyles from './styles.module.css';
@@ -12,6 +13,7 @@ import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
 import BuddyCarousel from 'components/BuddyCarousel';
+import EmailBanner from 'components/EmailBanner';
 import Patron from 'components/Patron';
 import { sendEvent } from 'hooks/amplitude';
 
@@ -76,6 +78,7 @@ export const getPillLocalityLevel = {
 
 const Home = (props) => {
   const [buddies, setBuddies] = React.useState([]);
+  const [isShown, setIsShown] = React.useState(false);
   const { state } = useCurrentUser();
 
   React.useEffect(() => {
@@ -87,8 +90,17 @@ const Home = (props) => {
     }
   }, [props.area]);
 
+  const currentUser = state.user;
   React.useEffect(() => {
-    const currentUser = state.user;
+    if (!currentUser) {
+      return;
+    }
+    if (!Cookies.get('has_seen_banner') && !currentUser.id) {
+      setTimeout(() => setIsShown(true), 30000);
+    }
+  }, [currentUser])
+
+  React.useEffect(() => {
     if (currentUser) {
       sendEvent('page_view', {
         type: 'location',
@@ -268,6 +280,7 @@ const Home = (props) => {
                 data-ad-slot="5483092474"></ins>
             </div>
           </div>
+          {isShown && <EmailBanner isShown={isShown} setIsShown={setIsShown} />}
         </div>
       </div>
     </Layout>

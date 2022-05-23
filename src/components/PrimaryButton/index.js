@@ -5,10 +5,11 @@ const PrimaryButton = ({
   children,
   disabled = false,
   onClick = () => { },
-  className = ''
+  className = '',
+  type='button',
 }) => {
   return (
-    <button onClick={onClick} className={`${styles.button} ${className}`} disabled={disabled}>
+    <button onClick={onClick} className={`${styles.button} ${className}`} disabled={disabled} type={type}>
       {children}
     </button>
   )
