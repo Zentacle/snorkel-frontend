@@ -1,4 +1,4 @@
-import Page from 'pages/loc/[country]/index';
+import Page, { getPillLocalityLevel } from 'pages/loc/[country]/index';
 import { rootDomain } from "src/lib/constants";
 
 export async function getStaticProps(context) {
@@ -23,6 +23,20 @@ export async function getStaticProps(context) {
   props['loc'] = 'area_one'
   props['country'] = country
   props['area_one'] = area_one
+
+  const localityType = getPillLocalityLevel[props.loc];
+  let url = `${rootDomain}/locality/${localityType}`
+  if (props.country) {
+    url += `?country=${props.country}`
+  }
+  if (props.area_one) {
+    url += `&area_one=${props.area_one}`
+  }
+  props['areas'] = await fetch(url).then(res =>
+    res.json()
+  ).then(data => {
+    return data.data;
+  })
 
   return {
     props, // will be passed to the page component as props

@@ -37,6 +37,17 @@ export async function getStaticProps(context) {
   props['loc'] = 'country'
   props['country'] = country
 
+  const localityType = getPillLocalityLevel[props.loc];
+  let url = `${rootDomain}/locality/${localityType}`
+  if (props.country) {
+    url += `?country=${props.country}`
+  }
+  props['areas'] = await fetch(url).then(res =>
+    res.json()
+  ).then(data => {
+    return data.data;
+  })
+
   return {
     props, // will be passed to the page component as props
     revalidate: 3600,
@@ -56,7 +67,7 @@ export async function getStaticPaths() {
   }
 }
 
-const getPillLocalityLevel = {
+export const getPillLocalityLevel = {
   'country': 'area_one',
   'area_one': 'area_two',
   'area_two': 'locality',
@@ -64,7 +75,6 @@ const getPillLocalityLevel = {
 }
 
 const Home = (props) => {
-  const [areas, setAreas] = React.useState([]);
   const [buddies, setBuddies] = React.useState([]);
   const { state } = useCurrentUser();
 
@@ -89,29 +99,12 @@ const Home = (props) => {
   }, [state, props.loc, props.area.short_name])
 
   React.useEffect(() => {
-    const localityType = getPillLocalityLevel[props.loc];
-    let url = `${rootDomain}/locality/${localityType}`
-    if (props.country) {
-      url += `?country=${props.country}`
-    }
-    if (props.area_one) {
-      url += `&area_one=${props.area_one}`
-    }
-    if (props.area_two) {
-      url += `&area_two=${props.area_two}`
-    }
-    fetch(url).then(res =>
-      res.json()
-    ).then(data => {
-      setAreas(data.data);
-    })
-
-    fetch(`${rootDomain}/buddy/get?${props.loc}=${props.area.id}`).then(res => 
+    fetch(`${rootDomain}/buddy/get?${props.loc}=${props.area.id}`).then(res =>
       res.json()
     ).then(data => {
       setBuddies(data.data);
     })
-  }, [props.area, props.country, props.area_one, props.area_two, props.loc])
+  }, [props.area, props.loc])
 
   React.useEffect(useGoogleOneTap(props.area.url, state.user), [state])
 
@@ -170,9 +163,9 @@ const Home = (props) => {
               area_two={props.area.area_two}
             />
           </div>
-          {areas.length
+          {props.areas.length
             ? <div className={`${styles.locationContainer} ${locStyles.locationContainer}`}>
-              {areas.map(area => (
+              {props.areas.map(area => (
                 <Link key={area.short_name} href={area.url}>
                   <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
                     {area.name}
@@ -212,9 +205,9 @@ const Home = (props) => {
           {
             buddies.length
               ? <BuddyCarousel
-                  buddies={buddies}
-                  loc={props.area.short_name}
-                />
+                buddies={buddies}
+                loc={props.area.short_name}
+              />
               : <></>
           }
           {
