@@ -51,6 +51,7 @@
 
 .rightButton {
     font-weight: var(--text-weight-bold);
+    display: contents;
 }
 
 .loginbutton {
