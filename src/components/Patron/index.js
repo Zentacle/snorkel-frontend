@@ -63,7 +63,10 @@ const Patron = (props) => {
 
   const sendViewEvent = (areaPatronKey) => {
     const itemLabel = getPatron(areaPatronKey).name;
-    sendEvent('view_patron')
+    sendEvent('view_patron', {
+      name: itemLabel,
+      location: props.name,
+    })
 
     ga.event({
       action: "view_item",
@@ -81,7 +84,10 @@ const Patron = (props) => {
 
   const sendClickEvent = (areaPatronKey) => () => {
     const itemLabel = getPatron(areaPatronKey).name;
-    sendEvent('click_patron')
+    sendEvent('click_patron', {
+      name: itemLabel,
+      location: props.name,
+    })
 
     ga.event({
       action: "purchase",
