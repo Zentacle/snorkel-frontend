@@ -8,6 +8,7 @@ import { useCurrentUser } from 'context/usercontext';
 import { rootDomain } from 'lib/constants';
 import * as ga from 'lib/ga';
 import PrimaryButton, { PrimaryLink } from 'components/PrimaryButton';
+import { sendEvent } from 'hooks/amplitude';
 import styles from './styles.module.css';
 
 interface Buddy {
@@ -26,7 +27,12 @@ interface Props {
 
 export default function BuddyCarousel(props: Props) {
   React.useEffect(() => {
-    props.buddies.map(partner => (
+    props.buddies.map(partner => {
+      sendEvent('buddy__view', {
+        location: props.loc,
+        buddy_id: partner.id,
+      })
+
       ga.event({
         action: "view_item",
         params: {
@@ -39,12 +45,17 @@ export default function BuddyCarousel(props: Props) {
           }]
         }
       })
-    ))
+    })
   }, [])
 
   const { state } = useCurrentUser();
 
   const onReachOutClick = (partner: Buddy) => {
+    sendEvent('buddy__message', {
+      location: props.loc,
+      buddy_id: partner.id,
+    });
+
     ga.event({
       action: "purchase",
       params: {

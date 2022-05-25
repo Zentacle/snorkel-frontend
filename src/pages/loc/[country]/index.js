@@ -2,7 +2,6 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import Cookies from 'js-cookie';
 
 import styles from "components/Home/Home.module.css"
 import locStyles from './styles.module.css';
