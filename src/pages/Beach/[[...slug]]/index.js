@@ -10,7 +10,6 @@ import BeachPageHero from 'components/BeachPageHero';
 import BeachReviews from "components/BeachPage/BeachReviews/BeachReviews";
 import Breadcrumbs from 'components/Breadcrumbs';
 import Carousel from 'components/Carousel/Carousel';
-import EmailBanner from 'components/EmailBanner';
 import Head from 'next/head';
 import Layout from "components/Layout/Layout";
 import MaxWidth from 'components/MaxWidth';
@@ -140,7 +139,6 @@ export async function getStaticPaths() {
 const Beach = (props) => {
     const [beach, setBeach] = useState(props.beach);
     const [nearbyBeaches, setNearbyBeaches] = useState(props.nearbyBeaches)
-    const [isShown, setIsShown] = useState(false);
     const photoState = useState([]);
 
     let { state } = useCurrentUser();
@@ -168,15 +166,6 @@ const Beach = (props) => {
             });
         }
     }, [state, currentUser, beach.id, beach.name])
-
-    useEffect(() => {
-        if (!currentUser) {
-            return;
-        }
-        if (!Cookies.get('has_seen_banner') && !currentUser.id) {
-            setTimeout(() => setIsShown(true), 30000);
-        }
-    }, [currentUser])
 
     useEffect(useGoogleOneTap(beach.url, currentUser), [state])
     useEffect(() => setNearbyBeaches(props.nearbyBeaches), [props.nearbyBeaches])
@@ -318,7 +307,6 @@ const Beach = (props) => {
                     }
                 </div>
             </MaxWidth>
-            {isShown && <EmailBanner isShown={isShown} setIsShown={setIsShown} />}
         </Layout>
     )
 }

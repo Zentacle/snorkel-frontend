@@ -13,7 +13,6 @@ import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
 import BuddyCarousel from 'components/BuddyCarousel';
-import EmailBanner from 'components/EmailBanner';
 import Patron from 'components/Patron';
 import { sendEvent } from 'hooks/amplitude';
 
@@ -78,8 +77,8 @@ export const getPillLocalityLevel = {
 
 const Home = (props) => {
   const [buddies, setBuddies] = React.useState([]);
-  const [isShown, setIsShown] = React.useState(false);
   const { state } = useCurrentUser();
+  const currentUser = state.user;
 
   React.useEffect(() => {
     var ads = document.getElementsByClassName("adsbygoogle").length;
@@ -89,16 +88,6 @@ const Home = (props) => {
       } catch (e) { }
     }
   }, [props.area]);
-
-  const currentUser = state.user;
-  React.useEffect(() => {
-    if (!currentUser) {
-      return;
-    }
-    if (!Cookies.get('has_seen_banner') && !currentUser.id) {
-      setTimeout(() => setIsShown(true), 30000);
-    }
-  }, [currentUser])
 
   React.useEffect(() => {
     if (currentUser) {
@@ -281,7 +270,6 @@ const Home = (props) => {
             </div>
           </div>
         </div>
-        {isShown && <EmailBanner isShown={isShown} setIsShown={setIsShown} />}
       </div>
     </Layout>
   )

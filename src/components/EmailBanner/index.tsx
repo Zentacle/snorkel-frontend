@@ -7,8 +7,9 @@ import Cookies from 'js-cookie';
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 import MaxWidth from 'components/MaxWidth';
-import useGoogleButton from 'hooks/useGoogleButton';
 import PrimaryButton from 'components/PrimaryButton';
+import { useCurrentUser } from 'context/usercontext';
+import useGoogleButton from 'hooks/useGoogleButton';
 
 interface Props {
   isShown: boolean;
@@ -116,4 +117,26 @@ const Banner = (props: Props) => {
   )
 }
 
-export default Banner;
+const EmailBannerContainer = () => {
+  const [isShown, setIsShown] = React.useState(false);
+  let { state } = useCurrentUser();
+  const currentUser = state.user;
+
+  React.useEffect(() => {
+    if (!currentUser) {
+      return;
+    }
+
+    if (!Cookies.get('has_seen_banner') && !currentUser.id) {
+      setTimeout(() => setIsShown(true), 30000);
+    }
+  }, [currentUser])
+
+  return (
+    <>
+      {isShown && <Banner isShown={isShown} setIsShown={setIsShown} />}
+    </>
+  )
+}
+
+export default EmailBannerContainer;

@@ -6,6 +6,7 @@ import Head from 'next/head';
 import '../styles/globals.css'
 import { UserProvider, useCurrentUser } from 'src/context/usercontext';
 import { clientSideDomain } from "src/lib/constants";
+import EmailBanner from 'components/EmailBanner';
 
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
@@ -47,6 +48,7 @@ function MyApp({ Component, pageProps }) {
       <UserProvider>
         <SetUser></SetUser>
         <Component {...pageProps} />
+        <EmailBanner/>
       </UserProvider>
     </>
   )
@@ -58,7 +60,7 @@ function SetUser() {
   React.useEffect(() => {
     fetch(`${clientSideDomain}/user/me`, {
       method: 'GET',
-      
+
       headers: {
         'Content-Type': 'application/json'
       }
