@@ -62,6 +62,11 @@ const Header = (props) => {
                 </div>
                 <div className={styles.spaceholder}>
                     <div className={styles.rightButton}>
+                        <Link href='https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=header_button'>
+                            <a className={styles.appButton}>
+                                Use App
+                            </a>
+                        </Link>
                         {currentUser && currentUser.id
                             ? <Dropdown
                                 trigger={

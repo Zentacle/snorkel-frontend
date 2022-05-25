@@ -72,8 +72,19 @@
     transition: background-color 0.2s;
 }
 
-.profile:hover, .profile:focus {
+.profile:hover,
+.profile:focus {
     background-color: #cecece;
+}
+
+.appButton {
+    background-color: var(--primary-color);
+    padding: 8px 12px;
+    border-radius: 16px;
+    color: white;
+    margin-right: 8px;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 @media (max-width: 720px) {
