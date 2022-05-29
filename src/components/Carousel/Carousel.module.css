@@ -56,7 +56,7 @@
     }
 }
 
-@media (hover: none) {
+@media (hover: none), (max-width: 720px) {
     .carousel{
         overflow: scroll;
     }

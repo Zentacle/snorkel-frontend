@@ -6,7 +6,7 @@
     margin: 0 64px;
 }
 
-@media (hover: none) {
+@media (hover: none), (max-width: 720px) {
     .contentContainer {
         margin: auto
     }
