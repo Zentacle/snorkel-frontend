@@ -32,9 +32,13 @@
   flex-direction: column;
   justify-content: space-between;
   margin-right: 16px;
-  padding: 8px 8px 0 8px;
+  padding: 8px;
   width: 320px;
-  flex: 1 0 320px;
+  flex: 0 0 320px;
+}
+
+.partnerContainer:last-of-type {
+  flex: 0 0 240px;
 }
 
 .name {
@@ -47,4 +51,16 @@
 
 .profilePic {
   border-radius: 32px;
+}
+
+.messageButton {
+  margin-top: 8px;
+}
+
+.buddyProText {
+  margin: auto;
+  padding: 16px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
 }

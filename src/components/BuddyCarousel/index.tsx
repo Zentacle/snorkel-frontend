@@ -7,7 +7,7 @@ import { toaster } from 'evergreen-ui';
 import { useCurrentUser } from 'context/usercontext';
 import { rootDomain } from 'lib/constants';
 import * as ga from 'lib/ga';
-import PrimaryButton, { PrimaryLink } from 'components/PrimaryButton';
+import TertiaryButton, { TertiaryLink } from 'controls/TertiaryButton';
 import { sendEvent } from 'hooks/amplitude';
 import styles from './styles.module.css';
 
@@ -111,12 +111,14 @@ export default function BuddyCarousel(props: Props) {
               </div>
               <div className={styles.bio}>{partner.bio}</div>
               {state.user && state.user.id
-                ? <PrimaryButton
+                ? <TertiaryButton
+                  className={styles.messageButton}
                   onClick={() => onReachOutClick(partner)}
                 >
                   Message
-                </PrimaryButton>
-                : <PrimaryLink
+                </TertiaryButton>
+                : <TertiaryLink
+                  className={styles.messageButton}
                   onClick={() => {
                     ga.event({
                       action: "add_to_cart",
@@ -134,14 +136,15 @@ export default function BuddyCarousel(props: Props) {
                   href='/register'
                 >
                   Message
-                </PrimaryLink>
+                </TertiaryLink>
               }
             </div>
           ))
         }
         <div className={styles.partnerContainer}>
-          Want to get matched up with a dive buddy in your area?
-          <PrimaryLink
+          <span className={styles.buddyProText}>Want to get matched up with a dive buddy in your area?</span>
+          <TertiaryLink
+            className={styles.messageButton}
             onClick={() => {
               ga.event({
                 action: "add_to_cart",
@@ -159,7 +162,7 @@ export default function BuddyCarousel(props: Props) {
             href={'https://buy.stripe.com/00gcPhf2Octp3nOaEE'}
           >
             Get Zentacle Pro
-          </PrimaryLink>
+          </TertiaryLink>
         </div>
       </div>
     </div>
