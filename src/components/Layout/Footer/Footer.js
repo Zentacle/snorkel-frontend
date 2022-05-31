@@ -41,7 +41,7 @@ const Footer = () => {
             initialRating={5}
             readonly>
           </Rating></div>
-        <Link href="'https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=footer'">
+        <Link href="https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=footer">
           <a onClick={onClick}>
             <Image
               src="/app_store_badge.png"
