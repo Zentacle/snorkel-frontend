@@ -119,7 +119,7 @@ export async function getStaticProps(context) {
             'tides': tides,
             'nearbyBeaches': nearbyBeaches,
         }, // will be passed to the page component as props
-        revalidate: 60,
+        revalidate: 3600,
     }
 }
 
