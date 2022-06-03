@@ -184,7 +184,7 @@ const Home = (props) => {
             {props.area.description}
           </div>
           {props.area.map_image_url &&
-            <Link href="https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map">
+            <Link href="https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=https://www.zentacle.com/explore&$fallback_url=https://www.zentacle.com/explore">
               <a
                 onClick={ () => sendEvent('loc_map__click') }
                 className={styles.mapImageContainer}

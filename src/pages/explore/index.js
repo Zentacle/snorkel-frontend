@@ -22,7 +22,8 @@ const ExplorePage = () => {
       window.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 9,
         center: new google.maps.LatLng(mapCenter[0], mapCenter[1]),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        gestureHandling: greedy,
       });
       map.addListener("idle", () => {
         var center = window.map.getCenter()
