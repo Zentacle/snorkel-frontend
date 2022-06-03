@@ -1,6 +1,8 @@
 import React from 'react';
-import { rootDomain } from 'lib/constants';
 import { ReactPhotoCollage } from "react-photo-collage";
+
+import { rootDomain } from 'lib/constants';
+import { sendEvent } from 'hooks/amplitude';
 
 import styles from './styles.module.css';
 
@@ -38,7 +40,8 @@ const PhotoPreview = (props) => {
   }, [props.beach.id])
 
   return (
-    settings && settings.photos && settings.photos[0].source ? <div className={styles.photocontainer}>
+    settings && settings.photos && settings.photos[0].source
+    ? <div className={styles.photocontainer} onClick={() => sendEvent('click__photo_preview')}>
       <ReactPhotoCollage {...settings}></ReactPhotoCollage>
     </div> : <></>
   )
