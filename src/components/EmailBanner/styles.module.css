@@ -23,6 +23,8 @@
   -webkit-animation: slide-up 1s ease;
   -moz-animation: slide-up 1s ease;
   animation: slide-up 1s ease;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .title {
