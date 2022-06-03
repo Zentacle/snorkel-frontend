@@ -33,6 +33,7 @@ const Banner = (props: Props) => {
   const submitEmail = () => {
     sendEvent('bottom_banner_email');
     router.push('/register');
+    props.setIsShown(false);
   }
 
   const submitCancel = (type: string) => {
