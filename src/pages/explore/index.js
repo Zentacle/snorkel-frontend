@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react';
 import Layout from "components/Layout/Layout";
 import Carousel from 'components/Carousel/Carousel';
 import { rootDomain } from 'lib/constants';
-import SearchBar from 'components/SearchBar';
 import styles from './styles.module.css';
-import Link from 'next/link';
 import Head from 'next/head';
 
 const ExplorePage = () => {
@@ -23,7 +21,7 @@ const ExplorePage = () => {
         zoom: 9,
         center: new google.maps.LatLng(mapCenter[0], mapCenter[1]),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        gestureHandling: greedy,
+        gestureHandling: 'greedy',
       });
       map.addListener("idle", () => {
         var center = window.map.getCenter()
