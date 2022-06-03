@@ -147,6 +147,10 @@
   border-color: #24a0ed;
 }
 
+.modalOpen {
+  overflow: hidden;
+}
+
 @-webkit-keyframes slide-up {
   0%{bottom:-320px}
   100%{bottom:0}

@@ -129,8 +129,18 @@ const EmailBannerContainer = () => {
 
     if (!Cookies.get('has_seen_banner') && !currentUser.id) {
       setTimeout(() => setIsShown(true), 30000);
+    } else {
+      sendEvent('bottom_banner_suppress');
     }
   }, [currentUser])
+
+  React.useEffect(() => {
+    if (isShown) {
+      document.body.classList.add(styles.modalOpen)
+    } else {
+      document.body.classList.remove(styles.modalOpen)
+    }
+  }, [isShown])
 
   return (
     <>
