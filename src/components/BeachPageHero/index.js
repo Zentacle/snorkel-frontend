@@ -17,6 +17,12 @@ const BeachPageHero = (props) => {
     toaster.danger(`Sorry, we don\'t have a map for this location yet!`)
   }
 
+  const onDirectionsClick = () => {
+    sendEvent('directions__click')
+    if (props.beach.entry_map) { return }
+    toaster.danger(`Sorry, we don\'t have directions for this location yet!`)
+  }
+
   const photoClick = () => {
     sendEvent('photos__click')
   }
@@ -70,11 +76,19 @@ const BeachPageHero = (props) => {
             <div className={styles.buttonlabel}>Entry Map</div>
           </div>
           <div className={styles.buttonouter}>
-            <Link href={props.beach.location_google || ''}>
-              <a className={styles.buttoncircle} onClick={() => sendEvent('directions__click')}>
-                <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
-              </a>
-            </Link>
+            {
+              props.beach.location_google ? (
+                <Link href={props.beach.location_google || ''}>
+                  <a className={styles.buttoncircle} onClick={onDirectionsClick}>
+                    <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
+                  </a>
+                </Link>
+              ) : (
+                <div className={styles.buttoncircle} onClick={onDirectionsClick}>
+                  <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
+                </div>
+              )
+            }
             <div className={styles.buttonlabel}>Directions</div>
           </div>
           <div className={styles.buttonouter}>
