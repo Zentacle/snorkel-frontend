@@ -184,7 +184,7 @@ const Home = (props) => {
             {props.area.description}
           </div>
           {props.area.map_image_url &&
-            <Link href="/explore">
+            <Link href="https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map">
               <a className={styles.mapImageContainer}>
                 <div className={styles.mapExpander}>
                   <svg width="16" height="16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
