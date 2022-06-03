@@ -37,7 +37,7 @@ const CreateAccount = () => {
         }).then(response => {
             response.json().then(data => {
                 if (response.ok) {
-                    if (data.auth_token) {
+                    if (data.data.auth_token) {
                         ga.event({
                             action: "sign_up",
                             params: {
