@@ -13,6 +13,7 @@ import {
     Trigger,
     Separator
 } from 'controls/Dropdown';
+import { sendEvent } from 'hooks/amplitude';
 import { rootDomain } from 'lib/constants';
 
 const Logo = ({ isShorediving = false }) => {
@@ -55,7 +56,10 @@ const Header = (props) => {
                 </div>
                 <div>
                     <Link href="/explore">
-                        <a className={styles.explore}>
+                        <a
+                            onClick={ () => sendEvent('explore_header__click') }
+                            className={styles.explore}
+                        >
                             Explore
                         </a>
                     </Link>
