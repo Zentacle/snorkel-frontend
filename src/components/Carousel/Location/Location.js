@@ -4,7 +4,8 @@ import Rating from "react-rating";
 import { EmptyStar, FullStar } from "components/StarRating";
 import Link from "next/link";
 import DifficultyTag from "components/DifficultyTag";
-const SlideLocation = ({ ...props }) => {
+
+const SlideLocation = (props) => {
     return (
         <div className={styles.slide} style={props.style}>
             <div className={styles.slidepic}>
@@ -46,7 +47,7 @@ const SlideLocation = ({ ...props }) => {
                 </div>
             </div>
             <Link href={props.info.url}>
-                <a className={styles.cardLink} style={props.style}></a>
+                <a onClick={props.onClick} className={styles.cardLink} style={props.style}></a>
             </Link>
         </div>
     )

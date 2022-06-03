@@ -5,6 +5,7 @@
       "components/*": ["src/components/*"],
       "hooks/*": ["src/hooks/*"],
       "pages/*": ["src/pages/*"],
+      "models/*": ["src/models/*"],
       "styles/*": ["src/styles/*"],
       "lib/*": ["src/lib/*"],
       "context/*": ["src/context/*"]

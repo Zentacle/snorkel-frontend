@@ -3,13 +3,20 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Location from './Location/Location';
 import { sendEvent } from 'hooks/amplitude';
+import { Beach } from 'models';
 
-const MyCarousel = (props) => {
+interface Props {
+  allowVertical: boolean;
+  data: Beach[];
+  onClick?: () => void;
+}
+
+const MyCarousel = (props: Props) => {
   const [data, setData] = React.useState(props.data);
   const [offset, setOffset] = React.useState(0);
-  const carousel = React.useRef(null);
+  const carousel = React.useRef<HTMLElement>(null);
 
-  const moveCarousel = (isForward) => () => {
+  const moveCarousel = (isForward: boolean) => () => {
     if (isForward) {
       sendEvent('click_carousel_forward')
     } else {
@@ -17,16 +24,18 @@ const MyCarousel = (props) => {
     }
     const direction = isForward ? -1 : 1;
     const cardWidth = 272;
-    const numCards = Math.floor(carousel.current.offsetWidth / cardWidth);
-    const newOffset = offset + ((cardWidth * numCards) * direction);
-    const scrollWidth = carousel.current.scrollWidth;
-    const maxScroll = (scrollWidth - (carousel.current.offsetWidth - 16) ) * -1;
-    if (newOffset < maxScroll) {
-      setOffset(maxScroll);
-    } else if (newOffset > 0) {
-      setOffset(0)
-    } else {
-      setOffset(newOffset);
+    if (carousel && carousel.current) {
+      const numCards = Math.floor(carousel.current.offsetWidth / cardWidth);
+      const newOffset = offset + ((cardWidth * numCards) * direction);
+      const scrollWidth = carousel.current.scrollWidth;
+      const maxScroll = (scrollWidth - (carousel.current.offsetWidth - 16) ) * -1;
+      if (newOffset < maxScroll) {
+        setOffset(maxScroll);
+      } else if (newOffset > 0) {
+        setOffset(0)
+      } else {
+        setOffset(newOffset);
+      }
     }
   }
 
@@ -37,6 +46,7 @@ const MyCarousel = (props) => {
       { data && <div className={`${styles.carousel} ${props.allowVertical && styles.allowVertical}`} ref={carousel}>
         { data.map(beach => (
             <Location
+              onClick={props.onClick}
               style={{'left': offset}}
               key={ beach.id }
               info={beach}

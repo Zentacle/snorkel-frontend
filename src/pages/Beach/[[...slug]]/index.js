@@ -275,7 +275,7 @@ const Beach = (props) => {
                                     key={beach.id}></ins>
                             </div>
                             <div className={styles.carouseltitle}>Other Locations Nearby</div>
-                            <Carousel data={nearbyBeaches} allowVertical />
+                            <Carousel onClick={() => sendEvent('click__nearby_beach')} data={nearbyBeaches} allowVertical />
                             {
                                 //<!-- below recommended -->
                             }
