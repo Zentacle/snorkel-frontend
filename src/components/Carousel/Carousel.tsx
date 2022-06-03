@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Location from './Location/Location';
 import { sendEvent } from 'hooks/amplitude';
-import { Beach } from 'models';
+import { Beach } from '@/src/models/Beach';
 
 interface Props {
   allowVertical: boolean;
@@ -14,7 +14,7 @@ interface Props {
 const MyCarousel = (props: Props) => {
   const [data, setData] = React.useState(props.data);
   const [offset, setOffset] = React.useState(0);
-  const carousel = React.useRef<HTMLElement>(null);
+  const carousel = React.useRef<HTMLDivElement>(null);
 
   const moveCarousel = (isForward: boolean) => () => {
     if (isForward) {
