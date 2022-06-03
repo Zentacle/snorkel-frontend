@@ -18,7 +18,6 @@ const CreateAccount = () => {
     const [password, setPassword] = React.useState('')
     const [firstName, setFirstName] = React.useState('')
     const [lastName, setLastName] = React.useState('')
-    const [username, setUsername] = React.useState('')
 
     const registerUser = () => {
         const body = {
@@ -26,7 +25,6 @@ const CreateAccount = () => {
             password,
             'first_name': firstName,
             'last_name': lastName,
-            username,
         }
         fetch(`${clientSideDomain}/user/register`, {
             method: 'POST',
@@ -78,7 +76,6 @@ const CreateAccount = () => {
                 <form onSubmit={e => { e.preventDefault(); }}>
                     <SignupInput value={firstName} onChange={setFirstName} id='first-name-input' type="First Name"></SignupInput>
                     <SignupInput value={lastName} onChange={setLastName} id='last-name-input' type="Last Name"></SignupInput>
-                    <SignupInput value={username} onChange={setUsername} id='username-input' type="Username"></SignupInput>
                     <SignupInput value={email} onChange={setEmail} id='email-input' type="Email"></SignupInput>
                     <SignupInput value={password} onChange={setPassword} id='password-input' type="Password"></SignupInput>
                     <PrimaryButton onClick={registerUser}>Create Account</PrimaryButton>
