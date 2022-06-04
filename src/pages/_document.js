@@ -97,17 +97,17 @@ export default class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-              window._mNHandle = window._mNHandle || {};
-              window._mNHandle.queue = window._mNHandle.queue || [];
-              medianet_versionId = "3121199";
-            `
+                // load Branch
+                (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking qrCode".split(" "), 0);
+                // init Branch
+                branch.init('key_live_il4SQUbp9suCNVaUkoK4qebhrtiYm69b');
+              `
             }}
           />
           <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
             crossOrigin="anonymous"></script>
-          <script src="https://contextual.media.net/dmedianet.js?cid=8CUYE4HN4" async="async"></script>
         </Head>
         <body>
           <Main />
