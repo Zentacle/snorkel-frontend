@@ -54,6 +54,7 @@ export default function BuddyCarousel(props: Props) {
     sendEvent('buddy__message', {
       location: props.loc,
       buddy_id: partner.id,
+      logged_in: true,
     });
 
     ga.event({
@@ -120,6 +121,11 @@ export default function BuddyCarousel(props: Props) {
                 : <TertiaryLink
                   className={styles.messageButton}
                   onClick={() => {
+                    sendEvent('buddy__message', {
+                      location: props.loc,
+                      buddy_id: partner.id,
+                      logged_in: false,
+                    });
                     ga.event({
                       action: "add_to_cart",
                       params: {
@@ -146,6 +152,9 @@ export default function BuddyCarousel(props: Props) {
           <TertiaryLink
             className={styles.messageButton}
             onClick={() => {
+              sendEvent('pro__click', {
+                location: props.loc,
+              })
               ga.event({
                 action: "add_to_cart",
                 params: {
@@ -161,7 +170,7 @@ export default function BuddyCarousel(props: Props) {
             }}
             href={'https://buy.stripe.com/00gcPhf2Octp3nOaEE'}
           >
-            Get Zentacle Pro
+            Sign Up
           </TertiaryLink>
         </div>
       </div>

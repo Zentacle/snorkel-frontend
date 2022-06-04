@@ -24,6 +24,12 @@ export async function getStaticProps(context) {
     return data;
   }))
 
+  await fetch(`${rootDomain}/locality/country`).then(res =>
+    res.json()
+  ).then(data => {
+    props['areas'] = data.data
+  })
+
   if (!props.default) {
     return {
       notFound: true,
@@ -40,7 +46,6 @@ export async function getStaticProps(context) {
 const Home = (props) => {
   const [recs, setRecs] = React.useState(null);
   const [buddies, setBuddies] = React.useState([]);
-  const [areas, setAreas] = React.useState([]);
   const { state } = useCurrentUser();
 
   React.useEffect(() => {
@@ -68,15 +73,6 @@ const Home = (props) => {
       setRecs(data.data)
     })
   }, [state.user])
-
-  React.useEffect(() => {
-    let url = `${rootDomain}/locality/country`
-    fetch(url).then(res =>
-      res.json()
-    ).then(data => {
-      setAreas(data.data)
-    })
-  }, [props.area])
 
   React.useEffect(useGoogleOneTap('/', state.user), [state])
 
@@ -109,7 +105,7 @@ const Home = (props) => {
         </div>
         <div className={styles.contentContainer}>
           <div className={styles.locationContainer}>
-            {areas.slice(0, 7).map(area => (
+            {props.areas.slice(0, 7).map(area => (
               <Link key={area.short_name} href={area.url}>
                 <a className={styles.location}>
                   {area.name}
@@ -140,8 +136,8 @@ const Home = (props) => {
             <div className={styles.carouseltitle}>Conditions Reported Recently</div>
             <Carousel data={props.latest}></Carousel>
           </div>
-          {areas.length > 7 && <div className={styles.locationContainer}>
-            {areas.slice(7).map(area => (
+          {props.areas.length > 7 && <div className={styles.locationContainer}>
+            {props.areas.slice(7).map(area => (
               <Link key={area.short_name} href={area.url} prefetch={false}>
                 <a className={styles.location}>
                   {area.name}
