@@ -32,6 +32,12 @@
     text-decoration: underline;
 }
 
+.reviewsContainer.isCollapsed {
+    mask-image: linear-gradient(180deg,#000 95%,transparent);
+    max-height: 1440px;
+    overflow: hidden;
+}
+
 @-webkit-keyframes gradient-movement {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
