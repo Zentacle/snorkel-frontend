@@ -30,6 +30,7 @@
   margin-left: 16px;
   overflow: hidden;
   flex-grow: 1;
+  mask-image: linear-gradient(180deg,#000 60%,transparent);
 }
 
 .spotName {
