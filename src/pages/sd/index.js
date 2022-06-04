@@ -13,6 +13,12 @@ export async function getStaticProps(context) {
     return data;
   }))
 
+  await fetch(`${rootDomain}/locality/country`).then(res =>
+    res.json()
+  ).then(data => {
+    props['areas'] = data.data
+  })
+
   if (!props.default) {
     return {
       notFound: true,
