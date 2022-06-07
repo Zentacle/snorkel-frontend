@@ -139,6 +139,18 @@ const Home = (props) => {
     areaPatronKey = props.area.short_name
   }
 
+  let longitude = null;
+  let latitude = null;
+  props.default.map(beach => {
+    if (!latitude && beach.latitude) {
+      latitude = beach.latitude;
+      longitude = beach.longitude;
+    }
+  })
+  const exploreUrl = latitude && longitude
+    ? `https://www.zentacle.com/explore?latitude=${latitude}&longitude=${longitude}`
+    : `https://www.zentacle.com/explore`
+
   const hasPatron = isMaui || isBigIsland || isOahu;
 
   const title = `Top Snorkeling and Scuba Diving in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
@@ -184,7 +196,7 @@ const Home = (props) => {
             {props.area.description}
           </div>
           {props.area.map_image_url &&
-            <Link href="https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=https://www.zentacle.com/explore&$fallback_url=https://www.zentacle.com/explore">
+            <Link href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=${exploreUrl}`}>
               <a
                 onClick={ () => sendEvent('loc_map__click') }
                 className={styles.mapImageContainer}

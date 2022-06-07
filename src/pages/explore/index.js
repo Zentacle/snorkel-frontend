@@ -14,20 +14,30 @@ const ExplorePage = () => {
   const [mapCenter, setMapCenter] = useState([20.83674343601845, -156.4178040410507])
 
   useEffect(() => {
+    const { latitude, longitude } = router.query;
+    if (latitude && longitude) {
+      setMapCenter([latitude, longitude])
+    }
+  }, [router.query])
+
+  useEffect(() => {
     if (!router.isReady) { return; }
 
     const initializeMap = () => {
+      const { latitude, longitude } = router.query;
       window.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 9,
-        center: new google.maps.LatLng(mapCenter[0], mapCenter[1]),
+        center: new google.maps.LatLng(latitude, longitude),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         gestureHandling: 'greedy',
       });
-      map.addListener("idle", () => {
+      window.map.addListener("idle", () => {
         var center = window.map.getCenter()
-        setMapCenter([center.lat(), center.lng()])
+        if (center) {
+          setMapCenter([center.lat(), center.lng()])
+        }
       });
-      fetch(`${rootDomain}/spots/nearby?lat=${mapCenter[0]}&lng=${mapCenter[1]}`, {
+      fetch(`${rootDomain}/spots/nearby?lat=${latitude}&lng=${longitude}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -44,7 +54,7 @@ const ExplorePage = () => {
     }
     const script = document.createElement('script')
     script.src = 'https://maps.google.com/maps/api/js?key=AIzaSyAPbvPcOMVp6qdWP59cML7kmYd2ShEGu_Y'
-    script.onload = setTimeout(initializeMap, 1000)
+    script.onload = initializeMap
     script.async = true;
     document.querySelector('body').appendChild(script)
   }, [router.isReady])
@@ -81,7 +91,7 @@ const ExplorePage = () => {
       });
       infowindow.close()
       marker.addListener('mouseover', function () {
-        infowindow.open(map, this);
+        infowindow.open(window.map, this);
       });
 
       // assuming you also want to hide the infowindow when user mouses-out
