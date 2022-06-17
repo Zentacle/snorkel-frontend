@@ -5,9 +5,16 @@
       {
         "appID": "1611242564.org.reactjs.native.example.Zentacle",
         "paths": [
-          "/Beach/*/*"
+          "/Beach/*/*",
+          "Beach/*/*",
+          "/"
         ]
       }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "1611242564.org.reactjs.native.example.Zentacle"
     ]
   }
 }
