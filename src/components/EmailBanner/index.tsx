@@ -44,6 +44,12 @@ const Banner = (props: Props) => {
     props.setIsShown(false);
   }
 
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const browserImg = isSafari
+    ? '/safari.png'
+    : '/chrome.png'
+
+
   return (
     <div className={styles.overlay}>
       <MaxWidth>
@@ -100,7 +106,7 @@ const Banner = (props: Props) => {
           <div className={styles.app}>
             <div className={styles.icon}>
               <Image
-                src='/safari.png'
+                src={browserImg}
                 height='44'
                 width='44'
               />
