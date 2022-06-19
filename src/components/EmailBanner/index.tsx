@@ -134,7 +134,7 @@ const EmailBannerContainer = () => {
       return;
     }
 
-    if (!Cookies.get('has_seen_banner') && !currentUser.id) {
+    if (!currentUser.id) {
       setTimeout(() => setIsShown(true), 5000);
     } else {
       sendEvent('bottom_banner_suppress');
