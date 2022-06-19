@@ -27,11 +27,15 @@ const Banner = (props: Props) => {
   React.useEffect(useGoogleButton('/', {}), [])
 
   const clickApp = () => {
-    sendEvent('bottom_banner_app');
+    sendEvent('bottom_banner_success', {
+      'type': 'app',
+    });
   }
 
   const submitEmail = () => {
-    sendEvent('bottom_banner_email');
+    sendEvent('bottom_banner_success', {
+      'type': 'email',
+    });
     router.push('/register');
     props.setIsShown(false);
   }
@@ -64,6 +68,9 @@ const Banner = (props: Props) => {
             <div
               id="google_button"
               className={styles.googleButton}
+              onMouseDown={ () => sendEvent('bottom_banner_success', {
+                'type': 'google',
+              })}
             >
             </div>
             <div className={styles.orSpacer}>
