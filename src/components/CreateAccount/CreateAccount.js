@@ -12,6 +12,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { clientSideDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import useGoogleButton from 'hooks/useGoogleButton';
+import useAppleButton from 'hooks/useAppleButton';
 import * as ga from 'lib/ga';
 
 const CreateAccount = () => {
@@ -61,6 +62,7 @@ const CreateAccount = () => {
     }, [])
 
     useEffect(useGoogleButton('/', {}), [])
+    useEffect(useAppleButton('/', {}), [])
 
     return (
         <Layout>

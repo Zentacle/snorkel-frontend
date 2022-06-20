@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from "next/head";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -11,6 +10,7 @@ import MaxWidth from 'components/MaxWidth';
 import PrimaryButton from 'components/PrimaryButton';
 import { useCurrentUser } from 'context/usercontext';
 import useGoogleButton from 'hooks/useGoogleButton';
+import useAppleButton from 'hooks/useAppleButton';
 
 interface Props {
   isShown: boolean;
@@ -26,6 +26,7 @@ const Banner = (props: Props) => {
   }, [])
 
   React.useEffect(useGoogleButton('/', {}), [])
+  React.useEffect(useAppleButton('/', {}), [])
 
   const clickApp = () => {
     sendEvent('bottom_banner_success', {
