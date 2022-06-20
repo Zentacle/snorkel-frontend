@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:type" content="website" key="og:type" />
         <meta name="twitter:card" content="summary_large_image" key="twitter-card"></meta>
         <meta name="apple-itunes-app" content="app-id=1611242564" key="apple-app"></meta>
-        <meta name="appleid-signin-client-id" content="org.reactjs.native.example.Zentacle-ios" />
+        <meta name="appleid-signin-client-id" content="org.reactjs.native.example.Zentacle" />
         <meta name="appleid-signin-scope" content="name email" />
         <meta name="appleid-signin-redirect-uri" content="https://www.zentacle.com/api/user/apple_register" />
         <meta name="appleid-signin-state" content="password" />
