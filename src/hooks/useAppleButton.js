@@ -9,7 +9,10 @@ const useGoogleButton = (redirectURL, user) => () => {
         if (response.authorization) {
             fetch(`${clientSideDomain}/user/apple_register`, {
                 method: 'POST',
-                body: JSON.stringify(response.authorization),
+                body: JSON.stringify({
+                    ...response.authorization,
+                    audience: 'org.reactjs.native.example.Zentacle-ios',
+                }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
