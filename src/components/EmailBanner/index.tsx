@@ -80,17 +80,17 @@ const Banner = (props: Props) => {
                 'type': 'google',
               })}
             >
-              <div
-                id="appleid-signin"
-                data-color="black"
-                data-border="true"
-                data-type="sign in"
-                className={styles.appleButton}
-                onMouseDown={() => sendEvent('bottom_banner_success', {
-                  'type': 'apple',
-                })}
-              />
             </div>
+            <div
+              id="appleid-signin"
+              data-color="black"
+              data-border="true"
+              data-type="sign in"
+              className={styles.appleButton}
+              onMouseDown={() => sendEvent('bottom_banner_success', {
+                'type': 'apple',
+              })}
+            />
             <div className={styles.orSpacer}>
               OR
             </div>
