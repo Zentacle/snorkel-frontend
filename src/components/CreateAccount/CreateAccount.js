@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Head from "next/head";
 import Link from "next/link";
 import { toaster } from 'evergreen-ui';
 
@@ -63,6 +64,13 @@ const CreateAccount = () => {
 
     return (
         <Layout>
+            <Head>
+                <meta name="appleid-signin-client-id" content="org.reactjs.native.example.Zentacle-ios"/>
+                <meta name="appleid-signin-scope" content="name email"/>
+                <meta name="appleid-signin-redirect-uri" content="https://www.zentacle.com/api/user/apple_register"/>
+                <meta name="appleid-signin-state" content="password"/>
+                <meta name="appleid-signin-use-popup" content="true"/>
+            </Head>
             <BackgroundCard>
                 <h1 className={styles.titlecontainer}>
                     Create your Free account
@@ -72,6 +80,13 @@ const CreateAccount = () => {
                     className={styles.googleButton}
                 >
                 </div>
+                <div
+                    id="appleid-signin"
+                    data-color="black"
+                    data-border="true"
+                    data-type="sign in"
+                    className={styles.appleButton}
+                />
                 <div className={styles.orSeparator}>OR</div>
                 <form onSubmit={e => { e.preventDefault(); }}>
                     <SignupInput value={firstName} onChange={setFirstName} id='first-name-input' type="First Name"></SignupInput>

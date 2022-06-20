@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from "next/head";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -56,6 +57,13 @@ const Banner = (props: Props) => {
 
   return (
     <div className={styles.overlay}>
+      <Head>
+        <meta name="appleid-signin-client-id" content="org.reactjs.native.example.Zentacle-ios" />
+        <meta name="appleid-signin-scope" content="name email" />
+        <meta name="appleid-signin-redirect-uri" content="https://www.zentacle.com/api/user/apple_register" />
+        <meta name="appleid-signin-state" content="password" />
+        <meta name="appleid-signin-use-popup" content="true" />
+      </Head>
       <MaxWidth>
         <div className={styles.container}>
           <div className={styles.title}>
@@ -68,10 +76,20 @@ const Banner = (props: Props) => {
             <div
               id="google_button"
               className={styles.googleButton}
-              onMouseDown={ () => sendEvent('bottom_banner_success', {
+              onMouseDown={() => sendEvent('bottom_banner_success', {
                 'type': 'google',
               })}
             >
+              <div
+                id="appleid-signin"
+                data-color="black"
+                data-border="true"
+                data-type="sign in"
+                className={styles.appleButton}
+                onMouseDown={() => sendEvent('bottom_banner_success', {
+                  'type': 'apple',
+                })}
+              />
             </div>
             <div className={styles.orSpacer}>
               OR
