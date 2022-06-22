@@ -46,7 +46,7 @@ const Banner = (props: Props) => {
     sendEvent('bottom_banner_skip', {
       type,
     });
-    Cookies.set('has_seen_banner', 'true', { expires: 7 });
+    Cookies.set('last_closed_banner', `${Date.now()}`, { expires: 7 });
     props.setIsShown(false);
   }
 
@@ -153,7 +153,13 @@ const EmailBannerContainer = () => {
       return;
     }
 
-    if (!currentUser.id) {
+    const last_closed_banner = parseInt(Cookies.get('last_closed_banner') || '0');
+    const yesterday = Date.now() - (1000*60*60*24)
+    const did_close_in_last_day = last_closed_banner && last_closed_banner > yesterday
+    const never_seen_banner = !last_closed_banner;
+    const isLoggedOut = !currentUser.id;
+    const shouldShowBanner = (never_seen_banner || !did_close_in_last_day) && isLoggedOut;
+    if (shouldShowBanner) {
       setTimeout(() => setIsShown(true), 5000);
     } else {
       sendEvent('bottom_banner_suppress');
