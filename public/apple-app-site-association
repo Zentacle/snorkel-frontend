@@ -8,9 +8,7 @@
           "1611242564.org.reactjs.native.example.Zentacle"
         ],
         "paths": [
-          "/Beach/*/*",
-          "Beach/*/*",
-          "/"
+          "/*"
         ]
       }
     ]
