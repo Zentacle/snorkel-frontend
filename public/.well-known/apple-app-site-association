@@ -9,6 +9,12 @@
         ],
         "paths": [
           "/*"
+        ],
+        "components": [
+          {
+            "/": "/",
+            "comment": "Frontpage"
+          }
         ]
       }
     ]
