@@ -25,6 +25,14 @@ module.exports = {
         "key": "Content-Type",
         "value": "application/json"
       }]
-    }]
+    },
+    {
+      "source": "/apple-app-site-association",
+      "headers": [{
+        "key": "Content-Type",
+        "value": "application/json"
+      }]
+    }
+    ]
   }
 }
