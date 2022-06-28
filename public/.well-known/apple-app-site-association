@@ -3,9 +3,9 @@
     "apps": [],
     "details": [
       {
-        "appID": "1611242564.org.reactjs.native.example.Zentacle",
+        "appID": "9C8EQ3DGNG.org.reactjs.native.example.Zentacle",
         "appIDs": [
-          "1611242564.org.reactjs.native.example.Zentacle"
+          "9C8EQ3DGNG.org.reactjs.native.example.Zentacle"
         ],
         "paths": [
           "/*"
@@ -25,7 +25,7 @@
   },
   "webcredentials": {
     "apps": [
-      "1611242564.org.reactjs.native.example.Zentacle"
+      "9C8EQ3DGNG.org.reactjs.native.example.Zentacle"
     ]
   }
 }
