@@ -121,7 +121,7 @@ const Banner = (props: Props) => {
               </div>
             </div>
             <div className={`${styles.button} ${styles.active}`}>
-              <Link href={`https://zentacle.app.link?$deeplink_path=${path}&utm_medium=xpromo&utm_source=xpromo&campaign=app_selector`}>
+              <Link href={`https://zentacle.app.link${path}?$deeplink_path=${path}&utm_medium=xpromo&utm_source=xpromo&campaign=app_selector`}>
                 <a onClick={clickApp}>
                   Open
                 </a>
