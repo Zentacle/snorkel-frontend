@@ -19,7 +19,13 @@ interface Props {
 
 const Banner = (props: Props) => {
   const [email, setEmail] = React.useState('');
+  const [path, setPath] = React.useState('');
+
   const router = useRouter();
+
+  React.useEffect(() => {
+    setPath(window.location.pathname)
+  }, [])
 
   React.useEffect(() => {
     sendEvent('bottom_banner_view');
@@ -115,7 +121,7 @@ const Banner = (props: Props) => {
               </div>
             </div>
             <div className={`${styles.button} ${styles.active}`}>
-              <Link href='https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=app_selector'>
+              <Link href={`https://zentacle.app.link?$deeplink_path=${path}&utm_medium=xpromo&utm_source=xpromo&campaign=app_selector`}>
                 <a onClick={clickApp}>
                   Open
                 </a>
@@ -154,7 +160,7 @@ const EmailBannerContainer = () => {
     }
 
     const last_closed_banner = parseInt(Cookies.get('last_closed_banner') || '0');
-    const yesterday = Date.now() - (1000*60*60*24)
+    const yesterday = Date.now() - (1000 * 60 * 60 * 24)
     const did_close_in_last_day = last_closed_banner && last_closed_banner > yesterday
     const never_seen_banner = !last_closed_banner;
     const isLoggedOut = !currentUser.id;

@@ -45,8 +45,13 @@ const Email = styled.div`
 const Header = (props) => {
     let { state } = useCurrentUser();
     const currentUser = state.user;
+    const [path, setPath] = React.useState('');
 
     const isShorediving = props.isShorediving;
+
+    React.useEffect(() => {
+        setPath(window.location.pathname)
+    }, [])
 
     return (
         <div className={styles.header}>
@@ -66,7 +71,7 @@ const Header = (props) => {
                 </div>
                 <div className={styles.spaceholder}>
                     <div className={styles.rightButton}>
-                        <Link href='https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=header_button'>
+                        <Link href={`https://zentacle.app.link?$deeplink_path=${path}&utm_medium=xpromo&utm_source=xpromo&campaign=header_button`}>
                             <a className={styles.appButton}>
                                 Use App
                             </a>
