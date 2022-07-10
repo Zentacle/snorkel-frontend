@@ -1,0 +1,23 @@
+.filterContainer {
+  display: flex;
+}
+
+.filterPill {
+  border-radius: 16px;
+  border: 1px solid #cecece;
+  color: rgb(51, 51, 51);
+  cursor: pointer;
+  display: flex;
+  font-size: 13px;
+  padding: 8px 16px;
+  margin-right: 8px;
+}
+
+.filterPillText {
+  margin-right: 4px;
+}
+
+.filterPill:hover {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}

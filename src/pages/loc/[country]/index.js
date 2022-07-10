@@ -12,6 +12,7 @@ import { useCurrentUser } from 'context/usercontext';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 import Breadcrumbs from 'components/Breadcrumbs';
 import BuddyCarousel from 'components/BuddyCarousel';
+import FilterBar from 'components/FilterBar';
 import Patron from 'components/Patron';
 import { sendEvent } from 'hooks/amplitude';
 
@@ -241,6 +242,7 @@ const Home = (props) => {
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="5284949215"></ins>
           </div>
+          <FilterBar/>
           <div>
             {
               props.default.map((location, index) => {
