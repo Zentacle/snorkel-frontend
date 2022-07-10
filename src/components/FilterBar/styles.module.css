@@ -1,5 +1,6 @@
 .filterContainer {
   display: flex;
+  padding: 0 16px;
 }
 
 .filterPill {
