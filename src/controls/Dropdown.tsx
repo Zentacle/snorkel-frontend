@@ -51,12 +51,13 @@ export const Trigger = styled.button`
 interface Props {
   align?: Align;
   children: React.ReactNode;
+  onOpenChange?: (open: boolean) => void;
   trigger: React.ReactNode;
 }
 
 export function Dropdown(props: Props) {
   return (
-    <DropdownMenu.Root>
+    <DropdownMenu.Root onOpenChange={props.onOpenChange}>
       <DropdownMenu.Trigger asChild>{props.trigger}</DropdownMenu.Trigger>
       <Content sideOffset={8} align={props.align}>{props.children}</Content>
     </DropdownMenu.Root>
