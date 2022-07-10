@@ -77,6 +77,7 @@ export const getPillLocalityLevel = {
 
 const Home = (props) => {
   const [buddies, setBuddies] = React.useState([]);
+  const [spots, setSpots] = React.useState(props.default)
   const { state } = useCurrentUser();
   const currentUser = state.user;
 
@@ -157,6 +158,15 @@ const Home = (props) => {
   const title = `Top Snorkeling and Scuba Diving in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
   const description = `Top scuba dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
 
+  const fetchLocations = (params) => {
+    const queryString = Object.keys(params).filter(key => params[key]).map(key => key + '=' + params[key]).join('&');
+    fetch(
+      `${rootDomain}/spots/get?${queryString}`
+    )
+      .then(res => res.json().catch(err => console.log(res)))
+      .then(data => setSpots(data.data))
+  }
+
   return (
     <Layout>
       <Head>
@@ -199,7 +209,7 @@ const Home = (props) => {
           {props.area.map_image_url &&
             <Link href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=${exploreUrl}`}>
               <a
-                onClick={ () => sendEvent('loc_map__click') }
+                onClick={() => sendEvent('loc_map__click')}
                 className={styles.mapImageContainer}
               >
                 <div className={styles.mapExpander}>
@@ -242,10 +252,20 @@ const Home = (props) => {
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="5284949215"></ins>
           </div>
-          <FilterBar/>
+          <FilterBar onSelect={(difficulty) => fetchLocations(
+            {
+              limit: 100,
+              sort: 'top',
+              country: props.country,
+              area_one: props.area_one,
+              area_two: props.area_two,
+              locality: props.locality,
+              difficulty: difficulty,
+            }
+          )} />
           <div>
             {
-              props.default.map((location, index) => {
+              spots.map((location, index) => {
                 return (index + 1) % 7 == 0
                   ? (
                     <>

@@ -38,18 +38,22 @@ const FilterPill = (props: FilterPillProps) => (
   </Dropdown>
 )
 
-const FilterBar = () => {
+interface Props {
+  onSelect: (difficulty: string) => void;
+}
+
+const FilterBar = (props: Props) => {
   return (
     <div className={styles.filterContainer}>
       <FilterPill text='Difficulty'>
         <>
-          <Item>
+          <Item onClick={() => props.onSelect('beginner')}>
             Beginner
           </Item>
-          <Item>
+          <Item onClick={() => props.onSelect('intermediate')}>
             Intermediate
           </Item>
-          <Item>
+          <Item onClick={() => props.onSelect('advanced')}>
             Advanced
           </Item>
         </>
