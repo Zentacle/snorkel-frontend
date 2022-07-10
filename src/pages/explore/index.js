@@ -24,7 +24,7 @@ const ExplorePage = () => {
     if (!router.isReady) { return; }
 
     const initializeMap = () => {
-      const { latitude, longitude } = router.query;
+      const [latitude, longitude] = mapCenter;
       window.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 9,
         center: new google.maps.LatLng(latitude, longitude),
@@ -90,6 +90,9 @@ const ExplorePage = () => {
         position: center,
       });
       infowindow.close()
+      marker.addListener('click', function () {
+        router.push(location.url);
+      })
       marker.addListener('mouseover', function () {
         infowindow.open(window.map, this);
       });
