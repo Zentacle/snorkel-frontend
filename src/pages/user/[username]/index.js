@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 
 import Layout from "components/Layout/Layout";
 import { rootDomain } from 'lib/constants';
@@ -39,10 +40,10 @@ const DiveLog = (props) => {
   useEffect(() => {
     const currentUser = state.user;
     if (currentUser) {
-        sendEvent('page_view', {
-            type: 'user',
-            profile_username: user.username,
-        });
+      sendEvent('page_view', {
+        type: 'user',
+        profile_username: user.username,
+      });
     }
   }, [state, user.username])
 
@@ -65,6 +66,20 @@ const DiveLog = (props) => {
         <meta property="og:url" content={`https://www.zentacle.com/user/${user.username}`} key="og-url" />
         <link rel="canonical" href={`https://www.zentacle.com/user/${user.username}`} />
       </Head>
+      <div className={styles.heroImg}>
+        <Image
+          src={`/default_hero_background.png`}
+          layout="fill"
+          objectFit='cover'
+        />
+      </div>
+      <div className={styles.profilePic}>
+        <Image
+          src={user.profile_pic}
+          layout="fill"
+          objectFit='cover'
+        />
+      </div>
       <MaxWidth>
         <div className={styles.container}>
           <h1 className={styles.title}>{user.display_name}&apos;s Dive Log</h1>
