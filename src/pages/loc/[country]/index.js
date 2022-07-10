@@ -101,6 +101,10 @@ const Home = (props) => {
   }, [state, props.loc, props.area.short_name])
 
   React.useEffect(() => {
+    setSpots(props.default)
+  }, [props.default])
+
+  React.useEffect(() => {
     fetch(`${rootDomain}/buddy/get?${props.loc}=${props.area.id}`).then(res =>
       res.json()
     ).then(data => {
@@ -189,7 +193,7 @@ const Home = (props) => {
           {props.areas.length
             ? <div className={`${styles.locationContainer} ${locStyles.locationContainer}`}>
               {props.areas.map(area => (
-                <Link key={area.short_name} href={area.url}>
+                <Link key={`${area.short_name}-${area.id}`} href={area.url}>
                   <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
                     {area.name}
                   </a>
