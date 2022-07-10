@@ -1,4 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { Align } from "@radix-ui/popper";
 import styled from 'styled-components';
 
 const Content = styled(DropdownMenu.Content)`
@@ -48,6 +49,7 @@ export const Trigger = styled.button`
 `;
 
 interface Props {
+  align?: Align;
   children: React.ReactNode;
   trigger: React.ReactNode;
 }
@@ -56,7 +58,7 @@ export function Dropdown(props: Props) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>{props.trigger}</DropdownMenu.Trigger>
-      <Content sideOffset={8}>{props.children}</Content>
+      <Content sideOffset={8} align={props.align}>{props.children}</Content>
     </DropdownMenu.Root>
   );
 }

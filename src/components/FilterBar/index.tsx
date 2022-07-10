@@ -28,6 +28,7 @@ const FilterBar = () => {
   return (
     <div className={styles.filterContainer}>
       <Dropdown
+        align="start"
         trigger={
           <Trigger>
             <FilterPill text='Difficulty' />
@@ -45,6 +46,7 @@ const FilterBar = () => {
         </Item>
       </Dropdown>
       <Dropdown
+        align="start"
         trigger={
           <Trigger>
             <FilterPill text='Activity' />
@@ -62,6 +64,7 @@ const FilterBar = () => {
         </Item>
       </Dropdown>
       <Dropdown
+        align="start"
         trigger={
           <Trigger>
             <FilterPill text='Entry' />
