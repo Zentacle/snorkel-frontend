@@ -8,21 +8,29 @@ import {
 } from 'controls/Dropdown';
 import { sendEvent } from 'hooks/amplitude';
 
+interface FilterPillProps {
+  text: string;
+}
+
+const FilterPill = (props: FilterPillProps) => (
+  <div
+    className={styles.filterPill}
+    onClick={() => sendEvent(`click__filter_${props.text.toLowerCase()}`)}
+  >
+    <span className={styles.filterPillText}>
+      {props.text}
+    </span>
+    <Image src="/down_caret.png" height={16} width={16} />
+  </div>
+)
+
 const FilterBar = () => {
   return (
     <div className={styles.filterContainer}>
       <Dropdown
         trigger={
           <Trigger>
-            <div
-              className={styles.filterPill}
-              onClick={() => sendEvent('filter_difficulty')}
-            >
-              <span className={styles.filterPillText}>
-                Difficulty
-              </span>
-              <Image src="/down_caret.png" height={16} width={16} />
-            </div>
+            <FilterPill text='Difficulty' />
           </Trigger>
         }
       >
@@ -39,15 +47,7 @@ const FilterBar = () => {
       <Dropdown
         trigger={
           <Trigger>
-            <div
-              className={styles.filterPill}
-              onClick={() => sendEvent('filter_activity')}
-            >
-              <span className={styles.filterPillText}>
-                Activity
-              </span>
-              <Image src="/down_caret.png" height={16} width={16} />
-            </div>
+            <FilterPill text='Activity' />
           </Trigger>
         }
       >
@@ -64,15 +64,7 @@ const FilterBar = () => {
       <Dropdown
         trigger={
           <Trigger>
-            <div
-              className={styles.filterPill}
-              onClick={() => sendEvent('filter_entry')}
-            >
-              <span className={styles.filterPillText}>
-                Entry
-              </span>
-              <Image src="/down_caret.png" height={16} width={16} />
-            </div>
+            <FilterPill text='Entry' />
           </Trigger>
         }
       >
