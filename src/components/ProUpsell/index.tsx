@@ -12,7 +12,7 @@ export default function ProUpsell() {
           <Image src={'/default_hero_background.png'} layout='fill' objectFit='cover' />
         </div>
         <div className={styles.content}>
-          <div className={styles.headline}>Your first week’s on us</div>
+          <div className={styles.headline}>Your first week&apos;s on us</div>
           <div className={styles.subtitle}>Get 1 week free, then only $5/month.</div>
           <div className={styles.headerRow}>
             <div className={styles.headerItem}>Features</div>
@@ -42,7 +42,7 @@ export default function ProUpsell() {
             </div>
           </div>
           <PrimaryLink href='https://buy.stripe.com/00gcPhf2Octp3nOaEE'>Start trial</PrimaryLink>
-          <div className={styles.disclaimer}>Cancel anytime. We'll send you a reminder one day before your trial ends</div>
+          <div className={styles.disclaimer}>Cancel anytime. We&apos;ll send you a reminder one day before your trial ends</div>
         </div>
       </div>
     </div>
