@@ -270,7 +270,7 @@ const Home = (props) => {
           <div>
             {
               spots.map((location, index) => {
-                return (index + 1) % 7 == 0
+                return (index + 1) % 7 == 3
                   ? (
                     <>
                       <LocationCard key={location.id} info={location} index={index} />
