@@ -218,7 +218,7 @@ const Beach = (props) => {
                 />}
             </Head>
             <MaxWidth>
-                <div className={styles.ad} key={beach.id}>
+                <div className={`${styles.ad} ${styles.desktopOnly}`} key={beach.id}>
                     <ins className="adsbygoogle"
                         style={{
                             display: 'block',

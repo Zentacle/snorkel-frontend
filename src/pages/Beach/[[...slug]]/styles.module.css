@@ -30,6 +30,10 @@
     display: block;
   }
 
+  .desktopOnly {
+    display: none;
+  }
+
   .innerContainer {
     border-right: none;
   }
