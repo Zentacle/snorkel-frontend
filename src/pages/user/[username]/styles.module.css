@@ -40,6 +40,7 @@
   border-radius: 100%;
   border: 4px solid white;
   overflow: hidden;
+  background-color: #0CD4EB;
 }
 
 @media (max-width: 720px) {

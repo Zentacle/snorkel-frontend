@@ -75,7 +75,7 @@ const DiveLog = (props) => {
       </div>
       <div className={styles.profilePic}>
         <Image
-          src={user.profile_pic}
+          src={user.profile_pic || '/default_profile.png'}
           layout="fill"
           objectFit='cover'
         />
