@@ -256,7 +256,7 @@ const Home = (props) => {
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="5284949215"></ins>
           </div>
-          <FilterBar onSelect={(difficulty) => fetchLocations(
+          <FilterBar onSelect={(difficulty, access) => fetchLocations(
             {
               limit: 100,
               sort: 'top',
@@ -265,6 +265,7 @@ const Home = (props) => {
               area_two: props.area_two,
               locality: props.locality,
               difficulty: difficulty,
+              access: access,
             }
           )} />
           <div>

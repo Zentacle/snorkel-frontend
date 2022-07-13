@@ -1,5 +1,6 @@
 import styles from './styles.module.css';
 import Image from 'next/image';
+import React from 'react';
 
 import {
   Dropdown,
@@ -11,6 +12,7 @@ import { sendEvent } from 'hooks/amplitude';
 interface FilterPillProps {
   children: React.ReactNode;
   text: string;
+  selected?: boolean;
 }
 
 const FilterPill = (props: FilterPillProps) => (
@@ -19,7 +21,7 @@ const FilterPill = (props: FilterPillProps) => (
     trigger={
       <Trigger>
         <div
-          className={styles.filterPill}
+          className={`${styles.filterPill} ${props.selected ? styles.selected : ''}`}
         >
           <span className={styles.filterPillText}>
             {props.text}
@@ -39,21 +41,28 @@ const FilterPill = (props: FilterPillProps) => (
 )
 
 interface Props {
-  onSelect: (difficulty: string) => void;
+  onSelect: (difficulty?: string, access?: string) => void;
 }
 
 const FilterBar = (props: Props) => {
+  const [difficulty, setDifficulty] = React.useState<string | undefined>(undefined);
+  const [access, setAccess] = React.useState<string | undefined>(undefined);
+
+  React.useEffect(() => {
+    props.onSelect(difficulty, access)
+  }, [difficulty, access])
+
   return (
     <div className={styles.filterContainer}>
-      <FilterPill text='Difficulty'>
+      <FilterPill text='Difficulty' selected={!!difficulty}>
         <>
-          <Item onClick={() => props.onSelect('beginner')}>
+          <Item onClick={() => setDifficulty('beginner')}>
             Beginner
           </Item>
-          <Item onClick={() => props.onSelect('intermediate')}>
+          <Item onClick={() => setDifficulty('intermediate')}>
             Intermediate
           </Item>
-          <Item onClick={() => props.onSelect('advanced')}>
+          <Item onClick={() => setDifficulty('advanced')}>
             Advanced
           </Item>
         </>
@@ -71,12 +80,12 @@ const FilterBar = (props: Props) => {
           </Item>
         </>
       </FilterPill>
-      <FilterPill text='Entry'>
+      <FilterPill text='Entry' selected={!!access}>
         <>
-          <Item>
+          <Item onClick={() => setAccess('shore')}>
             Shore
           </Item>
-          <Item>
+          <Item onClick={() => setAccess('boat')}>
             Boat
           </Item>
         </>
