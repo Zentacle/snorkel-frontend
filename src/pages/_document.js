@@ -52,6 +52,7 @@ export default class MyDocument extends Document {
                     }
                   });
                   gtag('config', 'AW-997844434');
+                  gtag('config', 'UA-203123601-1');
                 `,
             }}
             key="ga-setup"
