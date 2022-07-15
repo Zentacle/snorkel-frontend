@@ -273,8 +273,8 @@ const Home = (props) => {
               spots.map((location, index) => {
                 return (index + 1) % 7 == 3
                   ? (
-                    <>
-                      <LocationCard key={location.id} info={location} index={index} />
+                    <React.Fragment key={location.id}>
+                      <LocationCard info={location} index={index} />
                       {
                         //<!-- region listing -->
                       }
@@ -294,7 +294,7 @@ const Home = (props) => {
                           data-ad-client="ca-pub-7099980041278313"
                           data-ad-slot="4223983131"></ins>
                       </div>
-                    </>
+                    </React.Fragment>
                   )
                   : (
                     <LocationCard key={location.id} info={location} index={index} />
