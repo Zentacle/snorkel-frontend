@@ -1,8 +1,16 @@
 import Link from 'next/link';
 import SearchBar from 'components/SearchBar';
 import styles from './styles.module.css';
+import Location from 'models/Location';
 
-const Breadcrumbs = ({ country, area_one, area_two, locality }) => {
+interface Props {
+    country?: Location;
+    area_one?: Location;
+    area_two?: Location;
+    locality?: Location;
+}
+
+const Breadcrumbs = ({ country, area_one, area_two, locality }: Props) => {
     return (
         <div className={styles.locBreadcrumbContainer}>
             <div itemScope={true} itemType="http://schema.org/BreadcrumbList">
