@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Location from './Location/Location';
 import { sendEvent } from 'hooks/amplitude';
-import { Beach } from '@/src/models/Beach';
+import Beach from '@/src/models/Beach';
 
 interface Props {
   allowVertical: boolean;

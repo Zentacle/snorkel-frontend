@@ -41,57 +41,60 @@ const FilterPill = (props: FilterPillProps) => (
 )
 
 interface Props {
-  onSelect: (difficulty?: string, access?: string) => void;
+  access?: string;
+  activity?: string;
+  difficulty?: string;
+  setAccess: (access: string) => void;
+  setActivity: (activity: string) => void;
+  setDifficulty: (difficulty: string) => void;
 }
 
-const FilterBar = (props: Props) => {
-  const [difficulty, setDifficulty] = React.useState<string | undefined>(undefined);
-  const [access, setAccess] = React.useState<string | undefined>(undefined);
-
-  React.useEffect(() => {
-    props.onSelect(difficulty, access)
-  }, [difficulty, access])
-
-  return (
-    <div className={styles.filterContainer}>
-      <FilterPill text='Difficulty' selected={!!difficulty}>
-        <>
-          <Item onClick={() => setDifficulty('beginner')}>
-            Beginner
-          </Item>
-          <Item onClick={() => setDifficulty('intermediate')}>
-            Intermediate
-          </Item>
-          <Item onClick={() => setDifficulty('advanced')}>
-            Advanced
-          </Item>
-        </>
-      </FilterPill>
-      <FilterPill text='Activity'>
-        <>
-          <Item>
-            Snorkel
-          </Item>
-          <Item>
-            Scuba
-          </Item>
-          <Item>
-            Freedive
-          </Item>
-        </>
-      </FilterPill>
-      <FilterPill text='Entry' selected={!!access}>
-        <>
-          <Item onClick={() => setAccess('shore')}>
-            Shore
-          </Item>
-          <Item onClick={() => setAccess('boat')}>
-            Boat
-          </Item>
-        </>
-      </FilterPill>
-    </div >
-  )
-}
+const FilterBar = ({
+  access,
+  activity,
+  difficulty,
+  setAccess,
+  setActivity,
+  setDifficulty,
+}: Props) => (
+  <div className={styles.filterContainer}>
+    <FilterPill text='Difficulty' selected={!!difficulty}>
+      <>
+        <Item onClick={() => setDifficulty('beginner')}>
+          Beginner
+        </Item>
+        <Item onClick={() => setDifficulty('intermediate')}>
+          Intermediate
+        </Item>
+        <Item onClick={() => setDifficulty('advanced')}>
+          Advanced
+        </Item>
+      </>
+    </FilterPill>
+    <FilterPill text='Activity' selected={!!activity}>
+      <>
+        <Item onClick={() => setActivity('snorkel')}>
+          Snorkel
+        </Item>
+        <Item onClick={() => setActivity('scuba')}>
+          Scuba
+        </Item>
+        <Item onClick={() => setActivity('freedive')}>
+          Freedive
+        </Item>
+      </>
+    </FilterPill>
+    <FilterPill text='Entry' selected={!!access}>
+      <>
+        <Item onClick={() => setAccess('shore')}>
+          Shore
+        </Item>
+        <Item onClick={() => setAccess('boat')}>
+          Boat
+        </Item>
+      </>
+    </FilterPill>
+  </div >
+)
 
 export default FilterBar;

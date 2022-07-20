@@ -5,6 +5,8 @@ import Image from 'next/image';
 
 import styles from "components/Home/Home.module.css"
 import locStyles from './styles.module.css';
+import Beach from 'models/Beach';
+import Location from 'models/Location';
 import Layout from 'components/Layout/Layout';
 import LocationCard from 'components/LocationCard';
 import { rootDomain } from "src/lib/constants";
@@ -15,34 +17,37 @@ import BuddyCarousel from 'components/BuddyCarousel';
 import FilterBar from 'components/FilterBar';
 import Patron from 'components/Patron';
 import { sendEvent } from 'hooks/amplitude';
+import Expander from 'icons/Expander';
+import hasPatron from 'lib/hasPatron';
 
-export async function getStaticProps(context) {
-  const country = context.params.country;
-  const props = {};
-  let res;
+// TODO - fix type of context
+export async function getStaticProps(context: any) {
+  const country_short_name: string = context.params.country;
+  const props: Partial<Props> = {};
+
+  // TODO - fix res type
+  let res: any;
   res = await fetch(
-    `${rootDomain}/spots/get?sort=top&country=${country}&limit=100`
+    `${rootDomain}/spots/get?sort=top&country=${country_short_name}&limit=100`
   )
-  const data = await res.json().catch(err => console.log(res))
+  const data = await res.json().catch((err: any) => console.log(err))
   props['default'] = data.data || null;
   if (data.area) {
     props['area'] = data.area;
   }
 
   if (!props.default) {
+    // return 404
     return {
       notFound: true,
     }
   }
 
-  props['loc'] = 'country'
-  props['country'] = country
+  props.loc = 'country'
+  props.country = country_short_name
 
   const localityType = getPillLocalityLevel[props.loc];
-  let url = `${rootDomain}/locality/${localityType}`
-  if (props.country) {
-    url += `?country=${props.country}`
-  }
+  let url = `${rootDomain}/locality/${localityType}?country=${props.country}`
   props['areas'] = await fetch(url).then(res =>
     res.json()
   ).then(data => {
@@ -59,7 +64,7 @@ export async function getStaticPaths() {
   const res = await fetch(`${rootDomain}/locality/country`)
   const data = await res.json()
   return {
-    paths: data.data.map(loc => ({
+    paths: data.data.map((loc: Location) => ({
       params: {
         country: loc.short_name,
       }
@@ -68,16 +73,31 @@ export async function getStaticPaths() {
   }
 }
 
-export const getPillLocalityLevel = {
+export const getPillLocalityLevel: { [key: string]: string } = {
   'country': 'area_one',
   'area_one': 'area_two',
   'area_two': 'locality',
   'locality': 'locality',
 }
 
-const Home = (props) => {
+interface Props {
+  default: Beach[];
+  loc: string;
+  area: Location;
+  areas: Location[];
+  country?: string;
+  area_one?: string;
+  area_two?: string;
+  locality?: string;
+}
+
+const Home = (props: Props) => {
   const [buddies, setBuddies] = React.useState([]);
   const [spots, setSpots] = React.useState(props.default)
+  const [access, setAccess] = React.useState<string | undefined>(undefined)
+  const [activity, setActivity] = React.useState<string | undefined>(undefined)
+  const [difficulty, setDifficulty] = React.useState<string | undefined>(undefined)
+
   const { state } = useCurrentUser();
   const currentUser = state.user;
 
@@ -85,7 +105,7 @@ const Home = (props) => {
     var ads = document.getElementsByClassName("adsbygoogle").length;
     for (var i = 0; i < ads; i++) {
       try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
       } catch (e) { }
     }
   }, [props.area]);
@@ -114,40 +134,18 @@ const Home = (props) => {
 
   React.useEffect(useGoogleOneTap(props.area.url, state.user), [state])
 
-  const isBigIsland = (
-    props.area.short_name == 'big-island'
-    || (
-      props.area_two
-      && props.area_two.short_name == 'big-island'
-    )
-  )
-
-  const isMaui = (
-    props.area.short_name == 'maui'
-    || (
-      props.area_two
-      && props.area_two.short_name == 'maui'
-    )
-  )
-
-  const isOahu = (
-    props.area.short_name == 'oahu'
-    || (
-      props.area_two
-      && props.area_two.short_name == 'oahu'
-    )
-  )
-
   let areaPatronKey = null;
   if (props.loc === 'locality') {
-    areaPatronKey = props.area_two.short_name;
+    if (props.area_two) {
+      areaPatronKey = props.area_two;
+    }
   } else if (props.loc === 'area_two') {
     areaPatronKey = props.area.short_name
   }
 
-  let longitude = null;
-  let latitude = null;
-  props.default.map(beach => {
+  let longitude: number | undefined;
+  let latitude: number | undefined;
+  props.default.map((beach: Beach) => {
     if (!latitude && beach.latitude) {
       latitude = beach.latitude;
       longitude = beach.longitude;
@@ -157,12 +155,10 @@ const Home = (props) => {
     ? `https://www.zentacle.com/explore?latitude=${latitude}&longitude=${longitude}`
     : `https://www.zentacle.com/explore`
 
-  const hasPatron = isMaui || isBigIsland || isOahu;
-
   const title = `Top Snorkeling and Scuba Diving in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
   const description = `Top scuba dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`
 
-  const fetchLocations = (params) => {
+  const fetchLocations = (params: { [key: string]: string | undefined }) => {
     const queryString = Object.keys(params).filter(key => params[key]).map(key => key + '=' + params[key]).join('&');
     fetch(
       `${rootDomain}/spots/get?${queryString}`
@@ -170,6 +166,26 @@ const Home = (props) => {
       .then(res => res.json().catch(err => console.log(res)))
       .then(data => setSpots(data.data))
   }
+
+  React.useEffect(() => {
+    fetchLocations({
+      limit: '100',
+      sort: 'top',
+      country: props.country,
+      area_one: props.area_one,
+      area_two: props.area_two,
+      locality: props.locality,
+      difficulty: difficulty,
+      access: access,
+    })
+  }, [
+    difficulty,
+    access,
+    props.country,
+    props.area_one,
+    props.area_two,
+    props.locality,
+  ])
 
   return (
     <Layout>
@@ -217,9 +233,7 @@ const Home = (props) => {
                 className={styles.mapImageContainer}
               >
                 <div className={styles.mapExpander}>
-                  <svg width="16" height="16" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M64 4C64 2.93913 63.5786 1.92172 62.8284 1.17157C62.0783 0.421428 61.0609 0 60 0H40C38.9391 0 37.9217 0.421428 37.1716 1.17157C36.4214 1.92172 36 2.93913 36 4C36 5.06087 36.4214 6.07828 37.1716 6.82843C37.9217 7.57857 38.9391 8 40 8H50.28L37.16 21.16C36.7851 21.5319 36.4875 21.9743 36.2844 22.4617C36.0814 22.9491 35.9768 23.472 35.9768 24C35.9768 24.528 36.0814 25.0509 36.2844 25.5383C36.4875 26.0257 36.7851 26.4681 37.16 26.84C37.5319 27.2149 37.9743 27.5125 38.4617 27.7156C38.9491 27.9186 39.472 28.0232 40 28.0232C40.528 28.0232 41.0509 27.9186 41.5383 27.7156C42.0257 27.5125 42.4681 27.2149 42.84 26.84L56 13.68V24C56 25.0609 56.4214 26.0783 57.1716 26.8284C57.9217 27.5786 58.9391 28 60 28C61.0609 28 62.0783 27.5786 62.8284 26.8284C63.5786 26.0783 64 25.0609 64 24V4ZM26.84 37.16C26.4681 36.7851 26.0257 36.4875 25.5383 36.2844C25.0509 36.0814 24.528 35.9768 24 35.9768C23.472 35.9768 22.9491 36.0814 22.4617 36.2844C21.9743 36.4875 21.5319 36.7851 21.16 37.16L8 50.28V40C8 38.9391 7.57857 37.9217 6.82843 37.1716C6.07828 36.4214 5.06087 36 4 36C2.93913 36 1.92172 36.4214 1.17157 37.1716C0.421428 37.9217 0 38.9391 0 40V60C0 61.0609 0.421428 62.0783 1.17157 62.8284C1.92172 63.5786 2.93913 64 4 64H24C25.0609 64 26.0783 63.5786 26.8284 62.8284C27.5786 62.0783 28 61.0609 28 60C28 58.9391 27.5786 57.9217 26.8284 57.1716C26.0783 56.4214 25.0609 56 24 56H13.68L26.84 42.84C27.2149 42.4681 27.5125 42.0257 27.7156 41.5383C27.9186 41.0509 28.0232 40.528 28.0232 40C28.0232 39.472 27.9186 38.9491 27.7156 38.4617C27.5125 37.9743 27.2149 37.5319 26.84 37.16V37.16Z" fill="black" />
-                  </svg>
+                  <Expander />
                 </div>
                 <Image
                   src={props.area.map_image_url}
@@ -241,9 +255,9 @@ const Home = (props) => {
               : <></>
           }
           {
-            hasPatron && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
+            hasPatron(props.area, props.area_two) && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
           }
-          <div className={styles.homeAd} key={props.area}>
+          <div className={styles.homeAd}>
             <ins className="adsbygoogle"
               style={{
                 display: 'block',
@@ -256,18 +270,14 @@ const Home = (props) => {
               data-ad-client="ca-pub-7099980041278313"
               data-ad-slot="5284949215"></ins>
           </div>
-          <FilterBar onSelect={(difficulty, access) => fetchLocations(
-            {
-              limit: 100,
-              sort: 'top',
-              country: props.country,
-              area_one: props.area_one,
-              area_two: props.area_two,
-              locality: props.locality,
-              difficulty: difficulty,
-              access: access,
-            }
-          )} />
+          <FilterBar
+            access={access}
+            activity={activity}
+            difficulty={difficulty}
+            setAccess={(access: string) => setAccess(access)}
+            setActivity={(activity: string) => setActivity(activity)}
+            setDifficulty={(difficulty: string) => setDifficulty(difficulty)}
+          />
           <div>
             {
               spots.map((location, index) => {
