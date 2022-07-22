@@ -30,14 +30,12 @@ export async function getStaticProps(context) {
     beach_data = await beach_data.then(res => {
         if (res.status == 404) {
             return {
-                props: {
-                    errorCode: 404,
-                }
+                errorCode: 404,
             }
         }
         return res.json()
     });
-    if (!beach_data || beach_data.props.errorCode) {
+    if (!beach_data || (beach_data.errorCode)) {
         return {
             notFound: true,
         }
