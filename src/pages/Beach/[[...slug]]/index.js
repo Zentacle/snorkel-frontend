@@ -37,7 +37,7 @@ export async function getStaticProps(context) {
         }
         return res.json()
     });
-    if (!beach_data) {
+    if (!beach_data || beach_data.props.errorCode) {
         return {
             notFound: true,
         }
