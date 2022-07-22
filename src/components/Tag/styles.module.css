@@ -2,7 +2,7 @@
     border-radius: 8px;
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
-    display: inline;
+    display: inline-block;
     margin-right: 4px;
     padding: 4px 8px;
 }
