@@ -1,0 +1,11 @@
+.container {
+  background-color: #F0E7CA;
+  text-align: center;
+  min-height: 40vh;
+  padding: 64px;
+}
+
+.container H1 {
+  font-size: 32px;
+  font-weight: var(--text-weight-bold)
+}
