@@ -98,6 +98,7 @@ export default function BuddyCarousel(props: Props) {
                   src={partner.profile_pic || 'https://snorkel.s3.amazonaws.com/default/default_hero_background.png'}
                   width="64"
                   height="64"
+                  objectFit='cover'
                 />
                 <div className={styles.nameLockup}>
                   <Link
