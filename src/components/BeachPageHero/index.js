@@ -19,7 +19,7 @@ const BeachPageHero = (props) => {
 
   const onDirectionsClick = () => {
     sendEvent('directions__click')
-    if (props.beach.entry_map) { return }
+    if (props.beach.location_google) { return }
     toaster.danger(`Sorry, we don\'t have directions for this location yet!`)
   }
 
