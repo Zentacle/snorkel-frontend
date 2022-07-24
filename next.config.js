@@ -15,6 +15,7 @@ module.exports = {
       'www.mauidreamsdiveco.com',
       'i.ytimg.com',
       'fh-sites.imgix.net',
+      'zentacle.com',
     ],
     minimumCacheTTL: 60,
   },
