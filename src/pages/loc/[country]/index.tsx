@@ -176,7 +176,7 @@ const Home = (props: Props) => {
       area_two: props.area_two,
       locality: props.locality,
       difficulty: difficulty,
-      access: access,
+      entry: access,
     })
   }, [
     difficulty,
