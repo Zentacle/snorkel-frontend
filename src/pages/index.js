@@ -57,6 +57,14 @@ const Home = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (state.user) {
+        sendEvent('page_view', {
+            type: 'home',
+        });
+    }
+  }, [state.user])
+
   React.useEffect(() => {
     fetch(`${rootDomain}/buddy/get`).then(res =>
       res.json()
