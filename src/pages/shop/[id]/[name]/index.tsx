@@ -18,29 +18,26 @@ interface Context {
 }
 
 export async function getStaticProps(context: Context) {
-  let shopData = fetch(`${rootDomain}/shop/get/${context.params.id}`);
+  let shopData: any = fetch(`${rootDomain}/shop/get/${context.params.id}`);
 
-  shopData = await shopData.then((res) => {
+  shopData = await shopData.then((res: any) => {
     if (res.status == 404) {
       return {
-        props: {
           errorCode: 404,
-        }
       }
     }
     return res.json();
   });
-  if (!shopData || (shopData.props && shopData.props.errorCode)) {
+
+  if (!shopData || (shopData.data && shopData.data.errorCode)) {
     return {
       notFound: true,
     }
   }
 
-
   return {
     props: {
       'shop': shopData.data,
-
     }, // will be passed to the page component as props
     revalidate: 3600,
   };
@@ -48,7 +45,6 @@ export async function getStaticProps(context: Context) {
 
 export async function getStaticPaths() {
   const res = await fetch(`${rootDomain}/shop/get`);
-
   const data = await res.json();
 
   return {
@@ -78,10 +74,6 @@ function ShopPage(props: any) {
   if (props.errorCode) {
     return (<Error statusCode={props.errorCode} />)
   }
-
-
-
-
 
   return (
     <Layout isShorediving={false}>
