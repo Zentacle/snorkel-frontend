@@ -57,7 +57,7 @@ const Home = (props) => {
     }
   }, [])
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (state.user) {
         sendEvent('page_view', {
             type: 'home',
