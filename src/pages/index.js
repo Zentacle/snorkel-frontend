@@ -10,6 +10,7 @@ import ProUpsell from 'components/ProUpsell';
 import { rootDomain } from "src/lib/constants";
 import BuddyCarousel from 'components/BuddyCarousel';
 import { useCurrentUser } from 'context/usercontext';
+import { sendEvent } from 'hooks/amplitude';
 import useGoogleOneTap from "hooks/useGoogleOneTap";
 
 export async function getStaticProps(context) {
