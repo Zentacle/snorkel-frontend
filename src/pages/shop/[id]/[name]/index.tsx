@@ -2,14 +2,12 @@ import Breadcrumbs from "components/Breadcrumbs";
 import Layout from "components/Layout/Layout";
 import MaxWidth from "components/MaxWidth";
 import { rootDomain } from "lib/constants";
-import { identity } from "lodash";
 import Shop from "models/Shop";
 import React, { useEffect } from "react";
 import styles from "../../../Beach/[[...slug]]/styles.module.css";
 import ShopPageHero from "components/ShopPage/ShopPageHero";
 import ShopDetails from "components/ShopPage/ShopDetails";
 import Carousel from "components/Carousel/Carousel";
-import Error from 'next/error';
 
 interface Context {
   params: {
@@ -52,7 +50,7 @@ export async function getStaticPaths() {
     paths: data.data.map((shop: Shop) => ({
       params: {
         id: `${shop.id}`,
-        name: `${shop.name}`,
+        name: `${shop.url_name}`,
       },
     })),
     fallback: "blocking",

@@ -50,7 +50,10 @@ const ShopPageHero = (props: any) => {
         }
     }
 
-    function getGoogleUrl(address: string): string{
+    function getGoogleUrl(address: string): string {
+        if (!address) {
+            return "";
+        }
         let newAddress = address.replace(/\s/g, "+")
         return newAddress.replace(",", "%2C")
     }
@@ -92,17 +95,21 @@ const ShopPageHero = (props: any) => {
                         <div className={styles.buttonlabel}>Contact</div>
                     </div>
                     <div className={styles.buttonouter}>
-                        <a className={styles.buttoncircle} href={props.shop.url}>
+                        <a className={styles.buttoncircle} href={props.shop.url} onClick={() => onWebsiteClick}>
                             <Image src='/iconoir_internet.png' alt="map" objectFit="contain" height="20" width="20"></Image>
                         </a>
                         <div className={styles.buttonlabel}>Website</div>
                     </div>
                     <div className={styles.buttonouter}>
-                        <Link href={`https://www.google.com/maps/search/?api=1&query=${getGoogleUrl(props.shop.full_address)}`}>
+                        {props.shop.full_address ? <Link href={`https://www.google.com/maps/search/?api=1&query=${getGoogleUrl(props.shop.full_address)}`}>
                             <a className={styles.buttoncircle} onClick={onDirectionsClick}>
                                 <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
                             </a>
-                        </Link>
+                        </Link> :
+                            <a className={styles.buttoncircle} onClick={onDirectionsClick}>
+                                <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
+                            </a>
+                        }
                         <div className={styles.buttonlabel}>Directions</div>
                     </div>
                 </div>

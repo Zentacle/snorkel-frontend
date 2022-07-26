@@ -17,4 +17,5 @@ export default interface Shop {
     country_name?: Location;
     full_address?: string;
     description?: string;
+    url_name?: string;
   }
