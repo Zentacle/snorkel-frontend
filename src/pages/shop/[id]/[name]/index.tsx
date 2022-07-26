@@ -70,7 +70,7 @@ function ShopPage(props: any) {
     }).then(data => {
       setNearbyBeaches(data.data)
     })
-  }, [shop])
+  }, [props.shop.latitude, props.shop.longitude])
 
   return (
     <Layout>

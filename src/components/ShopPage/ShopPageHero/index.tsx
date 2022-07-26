@@ -8,45 +8,51 @@ import { toaster } from 'evergreen-ui';
 import { EmptyStar, FullStar } from "components/StarRating";
 import { sendEvent } from 'hooks/amplitude';
 import styles from "../../BeachPageHero/styles.module.css";
+import { add } from 'lodash';
 
 const ShopPageHero = (props: any) => {
     const onWebsiteClick = () => {
-        // sendEvent('entry_map__click')
+        sendEvent('shop__website__click')
         if (props.shop.url) { return }
         toaster.danger(`Sorry, we don\'t have a website for this shop yet!`)
     }
 
     const onDirectionsClick = () => {
-        // sendEvent('directions__click')
-        if (props.shop.entry_map) { return }
+        sendEvent('shop__directions__click')
+        if (props.shop.full_address) { return }
         toaster.danger(`Sorry, we don\'t have directions for this shop yet!`)
     }
 
     const contactClick = () => {
-        // sendEvent('contact__click')
+        sendEvent('shop__contact__click')
         if (!props.shop.phone) { return }
         toaster.notify(props.shop.phone)
     }
 
     const cityState = (): string => {
-        if (props.shop.city && props.shop.state){
+        if (props.shop.city && props.shop.state) {
             return `${props.shop.city}, ${props.shop.state}`
         }
-        else if (props.shop.city && props.shop.country){
+        else if (props.shop.city && props.shop.country) {
             return `${props.shop.city}, ${props.shop.country_name}`
         }
-        else if (props.shop.city){
+        else if (props.shop.city) {
             return `${props.shop.city}`
         }
-        else if (props.shop.state){
+        else if (props.shop.state) {
             return props.shop.state
         }
-        else if (props.shop.country){
+        else if (props.shop.country) {
             return props.shop.country_name
         }
         else {
             return ""
         }
+    }
+
+    function getGoogleUrl(address: string): string{
+        let newAddress = address.replace(/\s/g, "+")
+        return newAddress.replace(",", "%2C")
     }
 
     return (
@@ -73,7 +79,7 @@ const ShopPageHero = (props: any) => {
                         </Rating>
                     </div>
                     <div>
-                    {cityState()}
+                        {cityState()}
                     </div>
                 </div>
             </div>
@@ -81,31 +87,22 @@ const ShopPageHero = (props: any) => {
                 <div className={styles.buttoncontainer}>
                     <div className={styles.buttonouter}>
                         <a className={styles.buttoncircle} onClick={() => contactClick()}>
-
                             <Image src='/contactphone.png' alt="phone" objectFit="contain" height='20' width="20"></Image>
                         </a>
                         <div className={styles.buttonlabel}>Contact</div>
                     </div>
                     <div className={styles.buttonouter}>
-                            <a className={styles.buttoncircle} href={props.shop.url}>
-                                <Image src='/iconoir_internet.png' alt="map" objectFit="contain" height="20" width="20"></Image>
-                            </a>
+                        <a className={styles.buttoncircle} href={props.shop.url}>
+                            <Image src='/iconoir_internet.png' alt="map" objectFit="contain" height="20" width="20"></Image>
+                        </a>
                         <div className={styles.buttonlabel}>Website</div>
                     </div>
                     <div className={styles.buttonouter}>
-                        {
-                            props.shop.location_google ? (
-                                <Link href={props.shop.location_google || ''}>
-                                    <a className={styles.buttoncircle} onClick={onDirectionsClick}>
-                                        <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
-                                    </a>
-                                </Link>
-                            ) : (
-                                <div className={styles.buttoncircle} onClick={onDirectionsClick}>
-                                    <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
-                                </div>
-                            )
-                        }
+                        <Link href={`https://www.google.com/maps/search/?api=1&query=${getGoogleUrl(props.shop.full_address)}`}>
+                            <a className={styles.buttoncircle} onClick={onDirectionsClick}>
+                                <Image src='/directionsicon.png' alt="directions" objectFit="contain" height='24' width="24"></Image>
+                            </a>
+                        </Link>
                         <div className={styles.buttonlabel}>Directions</div>
                     </div>
                 </div>
