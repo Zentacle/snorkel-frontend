@@ -10,6 +10,7 @@ import ShopPageHero from "components/ShopPage/ShopPageHero";
 import ShopDetails from "components/ShopPage/ShopDetails";
 import Carousel from "components/Carousel/Carousel";
 import Error from 'next/error';
+
 interface Context {
   params: {
     id: string;
@@ -29,7 +30,7 @@ export async function getStaticProps(context: Context) {
     return res.json();
   });
 
-  if (!shopData || (shopData.data && shopData.data.errorCode)) {
+  if (!shopData.data || (shopData.data && shopData.data.errorCode)) {
     return {
       notFound: true,
     }
@@ -51,7 +52,7 @@ export async function getStaticPaths() {
     paths: data.data.map((shop: Shop) => ({
       params: {
         id: `${shop.id}`,
-        name: `${shop.name ? shop.name : null}`,
+        name: `${shop.name}`,
       },
     })),
     fallback: "blocking",
@@ -76,7 +77,7 @@ function ShopPage(props: any) {
   }
 
   return (
-    <Layout isShorediving={false}>
+    <Layout>
       <MaxWidth>
         {/* <div className={`${styles.ad} ${styles.desktopOnly}`} key={shop.id}>
           <ins className="adsbygoogle"
@@ -96,9 +97,7 @@ function ShopPage(props: any) {
           area_two={shop.area_two}
           locality={shop.locality}
         />
-        <ShopPageHero shop={shop}>
-
-        </ShopPageHero>
+        <ShopPageHero shop={shop}/>
         <ShopDetails
           phone={shop.phone}
           address1={shop.address1}
@@ -108,8 +107,7 @@ function ShopPage(props: any) {
           city={shop.city}
           state={shop.state}
           country={shop.country_name}
-          full_address={shop.full_address}>
-        </ShopDetails>
+          full_address={shop.full_address}/>
         <div className={styles.carouseltitle}>Other Locations Nearby</div>
         <Carousel data={nearbyBeaches} allowVertical></Carousel>
       </MaxWidth>
