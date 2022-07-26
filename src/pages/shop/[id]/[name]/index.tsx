@@ -72,10 +72,6 @@ function ShopPage(props: any) {
     })
   }, [shop])
 
-  if (props.errorCode) {
-    return (<Error statusCode={props.errorCode} />)
-  }
-
   return (
     <Layout>
       <MaxWidth>
