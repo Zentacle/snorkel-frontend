@@ -1,0 +1,47 @@
+.container {
+    background-color: white;
+    padding: 16px;
+
+}
+
+.sectioncontainer {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    padding: 0 0 16px 0;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: var(--text-weight-bold);
+}
+
+.description {
+    font-size: 14px;
+    line-height: 20px;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+}
+.sectionTitle {
+    font-size: 14px;
+    font-weight: var(--text-weight-bold);
+}
+.icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shopinfo{
+
+    font-size: 14px;
+}
+
+.location{
+    display: flex;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    flex-direction: column;
+}
