@@ -18,27 +18,51 @@ export default function ProUpsell() {
             <div className={styles.headerItem}>Features</div>
             <div className={styles.headerSection}>
               <div className={styles.headerItem}>Free</div>
-              <div className={styles.headerItem}>Pro</div>
+              <div className={`${styles.headerItem} ${styles.proItem}`}>Pro</div>
             </div>
           </div>
           <div>
             <div className={styles.featureRow}>
               Log Dives Manually
+              <div className={styles.checkContainer}>
+                <div className={styles.check}>X</div>
+                <div className={styles.check}>X</div>
+              </div>
             </div>
             <div className={styles.featureRow}>
               Research 11k+ dive sites
+              <div className={styles.checkContainer}>
+                <div className={styles.check}>X</div>
+                <div className={styles.check}>X</div>
+              </div>
             </div>
             <div className={styles.featureRow}>
               Find nearby dive buddies
+              <div className={styles.checkContainer}>
+                <div className={styles.check}>X</div>
+                <div className={styles.check}>X</div>
+              </div>
             </div>
             <div className={styles.featureRow}>
               Unlimited photo uploads
+              <div className={styles.checkContainer}>
+                <div className={styles.check}>X</div>
+                <div className={styles.check}>X</div>
+              </div>
             </div>
             <div className={styles.featureRow}>
               Keep dive logs private
+              <div className={styles.checkContainer}>
+                <div className={styles.check}>X</div>
+                <div className={styles.check}>X</div>
+              </div>
             </div>
             <div className={styles.featureRow}>
               Download offline details
+              <div className={styles.checkContainer}>
+                <div className={styles.check}>X</div>
+                <div className={styles.check}>X</div>
+              </div>
             </div>
           </div>
           <PrimaryLink href='https://buy.stripe.com/00gcPhf2Octp3nOaEE'>Start trial</PrimaryLink>
