@@ -16,6 +16,7 @@ module.exports = {
       'i.ytimg.com',
       'fh-sites.imgix.net',
       'zentacle.com',
+      'diveshopmedia.padiww.com',
     ],
     minimumCacheTTL: 60,
   },

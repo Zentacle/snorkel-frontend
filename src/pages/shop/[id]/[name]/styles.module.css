@@ -1,0 +1,44 @@
+.container {
+  background-color: white;
+  display: flex;
+}
+
+.innerContainer {
+  border-right: 1px solid #eee;
+}
+
+.carouseltitle{
+  margin-left: 16px;
+  margin-top: 32px;
+  font-weight: var(--text-weight-bold);
+}
+
+.ad {
+  margin-left: 16px;
+}
+
+.adTop {
+  margin-top: 16px;
+}
+
+@media (max-width: 968px) {
+  .adTop {
+    display: none;
+  }
+
+  .container {
+    display: block;
+  }
+
+  .desktopOnly {
+    display: none;
+  }
+
+  .innerContainer {
+    border-right: none;
+  }
+
+  .carouselSpacer {
+    margin: 32px 0;
+  }
+}

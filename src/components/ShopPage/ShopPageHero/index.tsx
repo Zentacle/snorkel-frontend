@@ -62,7 +62,7 @@ const ShopPageHero = (props: any) => {
         <div className={styles.image}>
             <div className={styles.imageinner}>
                 {props.shop.logo_img && <Image
-                    src='/hero.jpg'
+                    src={props.shop.logo_img || '/hero.jpg'}
                     layout='fill'
                     objectFit='cover'
                     alt={props.shop.name}

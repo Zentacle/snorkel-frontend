@@ -1,13 +1,14 @@
+import React, { useEffect } from "react";
+
 import Breadcrumbs from "components/Breadcrumbs";
 import Layout from "components/Layout/Layout";
 import MaxWidth from "components/MaxWidth";
 import { rootDomain } from "lib/constants";
 import Shop from "models/Shop";
-import React, { useEffect } from "react";
-import styles from "../../../Beach/[[...slug]]/styles.module.css";
 import ShopPageHero from "components/ShopPage/ShopPageHero";
 import ShopDetails from "components/ShopPage/ShopDetails";
 import Carousel from "components/Carousel/Carousel";
+import styles from "./styles.module.css";
 
 interface Context {
   params: {
@@ -22,7 +23,7 @@ export async function getStaticProps(context: Context) {
   shopData = await shopData.then((res: any) => {
     if (res.status == 404) {
       return {
-          errorCode: 404,
+        errorCode: 404,
       }
     }
     return res.json();
@@ -91,19 +92,25 @@ function ShopPage(props: any) {
           area_two={shop.area_two}
           locality={shop.locality}
         />
-        <ShopPageHero shop={shop}/>
-        <ShopDetails
-          phone={shop.phone}
-          address1={shop.address1}
-          address2={shop.address2}
-          hours={shop.hours}
-          description={shop.description}
-          city={shop.city}
-          state={shop.state}
-          country={shop.country_name}
-          full_address={shop.full_address}/>
-        <div className={styles.carouseltitle}>Other Locations Nearby</div>
-        <Carousel data={nearbyBeaches} allowVertical></Carousel>
+        <ShopPageHero shop={shop} />
+        <div className={styles.container}>
+          <div className={styles.innerContainer}>
+            <ShopDetails
+              phone={shop.phone}
+              address1={shop.address1}
+              address2={shop.address2}
+              hours={shop.hours}
+              description={shop.description}
+              city={shop.city}
+              state={shop.state}
+              country={shop.country_name}
+              full_address={shop.full_address} />
+          </div>
+          <div className={styles.carouselSpacer}>
+            <div className={styles.carouseltitle}>Dive Locations Nearby</div>
+            <Carousel data={nearbyBeaches} allowVertical></Carousel>
+          </div>
+        </div>
       </MaxWidth>
     </Layout>
   );
