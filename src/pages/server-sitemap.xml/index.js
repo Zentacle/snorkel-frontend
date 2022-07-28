@@ -90,6 +90,18 @@ export const getServerSideProps = async (ctx) => {
     }
   ))
 
+  res = await fetch('https://zentacle.com/api/shop/get?limit=none')
+  data = await res.json()
+
+  const shop_fields = data.data.filter(location => location.url).map(location => (
+    {
+      loc: `https://www.zentacle.com/shop/${location.id}/${location.url_name}`,
+      lastmod: new Date().toISOString(),
+      changefreq: 'weekly',
+      priority: 0.5,
+    }
+  ))
+
   return getServerSideSitemap(ctx, [
     ...spot_fields,
     ...user_fields,
@@ -97,6 +109,7 @@ export const getServerSideProps = async (ctx) => {
     ...area_one_fields,
     ...area_two_fields,
     ...locality_fields,
+    ...shop_fields,
   ])
 }
 
