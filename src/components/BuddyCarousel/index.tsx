@@ -99,6 +99,7 @@ export default function BuddyCarousel(props: Props) {
                   width="64"
                   height="64"
                   objectFit='cover'
+                  alt={partner.display_name}
                 />
                 <div className={styles.nameLockup}>
                   <Link

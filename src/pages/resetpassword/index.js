@@ -52,7 +52,7 @@ const ResetPassword = () => {
     useEffect(() => {
       const { token } = router.query
       setToken(token)
-    }, [router.isReady])
+    }, [router.isReady, router.query])
 
     return (
         <Layout>
