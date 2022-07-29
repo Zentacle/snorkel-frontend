@@ -82,7 +82,7 @@ const BeachEditComponent = () => {
 
         React.useEffect(() => {
             if (f) {
-                //create the uuid and place in front of file name 
+                //create the uuid and place in front of file name
                 const rand = uuidv4();
                 let testid = rand + '_' + f.path
                 const myNewFile = new File([f], testid, { type: f.type });
@@ -98,7 +98,7 @@ const BeachEditComponent = () => {
                     setNewEntryMap(newFileRecord)
                 }
             }
-        }, [submittedFile, f]);
+        }, [submittedFile, f, type]);
 
         return (
             <div>

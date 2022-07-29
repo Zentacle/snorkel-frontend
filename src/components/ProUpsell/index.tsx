@@ -9,7 +9,7 @@ export default function ProUpsell() {
     <div className={styles.overlay}>
       <div className={styles.outerContainer}>
         <div className={styles.heroImg}>
-          <Image src={'/default_hero_background.png'} layout='fill' objectFit='cover' />
+          <Image src={'/default_hero_background.png'} layout='fill' objectFit='cover' alt="background"/>
         </div>
         <div className={styles.content}>
           <div className={styles.headline}>Your first week&apos;s on us</div>

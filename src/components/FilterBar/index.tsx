@@ -26,7 +26,7 @@ const FilterPill = (props: FilterPillProps) => (
           <span className={styles.filterPillText}>
             {props.text}
           </span>
-          <Image src="/down_caret.png" height={16} width={16} />
+          <Image src="/down_caret.png" height={16} width={16} alt="dropdown caret"/>
         </div>
       </Trigger>
     }

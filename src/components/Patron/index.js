@@ -8,6 +8,26 @@ import Image from 'next/image';
 
 const Patron = (props) => {
   React.useEffect(() => {
+    const sendViewEvent = (areaPatronKey) => {
+      const itemLabel = getPatron(areaPatronKey).name;
+      sendEvent('view_patron', {
+        name: itemLabel,
+        location: props.name,
+      })
+
+      ga.event({
+        action: "view_item",
+        params: {
+          eventLabel: itemLabel,
+          items: [{
+            item_list_name: props.name,
+            item_name: 'Patron Link',
+            item_brand: itemLabel,
+            item_category: 'Patron',
+          }]
+        }
+      })
+    }
     sendViewEvent(props.areaPatronKey);
 
     const initializeFareharbor = () => {
@@ -17,10 +37,10 @@ const Patron = (props) => {
       document.querySelector('body').appendChild(script)
     }
     setTimeout(initializeFareharbor, 1000)
-  }, [])
+  }, [props.areaPatronKey, props.name])
 
   const getPatron = (areaPatronKey) => {
-    if (areaPatronKey == 'big-island') {
+    if (areaPatronKey[1] == 'big-island') {
       return {
         'name': 'Kona Shore Divers',
         'url': 'https://www.konashoredivers.com',
@@ -33,7 +53,7 @@ const Patron = (props) => {
         'logo_img': 'https://i.ytimg.com/vi/1Y-jraRZI0Y/mqdefault.jpg',
       }
     }
-    else if (areaPatronKey == 'maui') {
+    else if (areaPatronKey[1] == 'maui') {
       return {
         'name': 'Maui Dreams',
         'url': 'https://www.mauidreamsdiveco.com',
@@ -46,7 +66,7 @@ const Patron = (props) => {
         'logo_img': 'https://www.mauidreamsdiveco.com/uploads/images/logo_mauidreamsdiveco.png',
       }
     }
-    else if (areaPatronKey == 'oahu') {
+    else if (areaPatronKey[1] == 'oahu') {
       return {
         'name': 'Waikiki Diving Center',
         'url': 'https://waikikidiving.com/',
@@ -59,7 +79,7 @@ const Patron = (props) => {
         'logo_img': 'https://fh-sites.imgix.net/sites/4671/2022/01/24213304/WaikikiDC_logo_Color.png?auto=compress%2Cformat&h=120&fit=max',
       }
     }
-    else if (areaPatronKey == 'ny' || areaPatronKey == 'nj') {
+    else if (areaPatronKey[0] == 'ny' || areaPatronKey[0] == 'nj') {
       return {
         'name': 'Scuba.com',
         'url': 'https://imp.i302817.net/c/3557996/847281/11629',
@@ -72,27 +92,6 @@ const Patron = (props) => {
         'logo_img': 'https://pbs.twimg.com/profile_images/1300575478919520256/8quWmyRH_400x400.jpg',
       }
     }
-  }
-
-  const sendViewEvent = (areaPatronKey) => {
-    const itemLabel = getPatron(areaPatronKey).name;
-    sendEvent('view_patron', {
-      name: itemLabel,
-      location: props.name,
-    })
-
-    ga.event({
-      action: "view_item",
-      params: {
-        eventLabel: itemLabel,
-        items: [{
-          item_list_name: props.name,
-          item_name: 'Patron Link',
-          item_brand: itemLabel,
-          item_category: 'Patron',
-        }]
-      }
-    })
   }
 
   const sendClickEvent = (areaPatronKey) => () => {
@@ -129,6 +128,7 @@ const Patron = (props) => {
             src={patron.logo_img}
             layout="fill"
             objectFit='contain'
+            alt={patron.name}
           />
         </div>
         <div className={styles.description}>

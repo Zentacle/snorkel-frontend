@@ -8,12 +8,12 @@ import Link from 'next/link';
 
 const Footer = () => {
   const onClick = () => {
-    ga.event({
+    (window as any).ga.event({
       action: "add_to_cart",
       params: {
         eventLabel: 'iOS App',
         items: [{
-          item_list_name: `Footer - ${window.location.url}`,
+          item_list_name: `Footer - ${window.location.pathname}`,
           item_name: 'iOS App',
           item_category: 'iOS App',
         }]
@@ -47,6 +47,7 @@ const Footer = () => {
               src="/app_store_badge.png"
               height="44"
               width="150"
+              alt="iOS app store"
             />
           </a>
         </Link>

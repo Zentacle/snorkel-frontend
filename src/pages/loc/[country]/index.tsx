@@ -137,10 +137,12 @@ const Home = (props: Props) => {
   let areaPatronKey = null;
   if (props.loc === 'locality') {
     if (props.area_two) {
-      areaPatronKey = props.area_two;
+      areaPatronKey = [props.area_one, props.area_two];
     }
   } else if (props.loc === 'area_two') {
-    areaPatronKey = props.area.short_name
+    areaPatronKey = [props.area_one, props.area.short_name]
+  } else if (props.loc === 'area_one') {
+    areaPatronKey = [props.area.short_name, null]
   }
 
   let longitude: number | undefined;

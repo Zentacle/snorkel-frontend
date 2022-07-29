@@ -71,6 +71,7 @@ const DiveLog = (props) => {
           src={`/default_hero_background.png`}
           layout="fill"
           objectFit='cover'
+          alt="background image"
         />
       </div>
       <div className={styles.profilePic}>
@@ -78,6 +79,7 @@ const DiveLog = (props) => {
           src={user.profile_pic || '/default_profile.png'}
           layout="fill"
           objectFit='cover'
+          alt={user.display_name}
         />
       </div>
       <MaxWidth>

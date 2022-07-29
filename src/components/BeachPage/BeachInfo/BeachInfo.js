@@ -13,13 +13,15 @@ const EntryMap = ({ src }) => (
             src={src}
             layout="fill"
             objectFit='cover'
-        ></Image>
+            alt="entry map"
+        />
         <div className={ styles.overlay }></div>
         <div className={ styles.viewButton }>View Entry Map</div>
     </a>
 )
 
 const BeachInfo = ({
+    area_one,
     area_two,
     area_two_id,
     description,
@@ -40,7 +42,7 @@ const BeachInfo = ({
     React.useEffect(() => {
         setTides([...tidesArray]);
     }, [])
-    
+
     return (
         <div className={styles.container}>
             <VizDepth date={ last_review_date } difficulty={difficulty} viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
@@ -83,7 +85,10 @@ const BeachInfo = ({
                 </div>
                 </> : <></> }
             {
-                (area_two_id == 5 || area_two_id == 2 || area_two_id == 1) && area_two && <Patron areaPatronKey={area_two.short_name} name={name}/>
+                (area_two_id == 5 || area_two_id == 2 || area_two_id == 1)
+                && area_two
+                && area_one
+                && <Patron areaPatronKey={[area_one.short_name, area_two.short_name]} name={name}/>
             }
         </div>
     )

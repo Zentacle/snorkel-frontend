@@ -22,7 +22,7 @@ export default function Custom500() {
     <div className={styles.container}>
         <h1>Hmm, something went wrong (500)</h1>
         <h6>Try going back to the home page</h6>
-        <Image src='/turtle.jpg' height={455} width={340} />
+        <Image src='/turtle.jpg' height={455} width={340} alt="Diver with turtle"/>
     </div>
   </Layout>
 }

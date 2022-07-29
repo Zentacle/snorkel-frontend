@@ -114,6 +114,7 @@ const Banner = (props: Props) => {
                   src='/logo.png'
                   height='44'
                   width='44'
+                  alt="zentacle"
                 />
               </div>
               <div className={styles.appName}>
@@ -134,6 +135,7 @@ const Banner = (props: Props) => {
                 src={browserImg}
                 height='44'
                 width='44'
+                alt="browser"
               />
             </div>
             <div className={styles.appName}>

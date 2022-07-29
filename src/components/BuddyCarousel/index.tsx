@@ -46,7 +46,7 @@ export default function BuddyCarousel(props: Props) {
         }
       })
     })
-  }, [])
+  }, [props.loc, props.buddies])
 
   const { state } = useCurrentUser();
 

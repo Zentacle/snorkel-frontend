@@ -79,7 +79,7 @@ function SetUser() {
       console.log(err)
     })
 
-  }, [])
+  }, [dispatch])
 
   return null;
 
