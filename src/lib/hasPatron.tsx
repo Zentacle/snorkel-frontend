@@ -12,5 +12,17 @@ const isOahu = (area: Location, area_two?: string) => (
   area.short_name == 'oahu' || area_two == 'oahu'
 )
 
-export default (area: Location, area_two?: string) =>
-  isMaui(area, area_two) || isBigIsland(area, area_two) || isOahu(area, area_two);
+const isNY = (area: Location, area_one?: string) => (
+  area.short_name == 'ny' || area_one == 'ny'
+)
+
+const isNJ = (area: Location, area_one?: string) => (
+  area.short_name == 'nj' || area_one == 'nj'
+)
+
+export default (area: Location, area_one?: string, area_two?: string) =>
+  isMaui(area, area_two)
+  || isBigIsland(area, area_two)
+  || isOahu(area, area_two)
+  || isNY(area, area_one)
+  || isNJ(area, area_one);

@@ -59,6 +59,19 @@ const Patron = (props) => {
         'logo_img': 'https://fh-sites.imgix.net/sites/4671/2022/01/24213304/WaikikiDC_logo_Color.png?auto=compress%2Cformat&h=120&fit=max',
       }
     }
+    else if (areaPatronKey == 'ny' || areaPatronKey == 'nj') {
+      return {
+        'name': 'Scuba.com',
+        'url': 'https://imp.i302817.net/c/3557996/847281/11629',
+        'fareharbor_url': 'https://imp.i302817.net/c/3557996/847281/11629',
+        'address1': '42 W 18th St',
+        'address2': '',
+        'city': 'New York',
+        'state': 'NY',
+        'zip_code': '10011',
+        'logo_img': 'https://pbs.twimg.com/profile_images/1300575478919520256/8quWmyRH_400x400.jpg',
+      }
+    }
   }
 
   const sendViewEvent = (areaPatronKey) => {

@@ -255,7 +255,8 @@ const Home = (props: Props) => {
               : <></>
           }
           {
-            hasPatron(props.area, props.area_two) && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
+            hasPatron(props.area, props.area_one, props.area_two)
+            && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
           }
           <div className={styles.homeAd}>
             <ins className="adsbygoogle"
