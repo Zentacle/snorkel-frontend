@@ -14,7 +14,7 @@
     display: grid;
     grid-gap: 3px;
     grid-column-gap: 5px;
-    grid-template-columns: 10% 10% 70%;
+    grid-template-columns: 3% 5% 85%;
     grid-template-rows: 18% 18% 18% 18% 18%;
     grid-template-areas: "one star1 bar1"
                         "two star2 bar2"
@@ -34,28 +34,10 @@
     font-size: 64px;
     line-height: 1em;
 }
-.starempty{
-    color: Grey;
-
-}
-
-.starfull{
-    color: gold;
-
-}
-
-.starfullsmall{
-    color: gold;
-}
-
-.staremptysmall{
-    color: transparent;
-}
 
 .progbar{
     height: 10px !important;
     margin-top: 7px;
-    width: 90%;
 }
 .rating{
     transform: scale(.65);
@@ -65,7 +47,6 @@
 .averagestars{
     width: 150px;
     text-align: center;
-
 }
 .one, .two, .three, .four, .five{
     padding-top: 2px;

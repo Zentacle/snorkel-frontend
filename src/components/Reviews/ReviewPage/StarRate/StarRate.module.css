@@ -1,19 +1,9 @@
 .ratingcontainer{
     display: flex;
     font-weight: var(--text-weight-bold);
-    
 }
 
 .ratingtitle{
     font-weight: var(--text-weight-bold);
     font-size: 18px;
-}
-
-.starempty{
-    color: #cecece;
-    
-}
-
-.starfull{
-    color: gold;
 }

@@ -1,7 +1,11 @@
 .starempty{
-  color: Grey;
+  fill: #cecece;
+  height: 24px;
+  width: 24px;
 }
 
 .starfull{
-  color: gold;
+  fill: gold;
+  height: 24px;
+  width: 24px;
 }

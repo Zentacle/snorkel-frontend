@@ -1,4 +1,3 @@
-import Star from "@material-ui/icons/Star";
 import React from "react";
 import Rating from "react-rating";
 import Link from 'next/link';
@@ -6,6 +5,7 @@ import { ReactPhotoCollage } from "react-photo-collage";
 
 import ProfilePic from "components/ProfilePic";
 import styles from "./IndividualReview.module.css";
+import { EmptyStar, FullStar } from 'components/StarRating';
 
 const PhotoGrid = ({ signedUrls }) => {
     const photosArray = signedUrls.map(photo => ({
@@ -58,8 +58,8 @@ const IndividualReview = ({ review, user }) => {
                         <div className={styles.centerlower}>
                             <Rating
                                 fractions={2}
-                                emptySymbol={(<Star className={styles.starempty}></Star>)}
-                                fullSymbol={(<Star className={styles.starfull}></Star>)}
+                                emptySymbol={(<EmptyStar />)}
+                                fullSymbol={(<FullStar />)}
                                 initialRating={review.rating}
                                 readonly
                             />
