@@ -1,23 +1,18 @@
 .container{
     background-color: white;
-    
+    margin: 0 16px;
 }
 
 .description{
     font-size: 14px;
-    margin: 0 24px 24px 24px;
+    margin-bottom: 24px;
     line-height: 20px;
     white-space: pre-line;
     overflow-wrap: break-word;
 }
 
-.helper {
-    font-size: 12px;
-    margin: 0px 24px;
-}
-
 .entryMap {
-    margin: 24px;
+    margin: 24px 0;
     border-radius: 8px;
     height: 240px;
     background-size: cover;
@@ -36,7 +31,6 @@
 
 .tideContainer {
     display: flex;
-    margin: 0px 24px;
     overflow: scroll;
 }
 
@@ -93,10 +87,6 @@
     bottom: 0;
     background: rgba(0,0,0,.2);
     height: 100%;
-}
-
-.outerSpacer {
-    margin: 0 24px
 }
 
 .tagHeader {

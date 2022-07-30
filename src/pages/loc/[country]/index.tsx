@@ -201,13 +201,11 @@ const Home = (props: Props) => {
       </Head>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
-          <div className={styles.marginContainer}>
-            <Breadcrumbs
-              country={props.area.country}
-              area_one={props.area.area_one}
-              area_two={props.area.area_two}
-            />
-          </div>
+          <Breadcrumbs
+            country={props.area.country}
+            area_one={props.area.area_one}
+            area_two={props.area.area_two}
+          />
           {props.areas.length
             ? <div className={`${styles.locationContainer} ${locStyles.locationContainer}`}>
               {props.areas.map(area => (
@@ -258,7 +256,7 @@ const Home = (props: Props) => {
           }
           {
             hasPatron(props.area, props.area_one, props.area_two)
-            && <Patron areaPatronKey={areaPatronKey} name={props.area.name} />
+            && <Patron areaPatronKey={areaPatronKey} className={locStyles.patronContainer} name={props.area.name} />
           }
           <div className={styles.homeAd}>
             <ins className="adsbygoogle"

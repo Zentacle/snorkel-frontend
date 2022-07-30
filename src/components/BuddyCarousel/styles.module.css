@@ -1,9 +1,5 @@
-.partnerOuterContainer {
-  padding: 0 16px;
-}
-
 .partnerInnerContainer {
-  padding: 8px 0px;
+  padding: 8px 16px;
   display: flex;
   overflow: scroll;
 }
@@ -11,6 +7,7 @@
 .partnerTitle {
   font-weight: bold;
   font-size: 22px;
+  padding: 0 16px;
 }
 
 .userLockup {

@@ -5,7 +5,6 @@ const Calendar = () => {
             <path d="M1.33325 6.66667H14.6666M5.33325 1.33333V4V1.33333ZM10.6666 1.33333V4V1.33333Z" stroke="black" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
     )
-
 }
 
 export default Calendar;

@@ -120,7 +120,7 @@ const Patron = (props) => {
   const patron = getPatron(props.areaPatronKey)
 
   return (
-    <div>
+    <div className={props.className}>
       <SectionTitle text='Recommended dive shops' />
       <div className={styles.patronCard}>
         <div className={styles.image}>

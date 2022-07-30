@@ -1,3 +1,7 @@
+.patronContainer {
+  margin: 0 16px;
+}
+
 @media (max-width: 720px) {
   .locationContainer {
     flex-wrap: nowrap;

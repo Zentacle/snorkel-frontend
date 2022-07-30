@@ -3,7 +3,7 @@ import React from "react";
 
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from 'icons/Search';
 import * as ga from 'lib/ga';
 import TypeAheadDropDown from 'components/TypeAheadDropdown';
 

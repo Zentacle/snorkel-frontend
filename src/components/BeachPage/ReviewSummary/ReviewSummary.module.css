@@ -1,9 +1,6 @@
 .outerdiv{
-    
     width: 100%;
     display: flex;
-    
-    
 }
 
 .totreviews{
@@ -11,7 +8,7 @@
 }
 
 .innergrid{
-    padding: 15px;
+    padding: 16px;
     padding-right: 0px;
     width: 70%;
     display: grid;
@@ -24,7 +21,6 @@
                         "three star3 bar3"
                         "four star4 bar4"
                         "five star5 bar5";
-    
 }
 
 .averagecontainer{
@@ -40,12 +36,12 @@
 }
 .starempty{
     color: Grey;
-    
+
 }
 
 .starfull{
     color: gold;
-   
+
 }
 
 .starfullsmall{
@@ -69,7 +65,7 @@
 .averagestars{
     width: 150px;
     text-align: center;
-    
+
 }
 .one, .two, .three, .four, .five{
     padding-top: 2px;

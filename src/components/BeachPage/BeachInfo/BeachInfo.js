@@ -8,15 +8,15 @@ import SectionTitle from 'components/SectionTitle';
 import Tag from 'components/Tag';
 
 const EntryMap = ({ src }) => (
-    <a className={ styles.entryMap } href={ src }>
+    <a className={styles.entryMap} href={src}>
         <Image
             src={src}
             layout="fill"
             objectFit='cover'
             alt="entry map"
         />
-        <div className={ styles.overlay }></div>
-        <div className={ styles.viewButton }>View Entry Map</div>
+        <div className={styles.overlay}></div>
+        <div className={styles.viewButton}>View Entry Map</div>
     </a>
 )
 
@@ -45,27 +45,25 @@ const BeachInfo = ({
 
     return (
         <div className={styles.container}>
-            <VizDepth date={ last_review_date } difficulty={difficulty} viz={ last_review_viz } max_depth={ max_depth }></VizDepth>
-            <SectionTitle text={`Snorkeling and Scuba Diving at ${name}`}/>
+            <VizDepth date={last_review_date} difficulty={difficulty} viz={last_review_viz} max_depth={max_depth}></VizDepth>
+            <SectionTitle text={`Snorkeling and Scuba Diving at ${name}`} />
             <div className={styles.description}>
-                { description.length < 3
+                {description.length < 3
                     ? `${name} is a ${Math.round(rating * 100) / 100}-star rated scuba dive and snorkel destination in ${location_city} which is accessible from shore based on ${num_reviews} ratings. Visibility conditions were rated a ${last_review_viz} out of 5.`
-                    :  description }
+                    : description}
             </div>
-            <div className={styles.outerSpacer}>
-                { access && access.length ? <div className={styles.tagHeader}>Access</div> : <></> }
-                { access && access.map(tag => (<Tag key={tag.id} text={ tag.text } type={ 'entry' }/> )) }
-            </div>
-            { entry_map && <EntryMap src={ entry_map }/> }
-            { tidesArray.length ? <>
-                <SectionTitle text={`${name} Tide Chart and Surf Report (Beta)`}/>
+            {access && access.length ? <div className={styles.tagHeader}>Access</div> : <></>}
+            {access && access.map(tag => (<Tag key={tag.id} text={tag.text} type={'entry'} />))}
+            {entry_map && <EntryMap src={entry_map} />}
+            {tidesArray.length ? <>
+                <SectionTitle text={`${name} Tide Chart and Surf Report (Beta)`} />
                 <div className={styles.tideContainer}>
-                    { tidesArray.slice(0, 5).map(tide => {
-                        const tideData = new Date(`${tide.t.replace(/ /g,"T")}Z`);
+                    {tidesArray.slice(0, 5).map(tide => {
+                        const tideData = new Date(`${tide.t.replace(/ /g, "T")}Z`);
                         return (
                             <div className={styles.tideRow} key={tide.t}>
-                                <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tideData.toLocaleString([], {'weekday': 'long'})}</div>
-                                <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : '' }`}>{tideData.toLocaleString([], {hour: 'numeric', minute:'2-digit'})}</div>
+                                <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : ''}`}>{tideData.toLocaleString([], { 'weekday': 'long' })}</div>
+                                <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : ''}`}>{tideData.toLocaleString([], { hour: 'numeric', minute: '2-digit' })}</div>
                                 <div className={styles.tideImage}>
                                     <Image
                                         src={tide.type === 'H' ? '/high_tide.png' : '/low_tide.png'}
@@ -83,12 +81,12 @@ const BeachInfo = ({
                         )
                     })}
                 </div>
-                </> : <></> }
+            </> : <></>}
             {
                 (area_two_id == 5 || area_two_id == 2 || area_two_id == 1)
                 && area_two
                 && area_one
-                && <Patron areaPatronKey={[area_one.short_name, area_two.short_name]} name={name}/>
+                && <Patron areaPatronKey={[area_one.short_name, area_two.short_name]} name={name} />
             }
         </div>
     )
