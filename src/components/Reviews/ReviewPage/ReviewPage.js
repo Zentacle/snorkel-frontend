@@ -13,7 +13,7 @@ import PrimaryButton from 'components/PrimaryButton';
 import { clientSideDomain, rootDomain } from 'lib/constants';
 import { sendEvent } from 'hooks/amplitude';
 import { useDropzone } from 'react-dropzone';
-import CancelIcon from '@material-ui/icons/Cancel';
+import CancelIcon from 'icons/Cancel';
 import CheckIcon from '@material-ui/icons/Check';
 import { v4 as uuidv4 } from 'uuid';
 import MaxWidth from 'components/MaxWidth';
@@ -155,7 +155,7 @@ const ReviewPage = (props) => {
         )
     }
     //this is called after each time the user selects a photo
-    //actualfile represents the 
+    //actualfile represents the
     function FileSubmit({ submittedFile }) {
 
         let f = null;
@@ -173,7 +173,7 @@ const ReviewPage = (props) => {
                 toaster.danger("Each review can have at most 10 photos.")
             }
             if (f && !(fileRecords.length > 9)) {
-                //create the uuid and place in front of file name 
+                //create the uuid and place in front of file name
                 const rand = uuidv4();
                 let testid = rand + '_' + f.path
                 const myNewFile = new File([f], testid, { type: f.type });
@@ -255,15 +255,15 @@ const ReviewPage = (props) => {
                 </div>
                 <div className={styles.spacer}>
                     <div className={styles.reviewtitle}>
-                        <DiveBuddies activityType={activity} addBuddyEmails={addBuddyEmails} buddyEmails={buddyArray}></DiveBuddies> 
+                        <DiveBuddies activityType={activity} addBuddyEmails={addBuddyEmails} buddyEmails={buddyArray}></DiveBuddies>
                     </div>
                     <section>
-                        {buddyArray.length < 5 ? (         
+                        {buddyArray.length < 5 ? (
                             //input field
                             <div className={styles.enter_email_div} onKeyPress={(e) => {e.key === 'Enter' ? save_email() : ''}}>
-                                <input 
-                                    value={email} 
-                                    onChange={handleChange} 
+                                <input
+                                    value={email}
+                                    onChange={handleChange}
                                     className={styles.email_input}
                                     placeholder="email"
                                 />
