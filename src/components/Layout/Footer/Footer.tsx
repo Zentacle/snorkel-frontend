@@ -61,6 +61,7 @@ const Footer = () => {
           <div className={styles.footerLinkContainer}>
             <Link href='/directory' prefetch={false}><a className={styles.footerLink}>Dive Spot Directory</a></Link>
             <Link href='/directory/loc' prefetch={false}><a className={styles.footerLink}>Region Directory</a></Link>
+            <Link href='/directory/shop' prefetch={false}><a className={styles.footerLink}>Shop Directory</a></Link>
             <Link href='/add/spot' prefetch={false}><a className={styles.footerLink}>Add a new location</a></Link>
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mayank@zentacle.com">Report an issue</a>
             <a style={{ display: 'block' }} className={styles.footerLink} href="mailto:mayank@zentacle.com">Suggest an edit</a>

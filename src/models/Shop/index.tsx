@@ -1,7 +1,7 @@
 export default interface Shop {
     name: string;
     id: string;
-    url?: string;
+    website?: string;
     fareharbor_url?: string;
     logo_img?: string;
     latitude?: string;
@@ -17,5 +17,5 @@ export default interface Shop {
     country_name?: Location;
     full_address?: string;
     description?: string;
-    url_name?: string;
+    url: string;
   }

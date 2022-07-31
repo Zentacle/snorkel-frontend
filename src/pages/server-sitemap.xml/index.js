@@ -93,9 +93,9 @@ export const getServerSideProps = async (ctx) => {
   res = await fetch('https://zentacle.com/api/shop/get?limit=none')
   data = await res.json()
 
-  const shop_fields = data.data.filter(location => location.url).map(location => (
+  const shop_fields = data.data.map(location => (
     {
-      loc: `https://www.zentacle.com/shop/${location.id}/${location.url_name}`,
+      loc: `https://www.zentacle.com${location.url}`,
       lastmod: new Date().toISOString(),
       changefreq: 'weekly',
       priority: 0.5,
