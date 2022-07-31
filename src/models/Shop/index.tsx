@@ -1,3 +1,5 @@
+import Location from 'models/Location';
+
 export default interface Shop {
     name: string;
     id: string;
@@ -18,4 +20,8 @@ export default interface Shop {
     full_address?: string;
     description?: string;
     url: string;
+    country?: Location;
+    area_one?: Location;
+    area_two?: Location;
+    locality?: Location;
   }

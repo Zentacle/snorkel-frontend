@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import Head from 'next/head';
 
 import Breadcrumbs from "components/Breadcrumbs";
 import Layout from "components/Layout/Layout";
 import MaxWidth from "components/MaxWidth";
 import { rootDomain } from "lib/constants";
+import Beach from 'models/Beach';
 import Shop from "models/Shop";
 import ShopPageHero from "components/ShopPage/ShopPageHero";
 import ShopDetails from "components/ShopPage/ShopDetails";
@@ -51,16 +53,20 @@ export async function getStaticPaths() {
     paths: data.data.map((shop: Shop) => ({
       params: {
         id: `${shop.id}`,
-        name: `${shop.url_name}`,
+        name: `${shop.url}`,
       },
     })),
     fallback: "blocking",
   };
 }
 
-function ShopPage(props: any) {
-  const [shop, setShop] = React.useState(props.shop);
-  const [nearbyBeaches, setNearbyBeaches] = React.useState([])
+interface Props {
+  shop: Shop;
+}
+
+function ShopPage(props: Props) {
+  const { shop } = props;
+  const [nearbyBeaches, setNearbyBeaches] = React.useState<Beach[]>([])
 
   useEffect(() => {
     let nearby = fetch(`${rootDomain}/spots/nearby?lat=${props.shop.latitude}&lng=${props.shop.longitude}`)
@@ -71,8 +77,22 @@ function ShopPage(props: any) {
     })
   }, [props.shop.latitude, props.shop.longitude])
 
+  const canonicalURL = `https://www.zentacle.com${props.shop.url}`;
+  const description = props.shop.description;
+  const pageTitle = `${props.shop.name} in ${props.shop.country_name} - Zentacle`
+
   return (
     <Layout>
+      <Head>
+        <title key="title">{pageTitle}</title>
+        <meta property="og:title" content={pageTitle} key="og-title" />
+        <meta property="og:description" content={description} key="og-description" />
+        <meta property="og:image" content={props.shop.logo_img} key="og-image" />
+        <meta property="og:url" content={canonicalURL} key="og-url" />
+        <meta name="description" content={description} key="description" />
+        <link rel="canonical" href={canonicalURL} key="canonical" />
+        <meta name="apple-itunes-app" content={`app-id=1611242564, app-argument=${props.shop.url}`} key="apple-app"></meta>
+      </Head>
       <MaxWidth>
         {/* <div className={`${styles.ad} ${styles.desktopOnly}`} key={shop.id}>
           <ins className="adsbygoogle"

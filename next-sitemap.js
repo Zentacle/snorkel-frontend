@@ -6,6 +6,8 @@ module.exports = {
     '/server-sitemap.xml',
     '/setpassword',
     '/setusername',
+    '/404',
+    '/500',
   ], // <= exclude here
   robotsTxtOptions: {
     additionalSitemaps: [
