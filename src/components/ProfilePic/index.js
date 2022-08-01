@@ -7,8 +7,8 @@ const ProfilePic = ({ user, size }) => (
     <a className={styles.link}>
       {
         user.profile_pic
-          ? <Image className={styles.profilePic} alt={user.display_name} src={user.profile_pic} height={size} width={size} />
-          : <Image className={styles.profilePic} alt={user.display_name} src='/default_profile.png' height={size} width={size} />
+          ? <Image className={styles.profilePic} alt={user.display_name} src={user.profile_pic} height={size} width={size} objectFit="cover" />
+          : <Image className={styles.profilePic} alt={user.display_name} src='/default_profile.png' height={size} width={size} objectFit="cover" />
       }
     </a>
   </Link>
