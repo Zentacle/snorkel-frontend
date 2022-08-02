@@ -15,7 +15,7 @@ const Patron = (props: Props) => {
     <div className={props.className}>
       <SectionTitle text='Nearby dive shops' />
       <div className={styles.container}>
-        {props.shops.map((shop: Shop) => <ShopCard shop={shop} />)}
+        {props.shops.map((shop: Shop) => <ShopCard key={shop.id} shop={shop} />)}
       </div>
     </div>
   )
