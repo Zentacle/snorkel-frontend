@@ -1,4 +1,5 @@
 .container {
   display: flex;
   overflow: scroll;
+  max-width: 617px;
 }
