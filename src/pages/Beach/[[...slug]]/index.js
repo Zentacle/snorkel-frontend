@@ -117,7 +117,6 @@ export async function getStaticPaths() {
 }
 
 const Beach = (props) => {
-    console.log(props.nearbyShops)
     const [beach, setBeach] = useState(props.beach);
     const [nearbyBeaches, setNearbyBeaches] = useState(props.nearbyBeaches)
     const photoState = useState([]);
