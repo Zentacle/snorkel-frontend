@@ -9,7 +9,6 @@ interface Props {
 }
 
 const ShopCard = (props: Props) => {
-  console.log(props)
   const sendClickEvent = (name: string) => () => {
     sendEvent('click_patron', {
       name: name,
