@@ -26,6 +26,7 @@ export async function getStaticProps(context) {
     let beach_data = fetch(`${rootDomain}/spots/get?beach_id=${beachid}`)
     let review_data = fetch(`${rootDomain}/reviews/get?beach_id=${beachid}`)
     let nearbyBeaches = fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`)
+    let nearbyShops = fetch(`${rootDomain}/shop/nearby?beach_id=${beachid}`)
 
     beach_data = await beach_data.then(res => {
         if (res.status == 404) {
@@ -40,10 +41,6 @@ export async function getStaticProps(context) {
             notFound: true,
         }
     }
-
-    // if (!beach_data.country) {
-    //     fetch(`${rootDomain}/spot/geocode?id=${beachid}`)
-    // }
 
     if (`/Beach/${beachid}/${beachNameFromURL}` != beach_data.data.url) {
         return {
@@ -67,31 +64,6 @@ export async function getStaticProps(context) {
             `${rootDomain}/spot/tide?station_id=${stationId}&begin_date=${begin_date}&end_date=${end_date}`
         )
     }
-    // else {
-    //     if (beach_data.data.latitude) {
-    //         try {
-    //             response = await fetch(`https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/tidepredstations.json?lat=${beach_data.data.latitude}&lon=${beach_data.data.longitude}&radius=50`)
-    //             const stations_data = await response.json()
-    //             if (stations_data.stationList && stations_data.stationList.length) {
-    //                 stationId = stations_data.stationList[0].stationId
-    //             } else {
-    //                 stationId = '-1'
-    //             }
-    //             response = await fetch(`${rootDomain}/spot/setStationId`, {
-    //                 method: 'POST',
-    //                 body: JSON.stringify({
-    //                     'spotId': beachid,
-    //                     'stationId': stationId
-    //                 }),
-    //                 headers: {
-    //                     'Content-Type': 'application/json'
-    //                 }
-    //             })
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    // }
     review_data = await review_data.then(resp => resp.json());
     nearbyBeaches = await nearbyBeaches.then(res =>
         res.json()
@@ -108,14 +80,24 @@ export async function getStaticProps(context) {
             tides = tideData.predictions;
         }
     }
+    nearbyShops = await nearbyShops.then(res =>
+        res.json()
+    ).then(shop_data => {
+        if (shop_data.data) {
+            return shop_data.data;
+        } else {
+            return [];
+        }
+    })
 
     console.log(`beach_api_timing: ${Date.now() - startTime}ms, id: ${beachid}`)
     return {
         props: {
             'beach': beach_data.data,
             'reviews': review_data.data,
-            'tides': tides,
-            'nearbyBeaches': nearbyBeaches,
+            tides,
+            nearbyBeaches,
+            nearbyShops,
         }, // will be passed to the page component as props
         revalidate: 3600,
     }
@@ -135,6 +117,7 @@ export async function getStaticPaths() {
 }
 
 const Beach = (props) => {
+    console.log(props.nearbyShops)
     const [beach, setBeach] = useState(props.beach);
     const [nearbyBeaches, setNearbyBeaches] = useState(props.nearbyBeaches)
     const photoState = useState([]);
@@ -238,6 +221,7 @@ const Beach = (props) => {
                             isSingularReview={props.isSingularReview}
                             tides={props.tides}
                             reviews={props.reviews}
+                            nearbyShops={props.nearbyShops}
                         />
                         <PhotoPreview
                             photoState={photoState}

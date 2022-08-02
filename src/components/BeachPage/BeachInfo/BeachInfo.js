@@ -2,6 +2,7 @@ import React from "react";
 import Image from 'next/image';
 
 import styles from "./styles.module.css";
+import NearbyShops from 'components/NearbyShops';
 import VizDepth from "components/BeachPage/VizDepth/VizDepth";
 import Patron from 'components/Patron';
 import SectionTitle from 'components/SectionTitle';
@@ -30,6 +31,7 @@ const BeachInfo = ({
     last_review_date,
     last_review_viz,
     name,
+    nearbyShops,
     location_city,
     rating,
     num_reviews,
@@ -88,6 +90,9 @@ const BeachInfo = ({
                 && area_one
                 && <Patron areaPatronKey={[area_one.short_name, area_two.short_name]} name={name} />
             }
+            <NearbyShops
+                shops={nearbyShops}
+            />
         </div>
     )
 }

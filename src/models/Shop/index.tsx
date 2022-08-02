@@ -12,6 +12,7 @@ export default interface Shop {
     address2?: string;
     city?: string;
     state?: string
+    zip?: string;
     owner_user_id?: string;
     stamp_uri?: string;
     phone?: string;
