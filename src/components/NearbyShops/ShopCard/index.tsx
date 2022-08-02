@@ -10,7 +10,7 @@ interface Props {
 
 const ShopCard = (props: Props) => {
   const sendClickEvent = (name: string) => () => {
-    sendEvent('click_patron', {
+    sendEvent('click__nearby_patron', {
       name: name,
     });
   }

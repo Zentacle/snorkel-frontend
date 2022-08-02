@@ -10,6 +10,8 @@ import Shop from "models/Shop";
 import ShopPageHero from "components/ShopPage/ShopPageHero";
 import ShopDetails from "components/ShopPage/ShopDetails";
 import Carousel from "components/Carousel/Carousel";
+import { useCurrentUser } from 'context/usercontext';
+import { sendEvent } from 'hooks/amplitude';
 import styles from "./styles.module.css";
 
 interface Context {
@@ -67,6 +69,8 @@ interface Props {
 function ShopPage(props: Props) {
   const { shop } = props;
   const [nearbyBeaches, setNearbyBeaches] = React.useState<Beach[]>([])
+  let { state } = useCurrentUser();
+  const currentUser = state.user;
 
   useEffect(() => {
     let nearby = fetch(`${rootDomain}/spots/nearby?lat=${props.shop.latitude}&lng=${props.shop.longitude}`)
@@ -76,6 +80,16 @@ function ShopPage(props: Props) {
       setNearbyBeaches(data.data)
     })
   }, [props.shop.latitude, props.shop.longitude])
+
+  useEffect(() => {
+    if (currentUser) {
+      sendEvent('page_view', {
+        type: 'dive_shop',
+        site_id: shop.id,
+        site_name: shop.name,
+      });
+    }
+  }, [currentUser, shop.id, shop.name])
 
   const canonicalURL = `https://www.zentacle.com${props.shop.url}`;
   const description = props.shop.description;
