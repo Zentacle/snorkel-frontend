@@ -14,7 +14,7 @@ import Head from 'next/head';
 import Layout from "components/Layout/Layout";
 import MaxWidth from 'components/MaxWidth';
 import PhotoPreview from 'components/BeachPage/PhotoPreview';
-import ReviewSummary from 'components/BeachPage/ReviewSummary';
+import ReviewSummary from 'components/ReviewSummary';
 import styles from "./styles.module.css";
 import useGoogleOneTap from 'hooks/useGoogleOneTap';
 

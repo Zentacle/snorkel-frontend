@@ -4,14 +4,15 @@ import Head from 'next/head';
 import Breadcrumbs from "components/Breadcrumbs";
 import Layout from "components/Layout/Layout";
 import MaxWidth from "components/MaxWidth";
-import { rootDomain } from "lib/constants";
-import Beach from 'models/Beach';
-import Shop from "models/Shop";
+import ReviewSummary from 'components/ReviewSummary';
 import ShopPageHero from "components/ShopPage/ShopPageHero";
 import ShopDetails from "components/ShopPage/ShopDetails";
 import Carousel from "components/Carousel/Carousel";
 import { useCurrentUser } from 'context/usercontext';
 import { sendEvent } from 'hooks/amplitude';
+import { rootDomain } from "lib/constants";
+import Beach from 'models/Beach';
+import Shop from "models/Shop";
 import styles from "./styles.module.css";
 
 interface Context {
@@ -139,6 +140,11 @@ function ShopPage(props: Props) {
               state={shop.state}
               country={shop.country_name}
               full_address={shop.full_address} />
+            <ReviewSummary
+              ratings={0}
+              rating={0}
+              num_reviews={0}
+            />
           </div>
           <div className={styles.carouselSpacer}>
             <div className={styles.carouseltitle}>Dive Locations Nearby</div>

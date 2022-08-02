@@ -1,4 +1,4 @@
-import styles from "../ReviewSummary/ReviewSummary.module.css";
+import styles from "./ReviewSummary.module.css";
 import { FullStar, EmptyStar } from "components/StarRating";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Rating from "react-rating";
