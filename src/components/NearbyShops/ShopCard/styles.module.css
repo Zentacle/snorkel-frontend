@@ -37,7 +37,7 @@
 
 .image {
   position: relative;
-  width: 88px;
   border-radius: 100%;
   overflow: hidden;
+  flex: 0 0 64px;
 }

@@ -109,6 +109,7 @@ function ShopDetails(props: any) {
                 </div>
             </div>
 
+            <SectionTitle text={`About ${props.name}`} />
             <div className={styles.shopinfo}>
                 {props.description}
             </div>
