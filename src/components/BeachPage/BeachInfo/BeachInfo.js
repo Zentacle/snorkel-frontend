@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import styles from "./styles.module.css";
 import NearbyShops from 'components/NearbyShops';
+import Selector from 'components/BeachPage/Selector';
 import VizDepth from "components/BeachPage/VizDepth/VizDepth";
 import Patron from 'components/Patron';
 import SectionTitle from 'components/SectionTitle';
@@ -57,42 +58,13 @@ const BeachInfo = ({
             {access && access.length ? <div className={styles.tagHeader}>Access</div> : <></>}
             {access && access.map(tag => (<Tag key={tag.id} text={tag.text} type={'entry'} />))}
             {entry_map && <EntryMap src={entry_map} />}
-            {tidesArray.length ? <>
-                <SectionTitle text={`${name} Tide Chart and Surf Report (Beta)`} />
-                <div className={styles.tideContainer}>
-                    {tidesArray.slice(0, 5).map(tide => {
-                        const tideData = new Date(`${tide.t.replace(/ /g, "T")}Z`);
-                        return (
-                            <div className={styles.tideRow} key={tide.t}>
-                                <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : ''}`}>{tideData.toLocaleString([], { 'weekday': 'long' })}</div>
-                                <div className={`${styles.tideItem} ${tideData < new Date() ? styles.past : ''}`}>{tideData.toLocaleString([], { hour: 'numeric', minute: '2-digit' })}</div>
-                                <div className={styles.tideImage}>
-                                    <Image
-                                        src={tide.type === 'H' ? '/high_tide.png' : '/low_tide.png'}
-                                        height='16'
-                                        width='16'
-                                        alt={tide.type === 'H' ? 'high tide icon' : 'low tide icon'}
-                                    />
-                                    <div
-                                        className={styles.tideIcon}
-                                    >
-                                        {tide.v}ft
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
-            </> : <></>}
+            <Selector tidesArray={tidesArray} nearbyShops={nearbyShops}/>
             {
                 (area_two_id == 5 || area_two_id == 2 || area_two_id == 1)
                 && area_two
                 && area_one
                 && <Patron areaPatronKey={[area_one.short_name, area_two.short_name]} name={name} />
             }
-            <NearbyShops
-                shops={nearbyShops}
-            />
         </div>
     )
 }

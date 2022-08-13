@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  height: 32px;
+  border-bottom: 1px solid #cecece;
+  margin-bottom: 8px;
+}
+
+.contentContainer {
+  min-height: 145px;
+}
+
+.active {
+  border-bottom: 2px solid var(--primary-color);
+  color: var(--primary-color)!important;
+}
+
+.item {
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.item:not(:first-child) {
+  margin-left: 16px;
+}
