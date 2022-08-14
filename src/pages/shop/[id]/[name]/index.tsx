@@ -40,6 +40,8 @@ export async function getStaticProps(context: Context) {
     }
   }
 
+  console.log(shopData.data)
+
   return {
     props: {
       'shop': shopData.data,
@@ -72,6 +74,7 @@ function ShopPage(props: Props) {
   const [nearbyBeaches, setNearbyBeaches] = React.useState<Beach[]>([])
   let { state } = useCurrentUser();
   const currentUser = state.user;
+  console.log(shop)
 
   useEffect(() => {
     let nearby = fetch(`${rootDomain}/spots/nearby?lat=${props.shop.latitude}&lng=${props.shop.longitude}`)
@@ -131,6 +134,7 @@ function ShopPage(props: Props) {
         <div className={styles.container}>
           <div className={styles.innerContainer}>
             <ShopDetails
+              name={shop.name}
               phone={shop.phone}
               address1={shop.address1}
               address2={shop.address2}

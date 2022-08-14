@@ -18,8 +18,6 @@ interface Hours {
 }
 
 function ShopDetails(props: any) {
-
-
     const renderHours = () => {
         let currentDay = new Date().getDay();
         let dayString = ""
@@ -58,7 +56,6 @@ function ShopDetails(props: any) {
         )
     }
 
-
     return (
         <div className={styles.container}>
             <div className={styles.sectioncontainer}>
@@ -70,12 +67,10 @@ function ShopDetails(props: any) {
                         Hours
                     </span>
                     <div className={styles.description}>
-                        {/* {props.hours ? renderHours() : "no hours available"} */}
                         <div>
-                            {props.hours ?
-                                <Hours hours={props.hours}></Hours> :
-                                <div>No hours reported
-                                </div>
+                            {props.hours
+                                ? <Hours hours={props.hours} />
+                                : <div>No hours reported</div>
                             }
                         </div>
                     </div>
@@ -103,7 +98,7 @@ function ShopDetails(props: any) {
                     </span>
                     <div className={styles.location}>
                         <span>
-                           {props.full_address}
+                            {props.full_address}
                         </span>
                     </div>
                 </div>
