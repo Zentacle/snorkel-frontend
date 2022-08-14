@@ -24,6 +24,7 @@ interface Context {
 
 export async function getStaticProps(context: Context) {
   let shopData: any = fetch(`${rootDomain}/shop/get/${context.params.id}`);
+  let nearby: any = fetch(`${rootDomain}/shop/nearby?shop_id=${context.params.id}`);
 
   shopData = await shopData.then((res: any) => {
     if (res.status == 404) {
@@ -34,17 +35,20 @@ export async function getStaticProps(context: Context) {
     return res.json();
   });
 
+  nearby = await nearby.then((res) => {
+    return res.json()
+  })
+
   if (!shopData.data || (shopData.data && shopData.data.errorCode)) {
     return {
       notFound: true,
     }
   }
 
-  console.log(shopData.data)
-
   return {
     props: {
       'shop': shopData.data,
+      'nearbyShops': nearby.data,
     }, // will be passed to the page component as props
     revalidate: 3600,
   };
@@ -66,24 +70,14 @@ export async function getStaticPaths() {
 }
 
 interface Props {
+  nearbyShops: Shop[];
   shop: Shop;
 }
 
 function ShopPage(props: Props) {
-  const { shop } = props;
-  const [nearbyBeaches, setNearbyBeaches] = React.useState<Beach[]>([])
+  const { nearbyShops, shop } = props;
   let { state } = useCurrentUser();
   const currentUser = state.user;
-  console.log(shop)
-
-  useEffect(() => {
-    let nearby = fetch(`${rootDomain}/spots/nearby?lat=${props.shop.latitude}&lng=${props.shop.longitude}`)
-    nearby.then((res) => {
-      return res.json()
-    }).then(data => {
-      setNearbyBeaches(data.data)
-    })
-  }, [props.shop.latitude, props.shop.longitude])
 
   useEffect(() => {
     if (currentUser) {
@@ -152,7 +146,7 @@ function ShopPage(props: Props) {
           </div>
           <div className={styles.carouselSpacer}>
             <div className={styles.carouseltitle}>Dive Locations Nearby</div>
-            <Carousel data={nearbyBeaches} allowVertical></Carousel>
+            <Carousel data={nearbyShops} allowVertical></Carousel>
           </div>
         </div>
       </MaxWidth>
