@@ -65,7 +65,6 @@ function SetUser() {
   React.useEffect(() => {
     fetch(`${clientSideDomain}/user/me`, {
       method: 'GET',
-
       headers: {
         'Content-Type': 'application/json'
       }
