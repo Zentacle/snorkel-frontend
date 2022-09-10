@@ -168,7 +168,7 @@ const EmailBannerContainer = () => {
     const isLoggedOut = !currentUser.id;
     const shouldShowBanner = (never_seen_banner || !did_close_in_last_day) && isLoggedOut;
     if (shouldShowBanner) {
-      setTimeout(() => setIsShown(true), 1000);
+      setTimeout(() => setIsShown(true), 30000);
     } else {
       sendEvent('bottom_banner_suppress');
     }

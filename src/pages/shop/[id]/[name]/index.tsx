@@ -35,7 +35,7 @@ export async function getStaticProps(context: Context) {
     return res.json();
   });
 
-  nearby = await nearby.then((res) => {
+  nearby = await nearby.then((res:any) => {
     return res.json()
   })
 
