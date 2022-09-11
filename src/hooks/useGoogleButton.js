@@ -9,7 +9,10 @@ const useGoogleButton = (redirectURL, user) => () => {
     if (response.credential) {
       fetch(`${clientSideDomain}/user/google_register`, {
         method: 'POST',
-        body: JSON.stringify(response),
+        body: JSON.stringify({
+          ...response,
+          app: 'web',
+        }),
         headers: {
           'Content-Type': 'application/json'
         }

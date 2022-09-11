@@ -12,6 +12,7 @@ const useGoogleButton = (redirectURL, user) => () => {
                 body: JSON.stringify({
                     ...response.authorization,
                     audience: 'org.reactjs.native.example.Zentacle-ios',
+                    app: 'web',
                 }),
                 headers: {
                     'Content-Type': 'application/json'

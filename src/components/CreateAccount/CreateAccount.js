@@ -27,6 +27,7 @@ const CreateAccount = () => {
             password,
             'first_name': firstName,
             'last_name': lastName,
+            app: 'web',
         }
         fetch(`${clientSideDomain}/user/register`, {
             method: 'POST',
