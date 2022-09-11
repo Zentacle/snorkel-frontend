@@ -16,7 +16,7 @@ function Subsurface() {
   return (
     <Layout>
       <MaxWidth>
-        { dives.map((dive:any) => <div>{dive.date}</div>) }
+        { dives.map((dive:any) => <div key={dive.date}>{dive.date}</div>) }
       </MaxWidth>
     </Layout>
   );
