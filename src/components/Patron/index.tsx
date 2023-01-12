@@ -64,7 +64,6 @@ const Patron = (props: Props) => {
         "address1": "74-380 Kealakehe Parkway",
     "address2": "Slip # 21",
     "city": "Kailua Kona, Hawaii",
-    "fareharbor_url": null,
     "id": 3367,
     "latitude": 19.671436,
     "logo_img": "https://diveshopmedia.padiww.com/dsl-media/26421466/logo/201903310340-Logo.jpg",
@@ -178,7 +177,7 @@ const Patron = (props: Props) => {
           <a
             onMouseDown={sendClickEvent(props.areaPatronKey, index)}
             className={styles.bookNow}
-            href={patron.fareharbor_url}
+            href={patron.fareharbor_url || patron.website}
           >
             Book Now
           </a>
