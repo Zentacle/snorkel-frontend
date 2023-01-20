@@ -6,15 +6,17 @@ import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 import Image from 'next/image';
 
+type AreaPatronKey = (string | undefined)[] | (string | null)[];
+
 interface Props {
-  areaPatronKey: (string | undefined)[] | (string | null)[],
+  areaPatronKey: AreaPatronKey,
   className: string,
   name: string,
 }
 
 const Patron = (props: Props) => {
   React.useEffect(() => {
-    const sendViewEvents = (areaPatronKey: (string | undefined)[] | (string | null)[]) => {
+    const sendViewEvents = (areaPatronKey: AreaPatronKey) => {
       const patrons = getPatron(areaPatronKey);
       patrons?.map(patron => {
         const itemLabel = patron.name
@@ -120,7 +122,7 @@ const Patron = (props: Props) => {
     }
   }
 
-  const sendClickEvent = (areaPatronKey: (string | undefined)[] | (string | null)[], index: number) => () => {
+  const sendClickEvent = (areaPatronKey: AreaPatronKey, index: number) => () => {
     const patrons = getPatron(areaPatronKey);
     if (!patrons) {
       return;

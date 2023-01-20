@@ -95,7 +95,7 @@ const ShopPageHero = (props: any) => {
                         <div className={styles.buttonlabel}>Contact</div>
                     </div>
                     <div className={styles.buttonouter}>
-                        <a className={styles.buttoncircle} href={props.shop.url} onClick={() => onWebsiteClick}>
+                        <a className={styles.buttoncircle} href={props.shop.website} onClick={() => onWebsiteClick}>
                             <Image src='/iconoir_internet.png' alt="map" objectFit="contain" height="20" width="20"></Image>
                         </a>
                         <div className={styles.buttonlabel}>Website</div>
