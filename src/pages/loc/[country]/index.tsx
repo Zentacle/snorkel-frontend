@@ -19,6 +19,7 @@ import Patron from 'components/Patron';
 import { sendEvent } from 'hooks/amplitude';
 import Expander from 'icons/Expander';
 import hasPatron from 'lib/hasPatron';
+import LinkifyText from 'controls/LinkifyText';
 
 // TODO - fix type of context
 export async function getStaticProps(context: any) {
@@ -224,7 +225,7 @@ const Home = (props: Props) => {
             {'\n\n'}
             No matter what you&apos;re looking for, you can find a diverse range of the best ocean activities in {props.area.name} to suit your needs.
             {props.area.description && '\n\n'}
-            {props.area.description}
+            {props.area.description && <LinkifyText text={props.area.description}/>}
           </div>
           {props.area.map_image_url &&
             <Link href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=${exploreUrl}`}>

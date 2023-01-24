@@ -19,6 +19,7 @@ module.exports = {
       'www.zentacle.com',
       'diveshopmedia.padiww.com',
       'pbs.twimg.com',
+      'www.scubadiving.com',
     ],
     minimumCacheTTL: 60,
   },
