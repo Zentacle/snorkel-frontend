@@ -176,7 +176,7 @@ const Home = (props: Props) => {
           {props.areas.length
             ? <div className={`${styles.locationContainer} ${locStyles.locationContainer}`}>
               {props.areas.map(area => (
-                <Link key={`${area.short_name}-${area.id}`} href={area.url}>
+                <Link key={`${area.short_name}-${area.id}`} href={`${area.url}/shop`}>
                   <a className={`${styles.location} ${props.area.short_name === area.short_name && styles.active}`}>
                     {area.name}
                   </a>
