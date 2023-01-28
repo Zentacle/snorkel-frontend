@@ -25,6 +25,7 @@ interface Context {
 export async function getStaticProps(context: Context) {
   let shopData: any = fetch(`${rootDomain}/shop/get/${context.params.id}`);
   let nearby: any = fetch(`${rootDomain}/shop/nearby?shop_id=${context.params.id}`);
+  fetch(`${rootDomain}/shop/geocode/${context.params.id}`);
 
   shopData = await shopData.then((res: any) => {
     if (res.status == 404) {

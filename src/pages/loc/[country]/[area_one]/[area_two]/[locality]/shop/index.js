@@ -2,6 +2,8 @@ import Page, { getPillLocalityLevel } from 'pages/loc/[country]/shop/index';
 import { rootDomain } from "src/lib/constants";
 
 export async function getStaticProps(context) {
+  const locality = context.params.locality;
+  const area_two = context.params.area_two;
   const area_one = context.params.area_one;
   const country = context.params.country;
   const props = {};
