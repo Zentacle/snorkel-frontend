@@ -8,6 +8,8 @@ import {
   Trigger,
 } from 'controls/Dropdown';
 import { sendEvent } from 'hooks/amplitude';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface FilterPillProps {
   children: React.ReactNode;
@@ -56,7 +58,9 @@ const FilterBar = ({
   setAccess,
   setActivity,
   setDifficulty,
-}: Props) => (
+}: Props) => {
+  const router = useRouter();
+  return (
   <div className={styles.filterContainer}>
     <FilterPill text='Difficulty' selected={!!difficulty}>
       <>
@@ -94,7 +98,12 @@ const FilterBar = ({
         </Item>
       </>
     </FilterPill>
+    <Link href={`${router.asPath}/shop`}>
+      <a className={`${styles.filterPill}`}>
+        Shop
+      </a>
+    </Link>
   </div >
-)
+)};
 
 export default FilterBar;
