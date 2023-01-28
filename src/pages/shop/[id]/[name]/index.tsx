@@ -124,6 +124,7 @@ function ShopPage(props: Props) {
           area_one={shop.area_one}
           area_two={shop.area_two}
           locality={shop.locality}
+          isShop={true}
         />
         <ShopPageHero shop={shop} />
         <div className={styles.container}>
