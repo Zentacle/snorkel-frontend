@@ -157,7 +157,7 @@ const BeachEditComponent = () => {
 
         let heroName = '';
         let requestBody = newData;
-        const s3Url = "https://www.zentacle.com/images/";
+        const s3Url = "https://www.zentacle.com/image/";
         if (newHeroImage && newHeroImage.file) {
             heroName = await uploadPhoto(newHeroImage.file, "shops")
             requestBody.logo_img = s3Url + "shops/" + heroName;
