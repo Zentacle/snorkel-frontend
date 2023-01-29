@@ -2,6 +2,7 @@ import Location from 'models/Location';
 
 export default interface Shop {
     name: string;
+    username?: string;
     id: string;
     website?: string;
     fareharbor_url?: string;
