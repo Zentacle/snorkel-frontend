@@ -26,6 +26,7 @@ const BeachEditComponent = () => {
     const [oldData, setOldData] = React.useState<Partial<Shop>>({});
     const [newData, setNewData] = React.useState<Partial<Shop>>({});
     const [newHeroImage, setNewHeroImage] = React.useState<HeroImage | undefined>(undefined);
+    const [newStampImage, setNewStampImage] = React.useState<HeroImage | undefined>(undefined);
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
 
     let router = useRouter();
@@ -69,6 +70,9 @@ const BeachEditComponent = () => {
                 if (type === 'logo_img') {
                     setNewHeroImage(newFileRecord)
                 }
+                if (type === 'stamp_uri') {
+                    setNewStampImage(newFileRecord)
+                }
             }
         }, [submittedFile, type]);
 
@@ -77,6 +81,10 @@ const BeachEditComponent = () => {
                 {type === 'logo_img' && newHeroImage &&
                     <div className={styles.imageContainer}>
                         <img className={styles.image} src={newHeroImage.url} alt="hero image"></img>
+                    </div>}
+                {type === 'stamp_uri' && newStampImage &&
+                    <div className={styles.imageContainer}>
+                        <img className={styles.image} src={newStampImage.url} alt="hero image"></img>
                     </div>}
             </div>
         )
@@ -163,6 +171,11 @@ const BeachEditComponent = () => {
             requestBody.logo_img = s3Url + "shops/" + heroName;
         }
 
+        if (newStampImage && newStampImage.file) {
+            heroName = await uploadPhoto(newStampImage.file, "stamp")
+            requestBody.stamp_uri = s3Url + "stamp/" + heroName;
+        }
+
         if (Object.keys(requestBody).length) {
             requestBody.id = oldData.id;
             await patchBeach(requestBody);
@@ -196,6 +209,8 @@ const BeachEditComponent = () => {
                 <SignupInput value={getValueForKey('username') as string | undefined || ''} onChange={changeNewData('username')}></SignupInput>
                 <div>logo_img</div>
                 <DropZoneArea type="logo_img"></DropZoneArea>
+                <div>stamp_uri</div>
+                <DropZoneArea type="stamp_uri"></DropZoneArea>
                 <PrimaryButton disabled={isSubmitDisabled} className={styles.submit} onClick={submit}>Submit</PrimaryButton>
             </div>
         </div>
