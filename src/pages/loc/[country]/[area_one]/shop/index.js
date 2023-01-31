@@ -6,7 +6,7 @@ export async function getStaticProps(context) {
   const country = context.params.country;
   const props = {};
   const res = await fetch(
-    `${rootDomain}/shop/loc?sort=top&area_one=${area_one}&country=${country}&limit=none&shops=true`
+    `${rootDomain}/shop/loc?sort=top&area_one=${area_one}&country=${country}&limit=none`
   )
   const data = await res.json()
   props['default'] = data.data || null;
@@ -25,9 +25,9 @@ export async function getStaticProps(context) {
   props['area_one'] = area_one
 
   const localityType = getPillLocalityLevel[props.loc];
-  let url = `${rootDomain}/locality/${localityType}`
+  let url = `${rootDomain}/locality/${localityType}?shops=true`
   if (props.country) {
-    url += `?country=${props.country}`
+    url += `&country=${props.country}`
   }
   if (props.area_one) {
     url += `&area_one=${props.area_one}`
