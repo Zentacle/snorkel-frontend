@@ -45,7 +45,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`${rootDomain}/locality/area_one`)
+  const res = await fetch(`${rootDomain}/locality/area_one?shops=true`)
   const data = await res.json()
   return {
       paths: data.data.filter(loc => loc.short_name).map(loc => ({
