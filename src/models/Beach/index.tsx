@@ -4,4 +4,6 @@ export default interface Beach {
   url: string;
   latitude?: number;
   longitude?: number;
+  hero_img: string;
+  description: string;
 }

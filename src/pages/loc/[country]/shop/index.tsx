@@ -27,7 +27,7 @@ export async function getStaticProps(context: any) {
   // TODO - fix res type
   let res: any;
   res = await fetch(
-    `${rootDomain}/shop/loc?sort=top&country=${country_short_name}&limit=100`
+    `${rootDomain}/shop/loc?sort=top&country=${country_short_name}&limit=100&shops=true`
   )
   const data = await res.json().catch((err: any) => console.log(err))
   props['default'] = data.data || null;

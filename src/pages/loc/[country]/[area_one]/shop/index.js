@@ -6,7 +6,7 @@ export async function getStaticProps(context) {
   const country = context.params.country;
   const props = {};
   const res = await fetch(
-    `${rootDomain}/shop/loc?sort=top&area_one=${area_one}&country=${country}&limit=none`
+    `${rootDomain}/shop/loc?sort=top&area_one=${area_one}&country=${country}&limit=none&shops=true`
   )
   const data = await res.json()
   props['default'] = data.data || null;
