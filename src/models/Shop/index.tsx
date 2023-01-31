@@ -26,4 +26,5 @@ export default interface Shop {
     area_one?: Location;
     area_two?: Location;
     locality?: Location;
+    num_reviews?: number;
   }

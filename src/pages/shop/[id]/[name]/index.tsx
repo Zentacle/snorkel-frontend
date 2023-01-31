@@ -143,7 +143,7 @@ function ShopPage(props: Props) {
             <ReviewSummary
               ratings={0}
               rating={0}
-              num_reviews={0}
+              num_reviews={shop.num_reviews || 0}
             />
           </div>
           <div className={styles.carouselSpacer}>
