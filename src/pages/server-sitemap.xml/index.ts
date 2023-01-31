@@ -22,7 +22,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     fetch('https://zentacle.com/api/locality/area_two?limit=none').then((res) => res.json()),
     fetch('https://zentacle.com/api/locality/locality?limit=none').then((res) => res.json()),
     fetch('https://zentacle.com/api/shop/get?limit=none').then((res) => res.json()),
-  ]).then(([spots, users, countries, area_ones, area_twos, localities, country_shops]) => {
+    fetch('https://zentacle.com/api/locality/country?limit=none&shops=true').then((res) => res.json()),
+    fetch('https://zentacle.com/api/locality/area_one?limit=none&shops=true').then((res) => res.json()),
+  ]).then(([spots, users, countries, area_ones, area_twos, localities, shops, country_shops, area_one_shops]) => {
     const spot_fields = spots.data.map((location: Beach) => {
       const data: any = {
           loc: `https://www.zentacle.com${location.url}`,
@@ -79,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         priority: 0.7,
       }
     ))
-    const country_shop_fields = country_shops.data.map((location: Location) => (
+    const shop_fields = shops.data.map((location: Location) => (
       {
         loc: `https://www.zentacle.com${location.url}`,
         lastmod: new Date().toISOString(),
@@ -87,8 +89,24 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         priority: 0.5,
       }
     ))
+    const country_shop_fields = country_shops.data.map((location: Location) => (
+      {
+        loc: `https://www.zentacle.com${location.url}/shop`,
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.5,
+      }
+    ))
+    const area_one_shop_fields = area_one_shops.data.map((location: Location) => (
+      {
+        loc: `https://www.zentacle.com${location.url}/shop`,
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.5,
+      }
+    ))
     const end_date = new Date()
-    console.log(Math.abs(end_date.getTime() - start_date.getTime())/1000)
+    console.log('Generating server site map took: ', Math.abs(end_date.getTime() - start_date.getTime())/1000, ' seconds')
     return getServerSideSitemap(ctx, [
         ...spot_fields,
         ...user_fields,
@@ -96,7 +114,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         ...area_one_fields,
         ...area_two_fields,
         ...locality_fields,
+        ...shop_fields,
         ...country_shop_fields,
+        ...area_one_fields,
       ])
     })
 }
