@@ -13,134 +13,92 @@ const escapeForXML = (text: string) => text.replace(/&/g, '&amp;')
   .replace(/'/g, '&apos;')
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  // Method to source urls from cms
-  let res = await fetch('https://zentacle.com/api/spots/get?limit=none')
-  let data = await res.json()
-
-  const spot_fields = data.data.map((location: Beach) => {
-    const data: any = {
+  const start_date = new Date()
+  return Promise.all([
+    fetch('https://zentacle.com/api/spots/get?limit=none').then((res) => res.json()),
+    fetch('https://zentacle.com/api/users/all?top=true').then((res) => res.json()),
+    fetch('https://zentacle.com/api/locality/country?limit=none').then((res) => res.json()),
+    fetch('https://zentacle.com/api/locality/area_one?limit=none').then((res) => res.json()),
+    fetch('https://zentacle.com/api/locality/area_two?limit=none').then((res) => res.json()),
+    fetch('https://zentacle.com/api/locality/locality?limit=none').then((res) => res.json()),
+    fetch('https://zentacle.com/api/shop/get?limit=none').then((res) => res.json()),
+  ]).then(([spots, users, countries, area_ones, area_twos, localities, country_shops]) => {
+    const spot_fields = spots.data.map((location: Beach) => {
+      const data: any = {
+          loc: `https://www.zentacle.com${location.url}`,
+          lastmod: new Date().toISOString(),
+          changefreq: 'daily',
+          priority: 0.7,
+        }
+      if (location.hero_img) {
+        data["image:image"] = `
+          <image:loc>${escapeForXML(location.hero_img)}</image:loc>
+          <image:title>${escapeForXML(location.name)}</image:title>
+          <image:caption>${escapeForXML(location.description)}</image:caption>
+        `
+      }
+      return data;
+    })
+    const user_fields = users.data.filter((user: User) => user.username).map((user: User) => (
+      {
+        loc: `https://www.zentacle.com/user/${user.username}`,
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.2,
+      }
+    ))
+    const country_fields = countries.data.map((location: Location) => (
+      {
         loc: `https://www.zentacle.com${location.url}`,
         lastmod: new Date().toISOString(),
-        changefreq: 'daily',
+        changefreq: 'weekly',
         priority: 0.7,
       }
-    if (location.hero_img) {
-      data["image:image"] = `
-        <image:loc>${escapeForXML(location.hero_img)}</image:loc>
-        <image:title>${escapeForXML(location.name)}</image:title>
-        <image:caption>${escapeForXML(location.description)}</image:caption>
-      `
-    }
-    return data;
-  })
-
-  res = await fetch('https://zentacle.com/api/users/all?top=true')
-  data = await res.json()
-
-  const user_fields = data.data.filter((user: User) => user.username).map((user: User) => (
-    {
-      loc: `https://www.zentacle.com/user/${user.username}`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.2,
-    }
-  ))
-
-  res = await fetch('https://zentacle.com/api/locality/country?limit=none')
-  data = await res.json()
-
-  const country_fields = data.data.map((location: Location) => (
-    {
-      loc: `https://www.zentacle.com${location.url}`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.7,
-    }
-  ))
-
-  res = await fetch('https://zentacle.com/api/locality/area_one?limit=none')
-  data = await res.json()
-
-  const area_one_fields = data.data.map((location: Location) => (
-    {
-      loc: `https://www.zentacle.com${location.url}`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.7,
-    }
-  ))
-
-  res = await fetch('https://zentacle.com/api/locality/area_two?limit=none')
-  data = await res.json()
-
-  const area_two_fields = data.data.filter((location: Location) => location.url).map((location: Location) => (
-    {
-      loc: `https://www.zentacle.com${location.url}`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.7,
-    }
-  ))
-
-  res = await fetch('https://zentacle.com/api/locality/locality?limit=none')
-  data = await res.json()
-
-  const locality_fields = data.data.filter((location: Location) => location.url).map((location: Location) => (
-    {
-      loc: `https://www.zentacle.com${location.url}`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.5,
-    }
-  ))
-
-  res = await fetch('https://zentacle.com/api/shop/get?limit=none')
-  data = await res.json()
-
-  const shop_fields = data.data.map((location: Location) => (
-    {
-      loc: `https://www.zentacle.com${location.url}`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.5,
-    }
-  ))
-
-  // res = await fetch('https://zentacle.com/api/locality/country?limit=none&shops=true')
-  // data = await res.json()
-
-  // const country_shop_fields = data.data.map((location: Location) => (
-  //   {
-  //     loc: `https://www.zentacle.com${location.url}/shop`,
-  //     lastmod: new Date().toISOString(),
-  //     changefreq: 'weekly',
-  //     priority: 0.7,
-  //   }
-  // ))
-
-  res = await fetch('https://zentacle.com/api/locality/area_one?limit=none&shops=true')
-  data = await res.json()
-
-  const area_one_shop_fields = data.data.map((location: Location) => (
-    {
-      loc: `https://www.zentacle.com${location.url}/shop`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.7,
-    }
-  ))
-
-  return getServerSideSitemap(ctx, [
-    ...spot_fields,
-    ...user_fields,
-    ...country_fields,
-    ...area_one_fields,
-    ...area_two_fields,
-    ...locality_fields,
-    ...shop_fields,
-    // ...country_shop_fields,
-    ...area_one_shop_fields,
-  ])
+    ))
+    const area_one_fields = area_ones.data.map((location: Location) => (
+      {
+        loc: `https://www.zentacle.com${location.url}`,
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.7,
+      }
+    ))
+    const area_two_fields = area_twos.data.filter((location: Location) => location.url).map((location: Location) => (
+      {
+        loc: `https://www.zentacle.com${location.url}`,
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.7,
+      }
+    ))
+    const locality_fields = localities.data.filter((location: Location) => location.url).map((location: Location) => (
+      {
+        loc: `https://www.zentacle.com${location.url}`,
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.7,
+      }
+    ))
+    const country_shop_fields = country_shops.data.map((location: Location) => (
+      {
+        loc: `https://www.zentacle.com${location.url}`,
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.5,
+      }
+    ))
+    const end_date = new Date()
+    console.log(Math.abs(end_date.getTime() - start_date.getTime())/1000)
+    return getServerSideSitemap(ctx, [
+        ...spot_fields,
+        ...user_fields,
+        ...country_fields,
+        ...area_one_fields,
+        ...area_two_fields,
+        ...locality_fields,
+        ...country_shop_fields,
+      ])
+    })
 }
 
 const SitemapNullComponent = () => { }
