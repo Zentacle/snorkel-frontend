@@ -28,9 +28,6 @@ export async function getStaticProps(context) {
     let nearbyBeaches = fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`)
     let nearbyShops = fetch(`${rootDomain}/shop/nearby?beach_id=${beachid}`)
 
-    // Temporary while we re-code a bunch of messed up locations
-    fetch(`${rootDomain}/spot/geocode/${beachid}`)
-
     beach_data = await beach_data.then(res => {
         if (res.status == 404) {
             return {
