@@ -40,6 +40,11 @@ export default class MyDocument extends Document {
             key="google-tag-manager"
           />
           <script
+            async
+            src="https://tag.clearbitscripts.com/v1/pk_9f5d0fa8115ed5d8b313be0b7389ede5/tags.js"
+            referrerpolicy="strict-origin-when-cross-origin"
+          />
+          <script
             dangerouslySetInnerHTML={{
               __html: `
                   window.dataLayer = window.dataLayer || [];
