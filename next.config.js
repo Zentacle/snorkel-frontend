@@ -20,6 +20,7 @@ module.exports = {
       'diveshopmedia.padiww.com',
       'pbs.twimg.com',
       'www.scubadiving.com',
+      'd2p1cf6997m1ir.cloudfront.net',
     ],
     minimumCacheTTL: 60,
   },

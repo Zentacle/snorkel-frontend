@@ -105,9 +105,8 @@ function ShopDetails(props: any) {
             </div>
 
             <SectionTitle text={`About ${props.name}`} />
-            <div className={styles.shopinfo}>
-                {props.description}
-            </div>
+            <div className={styles.shopinfo} dangerouslySetInnerHTML={{ __html: props.description}}/>
+            {/* TODO: Fix this */}
         </div>
 
 
