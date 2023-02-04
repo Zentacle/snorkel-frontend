@@ -42,9 +42,7 @@ const Location = (props) => {
                     />
                     <div className={styles.numReviews}>({props.info.num_reviews})</div>
                 </div>
-                <div>
-                    {props.info.description}
-                </div>
+                <div dangerouslySetInnerHTML={{ __html: props.info.description }}/>
             </div>
             <Link href={props.info.url}>
                 <a className={styles.cardLink}></a>
