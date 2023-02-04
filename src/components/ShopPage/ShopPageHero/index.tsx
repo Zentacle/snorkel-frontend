@@ -61,8 +61,8 @@ const ShopPageHero = (props: any) => {
     return (
         <div className={styles.image}>
             <div className={styles.imageinner}>
-                {props.shop.logo_img && <Image
-                    src={props.shop.logo_img || '/hero.jpg'}
+                {props.shop.hero_img && <Image
+                    src={props.shop.hero_img || '/hero.jpg'}
                     layout='fill'
                     objectFit='cover'
                     alt={props.shop.name}
