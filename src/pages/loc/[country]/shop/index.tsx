@@ -172,6 +172,7 @@ const Home = (props: Props) => {
             country={props.area.country}
             area_one={props.area.area_one}
             area_two={props.area.area_two}
+            isShop={true}
           />
           {props.areas.length
             ? <div className={`${styles.locationContainer} ${locStyles.locationContainer}`}>
