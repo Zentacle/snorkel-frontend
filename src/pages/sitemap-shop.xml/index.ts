@@ -1,16 +1,8 @@
-// pages/server-sitemap.xml/index.tsx
-
-import Beach from "models/Beach";
-import Location from "models/Location";
-import User from "models/User";
+// pages/sitemap-shop.xml/index.tsx
 import { GetServerSideProps } from "next";
 import { getServerSideSitemap } from 'next-sitemap'
 
-const escapeForXML = (text: string) => text.replace(/&/g, '&amp;')
-  .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;')
-  .replace(/'/g, '&apos;')
+import Location from "models/Location";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // Method to source urls from cms
