@@ -9,3 +9,4 @@ Host: https://www.zentacle.com
 Sitemap: https://www.zentacle.com/sitemap-aggregate.xml
 Sitemap: https://www.zentacle.com/sitemap.xml
 Sitemap: https://www.zentacle.com/server-sitemap.xml
+Sitemap: https://www.zentacle.com/sitemap-shop.xml
