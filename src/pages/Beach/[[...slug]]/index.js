@@ -23,7 +23,7 @@ export async function getStaticProps(context) {
     const beachid = context.params.slug[0];
     const beachNameFromURL = context.params.slug[1];
 
-    let beach_data = fetch(`${rootDomain}/spots/get?beach_id=${beachid}`)
+    let beach_data = fetch(`${rootDomain}/spot/${beachid}`)
     let review_data = fetch(`${rootDomain}/reviews/get?beach_id=${beachid}`)
     let nearbyBeaches = fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`)
     let nearbyShops = fetch(`${rootDomain}/shop/nearby?beach_id=${beachid}`)
