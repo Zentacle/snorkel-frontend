@@ -28,6 +28,7 @@ const ShopCard = (props: Props) => {
                 layout="fill"
                 objectFit="cover"
                 alt={props.shop.name}
+                unoptimized
               />
             </a>
           </Link>

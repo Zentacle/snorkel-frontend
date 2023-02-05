@@ -242,6 +242,7 @@ const Home = (props: Props) => {
                   objectFit="contain"
                   height="300"
                   width="600"
+                  unoptimized
                   alt={`${props.area.name} dive site map`}
                 />
               </a>
