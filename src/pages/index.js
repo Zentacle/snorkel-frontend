@@ -25,7 +25,7 @@ export async function getStaticProps(context) {
     return data;
   }))
 
-  await fetch(`${rootDomain}/locality/country`).then(res =>
+  await fetch(`${rootDomain}/locality/country?limit=none`).then(res =>
     res.json()
   ).then(data => {
     props['areas'] = data.data
