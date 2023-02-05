@@ -2,43 +2,7 @@
   margin: 0 16px;
 }
 
-.patronName {
-  font-weight: var(--text-weight-bold);
-}
-
 .patronContainer {
   display: flex;
-}
-
-.description{
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  font-size: 14px;
-  line-height: 20px;
-  margin-left: 8px;
-  white-space: pre-line;
-}
-
-.bookNow {
-  background-color: var(--primary-color);
-  border-radius: 4px;
-  color: white;
-  padding: 4px 8px;
-  text-align: center;
-}
-
-.patronCard {
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 20%);
-  display: flex;
-  margin-bottom: 24px;
-  max-width: 320px;
-  padding: 8px;
-  margin-right: 8px;
-}
-
-.image {
-  position: relative;
-  width: 88px;
+  overflow: scroll;
 }

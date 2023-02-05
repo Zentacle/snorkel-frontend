@@ -18,7 +18,7 @@ interface Props {
   readonly?: boolean;
 }
 
-export default ({
+const Rating = ({
   className,
   fractions = 2,
   initialRating,
@@ -33,3 +33,5 @@ export default ({
     readonly={readonly}
   />
 );
+
+export default Rating;

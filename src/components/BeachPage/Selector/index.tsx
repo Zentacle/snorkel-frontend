@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import Tides from 'components/BeachPage/Tides';
-import NearbyShops from 'components/NearbyShops';
-import styles from './styles.module.css';
+import Tides from "components/BeachPage/Tides";
+import NearbyShops from "components/NearbyShops";
+import styles from "./styles.module.css";
 
 interface Props {
   nearbyShops: any[];
@@ -15,28 +15,25 @@ const Selector = ({ nearbyShops, tidesArray }: Props) => {
     <div>
       <div className={styles.container}>
         <div
-          className={`${!selected ? styles.active : ''} ${styles.item} `}
+          className={`${!selected ? styles.active : ""} ${styles.item} `}
           onClick={() => setSelected(false)}
         >
           Nearby Shops
         </div>
         <div
-          className={`${selected ? styles.active : ''} ${styles.item}`}
+          className={`${selected ? styles.active : ""} ${styles.item}`}
           onClick={() => setSelected(true)}
         >
           Tide Report
         </div>
       </div>
-      <div className={styles.contentContainer}>
-        {selected
-          ? <Tides tidesArray={tidesArray} />
-          : <NearbyShops
-            shops={nearbyShops}
-          />
-        }
-      </div>
+      {selected ? (
+        <Tides tidesArray={tidesArray} />
+      ) : (
+        <NearbyShops shops={nearbyShops} />
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Selector;

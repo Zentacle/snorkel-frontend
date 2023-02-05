@@ -5,6 +5,7 @@ import SectionTitle from 'components/SectionTitle';
 import styles from './styles.module.css';
 import { sendEvent } from 'hooks/amplitude';
 import Image from 'next/image';
+import ShopCard from 'components/NearbyShops/ShopCard';
 
 type AreaPatronKey = (string | undefined)[] | (string | null)[];
 
@@ -156,35 +157,10 @@ const Patron = (props: Props) => {
   <div className={styles.patronContainer}>
   {patrons && patrons.length
   ? patrons.map((patron, index) => (
-      <div key={patron.name} className={styles.patronCard}>
-        <div className={styles.image}>
-          <Image
-            src={patron.logo_img}
-            layout="fill"
-            objectFit='contain'
-            alt={patron.name}
-          />
-        </div>
-        <div className={styles.description}>
-          <a
-            onClick={sendClickEvent(props.areaPatronKey, index)}
-            className={styles.patronName}
-            href={patron.url}
-          >
-            {patron.name}
-          </a>
-          <div>{patron.address1}</div>
-          <div>{patron.address2}</div>
-          <div>{`${patron.city}, ${patron.state} ${patron.zip_code}`}</div>
-          <a
-            onMouseDown={sendClickEvent(props.areaPatronKey, index)}
-            className={styles.bookNow}
-            href={patron.fareharbor_url || patron.website}
-          >
-            Book Now
-          </a>
-        </div>
-      </div>
+    <ShopCard
+      key={patron.name}
+      shop={patron as any}
+    />
   ))
   : <></>
   }</div></div>
