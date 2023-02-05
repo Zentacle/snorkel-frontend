@@ -11,7 +11,9 @@ module.exports = {
   ], // <= exclude here
   robotsTxtOptions: {
     additionalSitemaps: [
-      'https://www.zentacle.com/server-sitemap.xml', // <==== Add here
+      'https://www.zentacle.com/server-sitemap.xml',
+      'https://www.zentacle.com/sitemap-shop.xml',
+       // <==== Add here
     ],
   },
 }

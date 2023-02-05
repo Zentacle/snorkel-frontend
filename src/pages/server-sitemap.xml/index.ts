@@ -94,42 +94,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   ))
 
-  res = await fetch('https://zentacle.com/api/shop/get?limit=none')
-  data = await res.json()
-
-  const shop_fields = data.data.map((location: Location) => (
-    {
-      loc: `https://www.zentacle.com${location.url}`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.5,
-    }
-  ))
-
-  // res = await fetch('https://zentacle.com/api/locality/country?limit=none&shops=true')
-  // data = await res.json()
-
-  // const country_shop_fields = data.data.map((location: Location) => (
-  //   {
-  //     loc: `https://www.zentacle.com${location.url}/shop`,
-  //     lastmod: new Date().toISOString(),
-  //     changefreq: 'weekly',
-  //     priority: 0.7,
-  //   }
-  // ))
-
-  res = await fetch('https://zentacle.com/api/locality/area_one?limit=none&shops=true')
-  data = await res.json()
-
-  const area_one_shop_fields = data.data.map((location: Location) => (
-    {
-      loc: `https://www.zentacle.com${location.url}/shop`,
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.7,
-    }
-  ))
-
   return getServerSideSitemap(ctx, [
     ...spot_fields,
     ...user_fields,
@@ -137,9 +101,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     ...area_one_fields,
     ...area_two_fields,
     ...locality_fields,
-    ...shop_fields,
-    // ...country_shop_fields,
-    ...area_one_shop_fields,
   ])
 }
 
