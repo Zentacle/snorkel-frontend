@@ -1,12 +1,19 @@
-import styles from "./styles.module.css"
 import Image from "next/image";
-import { useRouter } from "next/router";
 import Rating from "react-rating";
-import { EmptyStar, FullStar } from "components/StarRating";
 import Link from "next/link";
-import DifficultyTag from "components/DifficultyTag";
 
-const Location = (props) => {
+import DifficultyTag from "components/DifficultyTag";
+import { EmptyStar, FullStar } from "components/StarRating";
+import Beach from "models/Beach";
+import Shop from "models/Shop";
+import styles from "./styles.module.css"
+
+interface Props {
+    index: number;
+    info: Beach | Shop;
+}
+
+const Location = (props: Props) => {
     return (
         <div className={styles.slide}>
             <div className={styles.slidepic}>
@@ -24,15 +31,15 @@ const Location = (props) => {
                 <h3 className={styles.location}>
                     { props.info.locality && props.info.locality.url ?
                         <Link href={props.info.locality.url}>
-                            <a className={styles.locationLink} style={props.style}>
+                            <a className={styles.locationLink}>
                                 {props.info.location_city}
                             </a>
                         </Link>
                         : props.info.location_city
                     }
                 </h3>
-                <div className={styles.ratingContainer} title={props.info.rating}>
-                    <DifficultyTag difficulty={props.info.difficulty} />
+                <div className={styles.ratingContainer} title={`${props.info.rating}`}>
+                    { (props.info as any).difficulty ? <DifficultyTag difficulty={(props.info as any).difficulty} /> : <></> }
                     <Rating
                         fractions={2}
                         emptySymbol={(<EmptyStar />)}
@@ -42,7 +49,7 @@ const Location = (props) => {
                     />
                     <div className={styles.numReviews}>({props.info.num_reviews})</div>
                 </div>
-                <div dangerouslySetInnerHTML={{ __html: props.info.description }}/>
+                <div dangerouslySetInnerHTML={{ __html: props.info.description || '' }}/>
             </div>
             <Link href={props.info.url}>
                 <a className={styles.cardLink}></a>
