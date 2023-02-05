@@ -140,7 +140,7 @@ function ShopPage(props: Props) {
               country={shop.country_name}
               full_address={shop.full_address} />
             <ReviewSummary
-              ratings={shop.num_reviews || 0}
+              ratings={ { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 } }
               rating={0}
               num_reviews={shop.num_reviews || 0}
             />

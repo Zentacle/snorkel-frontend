@@ -1,12 +1,11 @@
 .patronCard {
-  border-radius: 8px;
+  border-radius: 16px;
   border: 1px solid #cecece;
   margin: 0px 16px 0px 0px;
   padding: 8px;
   flex: 1 0 320px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .innerContainer {
@@ -14,7 +13,11 @@
 }
 
 .patronName {
+  font-size: 16px;
   font-weight: var(--text-weight-bold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .description{
@@ -24,20 +27,35 @@
   font-size: 14px;
   line-height: 20px;
   margin-left: 8px;
-  white-space: pre-line;
+  overflow: hidden;
 }
 
 .bookNow {
-  background-color: var(--primary-color);
-  border-radius: 4px;
+  background-color: #AF35FA; /* var(--primary-color) */
+  border-radius: 8px;
   color: white;
   padding: 4px 8px;
   text-align: center;
 }
 
+.bookNow:hover {
+  opacity: 0.8;
+}
+
 .image {
   position: relative;
-  border-radius: 100%;
+  border-radius: 8px;
   overflow: hidden;
-  flex: 0 0 64px;
+  flex: 0 0 90px;
+  height: 90px;
+}
+
+.stars {
+  height: 22px;
+}
+
+.city {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
