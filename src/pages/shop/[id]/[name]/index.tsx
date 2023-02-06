@@ -156,7 +156,7 @@ function ShopPage(props: Props) {
             />
             <ReviewSummary
               ratings={{ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }}
-              rating={0}
+              rating={shop.rating || 0}
               num_reviews={shop.num_reviews || 0}
             />
           </div>
