@@ -1,32 +1,38 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+const newrelic = require("newrelic");
+
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
 // https://stackoverflow.com/questions/63449123/how-to-add-multiple-stylesheets-to-ctx-renderpage
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const startTime = Date.now();
-    const sheet = new ServerStyleSheet()
-    const originalRenderPage = ctx.renderPage
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
+    const browserTimingHeader = newrelic.getBrowserTimingHeader({
+      hasToRemoveScriptWrapper: true,
+    });
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
             sheet.collectStyles(<App {...props} />),
-        })
+        });
 
-      const initialProps = await Document.getInitialProps(ctx)
+      const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
+        browserTimingHeader,
         styles: (
           <>
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
         ),
-      }
+      };
     } finally {
-      sheet.seal()
+      sheet.seal();
     }
   }
 
@@ -34,6 +40,10 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{ __html: this.props.browserTimingHeader }}
+          />
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=G-WFH58XWN7D`}
@@ -87,7 +97,7 @@ export default class MyDocument extends Document {
                     if(m[y])m[y]=function(){return g._w[y].apply(this,arguments)};
                     g._v="1.3.0";
                 })(window,document,window['_fs_namespace'],'script','user');
-              `
+              `,
             }}
           />
           <script
@@ -97,7 +107,7 @@ export default class MyDocument extends Document {
             analytics.load("VaV9xZTx1sjrlrGixQKCyc6hq5yq9wTv");
             analytics.page();
             }}();
-            `
+            `,
             }}
           />
           <script
@@ -107,13 +117,14 @@ export default class MyDocument extends Document {
                 (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking qrCode".split(" "), 0);
                 // init Branch
                 branch.init('key_live_il4SQUbp9suCNVaUkoK4qebhrtiYm69b');
-              `
+              `,
             }}
           />
           <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7099980041278313"
-            crossOrigin="anonymous"></script>
+            crossOrigin="anonymous"
+          ></script>
         </Head>
         <body>
           <Main />
