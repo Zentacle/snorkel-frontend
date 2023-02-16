@@ -37,6 +37,10 @@
     font-size: 14px;
 }
 
+.shopinfo > a {
+    text-decoration: underline;
+}
+
 .location{
     display: flex;
     font-size: 14px;
