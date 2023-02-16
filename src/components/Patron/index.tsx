@@ -97,15 +97,15 @@ const Patron = (props: Props) => {
     }
     else if (areaPatronKey[1] == 'oahu') {
       return [{
-        'name': 'Waikiki Diving Center',
-        'url': 'https://waikikidiving.com/',
-        'fareharbor_url': 'https://fareharbor.com/embeds/book/waikikidivecenter/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=522147',
-        'address1': '424 Nāhua St',
+        'name': 'Trident Adventures',
+        'url': 'https://tridentadventures.com/',
+        'fareharbor_url': 'https://fareharbor.com/embeds/book/tridentadventures/?ref=asn&asn=shorediving&full-items=yes&back=shorediving.com&flow=111790',
+        'address1': '3 Aloha Tower Rd',
         'address2': '',
         'city': 'Honolulu',
         'state': 'HI',
-        'zip_code': '96815',
-        'logo_img': 'https://fh-sites.imgix.net/sites/4671/2022/01/24213304/WaikikiDC_logo_Color.png?auto=compress%2Cformat&h=120&fit=max',
+        'zip_code': '96826',
+        'logo_img': 'https://d2p1cf6997m1ir.cloudfront.net/media/shop/27/6b/3f/1de3/schermata-2022-03-14-alle-16-47-01.png',
       }]
     }
     else if (areaPatronKey[0] == 'ny' || areaPatronKey[0] == 'nj') {
