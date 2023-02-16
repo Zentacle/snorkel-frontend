@@ -262,7 +262,7 @@ const Home = (props: Props) => {
           </div>
           {props.area.description && (
             <div
-              className={styles.marginContainer}
+              className={`${styles.marginContainer} ${locStyles.descriptionContainer}`}
               dangerouslySetInnerHTML={{
                 __html: props.area.description,
               }}
