@@ -24,6 +24,7 @@ export async function getStaticProps(context) {
   props['loc'] = 'area_one'
   props['country'] = country
   props['area_one'] = area_one
+  props['area_two'] = area_two
 
   const localityType = getPillLocalityLevel[props.loc];
   let url = `${rootDomain}/locality/${localityType}`
@@ -32,6 +33,9 @@ export async function getStaticProps(context) {
   }
   if (props.area_one) {
     url += `&area_one=${props.area_one}`
+  }
+  if (props.area_two) {
+    url += `&area_two=${props.area_two}`
   }
   props['areas'] = await fetch(url).then(res =>
     res.json()
