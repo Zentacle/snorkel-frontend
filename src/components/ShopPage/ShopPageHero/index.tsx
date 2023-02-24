@@ -107,6 +107,7 @@ const ShopPageHero = (props: any) => {
               className={styles.buttoncircle}
               href={props.shop.website}
               onClick={() => onWebsiteClick}
+              rel="nofollow"
             >
               <Image
                 src="/iconoir_internet.png"
