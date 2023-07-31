@@ -252,11 +252,15 @@ const Beach = (props) => {
           </div>
           {nearbyBeaches.length ? (
             <div className={styles.carouselSpacer}>
-              <a
-                href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=beach_map&$desktop_url=${mapUrl}`}
-              >
-                <img className={styles.sideMap} src={mapUrl} />
-              </a>
+              {beach.latitude ? (
+                <a
+                  href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=beach_map&$desktop_url=${mapUrl}`}
+                >
+                  <img className={styles.sideMap} src={mapUrl} />
+                </a>
+              ) : (
+                <></>
+              )}
               <div className={`${styles.ad} ${styles.adTop}`}>
                 <ins
                   className="adsbygoogle"
