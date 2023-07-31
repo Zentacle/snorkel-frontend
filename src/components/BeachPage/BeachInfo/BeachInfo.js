@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 
 import styles from './styles.module.css';
+import Expander from 'icons/Expander';
 import NearbyShops from 'components/NearbyShops';
 import Selector from 'components/BeachPage/Selector';
 import VizDepth from 'components/BeachPage/VizDepth/VizDepth';
@@ -11,9 +12,12 @@ import Tag from 'components/Tag';
 
 const EntryMap = ({ href, src }) => (
   <a className={styles.entryMap} href={href}>
+    <div className={styles.mapExpander}>
+      <Expander />
+    </div>
     <Image src={src} layout="fill" objectFit="cover" alt="entry map" />
     <div className={styles.overlay}></div>
-    <div className={styles.viewButton}>View Entry Map</div>
+    <div className={styles.viewButton}>View</div>
   </a>
 );
 
@@ -70,7 +74,7 @@ const BeachInfo = ({
         access.map((tag) => (
           <Tag key={tag.id} text={tag.text} type={'entry'} />
         ))}
-      {latitude && (
+      {latitude && !entry_map && (
         <EntryMap
           src={mapUrl}
           href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=beach_map&$desktop_url=${mapUrl}`}
