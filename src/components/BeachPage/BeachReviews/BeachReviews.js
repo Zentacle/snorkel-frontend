@@ -39,13 +39,15 @@ const BeachReviews = (props) => {
           Write a Review
         </PrimaryLink>
       </div>
-      {props.isSingularReview && (
+      {props.isSingularReview ? (
         <div>
           Currently viewing a specific review.&nbsp;
           <Link href={url}>
             <a className={styles.viewAll}>View all reviews</a>
           </Link>
         </div>
+      ) : (
+        <></>
       )}
       <div
         className={`${styles.reviewsContainer} ${
@@ -64,10 +66,12 @@ const BeachReviews = (props) => {
           <div className={styles.emptyState}>No reviews yet. Be the first!</div>
         )}
       </div>
-      {isCollapsed && props.reviews.length && (
+      {isCollapsed && props.reviews.length ? (
         <PrimaryButton onClick={onViewAllClick}>
           View all {props.reviews.length} reviews
         </PrimaryButton>
+      ) : (
+        <></>
       )}
     </div>
   );
