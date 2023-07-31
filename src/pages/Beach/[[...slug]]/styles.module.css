@@ -13,6 +13,13 @@
   font-weight: var(--text-weight-bold);
 }
 
+.sideMap {
+  border-radius: 16px;
+  margin-left: 16px;
+  margin-top: 16px;
+  max-width: 270px;
+}
+
 .ad {
   margin-left: 16px;
 }
@@ -36,6 +43,10 @@
 
   .innerContainer {
     border-right: none;
+  }
+
+  .sideMap {
+    display: none;
   }
 
   .carouselSpacer {

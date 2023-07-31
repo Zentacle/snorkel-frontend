@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import Rating from "components/StarRating";
-import { sendEvent } from "hooks/amplitude";
-import Shop from "models/Shop";
-import styles from "./styles.module.css";
-import Link from "next/link";
+import Rating from 'components/StarRating';
+import { sendEvent } from 'hooks/amplitude';
+import Shop from 'models/Shop';
+import styles from './styles.module.css';
+import Link from 'next/link';
 
 interface Props {
   shop: Shop;
@@ -12,7 +12,7 @@ interface Props {
 
 const ShopCard = (props: Props) => {
   const sendClickEvent = (name: string) => () => {
-    sendEvent("click__nearby_patron", {
+    sendEvent('click__nearby_shop', {
       name: name,
     });
   };
@@ -24,7 +24,7 @@ const ShopCard = (props: Props) => {
           <Link href={props.shop.url}>
             <a>
               <Image
-                src={props.shop.logo_img || "/default_hero_background.png"}
+                src={props.shop.logo_img || '/default_hero_background.png'}
                 layout="fill"
                 objectFit="cover"
                 alt={props.shop.name}
