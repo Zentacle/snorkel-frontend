@@ -18,7 +18,10 @@ const BeachReviews = (props) => {
   };
 
   const { state } = useCurrentUser();
-  const link = state.user && state.user.id ? `${url}/review` : '/login';
+  const link =
+    state.user && state.user.id
+      ? `${url}/review`
+      : `https://zentacle.app.link/Log?beach_id=${beachid}&$deeplink_path=Log?beach_id=${beachid}&utm_medium=xpromo&utm_source=xpromo&campaign=review`;
 
   const onViewAllClick = () => {
     setIsCollapse(false);
@@ -31,7 +34,7 @@ const BeachReviews = (props) => {
         <PrimaryLink
           onClick={onReviewClick}
           className={styles.reviewbutton}
-          href={`https://zentacle.app.link/Log?beach_id=${beachid}&$deeplink_path=Log?beach_id=${beachid}&utm_medium=xpromo&utm_source=xpromo&campaign=review`}
+          href={link}
         >
           Write a Review
         </PrimaryLink>
