@@ -21,6 +21,7 @@ module.exports = {
       'pbs.twimg.com',
       'www.scubadiving.com',
       'd2p1cf6997m1ir.cloudfront.net',
+      'maps.googleapis.com',
     ],
     minimumCacheTTL: 60,
   },
