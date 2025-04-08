@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
-import Head from "next/head";
+import React, { useEffect } from 'react';
+import Head from 'next/head';
 
-import Breadcrumbs from "components/Breadcrumbs";
-import Layout from "components/Layout/Layout";
-import MaxWidth from "components/MaxWidth";
-import ReviewSummary from "components/ReviewSummary";
-import ShopPageHero from "components/ShopPage/ShopPageHero";
-import ShopDetails from "components/ShopPage/ShopDetails";
-import Carousel from "components/Carousel/Carousel";
-import { useCurrentUser } from "context/usercontext";
-import { sendEvent } from "hooks/amplitude";
-import { rootDomain } from "lib/constants";
-import Beach from "models/Beach";
-import Shop from "models/Shop";
-import styles from "./styles.module.css";
+import Breadcrumbs from 'components/Breadcrumbs';
+import Layout from 'components/Layout/Layout';
+import MaxWidth from 'components/MaxWidth';
+import ReviewSummary from 'components/ReviewSummary';
+import ShopPageHero from 'components/ShopPage/ShopPageHero';
+import ShopDetails from 'components/ShopPage/ShopDetails';
+import Carousel from 'components/Carousel/Carousel';
+import { useCurrentUser } from 'context/usercontext';
+import { sendEvent } from 'hooks/amplitude';
+import { rootDomain } from 'lib/constants';
+import Shop from 'models/Shop';
+import styles from './styles.module.css';
 
 interface Context {
   params: {
@@ -25,7 +24,7 @@ interface Context {
 export async function getStaticProps(context: Context) {
   let shopData: any = fetch(`${rootDomain}/shop/get/${context.params.id}`);
   let nearby: any = fetch(
-    `${rootDomain}/shop/nearby?shop_id=${context.params.id}`
+    `${rootDomain}/shop/nearby?shop_id=${context.params.id}`,
   );
 
   shopData = await shopData.then((res: any) => {
@@ -67,7 +66,7 @@ export async function getStaticPaths() {
         name: `${shop.url}`,
       },
     })),
-    fallback: "blocking",
+    fallback: 'blocking',
   };
 }
 
@@ -83,8 +82,8 @@ function ShopPage(props: Props) {
 
   useEffect(() => {
     if (currentUser) {
-      sendEvent("page_view", {
-        type: "dive_shop",
+      sendEvent('page_view', {
+        type: 'dive_shop',
         site_id: shop.id,
         site_name: shop.name,
       });
@@ -144,6 +143,7 @@ function ShopPage(props: Props) {
           <div className={styles.innerContainer}>
             <ShopDetails
               name={shop.name}
+              email={shop.email}
               phone={shop.phone}
               address1={shop.address1}
               address2={shop.address2}
@@ -153,6 +153,8 @@ function ShopPage(props: Props) {
               state={shop.state}
               country={shop.country_name}
               full_address={shop.full_address}
+              website={shop.website}
+              json_data={shop.padi_data}
             />
             <ReviewSummary
               ratings={{ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }}

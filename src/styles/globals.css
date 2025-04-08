@@ -4,6 +4,7 @@
   --text-weight-bold: 700;
   --text-weight-normal: 400;
   --primary-color: #0087D3;
+  --secondary-color: #0087D3;
   --background-color: #EAEAEA;
   --background-color-light: white;
   --background-color-dark: rgb(124, 124, 124);
@@ -12,6 +13,13 @@
 
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --box-shadow: 0px 2px 8px rgba(0, 0, 0, .5);
+
+  --accent-color: #00b4d8;
+  --light-color: #caf0f8;
+  --dark-color: #03045e;
+  --text-color: #333;
+  --light-text: #f8f9fa;
+  --border-radius: 8px;
 }
 
 html,
