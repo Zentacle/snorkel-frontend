@@ -73,7 +73,7 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
     <div className={styles.container}>
       <div className={styles.shopHeader}>
         <div className={styles.shopInfo}>
-          {!!json_data.features && (
+          {!!json_data.features?.length && (
             <div className={styles.badge}>PADI 5 Star IDC</div>
           )}
           <div className={styles.shopAddress}>{props.full_address}</div>
@@ -146,7 +146,9 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
               </p>
               <div className={styles.tagList}>
                 {json_data.rentals?.map((rental) => (
-                  <span className={styles.tag}>{rental}</span>
+                  <span key={rental} className={styles.tag}>
+                    {rental}
+                  </span>
                 ))}
               </div>
             </div>
@@ -161,7 +163,9 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
               </p>
               <div className={styles.tagList}>
                 {json_data.diveTypes?.map((dive) => (
-                  <span className={styles.tag}>{dive}</span>
+                  <span key={dive} className={styles.tag}>
+                    {dive}
+                  </span>
                 ))}
               </div>
             </div>
@@ -183,7 +187,9 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
               <h3 className={styles.sectionTitle}>Languages</h3>
               <div className={styles.tagList}>
                 {json_data.languages?.map((language) => (
-                  <span className={styles.tag}>{language}</span>
+                  <span key={language} className={styles.tag}>
+                    {language}
+                  </span>
                 ))}
               </div>
             </div>
@@ -210,7 +216,9 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
               <h2 className={styles.sectionTitle}>Our PADI Courses</h2>
               <div className={styles.coursesList}>
                 {json_data.coursesOffered.map((course) => (
-                  <div className={styles.courseItem}>{course}</div>
+                  <div key={course} className={styles.courseItem}>
+                    {course}
+                  </div>
                 ))}
               </div>
             </div>
