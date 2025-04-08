@@ -91,6 +91,7 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
               <a
                 href={props.website}
                 target="_blank"
+                rel="noreferrer"
                 style={{ textDecoration: 'none' }}
               >
                 {props.website}
@@ -200,8 +201,9 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
           <div className={styles.aboutSection}>
             <h2 className={styles.sectionTitle}>Gallery</h2>
             <div className="gallery">
-              {json_data.images?.map((image) => (
-                <div className="gallery-item">
+              {json_data.images?.map((image, index) => (
+                <div key={index} className="gallery-item">
+                  {/** TODO: fix index as key */}
                   <img
                     src="/api/placeholder/150/150"
                     alt="Dive shop gallery image"
