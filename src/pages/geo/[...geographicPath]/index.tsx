@@ -41,26 +41,10 @@ interface Props {
 
 export async function getStaticProps(context: any) {
   const { geographicPath } = context.params;
+  const path = geographicPath.join('/');
 
-  // For now, use the existing API endpoints until the new geographic endpoints are ready
-  // Convert geographic path to legacy parameters
-  const country = geographicPath[0];
-  const area_one = geographicPath[1];
-  const area_two = geographicPath[2];
-  const locality = geographicPath[3];
-
-  // Build query string for existing API
-  const queryParams = new URLSearchParams();
-  queryParams.append('sort', 'top');
-  queryParams.append('limit', '100');
-
-  if (country) queryParams.append('country', country);
-  if (area_one) queryParams.append('area_one', area_one);
-  if (area_two) queryParams.append('area_two', area_two);
-  if (locality) queryParams.append('locality', locality);
-
-  // Use existing spots API
-  const res = await fetch(`${rootDomain}/spots/get?${queryParams.toString()}`);
+  // Use the new geographic API
+  const res = await fetch(`${rootDomain}/loc/${path}`);
 
   if (!res.ok) {
     return {
@@ -71,7 +55,7 @@ export async function getStaticProps(context: any) {
   const data = await res.json();
   const props: Partial<Props> = {};
 
-  props.default = data.data || [];
+  props.default = data.spots || [];
   props.area = data.area;
   props.geographicPath = geographicPath;
 
