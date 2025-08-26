@@ -15,7 +15,7 @@ const TypeAheadDropDown = (props) => {
     const [suggestions, setSuggestions] = React.useState([])
 
     const fetchTypeahead = React.useCallback(debounce(
-        (query) => fetch(`${rootDomain}/search/typeahead?query=${query}`)
+        (query) => fetch(`${rootDomain}/search/typeahead?query=${query}&include_geographic=true`)
             .then(response => {
                 return response.json();
             }).then(data => {

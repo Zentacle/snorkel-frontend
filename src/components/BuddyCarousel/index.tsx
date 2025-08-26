@@ -21,7 +21,7 @@ interface Buddy {
 }
 
 interface Props {
-  loc: string;
+  loc?: string;
   buddies: Buddy[];
 }
 
