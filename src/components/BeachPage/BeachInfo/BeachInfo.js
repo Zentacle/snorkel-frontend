@@ -42,47 +42,12 @@ const BeachInfo = ({
   tides,
 }) => {
   const [tidesArray, setTides] = React.useState(tides);
-  const [cachedMapUrl, setCachedMapUrl] = React.useState(null);
-  const [mapLoading, setMapLoading] = React.useState(false);
 
   React.useEffect(() => {
     setTides([...tidesArray]);
   }, []);
 
-  // Fetch cached map when component mounts and coordinates are available
-  React.useEffect(() => {
-    if (latitude && longitude && !entry_map) {
-      setMapLoading(true);
-
-      const fetchCachedMap = async () => {
-        try {
-          const response = await fetch(
-            `/api/static-map?lat=${latitude}&lng=${longitude}&size=600x300&scale=2&maptype=terrain`
-          );
-
-          if (response.ok) {
-            const data = await response.json();
-            setCachedMapUrl(data.url);
-          } else {
-            console.error('Failed to fetch cached map:', response.statusText);
-            // Fallback to direct Google Maps URL if caching fails
-            setCachedMapUrl(`https://maps.googleapis.com/maps/api/staticmap?size=600x300&scale=2&maptype=terrain&key=AIzaSyDoZQ9uSyfz225xagIK4Ygi7lo2PBJhT_c&style=feature:poi|visibility:off&markers=color:blue%7Clabel:1%7C${latitude},${longitude}`);
-          }
-        } catch (error) {
-          console.error('Error fetching cached map:', error);
-          // Fallback to direct Google Maps URL if caching fails
-          setCachedMapUrl(`https://maps.googleapis.com/maps/api/staticmap?size=600x300&scale=2&maptype=terrain&key=AIzaSyDoZQ9uSyfz225xagIK4Ygi7lo2PBJhT_c&style=feature:poi|visibility:off&markers=color:blue%7Clabel:1%7C${latitude},${longitude}`);
-        } finally {
-          setMapLoading(false);
-        }
-      };
-
-      fetchCachedMap();
-    }
-  }, [latitude, longitude, entry_map]);
-
-  // Fallback to direct Google Maps URL (for backward compatibility)
-  const fallbackMapUrl = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&scale=2&maptype=terrain&key=AIzaSyDoZQ9uSyfz225xagIK4Ygi7lo2PBJhT_c&style=feature:poi|visibility:off&markers=color:blue%7Clabel:1%7C${latitude},${longitude}`;
+  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&scale=2&maptype=terrain&key=AIzaSyDoZQ9uSyfz225xagIK4Ygi7lo2PBJhT_c&style=feature:poi|visibility:off&markers=color:blue%7Clabel:1%7C${latitude},${longitude}`;
 
   return (
     <div className={styles.container}>
@@ -111,8 +76,8 @@ const BeachInfo = ({
         ))}
       {latitude && !entry_map && (
         <EntryMap
-          src={cachedMapUrl || fallbackMapUrl}
-          href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=beach_map&$desktop_url=${cachedMapUrl || fallbackMapUrl}`}
+          src={mapUrl}
+          href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=beach_map&$desktop_url=${mapUrl}`}
         />
       )}
       {entry_map && (
