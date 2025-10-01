@@ -8,9 +8,13 @@
     "start": "NODE_OPTIONS='-r @newrelic/next' next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
-    "nextdev": "next dev"
+    "nextdev": "next dev",
+    "setup-maps": "node scripts/setup-static-maps.js",
+    "batch-maps": "node scripts/batch-generate-maps.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.450.0",
+    "@aws-sdk/s3-request-presigner": "^3.450.0",
     "@material-ui/icons": "^4.11.3",
     "@newrelic/next": "^0.4.0",
     "@radix-ui/react-dropdown-menu": "^2.0.1",
