@@ -164,7 +164,7 @@ const Beach = (props) => {
       }-star rated scuba dive and snorkel site in ${beach.location_city}.`;
 
   const pageTitle = `${beach.name} in ${beach.location_city} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`;
-  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&scale=2&maptype=terrain&key=AIzaSyDoZQ9uSyfz225xagIK4Ygi7lo2PBJhT_c&style=feature:poi|visibility:off&markers=color:blue%7Clabel:1%7C${beach.latitude},${beach.longitude}`;
+  const mapUrl = `${rootDomain}/maps/static?latitude=${beach.latitude}&longitude=${beach.longitude}`;
 
   return (
     <Layout isShorediving={props.isShorediving}>
