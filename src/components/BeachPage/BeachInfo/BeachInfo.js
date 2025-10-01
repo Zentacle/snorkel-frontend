@@ -9,6 +9,7 @@ import VizDepth from 'components/BeachPage/VizDepth/VizDepth';
 import Patron from 'components/Patron';
 import SectionTitle from 'components/SectionTitle';
 import Tag from 'components/Tag';
+import { rootDomain } from 'lib/constants';
 
 const EntryMap = ({ href, src }) => (
   <a className={styles.entryMap} href={href}>
@@ -47,7 +48,7 @@ const BeachInfo = ({
     setTides([...tidesArray]);
   }, []);
 
-  const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&scale=2&maptype=terrain&key=AIzaSyDoZQ9uSyfz225xagIK4Ygi7lo2PBJhT_c&style=feature:poi|visibility:off&markers=color:blue%7Clabel:1%7C${latitude},${longitude}`;
+  const mapUrl = `${rootDomain}/maps/static?latitude=${latitude}&longitude=${longitude}`;
 
   return (
     <div className={styles.container}>
