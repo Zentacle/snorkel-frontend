@@ -9,8 +9,9 @@ import Shop from "models/Shop";
 import styles from "./styles.module.css";
 
 interface Props {
-  index: number;
+  index?: number;
   info: Beach | Shop;
+  beach?: Beach;
 }
 
 const Location = (props: Props) => {
@@ -29,7 +30,7 @@ const Location = (props: Props) => {
       </div>
       <div className={styles.locationInfoContainer}>
         <h2 className={styles.spotName}>
-          #{props.index + 1} - {props.info.name}
+          {props.index !== undefined ? `#${props.index + 1} - ` : ''}{props.info.name}
         </h2>
         <h3 className={styles.location}>
           {props.info.locality && props.info.locality.url ? (
