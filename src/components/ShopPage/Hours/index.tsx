@@ -13,7 +13,7 @@ export default function Hours(props: any) {
         let finalTime = ''
         let timeValues = time.split(":")
         let milHours = parseInt(timeValues[0])
-        let standardHours = milHours % 12
+        let standardHours = milHours % 12 || 12
 
 
         finalTime = standardHours.toString().trimEnd() + ":" + timeValues[1].padStart(2, '0')
