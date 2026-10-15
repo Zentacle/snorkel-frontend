@@ -9,4 +9,5 @@ export default interface Location {
   locality?: Location;
   map_image_url?: string;
   description?: string;
+  num_spots?: number;
 }
