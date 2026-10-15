@@ -97,9 +97,15 @@ export const diveSite = (beach: any, reviews: Review[] = []) => {
       reviewBody: review.text,
     }));
 
+  const rating = aggregateRating(beach.rating, beach.num_reviews);
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'TouristAttraction',
+    // Google only shows review stars for certain types (LocalBusiness, not
+    // TouristAttraction). Rated dive sites carried LocalBusiness markup
+    // before, and results with stars earned ~14% of all search clicks, so
+    // keep them star-eligible while also describing them accurately.
+    '@type': rating ? ['TouristAttraction', 'LocalBusiness'] : 'TouristAttraction',
     name: beach.name,
     url: `${SITE_URL}${beach.url}`,
     image: beach.hero_img || undefined,
@@ -115,7 +121,7 @@ export const diveSite = (beach: any, reviews: Review[] = []) => {
     touristType: ['Scuba divers', 'Snorkelers'],
     isAccessibleForFree: true,
     hasMap: beach.location_google || undefined,
-    aggregateRating: aggregateRating(beach.rating, beach.num_reviews),
+    aggregateRating: rating,
     review: reviewItems.length ? reviewItems : undefined,
   };
 };
