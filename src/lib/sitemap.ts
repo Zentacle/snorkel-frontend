@@ -12,9 +12,9 @@ const API_URL = 'https://www.zentacle.com/api';
 // per-sitemap indexing report useful.
 export const URLS_PER_SITEMAP = 5000;
 
-// Location pages listing fewer spots than this are thin and are noindexed,
-// so they are left out of the sitemap.
-const MIN_SPOTS_FOR_LOCATION_PAGE = 3;
+// Location pages listing fewer spots/shops than this are thin and are
+// noindexed, so they are left out of the sitemap.
+const MIN_LISTINGS_FOR_LOCATION_PAGE = 3;
 
 const LOCATION_LEVELS = ['country', 'area_one', 'area_two', 'locality'];
 
@@ -63,10 +63,11 @@ export const fetchLocations = async (shops: boolean): Promise<Location[]> => {
   );
   return levels
     .flat()
+    // with shops=true, num_spots is the number of shops
     .filter(
       (location: Location) =>
         location.url &&
-        (shops || (location.num_spots ?? 0) >= MIN_SPOTS_FOR_LOCATION_PAGE),
+        (location.num_spots ?? 0) >= MIN_LISTINGS_FOR_LOCATION_PAGE,
     );
 };
 
