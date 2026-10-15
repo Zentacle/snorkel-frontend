@@ -12,9 +12,10 @@ const API_URL = 'https://www.zentacle.com/api';
 // per-sitemap indexing report useful.
 export const URLS_PER_SITEMAP = 5000;
 
-// Location pages listing fewer spots/shops than this are thin and are
-// noindexed, so they are left out of the sitemap.
-const MIN_LISTINGS_FOR_LOCATION_PAGE = 3;
+// Empty location pages are noindexed, so they are left out of the sitemap.
+// Pages with only 1-2 listings stay in: Search Console showed 140 of them
+// earning ~1,900 clicks, so they get improved rather than hidden.
+const MIN_LISTINGS_FOR_LOCATION_PAGE = 1;
 
 const LOCATION_LEVELS = ['country', 'area_one', 'area_two', 'locality'];
 

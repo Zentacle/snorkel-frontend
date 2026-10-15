@@ -20,11 +20,11 @@ import hasPatron from "lib/hasPatron";
 import LinkifyText from "controls/LinkifyText";
 
 // TODO - fix type of context
-// Location pages listing fewer shops than this are thin, near-duplicate
-// templates. Keep them out of the index (their links are still followed)
-// so crawl budget goes to the pages with real content. The sitemap applies
-// the same threshold.
-const MIN_LISTINGS_TO_INDEX = 3;
+// Location pages with no shops have nothing to rank for. Keep them out of
+// the index (their links are still followed). Pages with 1-2 shops stay
+// indexed: many of them earn search traffic. The sitemap applies the same
+// threshold.
+const MIN_LISTINGS_TO_INDEX = 1;
 
 export async function getStaticProps(context: any) {
   const country_short_name: string = context.params.country;
