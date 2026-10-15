@@ -19,10 +19,10 @@ export async function getServerSideProps(context) {
       }
     } else {
       return {
-        props: {}
+        notFound: true,
       }
     }
-  })
+  }).catch(() => ({ notFound: true }))
 }
 
 const Page = () => {

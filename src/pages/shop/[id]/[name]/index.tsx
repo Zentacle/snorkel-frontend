@@ -34,14 +34,14 @@ export async function getStaticProps(context: Context) {
         errorCode: 404,
       };
     }
-    return res.json();
+    return res.json().catch(() => null);
   });
 
-  nearby = await nearby.then((res: any) => {
-    return res.json();
-  });
+  nearby = await nearby
+    .then((res: any) => res.json())
+    .catch(() => ({}));
 
-  if (!shopData.data || (shopData.data && shopData.data.errorCode)) {
+  if (!shopData || !shopData.data || shopData.errorCode) {
     return {
       notFound: true,
     };
@@ -59,7 +59,7 @@ export async function getStaticProps(context: Context) {
   return {
     props: {
       shop: shopData.data,
-      nearbyShops: nearby.data,
+      nearbyShops: nearby.data || [],
     }, // will be passed to the page component as props
     revalidate: 3600,
   };

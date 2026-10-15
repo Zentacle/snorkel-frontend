@@ -14,7 +14,7 @@ export async function getStaticProps(context) {
             'Content-Type': 'application/json'
         }
     })
-    const beach_data = await res.json()
+    const beach_data = await res.json().catch(() => null)
 
     const response = await fetch(`${rootDomain}/reviews/get?sd_review_id=${review_id}`, {
         method: 'GET',
@@ -22,9 +22,9 @@ export async function getStaticProps(context) {
             'Content-Type': 'application/json'
         }
     })
-    const review_data = await response.json();
+    const review_data = await response.json().catch(() => ({}));
 
-    if (!beach_data) {
+    if (!beach_data || !beach_data.data) {
         return {
             notFound: true,
         }
@@ -50,7 +50,7 @@ export async function getStaticProps(context) {
     return {
         props: {
             'beach': beach_data.data,
-            'reviews': review_data.data,
+            'reviews': review_data.data || [],
             'tides': [],
             'isShorediving': true,
             'isSingularReview': true,

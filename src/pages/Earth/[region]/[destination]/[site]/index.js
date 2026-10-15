@@ -10,8 +10,8 @@ export async function getServerSideProps(context) {
           'Content-Type': 'application/json'
       }
   })
-  const beach_data = await res.json()
-  if (!beach_data) {
+  const beach_data = await res.json().catch(() => null)
+  if (!beach_data || !beach_data.data || !beach_data.data.url) {
       return {
           notFound: true,
       }
