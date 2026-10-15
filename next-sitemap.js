@@ -5,6 +5,7 @@ module.exports = {
     '/shorediving-sitemap.xml',
     '/server-sitemap.xml',
     '/sitemap-shop.xml',
+    '/sitemaps/*',
     '/setpassword',
     '/setusername',
     '/404',
@@ -24,7 +25,6 @@ module.exports = {
   robotsTxtOptions: {
     additionalSitemaps: [
       'https://www.zentacle.com/server-sitemap.xml',
-      'https://www.zentacle.com/sitemap-shop.xml',
        // <==== Add here
     ],
   },

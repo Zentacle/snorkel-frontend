@@ -13,4 +13,7 @@ export default interface Beach {
   rating: number;
   locality?: Location;
   num_reviews: number;
+  updated?: string;
+  last_review_date?: string;
+  is_deleted?: boolean;
 }
