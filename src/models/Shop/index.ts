@@ -1,5 +1,21 @@
 import Location from 'models/Location';
 
+export interface ShopHours {
+  shopDayName: string;
+  shopHourOpen: string;
+  shopHourClose: string;
+}
+
+export interface ShopPadiData {
+  coursesOffered?: string[];
+  images?: string[];
+  languages?: string[];
+  rentals?: string[];
+  diveTypes?: string[];
+  features?: string[];
+  padiRating?: string;
+}
+
 export default interface Shop {
   name: string;
   email?: string;
@@ -18,7 +34,9 @@ export default interface Shop {
   owner_user_id?: string;
   stamp_uri?: string;
   phone?: string;
-  hours?: string;
+  whatsapp?: string;
+  padi_store_id?: string;
+  hours?: ShopHours[] | null;
   country_name?: string;
   full_address?: string;
   description: string;
@@ -31,5 +49,5 @@ export default interface Shop {
   hero_img?: string;
   rating: number;
   location_city: string;
-  padi_data: any;
+  padi_data: ShopPadiData | null;
 }

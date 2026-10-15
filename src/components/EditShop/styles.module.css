@@ -40,3 +40,88 @@
     max-width: 400px;
 }
 
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.viewLink {
+    text-align: center;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.section {
+    border-top: 1px solid #ececec;
+    padding-top: 16px;
+    margin-top: 8px;
+}
+
+.sectionTitle {
+    font-size: 18px;
+    font-weight: var(--text-weight-bold);
+    margin-bottom: 4px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    column-gap: 16px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: var(--text-weight-bold);
+}
+
+.hint {
+    font-size: 12px;
+    color: grey;
+}
+
+.input {
+    width: 100%;
+    border-radius: 8px;
+    height: 42px;
+    border: 1px solid #cecece;
+    padding: 10px;
+    margin: 12px 0;
+}
+
+.dayRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.dayName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 120px;
+    font-size: 14px;
+}
+
+.time {
+    border: 1px solid #cecece;
+    border-radius: 8px;
+    padding: 6px 8px;
+}
+
+.time:disabled {
+    opacity: 0.4;
+}
+
+.submit {
+    margin-top: 16px;
+}

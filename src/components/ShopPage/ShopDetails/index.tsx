@@ -4,20 +4,14 @@ import Map from 'icons/Map';
 import Hours from '../Hours';
 import Phone from 'icons/Phone';
 import Calendar from 'icons/Calendar';
+import { ShopPadiData } from 'models/Shop';
 
-interface JsonData {
-  coursesOffered?: string[];
-  images?: string[];
-  languages?: string[];
-  rentals?: string[];
-  diveTypes?: string[];
-  features?: string[];
-}
 
 interface Props {
   name: string;
   email?: string;
   phone?: string;
+  whatsapp?: string;
   address1?: string;
   address2?: string;
   hours: any;
@@ -27,10 +21,17 @@ interface Props {
   country?: string;
   full_address?: string;
   website?: string;
-  json_data: JsonData;
+  json_data: ShopPadiData | null;
 }
 
-function ShopDetails({ json_data = {}, ...props }: Props) {
+function ShopDetails({ json_data: padiData, ...props }: Props) {
+  const json_data: ShopPadiData = padiData || {};
+  const whatsappDigits = props.whatsapp?.replace(/\D/g, '');
+  // Shops never edited since padiRating existed keep the old badge
+  const padiBadge =
+    json_data.padiRating ??
+    (json_data.features?.length ? 'PADI 5 Star IDC' : '');
+
   const renderHours = () => {
     let currentDay = new Date().getDay();
     let dayString = '';
@@ -73,15 +74,26 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
     <div className={styles.container}>
       <div className={styles.shopHeader}>
         <div className={styles.shopInfo}>
-          {!!json_data.features?.length && (
-            <div className={styles.badge}>PADI 5 Star IDC</div>
-          )}
+          {!!padiBadge && <div className={styles.badge}>{padiBadge}</div>}
           <div className={styles.shopAddress}>{props.full_address}</div>
           <div className={styles.shopContact}>
             <div className={styles.contactItem}>
               <span className={styles.icon}></span>
               <span>{props.phone}</span>
             </div>
+            {whatsappDigits && (
+              <div className={styles.contactItem}>
+                <span className={styles.icon}></span>
+                <a
+                  href={`https://wa.me/${whatsappDigits}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ textDecoration: 'none' }}
+                >
+                  WhatsApp {props.whatsapp}
+                </a>
+              </div>
+            )}
             <div className={styles.contactItem}>
               <span className={styles.icon}></span>
               <span>{props.email}</span>
@@ -136,6 +148,7 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
           </div>
 
           <div className={styles.featuresGrid}>
+            {!!json_data.rentals?.length && (
             <div className={styles.featureCard}>
               <div className={styles.featureTitle}>
                 <div className={styles.featureIcon}>●</div>
@@ -153,6 +166,7 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
                 ))}
               </div>
             </div>
+            )}
 
             <div className={styles.featureCard}>
               <div className={styles.featureTitle}>
@@ -235,7 +249,7 @@ function ShopDetails({ json_data = {}, ...props }: Props) {
             <span className={styles.title}>Hours</span>
             <div className={styles.description}>
               <div>
-                {props.hours ? (
+                {props.hours?.length ? (
                   <Hours hours={props.hours} />
                 ) : (
                   <div>No hours reported</div>
