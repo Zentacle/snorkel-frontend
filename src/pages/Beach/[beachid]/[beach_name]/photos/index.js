@@ -13,10 +13,29 @@ export async function getServerSideProps(context) {
     const beach_id = context.query.beachid;
     const beach = await fetch(`${rootDomain}/spots/get?beach_id=${beach_id}`)
         .then(response => {
+            if (!response.ok) {
+                return {};
+            }
             return response.json();
         }).then(data => {
             return data.data;
         })
+
+    if (!beach) {
+        return {
+            notFound: true,
+        };
+    }
+
+    const photosUrl = `${beach.url}/photos`;
+    if (`/Beach/${beach_id}/${context.query.beach_name}/photos` != photosUrl) {
+        return {
+            redirect: {
+                destination: photosUrl,
+                permanent: true,
+            },
+        };
+    }
 
     const beachImages = await fetch(`${rootDomain}/beachimages?beach_id=${beach_id}`)
         .then(response => {
@@ -56,6 +75,7 @@ const PhotoPage = (props) => {
                 <meta property="og:description" content={description} key="og-description" />
                 <meta property="og:image" content={hero_img} key="og-image" />
                 <meta name="description" content={description} key="description" />
+                <link rel="canonical" href={`https://www.zentacle.com${url}/photos`} key="canonical" />
                 <script async defer data-pin-hover="true" src="//assets.pinterest.com/js/pinit.js"></script>
             </Head>
             <MaxWidth>

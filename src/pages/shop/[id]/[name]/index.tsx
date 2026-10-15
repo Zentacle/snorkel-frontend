@@ -46,6 +46,15 @@ export async function getStaticProps(context: Context) {
     };
   }
 
+  if (`/shop/${context.params.id}/${context.params.name}` != shopData.data.url) {
+    return {
+      redirect: {
+        destination: shopData.data.url,
+        permanent: true,
+      },
+    };
+  }
+
   return {
     props: {
       shop: shopData.data,
