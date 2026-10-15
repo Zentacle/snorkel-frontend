@@ -3,6 +3,7 @@ import Error from 'next/error';
 import Cookies from 'js-cookie';
 
 import { rootDomain } from 'lib/constants';
+import { diveSiteDescription } from 'lib/metaDescription';
 import { breadcrumbList, diveSite, jsonLd } from 'lib/structuredData';
 import { sendEvent } from 'hooks/amplitude';
 import { useCurrentUser } from 'context/usercontext';
@@ -164,13 +165,7 @@ const Beach = (props) => {
 
   let canonicalURL = `https://www.zentacle.com${beach.url}`;
 
-  const description = beach.description
-    ? `${beach.description} ${beach.name} is a ${
-        Math.round(beach.rating * 100) / 100
-      }-star rated scuba dive and snorkel site in ${beach.location_city}.`
-    : `${beach.name} is a ${
-        Math.round(beach.rating * 100) / 100
-      }-star rated scuba dive and snorkel site in ${beach.location_city}.`;
+  const description = diveSiteDescription(beach);
 
   const pageTitle = `${beach.name} in ${beach.location_city} | ${siteName} - Scuba Diving and Snorkel Reviews, Maps, and Photos`;
   const mapUrl = `${rootDomain}/maps/static?latitude=${beach.latitude}&longitude=${beach.longitude}`;

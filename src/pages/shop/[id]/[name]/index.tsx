@@ -11,6 +11,7 @@ import Carousel from 'components/Carousel/Carousel';
 import { useCurrentUser } from 'context/usercontext';
 import { sendEvent } from 'hooks/amplitude';
 import { rootDomain } from 'lib/constants';
+import { diveShopDescription } from 'lib/metaDescription';
 import { breadcrumbList, diveShop, jsonLd } from 'lib/structuredData';
 import Shop from 'models/Shop';
 import styles from './styles.module.css';
@@ -102,7 +103,7 @@ function ShopPage(props: Props) {
   }, [currentUser, shop.id, shop.name]);
 
   const canonicalURL = `https://www.zentacle.com${props.shop.url}`;
-  const description = props.shop.description;
+  const description = diveShopDescription(props.shop);
   const pageTitle = `${props.shop.name} in ${props.shop.country_name} - Zentacle`;
 
   return (
