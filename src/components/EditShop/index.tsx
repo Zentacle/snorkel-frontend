@@ -292,7 +292,6 @@ const ShopEditComponent = () => {
                 <h2 className={styles.sectionTitle}>Contact</h2>
                 <div className={styles.grid}>
                     {text('phone', 'Main phone', undefined, 'tel')}
-                    {text('whatsapp', 'Mobile / WhatsApp', undefined, 'tel')}
                     {text('email', 'Email', undefined, 'email')}
                     {text('website', 'Website', undefined, 'url')}
                     {text('fareharbor_url', 'FareHarbor booking URL', undefined, 'url')}

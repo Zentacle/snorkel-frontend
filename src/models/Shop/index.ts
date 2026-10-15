@@ -34,7 +34,6 @@ export default interface Shop {
   owner_user_id?: string;
   stamp_uri?: string;
   phone?: string;
-  whatsapp?: string;
   padi_store_id?: string;
   hours?: ShopHours[] | null;
   country_name?: string;

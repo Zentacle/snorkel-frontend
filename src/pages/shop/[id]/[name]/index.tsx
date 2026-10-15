@@ -145,7 +145,6 @@ function ShopPage(props: Props) {
               name={shop.name}
               email={shop.email}
               phone={shop.phone}
-              whatsapp={shop.whatsapp}
               address1={shop.address1}
               address2={shop.address2}
               hours={shop.hours}

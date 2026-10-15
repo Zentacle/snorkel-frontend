@@ -11,7 +11,6 @@ interface Props {
   name: string;
   email?: string;
   phone?: string;
-  whatsapp?: string;
   address1?: string;
   address2?: string;
   hours: any;
@@ -26,7 +25,6 @@ interface Props {
 
 function ShopDetails({ json_data: padiData, ...props }: Props) {
   const json_data: ShopPadiData = padiData || {};
-  const whatsappDigits = props.whatsapp?.replace(/\D/g, '');
   // Shops never edited since padiRating existed keep the old badge
   const padiBadge =
     json_data.padiRating ??
@@ -81,19 +79,6 @@ function ShopDetails({ json_data: padiData, ...props }: Props) {
               <span className={styles.icon}></span>
               <span>{props.phone}</span>
             </div>
-            {whatsappDigits && (
-              <div className={styles.contactItem}>
-                <span className={styles.icon}></span>
-                <a
-                  href={`https://wa.me/${whatsappDigits}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ textDecoration: 'none' }}
-                >
-                  WhatsApp {props.whatsapp}
-                </a>
-              </div>
-            )}
             <div className={styles.contactItem}>
               <span className={styles.icon}></span>
               <span>{props.email}</span>
