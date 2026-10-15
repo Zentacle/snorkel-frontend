@@ -6,7 +6,7 @@ import Location from "models/Location";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // Method to source urls from cms
-  let res = await fetch('https://zentacle.com/api/shop/get?limit=none')
+  let res = await fetch('https://www.zentacle.com/api/shop/get?limit=none')
   let data = await res.json()
 
   const shop_fields = data.data.map((location: Location) => (
@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   ))
 
-  res = await fetch('https://zentacle.com/api/locality/country?limit=none&shops=true')
+  res = await fetch('https://www.zentacle.com/api/locality/country?limit=none&shops=true')
   data = await res.json()
 
   const country_shop_fields = data.data.map((location: Location) => (
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   ))
 
-  res = await fetch('https://zentacle.com/api/locality/area_one?limit=none&shops=true')
+  res = await fetch('https://www.zentacle.com/api/locality/area_one?limit=none&shops=true')
   data = await res.json()
 
   const area_one_shop_fields = data.data.map((location: Location) => (
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   ))
 
-  res = await fetch('https://zentacle.com/api/locality/area_two?limit=none&shops=true')
+  res = await fetch('https://www.zentacle.com/api/locality/area_two?limit=none&shops=true')
   data = await res.json()
 
   const area_two_shop_fields = data.data.map((location: Location) => (
@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   ))
 
-  res = await fetch('https://zentacle.com/api/locality/locality?limit=none&shops=true')
+  res = await fetch('https://www.zentacle.com/api/locality/locality?limit=none&shops=true')
   data = await res.json()
 
   const locality_shop_fields = data.data.map((location: Location) => (
