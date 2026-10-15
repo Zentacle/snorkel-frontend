@@ -20,6 +20,12 @@ import hasPatron from "lib/hasPatron";
 import LinkifyText from "controls/LinkifyText";
 
 // TODO - fix type of context
+// Location pages listing fewer shops than this are thin, near-duplicate
+// templates. Keep them out of the index (their links are still followed)
+// so crawl budget goes to the pages with real content. The sitemap applies
+// the same threshold.
+const MIN_LISTINGS_TO_INDEX = 3;
+
 export async function getStaticProps(context: any) {
   const country_short_name: string = context.params.country;
   const props: Partial<Props> = {};
@@ -176,6 +182,9 @@ const Home = (props: Props) => {
           key="og:image"
         />
         <meta name="description" content={description} key="description" />
+        {props.default.length < MIN_LISTINGS_TO_INDEX && (
+          <meta name="robots" content="noindex, follow" key="robots" />
+        )}
         {props.area.url && (
           <link
             rel="canonical"
