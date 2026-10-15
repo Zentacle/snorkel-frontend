@@ -49,4 +49,5 @@ export default interface Shop {
   rating: number;
   location_city: string;
   padi_data: ShopPadiData | null;
+  updated?: string;
 }

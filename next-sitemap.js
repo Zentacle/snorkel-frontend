@@ -5,6 +5,8 @@ module.exports = {
     '/shorediving-sitemap.xml',
     '/server-sitemap.xml',
     '/sitemap-shop.xml',
+    '/sitemap-index.xml',
+    '/sitemaps/*',
     '/setpassword',
     '/setusername',
     '/404',
