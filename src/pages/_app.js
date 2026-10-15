@@ -2,13 +2,35 @@ import React, { useEffect } from 'react';
 import { initAmplitude, setAmplitudeUserId } from 'hooks/amplitude';
 import { setGAUserID } from 'lib/ga';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import '../styles/globals.css'
 import { UserProvider, useCurrentUser } from 'src/context/usercontext';
 import { clientSideDomain } from "src/lib/constants";
 import EmailBanner from 'components/EmailBanner';
 
+// Account, form and tool pages that have no search value. They stay
+// crawlable (so links on them are followed) but are kept out of the index.
+const NOINDEX_ROUTES = [
+  '/login',
+  '/register',
+  '/requestpassword',
+  '/resetpassword',
+  '/setpassword',
+  '/setusername',
+  '/review',
+  '/duplicates',
+  '/search',
+  '/add/spot',
+  '/Beach/[beachid]/[beach_name]/review',
+  '/Beach/[beachid]/[beach_name]/edit',
+  '/Beach/sd/[sd_id]/review',
+  '/shop/[id]/[name]/edit',
+];
+
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  const noindex = NOINDEX_ROUTES.includes(router.pathname);
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -22,6 +44,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        {noindex && <meta name="robots" content="noindex, follow" key="robots" />}
         <meta property="og:type" content="website" key="og:type" />
         <meta name="twitter:card" content="summary_large_image" key="twitter-card"></meta>
         <meta name="apple-itunes-app" content="app-id=1611242564" key="apple-app"></meta>

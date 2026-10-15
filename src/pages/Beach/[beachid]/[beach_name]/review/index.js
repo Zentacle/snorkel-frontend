@@ -29,9 +29,9 @@ const Review = () => {
     return (
         <Layout>
             <Head>
-                <title key="title">Leave a review for {beach.name}!</title>
-                <meta property="og:title" content={`Leave a review for ${beach.name}`} key="og-title" />
-                <link rel="canonical" href={`https://www.zentacle.com${beach.url}`} />
+                <title key="title">{beach.name ? `Leave a review for ${beach.name}!` : 'Leave a review | Zentacle'}</title>
+                {beach.name && <meta property="og:title" content={`Leave a review for ${beach.name}`} key="og-title" />}
+                {beach.url && <link rel="canonical" href={`https://www.zentacle.com${beach.url}`} key="canonical" />}
             </Head>
             <ReviewPage
                 name={beach.name}
