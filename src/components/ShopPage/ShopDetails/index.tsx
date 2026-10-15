@@ -5,6 +5,7 @@ import Hours from '../Hours';
 import Phone from 'icons/Phone';
 import Calendar from 'icons/Calendar';
 import { ShopPadiData } from 'models/Shop';
+import { getPadiBadge } from 'lib/padi';
 
 
 interface Props {
@@ -25,10 +26,7 @@ interface Props {
 
 function ShopDetails({ json_data: padiData, ...props }: Props) {
   const json_data: ShopPadiData = padiData || {};
-  // Shops never edited since padiRating existed keep the old badge
-  const padiBadge =
-    json_data.padiRating ??
-    (json_data.features?.length ? 'PADI 5 Star IDC' : '');
+  const padiBadge = getPadiBadge(json_data);
 
   const renderHours = () => {
     let currentDay = new Date().getDay();

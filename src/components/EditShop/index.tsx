@@ -32,16 +32,6 @@ interface DayHours {
 
 const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const PADI_RATINGS = [
-    'PADI Dive Center',
-    'PADI Dive Resort',
-    'PADI 5 Star Dive Center',
-    'PADI 5 Star Dive Resort',
-    'PADI 5 Star Instructor Development Center (IDC)',
-    'PADI 5 Star Instructor Development Dive Resort (IDDR)',
-    'PADI Career Development Center (CDC)',
-];
-
 const IMAGE_FIELDS: { key: ImageField; label: string; directory: string }[] = [
     { key: 'logo_img', label: 'Logo', directory: 'shops' },
     { key: 'hero_img', label: 'Hero image', directory: 'shops' },
@@ -49,7 +39,7 @@ const IMAGE_FIELDS: { key: ImageField; label: string; directory: string }[] = [
 ];
 
 const PADI_LISTS: { key: PadiListKey; label: string; hint: string }[] = [
-    { key: 'features', label: 'Features & services', hint: 'e.g. Nitrox, Equipment Rentals, Boat Dives' },
+    { key: 'features', label: 'PADI features', hint: 'PADI codes: fivestar (shows the 5 Star badge), greenstar, aware' },
     { key: 'rentals', label: 'Equipment rentals', hint: 'Leave empty if the shop does not rent equipment' },
     { key: 'diveTypes', label: 'Dive types', hint: 'e.g. Reef, Wreck, Night' },
     { key: 'coursesOffered', label: 'PADI courses offered', hint: 'e.g. Open Water Diver' },
@@ -135,7 +125,6 @@ const ShopEditComponent = () => {
     const [days, setDays] = React.useState<DayHours[]>(hoursToDays());
     const [hoursChanged, setHoursChanged] = React.useState(false);
     const [padiEdits, setPadiEdits] = React.useState<Partial<Record<PadiListKey, string>>>({});
-    const [padiRating, setPadiRating] = React.useState<string | undefined>(undefined);
     const [images, setImages] = React.useState<Partial<Record<ImageField, PendingImage>>>({});
     const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false);
 
@@ -205,9 +194,6 @@ const ShopEditComponent = () => {
         (Object.keys(padiEdits) as PadiListKey[]).forEach(key => {
             padiData[key] = (padiEdits[key] || '').split('\n').map(s => s.trim()).filter(Boolean);
         });
-        if (padiRating !== undefined && padiRating.trim() !== (oldData.padi_data?.padiRating || '')) {
-            padiData.padiRating = padiRating;
-        }
         if (Object.keys(padiData).length) {
             body.padi_data = padiData;
         }
@@ -330,20 +316,7 @@ const ShopEditComponent = () => {
 
             <section className={styles.section}>
                 <h2 className={styles.sectionTitle}>PADI</h2>
-                <div className={styles.grid}>
-                    <Field label="PADI rating" hint="Admin only. Shown as the badge on the shop page">
-                        <input
-                            className={styles.input}
-                            list="padi-ratings"
-                            value={padiRating ?? oldData.padi_data?.padiRating ?? ''}
-                            onChange={e => setPadiRating(e.target.value)}
-                        />
-                        <datalist id="padi-ratings">
-                            {PADI_RATINGS.map(r => <option key={r} value={r} />)}
-                        </datalist>
-                    </Field>
-                    {text('padi_store_id', 'PADI store ID', 'Admin only')}
-                </div>
+                {text('padi_store_id', 'PADI store ID', 'Admin only')}
                 {PADI_LISTS.map(({ key, label, hint }) => (
                     <Field key={key} label={label} hint={`One per line. ${hint}`}>
                         <textarea

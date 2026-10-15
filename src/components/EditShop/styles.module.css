@@ -87,15 +87,6 @@
     color: grey;
 }
 
-.input {
-    width: 100%;
-    border-radius: 8px;
-    height: 42px;
-    border: 1px solid #cecece;
-    padding: 10px;
-    margin: 12px 0;
-}
-
 .dayRow {
     display: flex;
     align-items: center;

@@ -13,7 +13,7 @@ export interface ShopPadiData {
   rentals?: string[];
   diveTypes?: string[];
   features?: string[];
-  padiRating?: string;
+  centerTypes?: string[];
 }
 
 export default interface Shop {
