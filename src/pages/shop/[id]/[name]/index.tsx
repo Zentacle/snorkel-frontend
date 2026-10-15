@@ -11,6 +11,7 @@ import Carousel from 'components/Carousel/Carousel';
 import { useCurrentUser } from 'context/usercontext';
 import { sendEvent } from 'hooks/amplitude';
 import { rootDomain } from 'lib/constants';
+import { breadcrumbList, diveShop, jsonLd } from 'lib/structuredData';
 import Shop from 'models/Shop';
 import styles from './styles.module.css';
 
@@ -117,6 +118,18 @@ function ShopPage(props: Props) {
           content={`app-id=1611242564, app-argument=${props.shop.url}`}
           key="apple-app"
         ></meta>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(diveShop(shop))}
+          key="dive-shop-ld"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(
+            breadcrumbList(shop, { name: shop.name, url: shop.url }, true),
+          )}
+          key="breadcrumb-ld"
+        />
       </Head>
       <MaxWidth>
         {/* <div className={`${styles.ad} ${styles.desktopOnly}`} key={shop.id}>

@@ -14,46 +14,42 @@ interface Props {
 const Breadcrumbs = ({ country, area_one, area_two, locality, isShop }: Props) => {
     return (
         <div className={styles.locBreadcrumbContainer}>
-            <div itemScope={true} itemType="http://schema.org/BreadcrumbList">
+            <div>
                 {country && country.short_name &&
-                    <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
+                    <span>
                         <Link href={`${country.url}${isShop ? '/shop' : ''}`}>
-                            <a className={styles.locBreadcrumb} itemProp="item">
-                                <span itemProp="name">{country.name}</span>
-                                <meta itemProp="position" content="1" />
+                            <a className={styles.locBreadcrumb}>
+                                <span>{country.name}</span>
                             </a>
                         </Link>
                     </span>
                 }
                 {area_one && area_one.short_name &&
-                    <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
+                    <span>
                         <span className={styles.locBreadcrumbCaret}>›</span>
                         <Link href={`${area_one.url}${isShop ? '/shop' : ''}`}>
-                            <a className={styles.locBreadcrumb} itemProp="item">
-                                <span itemProp="name">{area_one.name}</span>
-                                <meta itemProp="position" content="2" />
+                            <a className={styles.locBreadcrumb}>
+                                <span>{area_one.name}</span>
                             </a>
                         </Link>
                     </span>
                 }
                 {area_two && area_two.short_name && area_two.url &&
-                    <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
+                    <span>
                         <span className={styles.locBreadcrumbCaret}>›</span>
                         <Link href={`${area_two.url}${isShop ? '/shop' : ''}`}>
-                            <a className={styles.locBreadcrumb} itemProp="item">
-                                <span itemProp="name">{area_two.name}</span>
-                                <meta itemProp="position" content="3" />
+                            <a className={styles.locBreadcrumb}>
+                                <span>{area_two.name}</span>
                             </a>
                         </Link>
                     </span>
                 }
                 {locality && locality.short_name && locality.url &&
-                    <span itemProp="itemListElement" itemScope={true} itemType="http://schema.org/ListItem">
+                    <span>
                         <span className={styles.locBreadcrumbCaret}>›</span>
                         <Link href={`${locality.url}${isShop ? '/shop' : ''}`}>
-                            <a className={styles.locBreadcrumb} itemProp="item">
-                                <span itemProp="name">{locality.name}</span>
-                                <meta itemProp="position" content="4" />
+                            <a className={styles.locBreadcrumb}>
+                                <span>{locality.name}</span>
                             </a>
                         </Link>
                     </span>
