@@ -3,6 +3,7 @@ import Error from 'next/error';
 import Cookies from 'js-cookie';
 
 import { rootDomain } from 'lib/constants';
+import { breadcrumbList, diveSite, jsonLd } from 'lib/structuredData';
 import { sendEvent } from 'hooks/amplitude';
 import { useCurrentUser } from 'context/usercontext';
 import BeachInfo from 'components/BeachPage/BeachInfo/BeachInfo';
@@ -185,26 +186,18 @@ const Beach = (props) => {
           content={`app-id=1611242564, app-argument=${beach.url}`}
           key="apple-app"
         ></meta>
-        {beach.num_reviews && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: `{
-                            "@context": "https://schema.org",
-                            "@type": "LocalBusiness",
-                            "name": "${beach.name}",
-                            "image": "${beach.hero_img}",
-                            "url": "https://www.zentacle.com${beach.url}",
-                            "aggregateRating": {
-                                "@type": "AggregateRating",
-                                "ratingValue": "${beach.rating}",
-                                "ratingCount": "${beach.num_reviews}"
-                            }
-                        }`,
-            }}
-            key="aggregate-rating-ld"
-          />
-        )}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(diveSite(beach, props.reviews))}
+          key="dive-site-ld"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(
+            breadcrumbList(beach, { name: beach.name, url: beach.url }),
+          )}
+          key="breadcrumb-ld"
+        />
       </Head>
       <MaxWidth>
         <div className={`${styles.ad} ${styles.desktopOnly}`} key={beach.id}>

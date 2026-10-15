@@ -8,6 +8,7 @@ import '../styles/globals.css'
 import { UserProvider, useCurrentUser } from 'src/context/usercontext';
 import { clientSideDomain } from "src/lib/constants";
 import EmailBanner from 'components/EmailBanner';
+import { jsonLd, organization, website } from 'lib/structuredData';
 
 // Account, form and tool pages that have no search value. They stay
 // crawlable (so links on them are followed) but are kept out of the index.
@@ -53,24 +54,17 @@ function MyApp({ Component, pageProps }) {
         <meta name="appleid-signin-redirect-uri" content="https://www.zentacle.com/api/user/apple_register" />
         <meta name="appleid-signin-state" content="password" />
         <meta name="appleid-signin-use-popup" content="true" />
+        {/* WebSite + Organization identify the brand entity to search engines
+            and AI answer engines. No SearchAction: /search renders client-side. */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: `{
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "url": "https://www.zentacle.com/",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": {
-                  "@type": "EntryPoint",
-                  "urlTemplate": "https://www.zentacle.com/search?query={search_term_string}"
-                },
-                "query-input": "required name=search_term_string"
-              }
-            }`
-          }}
-          key="seo-search"
+          dangerouslySetInnerHTML={jsonLd(website)}
+          key="website-ld"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(organization)}
+          key="organization-ld"
         />
       </Head>
       <UserProvider>
