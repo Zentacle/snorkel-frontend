@@ -63,7 +63,8 @@ export async function getStaticPaths() {
     paths: data.data.map((shop: Shop) => ({
       params: {
         id: `${shop.id}`,
-        name: `${shop.url}`,
+        // shop.url is the full path (/shop/<id>/<slug>); the route param is only the slug
+        name: shop.url.split('/').pop(),
       },
     })),
     fallback: 'blocking',
