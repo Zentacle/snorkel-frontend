@@ -1,4 +1,4 @@
-// Serves the child sitemaps listed in /sitemap-index.xml:
+// Serves the child sitemaps listed in the index at /server-sitemap.xml:
 //   /sitemaps/spots-<n>.xml, /sitemaps/shops-<n>.xml,
 //   /sitemaps/locations.xml, /sitemaps/shop-locations.xml
 import { GetServerSideProps } from 'next';

@@ -1,6 +1,13 @@
-// Legacy sitemap URL, still registered in Search Console. It now serves the
-// sitemap index so nothing is listed twice; /sitemap-index.xml is canonical.
-export { getServerSideProps } from 'pages/sitemap-index.xml';
+// Legacy URL, still registered in Search Console. Shops are now listed in
+// the sitemap index at /server-sitemap.xml.
+import { GetServerSideProps } from 'next';
+
+export const getServerSideProps: GetServerSideProps = async () => ({
+  redirect: {
+    destination: '/server-sitemap.xml',
+    permanent: true,
+  },
+});
 
 const SitemapNullComponent = () => {};
 // Default export to prevent next.js errors

@@ -4,4 +4,4 @@ Allow: /
 Disallow: /api
 
 # Sitemaps
-Sitemap: https://www.zentacle.com/sitemap-index.xml
+Sitemap: https://www.zentacle.com/server-sitemap.xml
