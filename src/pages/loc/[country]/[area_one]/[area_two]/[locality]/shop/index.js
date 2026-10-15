@@ -10,13 +10,14 @@ export async function getStaticProps(context) {
   const res = await fetch(
     `${rootDomain}/shop/loc?sort=top&area_one=${area_one}&country=${country}&area_two=${area_two}&locality=${locality}&limit=none`
   )
-  const data = await res.json()
-  props['default'] = data.data || null;
-  if (data.area) {
+  const data = await res.json().catch(() => null)
+  props['default'] = (data && data.data) || null;
+  if (data && data.area) {
     props['area'] = data.area;
   }
 
-  if (!props.default) {
+  // the page can't render without its area (title, breadcrumbs, canonical)
+  if (!props.default || !props.area) {
     return {
       notFound: true,
     }
@@ -37,7 +38,7 @@ export async function getStaticProps(context) {
   props['areas'] = await fetch(url).then(res =>
     res.json()
   ).then(data => {
-    return data.data;
+    return (data && data.data) || [];
   })
 
   return {

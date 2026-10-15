@@ -20,6 +20,12 @@ import useGoogleOneTap from 'hooks/useGoogleOneTap';
 
 export async function getStaticProps(context) {
   const startTime = Date.now();
+  // /Beach with no id would otherwise throw
+  if (!context.params.slug || !context.params.slug[0]) {
+    return {
+      notFound: true,
+    };
+  }
   const beachid = context.params.slug[0];
   const beachNameFromURL = context.params.slug[1];
 
@@ -34,9 +40,9 @@ export async function getStaticProps(context) {
         errorCode: 404,
       };
     }
-    return res.json();
+    return res.json().catch(() => null);
   });
-  if (!beach_data || beach_data.errorCode) {
+  if (!beach_data || beach_data.errorCode || !beach_data.data) {
     return {
       notFound: true,
     };
@@ -64,7 +70,9 @@ export async function getStaticProps(context) {
       `${rootDomain}/spot/tide?station_id=${stationId}&begin_date=${begin_date}&end_date=${end_date}`,
     );
   }
-  review_data = await review_data.then((resp) => resp.json());
+  review_data = await review_data
+    .then((resp) => resp.json())
+    .catch(() => ({ data: [] }));
   nearbyBeaches = await nearbyBeaches
     .then((res) => res.json())
     .then((beach_data) => {
@@ -94,7 +102,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       beach: beach_data.data,
-      reviews: review_data.data,
+      reviews: review_data.data || [],
       tides,
       nearbyBeaches,
       nearbyShops,

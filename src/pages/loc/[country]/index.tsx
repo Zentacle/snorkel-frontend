@@ -32,12 +32,13 @@ export async function getStaticProps(context: any) {
     `${rootDomain}/spots/get?sort=top&country=${country_short_name}&limit=100`
   );
   const data = await res.json().catch((err: any) => console.log(err));
-  props["default"] = data.data || null;
-  if (data.area) {
+  props["default"] = (data && data.data) || null;
+  if (data && data.area) {
     props["area"] = data.area;
   }
 
-  if (!props.default) {
+  // the page can't render without its area (title, breadcrumbs, canonical)
+  if (!props.default || !props.area) {
     // return 404
     return {
       notFound: true,
@@ -52,7 +53,7 @@ export async function getStaticProps(context: any) {
   props["areas"] = await fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      return data.data;
+      return (data && data.data) || [];
     });
 
   return {
