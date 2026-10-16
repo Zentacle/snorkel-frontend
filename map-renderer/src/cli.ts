@@ -86,7 +86,11 @@ const main = async () => {
   const state = (await storage.readJson<RenderState>(STATE_KEY)) || { version: RENDER_VERSION, entries: {} };
   const index = (await storage.readJson<Record<string, IndexEntry>>(INDEX_KEY)) || {};
 
-  const pages = args.only.length ? args.only.map(pageFromUrl) : await listLocationPages();
+  const allPages = await listLocationPages();
+  // --only pages still use their listed entry, for the old image key
+  const pages = args.only.length
+    ? args.only.map((url) => allPages.find((page) => page.url === url) || pageFromUrl(url))
+    : allPages;
   console.log(`${pages.length} location pages`);
 
   // Plan every page (cheap API calls), then render only what changed.
