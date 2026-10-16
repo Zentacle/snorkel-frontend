@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import SearchBar from 'components/SearchBar';
 import styles from './styles.module.css';
 import Location from 'models/Location';
 
@@ -54,9 +53,6 @@ const Breadcrumbs = ({ country, area_one, area_two, locality, isShop }: Props) =
                         </Link>
                     </span>
                 }
-            </div>
-            <div className={styles.search}>
-                <SearchBar largeSearchBar={false}></SearchBar>
             </div>
         </div >
     )

@@ -1,64 +1,93 @@
 .header {
-    background: white;
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
 }
 
 .headercontainer {
-    align-items: center;
     display: flex;
-    height: 52px;
+    align-items: center;
+    gap: 28px;
+    max-width: var(--page-max);
+    height: 68px;
     margin: auto;
-    padding: 0 16px;
+    padding: 0 24px;
 }
 
 .headertitlelink {
-    cursor: pointer;
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
-    font-weight: var(--text-weight-bold);
+    gap: 8px;
+    cursor: pointer;
 }
 
 .headertitle {
-    margin-left: 4px;
-    font-size: 18px;
-    font-family: 'SF Pro Rounded', inherit;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
-.spaceholder {
-    margin-left: auto;
+.nav {
     display: flex;
+    gap: 22px;
+}
+
+.navLink {
+    padding: 8px 0;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--ink);
+}
+
+.navLink:hover {
+    color: var(--blue);
+}
+
+.navLinkActive {
+    color: var(--blue);
+}
+
+.search {
+    flex: 1 1 280px;
+    min-width: 0;
+    max-width: 440px;
+}
+
+.actions {
+    display: flex;
+    flex: 0 0 auto;
     align-items: center;
+    gap: 14px;
+    margin-left: auto;
 }
 
-.explore {
-    margin-left: 12px;
-    font-weight: var(--text-weight-bold);
-    color: #414141;
-    transition: color 0.25s;
+.appButton {
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--ink);
 }
 
-.explore:hover,
-.explore:active {
-    color: var(--primary-color);
-}
-
-.addSpot {
-    margin-right: 8px;
-    color: white;
-    background: var(--primary-color);
-    border-radius: 8px;
-    padding: 4px 8px;
-}
-
-.rightButton {
-    font-weight: var(--text-weight-bold);
-    display: contents;
+.appButton:hover {
+    color: var(--blue);
 }
 
 .loginbutton {
-    font-size: 14px;
-    text-align: right;
-    font-weight: var(--text-weight-bold);
-    color: var(--primary-color);
+    padding: 10px 18px;
+    border-radius: 999px;
+    background-color: var(--blue);
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: white;
+}
+
+.loginbutton:hover {
+    background-color: var(--blue-dark);
 }
 
 .outerprofile {
@@ -68,28 +97,100 @@
 .profile {
     display: flex;
     align-items: center;
-    padding: 8px;
-    border-radius: 16px;
+    padding: 6px;
+    border-radius: 999px;
     transition: background-color 0.2s;
 }
 
 .profile:hover,
 .profile:focus {
-    background-color: #cecece;
+    background-color: var(--chip-bg);
 }
 
-.appButton {
-    background-color: var(--primary-color);
-    padding: 8px 12px;
-    border-radius: 16px;
-    color: white;
-    margin-right: 8px;
-    font-weight: normal;
-    font-size: 14px;
+.iconButton {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    color: var(--ink);
+    cursor: pointer;
 }
 
-@media (max-width: 720px) {
+.iconButton:hover {
+    background-color: var(--chip-bg);
+}
+
+.mobileSearch,
+.mobileMenu {
+    display: none;
+}
+
+/* narrower desktops: drop the search box before the nav gets squeezed */
+@media (max-width: 1080px) {
+    .search {
+        display: none;
+    }
+
+    .searchToggle {
+        display: flex;
+    }
+
+    .mobileSearch {
+        display: block;
+        padding: 0 24px 12px;
+    }
+}
+
+@media (max-width: 860px) {
+    .headercontainer {
+        gap: 8px;
+        height: 60px;
+        padding: 0 8px 0 16px;
+    }
+
+    .nav,
+    .appButton {
+        display: none;
+    }
+
+    .actions {
+        gap: 4px;
+    }
+
+    .iconButton {
+        display: flex;
+    }
+
+    .loginbutton {
+        padding: 9px 14px;
+        font-size: 14px;
+    }
+
     .outerprofile {
         display: none;
+    }
+
+    .mobileSearch {
+        padding: 0 16px 12px;
+    }
+
+    .mobileMenu {
+        display: flex;
+        flex-direction: column;
+        padding: 4px 16px 12px;
+        border-top: 1px solid var(--line);
+    }
+
+    .mobileLink {
+        padding: 13px 0;
+        border-bottom: 1px solid #EDF1F4;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .mobileLink:last-child {
+        border-bottom: 0;
     }
 }

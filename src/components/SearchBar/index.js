@@ -12,6 +12,8 @@ const SearchBar = (props) => {
     const [search, setSearch] = React.useState(props.value || '');
     const largeSearchBar = props.largeSearchBar;
     const barSize = largeSearchBar ? styles.lgBar : '';
+    // the slimmer bar used in the site header
+    const compact = props.compact ? styles.compact : '';
 
     const conductSearch = () => {
         sendEvent('submit_search', {
@@ -25,10 +27,11 @@ const SearchBar = (props) => {
     }
 
     return (
-        <div className={`${barSize} ${styles.container}`}>
+        <div className={`${barSize} ${compact} ${styles.container}`}>
             <div className={styles.inputContainer}>
                 <input
-                    placeholder="Enter a city, state, or country"
+                    placeholder={props.compact ? 'Search a city, state, or country' : 'Enter a city, state, or country'}
+                    aria-label="Search a city, state, or country"
                     value={search}
                     className={styles.searchbar}
                     onChange={e => setSearch(e.target.value)}
@@ -39,7 +42,7 @@ const SearchBar = (props) => {
                     }}
                 />
             </div>
-            <button className={`${barSize} ${styles.searchButton}`} onClick={conductSearch}>
+            <button className={`${barSize} ${styles.searchButton}`} onClick={conductSearch} aria-label="Search">
                 <SearchIcon className={styles.icon} />
             </button>
             <TypeAheadDropDown text={search}/>
