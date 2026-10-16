@@ -72,12 +72,14 @@ export const LocationIntro = ({
 
   return (
     <>
-      <Breadcrumbs
-        country={area.country}
-        area_one={area.area_one}
-        area_two={area.area_two}
-        isShop={isShop}
-      />
+      <div className={styles.crumbs}>
+        <Breadcrumbs
+          country={area.country}
+          area_one={area.area_one}
+          area_two={area.area_two}
+          isShop={isShop}
+        />
+      </div>
       <div className={styles.intro}>
         <div className={styles.introText}>
           <h1 className={styles.title}>{title}</h1>
