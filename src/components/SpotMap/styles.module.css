@@ -2,6 +2,10 @@
   margin: 0 16px 16px;
 }
 
+.figureFlush {
+  margin: 0;
+}
+
 /* same 2:1 ratio as the static image, so percentage pin positions line up */
 .map {
   position: relative;

@@ -27,11 +27,13 @@ interface MapSpot extends PinCardSpot {
 }
 
 interface Props {
-  // in ranked order; pin numbers match the "#1 - Name" list below the map
+  // in ranked order; pin numbers match the "#1 - Name" list beside or below the map
   spots: MapSpot[];
   areaName: string;
   // the annotated image rendered for this page (map-renderer/), if any
   stored?: LocationMap | null;
+  // no outer margin (when the map sits in a column of its own)
+  flush?: boolean;
 }
 
 const hasCoordinates = (spot: MapSpot) =>
@@ -61,7 +63,7 @@ const loadGoogleMaps = () => {
   return googleMapsLoading;
 };
 
-const SpotMap = ({ spots, areaName, stored }: Props) => {
+const SpotMap = ({ spots, areaName, stored, flush = false }: Props) => {
   const router = useRouter();
   const [interactive, setInteractive] = React.useState(false);
   // number of the pin being hovered or focused, if any
@@ -141,6 +143,8 @@ const SpotMap = ({ spots, areaName, stored }: Props) => {
     />
   );
 
+  const figureClass = `${styles.figure} ${flush ? styles.figureFlush : ''}`;
+
   if (stored) {
     return (
       <StoredMap
@@ -152,6 +156,7 @@ const SpotMap = ({ spots, areaName, stored }: Props) => {
         interactive={interactive}
         interactiveMap={interactiveMap}
         exploreButton={exploreButton}
+        figureClass={figureClass}
       />
     );
   }
@@ -179,7 +184,7 @@ const SpotMap = ({ spots, areaName, stored }: Props) => {
     `&size=${MAP_WIDTH}x${MAP_HEIGHT}`;
 
   return (
-    <figure className={styles.figure}>
+    <figure className={figureClass}>
       <div className={styles.map}>
       {interactive ? (
         interactiveMap
@@ -233,8 +238,7 @@ const SpotMap = ({ spots, areaName, stored }: Props) => {
       </div>
       <figcaption className={styles.caption}>
         <span>
-          Numbers match the ranked list of {areaName} dive and snorkel sites
-          below.
+          Numbers match the ranked list of {areaName} dive and snorkel sites.
         </span>
         {exploreButton}
       </figcaption>
@@ -251,6 +255,7 @@ interface StoredMapProps {
   interactive: boolean;
   interactiveMap: React.ReactNode;
   exploreButton: React.ReactNode;
+  figureClass: string;
 }
 
 // The annotated image (title band, map with pins, key) cropped to its map
@@ -265,12 +270,13 @@ const StoredMap = ({
   interactive,
   interactiveMap,
   exploreButton,
+  figureClass,
 }: StoredMapProps) => {
   const { image, map, pins } = stored;
   const spotsById = new Map(spots.map((spot) => [String(spot.id), spot]));
 
   return (
-    <figure className={styles.figure}>
+    <figure className={figureClass}>
       <div className={styles.map} style={{ aspectRatio: `${image.width} / ${map.height}` }}>
         {interactive ? (
           interactiveMap
@@ -329,8 +335,8 @@ const StoredMap = ({
       </div>
       <figcaption className={styles.caption}>
         <span>
-          Numbers match the ranked list of {areaName} dive and snorkel sites
-          below.{' '}
+          Numbers match the ranked list of {areaName} dive and snorkel
+          sites.{' '}
           <a href={image.url} target="_blank" rel="noreferrer" className={styles.fullMapLink}>
             Full map with key
           </a>

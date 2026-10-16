@@ -1,0 +1,770 @@
+/* Location pages (src/pages/loc/...): dive sites and dive shops */
+
+.page {
+  background-color: var(--page-bg);
+  color: var(--ink);
+}
+
+.container {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 16px 24px 64px;
+}
+
+/* ---- intro: title, stats, tabs, areas ---- */
+
+.intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-top: 12px;
+}
+
+.introText {
+  flex: 1 1 560px;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  margin: 10px 0 0;
+  max-width: 760px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.lede a,
+.textLink {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.lede a:hover,
+.textLink:hover {
+  text-decoration: underline;
+}
+
+.stats {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.stats dd {
+  margin: 0;
+}
+
+.statValue {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-top: 22px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 12px 16px;
+  border-bottom: 3px solid transparent;
+  font-weight: 600;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: var(--ink);
+}
+
+.tabActive {
+  border-bottom-color: var(--blue);
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.areas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.areasLabel {
+  margin-right: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+.areaChip {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background-color: var(--surface);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.areaChip:hover {
+  border-color: var(--line-strong);
+}
+
+.areaChipActive {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.areaCount {
+  margin-left: 6px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.moreAreas {
+  padding: 8px 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+/* ---- filters ---- */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.filterGroup {
+  display: flex;
+  gap: 6px;
+  margin-right: 10px;
+}
+
+.filterChip {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background-color: var(--surface);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.filterChip:hover {
+  border-color: var(--ink-muted);
+}
+
+.filterChipActive {
+  border-color: var(--ink);
+  background-color: var(--ink);
+  color: white;
+}
+
+.filterChipActive:hover {
+  border-color: var(--ink);
+}
+
+.clearFilters {
+  padding: 0 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.resultCount {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+/* ---- list + map layout ----
+   desktop: list on the left, map and shops in a sticky column on the right
+   phone: map, then the list, then shops (the side column is flattened) */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  grid-template-areas: 'list side';
+  gap: 28px;
+  margin-top: 16px;
+}
+
+.list {
+  grid-area: list;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.side {
+  grid-area: side;
+  position: sticky;
+  top: 16px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.mapSlot {
+  grid-area: map;
+}
+
+.shopSlot {
+  grid-area: shops;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'map' 'list' 'shops';
+    gap: 16px;
+  }
+
+  .side {
+    display: contents;
+  }
+}
+
+/* ---- spot rows ---- */
+
+.row {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--surface);
+}
+
+.row:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 4px 16px rgba(14, 36, 51, 0.06);
+}
+
+.rowPhoto {
+  position: relative;
+  flex: 0 0 220px;
+  height: 148px;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #E3ECF2;
+}
+
+.noPhoto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 100%;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.rank {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border: 2px solid white;
+  border-radius: 999px;
+  background-color: var(--blue);
+  box-shadow: 0 1px 4px rgba(14, 36, 51, 0.3);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 26px;
+  text-align: center;
+  color: white;
+}
+
+/* not on the map (no coordinates, or past the top 20 pins) */
+.rankOffMap {
+  background-color: #6B7C88;
+}
+
+.rowBody {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+  min-width: 0;
+  padding: 4px 4px 4px 0;
+}
+
+.rowName {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+/* the whole row is clickable through the name's link */
+.rowLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+}
+
+.rowLink:hover {
+  color: var(--blue);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.ratingValue {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.placeLink {
+  position: relative;
+  z-index: 1;
+}
+
+.placeLink:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.blurb {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.chip {
+  padding: 4px 9px;
+  border-radius: 6px;
+  background-color: var(--chip-bg);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.beginner {
+  background-color: #E3F4EA;
+  color: #1D6B3A;
+}
+
+.intermediate {
+  background-color: #E4EEFB;
+  color: #1F4F8F;
+}
+
+.advanced {
+  background-color: #FBE8E1;
+  color: #9A3412;
+}
+
+.empty {
+  padding: 32px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-card);
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+.ad {
+  position: relative;
+  padding: 22px 12px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--surface);
+}
+
+/* AdSense marks a slot it couldn't fill; don't leave an empty labeled box */
+.ad:has(ins[data-ad-status='unfilled']) {
+  display: none;
+}
+
+.patron {
+  padding: 4px 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--surface);
+}
+
+.adLabel {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.adDesktop {
+  display: block;
+}
+
+.adMobile {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .adDesktop {
+    display: none;
+  }
+
+  .adMobile {
+    display: block;
+  }
+}
+
+/* ---- side column cards ---- */
+
+.card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--surface);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.shop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid #EDF1F4;
+}
+
+.shop:first-of-type {
+  margin-top: 8px;
+}
+
+.shopInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.shopName {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.shopName:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.shopMeta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+.bookButton {
+  flex: 0 0 auto;
+  padding: 9px 16px;
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.bookButton:hover {
+  background-color: var(--blue);
+  color: white;
+}
+
+.secondaryButton {
+  align-self: center;
+  margin-top: 8px;
+  padding: 12px 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background-color: var(--surface);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.secondaryButton:hover {
+  border-color: var(--blue);
+}
+
+/* ---- guide ---- */
+
+.guide {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  gap: 28px;
+  margin-top: 56px;
+  scroll-margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .guide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.guideTitle {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.guideText {
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  white-space: pre-line;
+}
+
+.guideText a {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.faqTitle {
+  margin: 36px 0 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.faqs {
+  margin: 10px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.faq {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.faqQuestion {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.faqAnswer {
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.siblings {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.sibling {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.sibling:hover {
+  border-color: var(--blue);
+}
+
+.siblingName {
+  font-weight: 700;
+}
+
+.siblingCount {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+/* ---- phones ---- */
+
+@media (max-width: 720px) {
+  .container {
+    padding: 12px 16px 48px;
+  }
+
+  .title {
+    font-size: 27px;
+  }
+
+  .lede {
+    font-size: 15px;
+  }
+
+  .stats {
+    gap: 16px;
+  }
+
+  .statValue {
+    font-size: 18px;
+  }
+
+  .areas {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: -16px;
+    padding-right: 16px;
+  }
+
+  .areaChip {
+    flex: 0 0 auto;
+  }
+
+  .filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: -16px;
+    padding-right: 16px;
+  }
+
+  .filterGroup {
+    margin-right: 4px;
+  }
+
+  .filterChip {
+    flex: 0 0 auto;
+  }
+
+  .resultCount {
+    display: none;
+  }
+
+  .row {
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .rowPhoto {
+    flex-basis: 104px;
+    height: 104px;
+  }
+
+  .rank {
+    top: 6px;
+    left: 6px;
+    min-width: 26px;
+    height: 26px;
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  .rowName {
+    font-size: 16px;
+  }
+
+  .meta {
+    font-size: 13px;
+  }
+
+  .blurb {
+    display: none;
+  }
+
+  .chip {
+    padding: 3px 7px;
+    font-size: 12px;
+  }
+
+  .guide {
+    margin-top: 40px;
+  }
+
+  .guideTitle {
+    font-size: 23px;
+  }
+}
+
+/* horizontally scrolling rows: no scrollbar track under the chips */
+.tabs,
+.areas,
+.filters {
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar,
+.areas::-webkit-scrollbar,
+.filters::-webkit-scrollbar {
+  display: none;
+}

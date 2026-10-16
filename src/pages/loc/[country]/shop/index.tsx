@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import styles from "components/Home/Home.module.css";
 import locStyles from "./styles.module.css";
+import { LocationIntro, locationPageStyles as pageStyles } from "components/LocationPage";
 import Beach from "models/Beach";
 import Location from "models/Location";
 import Layout from "components/Layout/Layout";
@@ -153,6 +154,9 @@ const Home = (props: Props) => {
       ? `https://www.zentacle.com/explore?latitude=${latitude}&longitude=${longitude}`
       : `https://www.zentacle.com/explore`;
 
+  // country pages list at most 100 shops
+  const capped = props.loc === "country" && props.default.length >= 100;
+
   const title = `Top scuba dive shops in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
   const description = `Top scuba dive shops in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`;
 
@@ -192,39 +196,19 @@ const Home = (props: Props) => {
           />
         )}
       </Head>
-      <div className={styles.container}>
-        <div className={styles.contentContainer}>
-          <Breadcrumbs
-            country={props.area.country}
-            area_one={props.area.area_one}
-            area_two={props.area.area_two}
-            isShop={true}
+      <div className={pageStyles.page}>
+        <div className={pageStyles.container}>
+          <LocationIntro
+            area={props.area}
+            title={`Top Scuba Dive Shops in ${props.area.name}`}
+            lede={`Dive shops in ${props.area.name} where you can rent equipment, book dives and take courses, ranked by diver reviews.`}
+            stats={[]}
+            activeTab="shops"
+            numShops={capped ? null : props.default.length}
+            areas={props.areas}
+            areasLabel={props.loc === "locality" ? "Nearby areas" : "Areas"}
+            isShop
           />
-          {props.areas.length ? (
-            <div
-              className={`${styles.locationContainer} ${locStyles.locationContainer}`}
-            >
-              {props.areas.map((area) => (
-                <Link
-                  key={`${area.short_name}-${area.id}`}
-                  href={`${area.url}/shop`}
-                >
-                  <a
-                    className={`${styles.location} ${
-                      props.area.short_name === area.short_name && styles.active
-                    }`}
-                  >
-                    {area.name}
-                  </a>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <></>
-          )}
-          <h1 className={styles.areaTitle}>
-            Top Scuba Dive Shops in {props.area.name}
-          </h1>
           <div className={styles.marginContainer}>
             Ready to check out the best shops in {props.area.name} for scuba
             diving, snorkeling, shore diving, free diving or other ocean
