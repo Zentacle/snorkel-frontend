@@ -205,3 +205,32 @@ export const website = {
   name: 'Zentacle',
   url: `${SITE_URL}/`,
 };
+
+// A location page's ranked list of dive sites.
+export const spotItemList = (
+  name: string,
+  spots: { name: string; url: string }[],
+  max = 20,
+) => ({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name,
+  itemListOrder: 'https://schema.org/ItemListOrderDescending',
+  numberOfItems: spots.length,
+  itemListElement: spots.slice(0, max).map((spot, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: spot.name,
+    url: `${SITE_URL}${spot.url}`,
+  })),
+});
+
+export const faqPage = (faqs: { question: string; answer: string }[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+});

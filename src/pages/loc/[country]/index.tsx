@@ -3,25 +3,41 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
-import styles from "components/Home/Home.module.css";
-import locStyles from "./styles.module.css";
 import Beach from "models/Beach";
 import Location from "models/Location";
+import Shop from "models/Shop";
 import Layout from "components/Layout/Layout";
-import LocationCard from "components/LocationCard";
 import { rootDomain } from "src/lib/constants";
 import { useCurrentUser } from "context/usercontext";
 import useGoogleOneTap from "hooks/useGoogleOneTap";
-import Breadcrumbs from "components/Breadcrumbs";
 import BuddyCarousel from "components/BuddyCarousel";
-import FilterBar from "components/FilterBar";
 import Patron from "components/Patron";
 import { sendEvent } from "hooks/amplitude";
 import Expander from "icons/Expander";
 import SpotMap from "components/SpotMap";
+import {
+  ListSpot,
+  LocationGuide,
+  LocationIntro,
+  locationPageStyles as pageStyles,
+  ShopsCard,
+  SpotList,
+} from "components/LocationPage";
+import mapStyles from "components/Home/Home.module.css";
 import { fetchLocationMap, LocationMap } from "lib/locationMap";
+import {
+  fetchLocationExtras,
+  LocationStats,
+  plainText,
+} from "lib/locationPage";
+import { locationFaqs } from "lib/locationFaqs";
+import {
+  breadcrumbList,
+  faqPage,
+  jsonLd,
+  spotItemList,
+} from "lib/structuredData";
 import hasPatron from "lib/hasPatron";
-import LinkifyText from "controls/LinkifyText";
 
 // TODO - fix type of context
 // Location pages with no spots have nothing to rank for. Keep them out of
@@ -29,6 +45,12 @@ import LinkifyText from "controls/LinkifyText";
 // indexed: many of them earn search traffic. The sitemap applies the same
 // threshold.
 const MIN_LISTINGS_TO_INDEX = 1;
+// country pages list at most this many spots
+const COUNTRY_SPOT_LIMIT = 100;
+// pins drawn on the live map when there is no stored map image
+const MAX_PINS = 20;
+// the intro sentence is taken from the description only if it is this short
+const MAX_LEDE_LENGTH = 220;
 
 export async function getStaticProps(context: any) {
   const country_short_name: string = context.params.country;
@@ -37,7 +59,7 @@ export async function getStaticProps(context: any) {
   // TODO - fix res type
   let res: any;
   res = await fetch(
-    `${rootDomain}/spots/get?sort=top&country=${country_short_name}&limit=100`
+    `${rootDomain}/spots/get?sort=top&country=${country_short_name}&limit=${COUNTRY_SPOT_LIMIT}`
   );
   const data = await res.json().catch((err: any) => console.log(err));
   props["default"] = (data && data.data) || null;
@@ -56,6 +78,10 @@ export async function getStaticProps(context: any) {
   props.loc = "country";
   props.country = country_short_name;
   props.map = await fetchLocationMap(props.loc, props.area);
+  Object.assign(
+    props,
+    await fetchLocationExtras(props.loc, { country: props.country }, props.area)
+  );
 
   const localityType = getPillLocalityLevel[props.loc];
   let url = `${rootDomain}/locality/${localityType}?country=${props.country}`;
@@ -93,25 +119,45 @@ export const getPillLocalityLevel: { [key: string]: string } = {
 
 interface Props {
   default: Beach[];
-  loc: string;
+  loc: "country" | "area_one" | "area_two" | "locality";
   area: Location;
   // annotated map image rendered by map-renderer/, if any
   map?: LocationMap | null;
   areas: Location[];
+  // from fetchLocationExtras (lib/locationPage)
+  shops: Shop[];
+  numSpots: number | null;
+  numShops: number | null;
+  stats: LocationStats | null;
+  siblings: Location[];
   country?: string;
   area_one?: string;
   area_two?: string;
   locality?: string;
 }
 
+const hasCoordinates = (spot: Beach) =>
+  typeof spot.latitude === "number" && typeof spot.longitude === "number";
+
+// One or two sentences for under the title: the start of the area's own
+// description when it is short enough, else a summary.
+const ledeText = (area: Location, numSpots: string) => {
+  const description = plainText(area.description);
+  const sentences = description.match(/[^.!?]+[.!?]+/g) || [];
+  let lede = "";
+  for (const sentence of sentences) {
+    if ((lede + sentence).length > MAX_LEDE_LENGTH) break;
+    lede += sentence;
+  }
+  return (
+    lede.trim() ||
+    `The top ${numSpots} dive and snorkel sites in ${area.name}, ranked by diver reviews, with maps and photos.`
+  );
+};
+
 const Home = (props: Props) => {
   const [buddies, setBuddies] = React.useState([]);
-  const [spots, setSpots] = React.useState(props.default);
-  const [access, setAccess] = React.useState<string | undefined>(undefined);
-  const [activity, setActivity] = React.useState<string | undefined>(undefined);
-  const [difficulty, setDifficulty] = React.useState<string | undefined>(
-    undefined
-  );
+  const spots = props.default as ListSpot[];
 
   const { state } = useCurrentUser();
   const currentUser = state.user;
@@ -138,10 +184,6 @@ const Home = (props: Props) => {
   }, [state, props.loc, props.area.short_name]);
 
   React.useEffect(() => {
-    setSpots(props.default);
-  }, [props.default]);
-
-  React.useEffect(() => {
     fetch(`${rootDomain}/buddy/get?${props.loc}=${props.area.id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -162,58 +204,94 @@ const Home = (props: Props) => {
     areaPatronKey = [props.area.short_name, null];
   }
 
-  let longitude: number | undefined;
-  let latitude: number | undefined;
-  props.default.map((beach: Beach) => {
-    if (!latitude && beach.latitude) {
-      latitude = beach.latitude;
-      longitude = beach.longitude;
-    }
-  });
-  const exploreUrl =
-    latitude && longitude
-      ? `https://www.zentacle.com/explore?latitude=${latitude}&longitude=${longitude}`
-      : `https://www.zentacle.com/explore`;
+  const firstMapped = spots.find(hasCoordinates);
+  const exploreUrl = firstMapped
+    ? `https://www.zentacle.com/explore?latitude=${firstMapped.latitude}&longitude=${firstMapped.longitude}`
+    : `https://www.zentacle.com/explore`;
+
+  // country pages only load the top spots, so totals come from /locality/stats
+  const capped =
+    props.loc === "country" && spots.length >= COUNTRY_SPOT_LIMIT;
+  const numSpots = props.numSpots ?? (capped ? null : spots.length);
+  const numSpotsLabel = numSpots ? `${numSpots}` : `${spots.length}+`;
+  const numReviews =
+    props.stats?.num_reviews ??
+    (capped
+      ? null
+      : spots.reduce((sum, spot) => sum + (spot.num_reviews || 0), 0));
+
+  const stats = [
+    { value: numSpotsLabel, label: numSpots === 1 ? "dive site" : "dive sites" },
+    ...(props.numShops
+      ? [{ value: `${props.numShops}`, label: props.numShops === 1 ? "dive shop" : "dive shops" }]
+      : []),
+    ...(numReviews ? [{ value: `${numReviews}`, label: "reviews" }] : []),
+  ];
+
+  // spots drawn on the map get blue rank badges in the list
+  const pinnedIds = new Set(
+    props.map
+      ? props.map.pins.map((pin) => String(pin.spotId))
+      : spots
+          .slice(0, MAX_PINS)
+          .filter(hasCoordinates)
+          .map((spot) => String(spot.id))
+  );
+
+  const faqs = locationFaqs(props.area.name, spots, props.shops, props.numShops);
+  const parent =
+    props.loc === "area_one"
+      ? props.area.country
+      : props.loc === "area_two"
+      ? props.area.area_one
+      : null;
 
   const title = `Top Snorkeling and Scuba Diving in ${props.area.name} | Zentacle - Reviews, Maps, and Photos`;
   const description = `Top scuba dive and snorkel spots in ${props.area.name} with maps, detailed reviews, and photos curated by oceans lovers like you.`;
 
-  const fetchLocations = (params: { [key: string]: string | undefined }) => {
-    const queryString = Object.keys(params)
-      .filter((key) => params[key])
-      .map((key) => key + "=" + params[key])
-      .join("&");
-    fetch(`${rootDomain}/spots/get?${queryString}`)
-      .then((res) => res.json().catch((err) => console.log(res)))
-      .then((data) => setSpots(data.data));
-  };
-
-  React.useEffect(() => {
-    // Without filters, keep the server's list: its order is what the map
-    // image is numbered by (re-fetching could reorder spots on big pages).
-    if (!difficulty && !access) {
-      setSpots(props.default);
-      return;
-    }
-    fetchLocations({
-      limit: "100",
-      sort: "top",
-      country: props.country,
-      area_one: props.area_one,
-      area_two: props.area_two,
-      locality: props.locality,
-      difficulty: difficulty,
-      entry: access,
-    });
-  }, [
-    difficulty,
-    access,
-    props.default,
-    props.country,
-    props.area_one,
-    props.area_two,
-    props.locality,
-  ]);
+  const side = (
+    <div className={pageStyles.side}>
+      <div className={pageStyles.mapSlot}>
+        <SpotMap spots={spots} areaName={props.area.name} stored={props.map} flush />
+        {/* fallback when no listed spot has coordinates for the map */}
+        {props.area.map_image_url && !spots.some(hasCoordinates) && (
+          <Link
+            href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=${exploreUrl}`}
+          >
+            <a
+              onClick={() => sendEvent("loc_map__click")}
+              className={mapStyles.mapImageContainer}
+            >
+              <div className={mapStyles.mapExpander}>
+                <Expander />
+              </div>
+              <Image
+                src={props.area.map_image_url}
+                className={mapStyles.mapImage}
+                objectFit="contain"
+                height="300"
+                width="600"
+                unoptimized
+                alt={`${props.area.name} dive site map`}
+              />
+            </a>
+          </Link>
+        )}
+      </div>
+      <div className={pageStyles.shopSlot}>
+        {hasPatron(props.area, props.area_one, props.area_two) &&
+          areaPatronKey &&
+          areaPatronKey.length && (
+            <Patron
+              areaPatronKey={areaPatronKey}
+              className={pageStyles.patron}
+              name={props.area.name}
+            />
+          )}
+        <ShopsCard area={props.area} shops={props.shops} numShops={props.numShops} />
+      </div>
+    </div>
+  );
 
   return (
     <Layout>
@@ -247,168 +325,73 @@ const Home = (props: Props) => {
             href={`https://www.zentacle.com${props.area.url}`}
           />
         )}
+        {props.area.url && (
+          <script
+            type="application/ld+json"
+            key="ld-breadcrumbs"
+            dangerouslySetInnerHTML={jsonLd(
+              breadcrumbList(props.area, { name: props.area.name, url: props.area.url })
+            )}
+          />
+        )}
+        {spots.length > 0 && (
+          <script
+            type="application/ld+json"
+            key="ld-itemlist"
+            dangerouslySetInnerHTML={jsonLd(
+              spotItemList(`Top dive and snorkel sites in ${props.area.name}`, spots)
+            )}
+          />
+        )}
+        {faqs.length > 0 && (
+          <script
+            type="application/ld+json"
+            key="ld-faq"
+            dangerouslySetInnerHTML={jsonLd(faqPage(faqs))}
+          />
+        )}
       </Head>
-      <div className={styles.container}>
-        <div className={styles.contentContainer}>
-          <Breadcrumbs
-            country={props.area.country}
-            area_one={props.area.area_one}
-            area_two={props.area.area_two}
+      <div className={pageStyles.page}>
+        <div className={pageStyles.container}>
+          <LocationIntro
+            area={props.area}
+            title={`Top Snorkeling and Scuba Diving in ${props.area.name}`}
+            lede={
+              <>
+                {ledeText(props.area, numSpotsLabel)}{" "}
+                <a href="#guide">Read the {props.area.name} guide</a>
+              </>
+            }
+            stats={stats}
+            activeTab="sites"
+            numSpots={numSpotsLabel}
+            numShops={props.numShops}
+            areas={props.areas}
+            areasLabel={props.loc === "locality" ? "Nearby areas" : "Areas"}
           />
-          {props.areas.length ? (
-            <div
-              className={`${styles.locationContainer} ${locStyles.locationContainer}`}
-            >
-              {props.areas.map((area) => (
-                <Link key={`${area.short_name}-${area.id}`} href={area.url}>
-                  <a
-                    className={`${styles.location} ${
-                      props.area.short_name === area.short_name && styles.active
-                    }`}
-                  >
-                    {area.name}
-                  </a>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <></>
-          )}
-          <h1 className={styles.areaTitle}>
-            Top Snorkeling and Scuba Diving in {props.area.name}
-          </h1>
-          <SpotMap
-            spots={spots}
+          <SpotList
             areaName={props.area.name}
-            stored={!difficulty && !access ? props.map : null}
+            spots={spots}
+            pinnedIds={pinnedIds}
+            side={side}
           />
-          <div className={styles.marginContainer}>
-            Ready to check out the best sites in {props.area.name} for scuba
-            diving, snorkeling, shore diving, free diving or other ocean
-            activities? Zentacle has {props.default.length} dive sites, snorkel
-            spots, beaches, and more. Discover hand-curated maps, along with
-            reviews and photos from nature lovers like you.
-            {"\n\n"}
-            No matter what you&apos;re looking for, you can find a diverse range
-            of the best ocean activities in {props.area.name} to suit your
-            needs.
-            {props.area.description && "\n\n"}
-          </div>
-          {props.area.description && (
-            <div
-              className={`${styles.marginContainer} ${locStyles.descriptionContainer}`}
-              dangerouslySetInnerHTML={{
-                __html: props.area.description,
-              }}
-            />
-          )}
-          {/* fallback when no listed spot has coordinates for the map above */}
-          {props.area.map_image_url && !spots.some((spot) => spot.latitude && spot.longitude) && (
-            <Link
-              href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=${exploreUrl}`}
-            >
-              <a
-                onClick={() => sendEvent("loc_map__click")}
-                className={styles.mapImageContainer}
-              >
-                <div className={styles.mapExpander}>
-                  <Expander />
-                </div>
-                <Image
-                  src={props.area.map_image_url}
-                  className={styles.mapImage}
-                  objectFit="contain"
-                  height="300"
-                  width="600"
-                  unoptimized
-                  alt={`${props.area.name} dive site map`}
-                />
-              </a>
-            </Link>
-          )}
           {buddies.length ? (
             <BuddyCarousel buddies={buddies} loc={props.area.short_name} />
           ) : (
             <></>
           )}
-          {hasPatron(props.area, props.area_one, props.area_two) &&
-          areaPatronKey &&
-          areaPatronKey.length ? (
-            <Patron
-              areaPatronKey={areaPatronKey}
-              className={locStyles.patronContainer}
-              name={props.area.name}
-            />
-          ) : (
-            <></>
-          )}
-          <div className={styles.homeAd}>
-            <ins
-              className="adsbygoogle"
-              style={{
-                display: "block",
-                minWidth: "300px",
-                maxWidth: "970px",
-                width: "100%",
-                height: "90px",
-                margin: "16px auto",
-              }}
-              data-ad-client="ca-pub-7099980041278313"
-              data-ad-slot="5284949215"
-            ></ins>
-          </div>
-          <FilterBar
-            access={access}
-            activity={activity}
-            difficulty={difficulty}
-            setAccess={(access: string) => setAccess(access)}
-            setActivity={(activity: string) => setActivity(activity)}
-            setDifficulty={(difficulty: string) => setDifficulty(difficulty)}
+          <LocationGuide
+            areaName={props.area.name}
+            descriptionHtml={props.area.description}
+            summary={
+              `Ready to check out the best sites in ${props.area.name} for scuba diving, snorkeling, shore diving, ` +
+              `free diving or other ocean activities? Zentacle has ${numSpotsLabel} dive sites, snorkel spots, ` +
+              `beaches, and more. Discover hand-curated maps, along with reviews and photos from nature lovers like you.`
+            }
+            faqs={faqs}
+            siblings={props.siblings}
+            siblingsTitle={parent ? `More of ${parent.name}` : "Nearby"}
           />
-          <div>
-            {spots.map((location, index) => {
-              return (index + 1) % 7 == 3 ? (
-                <React.Fragment key={location.id}>
-                  <LocationCard info={location} index={index} />
-                  {
-                    //<!-- region listing -->
-                  }
-                  <div className={`${styles.ad} ${styles.inFeedAdDesktop}`}>
-                    <ins
-                      className={`adsbygoogle`}
-                      style={{ display: "block" }}
-                      data-ad-format="fluid"
-                      data-ad-layout-key="-fh-2s+hd-1e-1gn"
-                      data-ad-client="ca-pub-7099980041278313"
-                      data-ad-slot="8488292082"
-                    ></ins>
-                  </div>
-                  <div className={`${styles.ad} ${styles.inFeedAdMobile}`}>
-                    <ins
-                      className={`adsbygoogle`}
-                      style={{ display: "block" }}
-                      data-ad-format="fluid"
-                      data-ad-layout-key="-6d+e4+4h-78+7"
-                      data-ad-client="ca-pub-7099980041278313"
-                      data-ad-slot="4223983131"
-                    ></ins>
-                  </div>
-                </React.Fragment>
-              ) : (
-                <LocationCard key={location.id} info={location} index={index} />
-              );
-            })}
-            <div className={styles.ad}>
-              <ins
-                className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-format="fluid"
-                data-ad-layout-key="-fh-2s+hd-1e-1gn"
-                data-ad-client="ca-pub-7099980041278313"
-                data-ad-slot="5483092474"
-              ></ins>
-            </div>
-          </div>
         </div>
       </div>
     </Layout>
