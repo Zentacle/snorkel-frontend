@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { sendEvent } from 'hooks/amplitude';
 import { googleMapsKey, rootDomain } from 'lib/constants';
 import { fitView, pinPosition, spreadPins } from 'lib/mapProjection';
+import PinCard, { PinCardSpot } from './PinCard';
 import styles from './styles.module.css';
 
 // The static image is requested at this size (x2 for retina); pins are placed
@@ -16,7 +17,7 @@ const MAP_HEIGHT = 320;
 // the interactive map shows all of them.
 const MAX_PINS = 20;
 
-interface MapSpot {
+interface MapSpot extends PinCardSpot {
   id: string | number;
   name: string;
   url: string;
@@ -60,6 +61,8 @@ const loadGoogleMaps = () => {
 const SpotMap = ({ spots, areaName }: Props) => {
   const router = useRouter();
   const [interactive, setInteractive] = React.useState(false);
+  // number of the pin being hovered or focused, if any
+  const [activePin, setActivePin] = React.useState<number | null>(null);
   const interactiveRef = React.useRef<HTMLDivElement>(null);
 
   const numbered = spots
@@ -147,23 +150,30 @@ const SpotMap = ({ spots, areaName }: Props) => {
         />
       ) : (
         <>
-          <Image
-            src={imageUrl}
-            alt={`Map of the top dive and snorkel sites in ${areaName}`}
-            layout="fill"
-            objectFit="cover"
-            priority
-            unoptimized
-          />
+          <div className={styles.mapImage}>
+            <Image
+              src={imageUrl}
+              alt={`Map of the top dive and snorkel sites in ${areaName}`}
+              layout="fill"
+              objectFit="cover"
+              priority
+              unoptimized
+            />
+          </div>
           {pinned.map(({ spot, number }, i) => {
             const { left, top } = pinPositions[i];
+            const active = activePin === number;
             return (
               <Link key={spot.id} href={spot.url}>
                 <a
-                  className={styles.pin}
+                  className={`${styles.pin} ${active ? styles.pinActive : ''}`}
                   style={{ left: `${left}%`, top: `${top}%` }}
-                  title={spot.name}
                   aria-label={`${number}. ${spot.name}`}
+                  aria-describedby={active ? `pin-card-${number}` : undefined}
+                  onMouseEnter={() => setActivePin(number)}
+                  onMouseLeave={() => setActivePin(null)}
+                  onFocus={() => setActivePin(number)}
+                  onBlur={() => setActivePin(null)}
                   onClick={() => sendEvent('loc_map__pin_click')}
                 >
                   {number}
@@ -171,6 +181,18 @@ const SpotMap = ({ spots, areaName }: Props) => {
               </Link>
             );
           })}
+          {pinned.map(({ spot, number }, i) =>
+            activePin === number ? (
+              <PinCard
+                key={`card-${spot.id}`}
+                id={`pin-card-${number}`}
+                number={number}
+                spot={spot}
+                left={pinPositions[i].left}
+                top={pinPositions[i].top}
+              />
+            ) : null,
+          )}
         </>
       )}
       </div>
