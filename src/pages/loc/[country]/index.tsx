@@ -55,7 +55,7 @@ export async function getStaticProps(context: any) {
 
   props.loc = "country";
   props.country = country_short_name;
-  props.map = await fetchLocationMap(props.loc, props.area.url);
+  props.map = await fetchLocationMap(props.loc, props.area);
 
   const localityType = getPillLocalityLevel[props.loc];
   let url = `${rootDomain}/locality/${localityType}?country=${props.country}`;
