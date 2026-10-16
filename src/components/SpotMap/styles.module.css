@@ -1,0 +1,86 @@
+.figure {
+  margin: 0 16px 16px;
+}
+
+/* same 2:1 ratio as the static image, so percentage pin positions line up */
+.map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: var(--background-color);
+}
+
+.interactive {
+  position: absolute;
+  inset: 0;
+}
+
+.pin {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  min-width: 24px;
+  height: 24px;
+  padding: 0 4px;
+  border-radius: 12px;
+  border: 2px solid white;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 12px;
+  font-weight: var(--text-weight-bold);
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: var(--shadow-dropdown);
+}
+
+.pin:hover,
+.pin:focus-visible {
+  z-index: 2;
+  transform: translate(-50%, -50%) scale(1.15);
+  background-color: var(--dark-color);
+}
+
+.exploreButton {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--separator-color);
+  border-radius: 20px;
+  background-color: white;
+  color: var(--text-color);
+  font-weight: var(--text-weight-bold);
+  cursor: pointer;
+}
+
+.exploreButton:hover {
+  background-color: var(--light-color);
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* on phones the map shrinks to about half size, so shrink the pins too */
+@media (max-width: 600px) {
+  .pin {
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border-width: 1.5px;
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .exploreButton {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
