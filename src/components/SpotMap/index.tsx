@@ -34,6 +34,8 @@ interface Props {
   stored?: LocationMap | null;
   // no outer margin (when the map sits in a column of its own)
   flush?: boolean;
+  // id of a spot to highlight (e.g. its row in the list is hovered)
+  highlightId?: string | number | null;
 }
 
 const hasCoordinates = (spot: MapSpot) =>
@@ -63,7 +65,8 @@ const loadGoogleMaps = () => {
   return googleMapsLoading;
 };
 
-const SpotMap = ({ spots, areaName, stored, flush = false }: Props) => {
+const SpotMap = ({ spots, areaName, stored, flush = false, highlightId = null }: Props) => {
+  const highlighted = highlightId === null ? null : String(highlightId);
   const router = useRouter();
   const [interactive, setInteractive] = React.useState(false);
   // number of the pin being hovered or focused, if any
@@ -153,6 +156,7 @@ const SpotMap = ({ spots, areaName, stored, flush = false }: Props) => {
         areaName={areaName}
         activePin={activePin}
         setActivePin={setActivePin}
+        highlighted={highlighted}
         interactive={interactive}
         interactiveMap={interactiveMap}
         exploreButton={exploreButton}
@@ -203,10 +207,11 @@ const SpotMap = ({ spots, areaName, stored, flush = false }: Props) => {
           {pinned.map(({ spot, number }, i) => {
             const { left, top } = pinPositions[i];
             const active = activePin === number;
+            const lit = highlighted === String(spot.id);
             return (
               <Link key={spot.id} href={spot.url}>
                 <a
-                  className={`${styles.pin} ${active ? styles.pinActive : ''}`}
+                  className={`${styles.pin} ${active ? styles.pinActive : ''} ${lit ? styles.pinHighlight : ''}`}
                   style={{ left: `${left}%`, top: `${top}%` }}
                   aria-label={`${number}. ${spot.name}`}
                   aria-describedby={active ? `pin-card-${number}` : undefined}
@@ -251,6 +256,8 @@ interface StoredMapProps {
   spots: MapSpot[];
   areaName: string;
   activePin: number | null;
+  // spot id highlighted from outside the map (hovered list row)
+  highlighted: string | null;
   setActivePin: (pin: number | null) => void;
   interactive: boolean;
   interactiveMap: React.ReactNode;
@@ -266,6 +273,7 @@ const StoredMap = ({
   spots,
   areaName,
   activePin,
+  highlighted,
   setActivePin,
   interactive,
   interactiveMap,
@@ -298,10 +306,11 @@ const StoredMap = ({
               const spot = spotsById.get(String(pin.spotId));
               const name = spot?.name || `Site ${pin.number}`;
               const active = activePin === pin.number;
+              const lit = highlighted === String(pin.spotId);
               return (
                 <Link key={pin.spotId} href={pin.url}>
                   <a
-                    className={`${styles.hotspot} ${active ? styles.hotspotActive : ''}`}
+                    className={`${styles.hotspot} ${active ? styles.hotspotActive : ''} ${lit ? styles.hotspotHighlight : ''}`}
                     style={{ left: `${pin.left}%`, top: `${pin.top}%` }}
                     aria-label={`${pin.number}. ${name}`}
                     aria-describedby={active ? `pin-card-${pin.number}` : undefined}

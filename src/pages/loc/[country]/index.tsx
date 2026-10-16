@@ -157,6 +157,8 @@ const ledeText = (area: Location, numSpots: string) => {
 
 const Home = (props: Props) => {
   const [buddies, setBuddies] = React.useState([]);
+  // spot whose list row is hovered, highlighted on the map
+  const [hoveredSpotId, setHoveredSpotId] = React.useState<string | null>(null);
   const spots = props.default as ListSpot[];
 
   const { state } = useCurrentUser();
@@ -252,7 +254,13 @@ const Home = (props: Props) => {
   const side = (
     <div className={pageStyles.side}>
       <div className={pageStyles.mapSlot}>
-        <SpotMap spots={spots} areaName={props.area.name} stored={props.map} flush />
+        <SpotMap
+          spots={spots}
+          areaName={props.area.name}
+          stored={props.map}
+          flush
+          highlightId={hoveredSpotId}
+        />
         {/* fallback when no listed spot has coordinates for the map */}
         {props.area.map_image_url && !spots.some(hasCoordinates) && (
           <Link
@@ -374,6 +382,7 @@ const Home = (props: Props) => {
             spots={spots}
             pinnedIds={pinnedIds}
             side={side}
+            onRowHover={setHoveredSpotId}
           />
           {buddies.length ? (
             <BuddyCarousel buddies={buddies} loc={props.area.short_name} />

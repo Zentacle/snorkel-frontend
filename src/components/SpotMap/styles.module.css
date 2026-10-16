@@ -277,3 +277,34 @@
     font-size: 13px;
   }
 }
+
+/* the spot whose row is hovered in the list beside the map */
+.hotspotHighlight,
+.pinHighlight {
+  z-index: 3;
+  box-shadow: 0 0 0 3px white, 0 0 0 6px var(--blue, var(--primary-color));
+  animation: highlightPulse 1.2s ease-out infinite;
+}
+
+.pinHighlight {
+  transform: translate(-50%, -50%) scale(1.25);
+  background-color: var(--dark-color);
+}
+
+@keyframes highlightPulse {
+  0% {
+    box-shadow: 0 0 0 3px white, 0 0 0 6px var(--blue, var(--primary-color)),
+      0 0 0 6px rgba(10, 102, 194, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 3px white, 0 0 0 6px var(--blue, var(--primary-color)),
+      0 0 0 18px rgba(10, 102, 194, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspotHighlight,
+  .pinHighlight {
+    animation: none;
+  }
+}
