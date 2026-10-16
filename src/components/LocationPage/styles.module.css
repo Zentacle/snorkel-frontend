@@ -13,6 +13,17 @@
 
 /* ---- intro: title, stats, tabs, areas ---- */
 
+/* Breadcrumbs indents its first link on phones for older layouts; this
+   container already has the page padding */
+.crumbs span:first-child > a {
+  margin-left: 0;
+}
+
+.crumbs > div {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+
 .intro {
   display: flex;
   flex-wrap: wrap;
@@ -246,6 +257,14 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* list column is narrow beside the map: smaller photos */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .rowPhoto {
+    flex-basis: 160px;
+    height: 128px;
+  }
 }
 
 @media (max-width: 900px) {
