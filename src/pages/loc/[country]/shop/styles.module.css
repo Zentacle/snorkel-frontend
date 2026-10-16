@@ -2,6 +2,10 @@
   margin: 0 16px;
 }
 
+.descriptionContainer > a {
+  text-decoration: underline;
+}
+
 @media (max-width: 720px) {
   .locationContainer {
     flex-wrap: nowrap;

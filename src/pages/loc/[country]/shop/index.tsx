@@ -17,7 +17,6 @@ import Patron from "components/Patron";
 import { sendEvent } from "hooks/amplitude";
 import Expander from "icons/Expander";
 import hasPatron from "lib/hasPatron";
-import LinkifyText from "controls/LinkifyText";
 
 // TODO - fix type of context
 // Location pages with no shops have nothing to rank for. Keep them out of
@@ -237,11 +236,16 @@ const Home = (props: Props) => {
             No matter what you&apos;re looking for, you can find a diverse range
             of the best ocean activities in {props.area.name} to suit your
             needs.
-            {props.area.description && "\n\n"}
-            {props.area.description && (
-              <LinkifyText text={props.area.description} />
-            )}
           </div>
+          {/* descriptions are HTML (links), like on the dive site list pages */}
+          {props.area.description && (
+            <div
+              className={`${styles.marginContainer} ${locStyles.descriptionContainer}`}
+              dangerouslySetInnerHTML={{
+                __html: props.area.description,
+              }}
+            />
+          )}
           {props.area.map_image_url && (
             <Link
               href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=${exploreUrl}`}
