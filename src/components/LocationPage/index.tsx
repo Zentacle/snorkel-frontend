@@ -208,18 +208,27 @@ const SpotRow = ({
   rank,
   onMap,
   hidden,
+  onHover,
 }: {
   spot: ListSpot;
   rank: number;
   onMap: boolean;
   hidden: boolean;
+  onHover?: (spotId: string | null) => void;
 }) => {
   const [photoFailed, setPhotoFailed] = React.useState(false);
   const rating = formatRating(spot.rating);
   const difficulty = (spot.difficulty || '').toLowerCase();
   const depth = depthLabel(spot.max_depth);
   return (
-    <article className={styles.row} style={hidden ? { display: 'none' } : undefined}>
+    <article
+      className={styles.row}
+      style={hidden ? { display: 'none' } : undefined}
+      onMouseEnter={onMap && onHover ? () => onHover(String(spot.id)) : undefined}
+      onMouseLeave={onMap && onHover ? () => onHover(null) : undefined}
+      onFocus={onMap && onHover ? () => onHover(String(spot.id)) : undefined}
+      onBlur={onMap && onHover ? () => onHover(null) : undefined}
+    >
       <div className={styles.rowPhoto}>
         {spot.hero_img && !photoFailed ? (
           <Image
@@ -305,9 +314,11 @@ interface SpotListProps {
   pinnedIds: Set<string>;
   // the column beside the list (map and shops): above it on phones
   side: React.ReactNode;
+  // a row with a pin on the map is hovered (null when it's left)
+  onRowHover?: (spotId: string | null) => void;
 }
 
-export const SpotList = ({ areaName, spots, pinnedIds, side }: SpotListProps) => {
+export const SpotList = ({ areaName, spots, pinnedIds, side, onRowHover }: SpotListProps) => {
   const [difficulty, setDifficulty] = React.useState<string | null>(null);
   const [entry, setEntry] = React.useState<string | null>(null);
   const [showAll, setShowAll] = React.useState(false);
@@ -381,6 +392,7 @@ export const SpotList = ({ areaName, spots, pinnedIds, side }: SpotListProps) =>
           areaName={areaName}
           shown={shown}
           pinnedIds={pinnedIds}
+          onRowHover={onRowHover}
           showAll={showAll || filtered}
           onShowAll={() => {
             sendEvent('loc_list__show_all');
@@ -397,12 +409,14 @@ const SpotListBody = ({
   areaName,
   shown,
   pinnedIds,
+  onRowHover,
   showAll,
   onShowAll,
 }: {
   areaName: string;
   shown: { spot: ListSpot; rank: number }[];
   pinnedIds: Set<string>;
+  onRowHover?: (spotId: string | null) => void;
   showAll: boolean;
   onShowAll: () => void;
 }) => (
@@ -417,6 +431,7 @@ const SpotListBody = ({
           rank={rank}
           onMap={pinnedIds.has(String(spot.id))}
           hidden={!showAll && i >= ROWS_SHOWN}
+          onHover={onRowHover}
         />
         {i === AD_AFTER - 1 && <InFeedAd />}
       </React.Fragment>
