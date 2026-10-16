@@ -18,6 +18,7 @@ import FilterBar from "components/FilterBar";
 import Patron from "components/Patron";
 import { sendEvent } from "hooks/amplitude";
 import Expander from "icons/Expander";
+import SpotMap from "components/SpotMap";
 import hasPatron from "lib/hasPatron";
 import LinkifyText from "controls/LinkifyText";
 
@@ -258,6 +259,7 @@ const Home = (props: Props) => {
           <h1 className={styles.areaTitle}>
             Top Snorkeling and Scuba Diving in {props.area.name}
           </h1>
+          <SpotMap spots={spots} areaName={props.area.name} />
           <div className={styles.marginContainer}>
             Ready to check out the best sites in {props.area.name} for scuba
             diving, snorkeling, shore diving, free diving or other ocean
@@ -278,7 +280,8 @@ const Home = (props: Props) => {
               }}
             />
           )}
-          {props.area.map_image_url && (
+          {/* fallback when no listed spot has coordinates for the map above */}
+          {props.area.map_image_url && !spots.some((spot) => spot.latitude && spot.longitude) && (
             <Link
               href={`https://zentacle.app.link?utm_medium=xpromo&utm_source=xpromo&campaign=loc_map&$desktop_url=${exploreUrl}`}
             >
