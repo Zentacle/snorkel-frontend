@@ -8,6 +8,8 @@ export const LEVELS: Level[] = ['country', 'area_one', 'area_two', 'locality'];
 export interface LocationPage {
   level: Level;
   url: string; // e.g. /loc/us/hi/maui/wailea-makena
+  // where the old static map was stored (the API's map_image_url)
+  mapImageUrl?: string | null;
 }
 
 export interface ApiSpot {
@@ -36,17 +38,35 @@ export const getJson = async (url: string, attempts = 4): Promise<any> => {
   }
 };
 
+const segmentsOf = (url: string) => url.replace(/^\/loc\//, '').split('/');
+
 export const listLocationPages = async (): Promise<LocationPage[]> => {
   const pages: LocationPage[] = [];
   for (const level of LEVELS) {
     const body = await getJson(`${API_URL}/locality/${level}?limit=none`);
     for (const row of body?.data || []) {
-      if (row.url && row.url.startsWith('/loc/') && !row.url.includes('/_/') && !row.url.includes('None')) {
-        pages.push({ level, url: row.url });
+      if (
+        row.url &&
+        row.url.startsWith('/loc/') &&
+        !row.url.includes('/_/') &&
+        !row.url.includes('None') &&
+        // "/loc/th/trat/" and "/loc/th/trat//koh-chang-tai" are missing a level
+        !segmentsOf(row.url).includes('')
+      ) {
+        pages.push({ level, url: row.url, mapImageUrl: row.map_image_url });
       }
     }
   }
-  return pages;
+  // two pages must never write the same image
+  const claims = new Map<string, number>();
+  pages.forEach((page) => {
+    const key = legacyKey(page.mapImageUrl);
+    if (key) claims.set(key, (claims.get(key) || 0) + 1);
+  });
+  return pages.map((page) => {
+    const key = legacyKey(page.mapImageUrl);
+    return key && claims.get(key)! > 1 ? { ...page, mapImageUrl: null } : page;
+  });
 };
 
 // Same query as the page's getStaticProps for that level.
@@ -66,6 +86,18 @@ export const fetchRankedSpots = async (page: LocationPage) => {
   return { areaName: (body.area?.name as string) || page.url, spots: body.data as ApiSpot[] };
 };
 
-// S3 key the old static location maps used: loc-map/<level>/<segments>.png
-export const imageKeyFor = ({ level, url }: LocationPage) =>
-  `${level}/${url.replace(/^\/loc\//, '').split('/').join('_')}`;
+// The old static map's key (from map_image_url, e.g. ".../loc-map/area_one/
+// cw_curacao.png" -> "area_one/cw_curacao"), so Google Images keeps the same
+// image URL. Null for the broken ones with an empty name ("th_", "th__"),
+// which several pages shared. Keep in sync with src/lib/locationMap.ts.
+export const legacyKey = (mapImageUrl?: string | null) => {
+  const match = mapImageUrl?.match(/\/loc-map\/((?:country|area_one|area_two|locality)\/[^/]+)\.png$/);
+  if (!match || match[1].split('/')[1].split('_').includes('')) return null;
+  return match[1];
+};
+
+// S3 key (without extension) for a page's map: the old map's key when it has
+// one, otherwise loc-map/<level>/<url segments joined by "_"> (which is what
+// almost every old map used anyway).
+export const imageKeyFor = ({ level, url, mapImageUrl }: LocationPage) =>
+  legacyKey(mapImageUrl) || `${level}/${segmentsOf(url).join('_')}`;
