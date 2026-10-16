@@ -25,21 +25,33 @@ export interface LocationMap {
   pins: LocationMapPin[];
 }
 
-// Same naming as map-renderer/src/locations.ts imageKeyFor (and the old maps):
-// loc-map/<level>/<url segments joined by "_">
-export const locationMapKey = (level: string, url: string) =>
-  `${level}/${url.replace(/^\/loc\//, '').split('/').join('_')}`;
+// The old static map's key (from the location's map_image_url), kept so
+// Google Images keeps the same image URL; null for the broken ones with an
+// empty name ("th_") that several pages shared.
+const legacyKey = (mapImageUrl?: string | null) => {
+  const match = mapImageUrl?.match(/\/loc-map\/((?:country|area_one|area_two|locality)\/[^/]+)\.png$/);
+  if (!match || match[1].split('/')[1].split('_').includes('')) {
+    return null;
+  }
+  return match[1];
+};
+
+// Same naming as map-renderer/src/locations.ts imageKeyFor: the old map's
+// key, else loc-map/<level>/<url segments joined by "_">
+export const locationMapKey = (level: string, url: string, mapImageUrl?: string | null) =>
+  legacyKey(mapImageUrl) || `${level}/${url.replace(/^\/loc\//, '').split('/').join('_')}`;
 
 // The stored map for a location page, or null if it hasn't been rendered.
 export const fetchLocationMap = async (
   level: string,
-  url: string | undefined,
+  area: { url?: string; map_image_url?: string | null } | undefined,
 ): Promise<LocationMap | null> => {
+  const url = area?.url;
   if (!url) {
     return null;
   }
   try {
-    const res = await fetch(`${STORAGE_BASE}${locationMapKey(level, url)}.json`);
+    const res = await fetch(`${STORAGE_BASE}${locationMapKey(level, url, area?.map_image_url)}.json`);
     if (!res.ok) {
       return null;
     }

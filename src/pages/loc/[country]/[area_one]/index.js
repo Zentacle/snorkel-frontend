@@ -23,7 +23,7 @@ export async function getStaticProps(context) {
   }
 
   props['loc'] = 'area_one'
-  props['map'] = await fetchLocationMap(props.loc, props.area.url)
+  props['map'] = await fetchLocationMap(props.loc, props.area)
   props['country'] = country
   props['area_one'] = area_one
 
