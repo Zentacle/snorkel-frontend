@@ -3,6 +3,7 @@
 //   /sitemaps/locations.xml, /sitemaps/shop-locations.xml
 import { GetServerSideProps } from 'next';
 
+import { fetchLocationMapIndex } from 'lib/locationMap';
 import {
   chunk,
   fetchLocations,
@@ -18,7 +19,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const file = `${ctx.params?.file}`;
 
   if (file === 'locations.xml') {
-    return sendUrlset(ctx, locationFields(await fetchLocations(false)));
+    const [locations, maps] = await Promise.all([fetchLocations(false), fetchLocationMapIndex()]);
+    return sendUrlset(ctx, locationFields(locations, '', maps));
   }
   if (file === 'shop-locations.xml') {
     return sendUrlset(ctx, locationFields(await fetchLocations(true), '/shop'));
