@@ -19,6 +19,7 @@ import Patron from "components/Patron";
 import { sendEvent } from "hooks/amplitude";
 import Expander from "icons/Expander";
 import SpotMap from "components/SpotMap";
+import { fetchLocationMap, LocationMap } from "lib/locationMap";
 import hasPatron from "lib/hasPatron";
 import LinkifyText from "controls/LinkifyText";
 
@@ -54,6 +55,7 @@ export async function getStaticProps(context: any) {
 
   props.loc = "country";
   props.country = country_short_name;
+  props.map = await fetchLocationMap(props.loc, props.area.url);
 
   const localityType = getPillLocalityLevel[props.loc];
   let url = `${rootDomain}/locality/${localityType}?country=${props.country}`;
@@ -93,6 +95,8 @@ interface Props {
   default: Beach[];
   loc: string;
   area: Location;
+  // annotated map image rendered by map-renderer/, if any
+  map?: LocationMap | null;
   areas: Location[];
   country?: string;
   area_one?: string;
@@ -185,6 +189,12 @@ const Home = (props: Props) => {
   };
 
   React.useEffect(() => {
+    // Without filters, keep the server's list: its order is what the map
+    // image is numbered by (re-fetching could reorder spots on big pages).
+    if (!difficulty && !access) {
+      setSpots(props.default);
+      return;
+    }
     fetchLocations({
       limit: "100",
       sort: "top",
@@ -198,6 +208,7 @@ const Home = (props: Props) => {
   }, [
     difficulty,
     access,
+    props.default,
     props.country,
     props.area_one,
     props.area_two,
@@ -216,9 +227,16 @@ const Home = (props: Props) => {
         />
         <meta
           property="og:image"
-          content="https://www.zentacle.com/social_background_v2.jpg"
+          content={props.map?.image.url || "https://www.zentacle.com/social_background_v2.jpg"}
           key="og:image"
         />
+        {props.map && (
+          <>
+            <meta property="og:image:width" content={`${props.map.image.width}`} key="og:image:width" />
+            <meta property="og:image:height" content={`${props.map.image.height}`} key="og:image:height" />
+            <meta property="og:image:alt" content={props.map.title} key="og:image:alt" />
+          </>
+        )}
         <meta name="description" content={description} key="description" />
         {props.default.length < MIN_LISTINGS_TO_INDEX && (
           <meta name="robots" content="noindex, follow" key="robots" />
@@ -259,7 +277,11 @@ const Home = (props: Props) => {
           <h1 className={styles.areaTitle}>
             Top Snorkeling and Scuba Diving in {props.area.name}
           </h1>
-          <SpotMap spots={spots} areaName={props.area.name} />
+          <SpotMap
+            spots={spots}
+            areaName={props.area.name}
+            stored={!difficulty && !access ? props.map : null}
+          />
           <div className={styles.marginContainer}>
             Ready to check out the best sites in {props.area.name} for scuba
             diving, snorkeling, shore diving, free diving or other ocean

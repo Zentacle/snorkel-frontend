@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 import { sendEvent } from 'hooks/amplitude';
 import { googleMapsKey, rootDomain } from 'lib/constants';
+import { LocationMap } from 'lib/locationMap';
 import { fitView, pinPosition, spreadPins } from 'lib/mapProjection';
 import PinCard, { PinCardSpot } from './PinCard';
 import styles from './styles.module.css';
@@ -29,6 +30,8 @@ interface Props {
   // in ranked order; pin numbers match the "#1 - Name" list below the map
   spots: MapSpot[];
   areaName: string;
+  // the annotated image rendered for this page (map-renderer/), if any
+  stored?: LocationMap | null;
 }
 
 const hasCoordinates = (spot: MapSpot) =>
@@ -58,7 +61,7 @@ const loadGoogleMaps = () => {
   return googleMapsLoading;
 };
 
-const SpotMap = ({ spots, areaName }: Props) => {
+const SpotMap = ({ spots, areaName, stored }: Props) => {
   const router = useRouter();
   const [interactive, setInteractive] = React.useState(false);
   // number of the pin being hovered or focused, if any
@@ -117,6 +120,42 @@ const SpotMap = ({ spots, areaName }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interactive, spots, router]);
 
+  const exploreButton = !interactive && (
+    <button
+      type="button"
+      className={styles.exploreButton}
+      onClick={() => {
+        sendEvent('loc_map__explore_click');
+        setInteractive(true);
+      }}
+    >
+      Explore the map
+    </button>
+  );
+
+  const interactiveMap = (
+    <div
+      ref={interactiveRef}
+      className={styles.interactive}
+      aria-label={`Interactive map of dive sites in ${areaName}`}
+    />
+  );
+
+  if (stored) {
+    return (
+      <StoredMap
+        stored={stored}
+        spots={spots}
+        areaName={areaName}
+        activePin={activePin}
+        setActivePin={setActivePin}
+        interactive={interactive}
+        interactiveMap={interactiveMap}
+        exploreButton={exploreButton}
+      />
+    );
+  }
+
   if (!view) {
     return null;
   }
@@ -143,11 +182,7 @@ const SpotMap = ({ spots, areaName }: Props) => {
     <figure className={styles.figure}>
       <div className={styles.map}>
       {interactive ? (
-        <div
-          ref={interactiveRef}
-          className={styles.interactive}
-          aria-label={`Interactive map of dive sites in ${areaName}`}
-        />
+        interactiveMap
       ) : (
         <>
           <div className={styles.mapImage}>
@@ -201,18 +236,106 @@ const SpotMap = ({ spots, areaName }: Props) => {
           Numbers match the ranked list of {areaName} dive and snorkel sites
           below.
         </span>
-        {!interactive && (
-          <button
-            type="button"
-            className={styles.exploreButton}
-            onClick={() => {
-              sendEvent('loc_map__explore_click');
-              setInteractive(true);
-            }}
-          >
-            Explore the map
-          </button>
+        {exploreButton}
+      </figcaption>
+    </figure>
+  );
+};
+
+interface StoredMapProps {
+  stored: LocationMap;
+  spots: MapSpot[];
+  areaName: string;
+  activePin: number | null;
+  setActivePin: (pin: number | null) => void;
+  interactive: boolean;
+  interactiveMap: React.ReactNode;
+  exploreButton: React.ReactNode;
+}
+
+// The annotated image (title band, map with pins, key) cropped to its map
+// area, with invisible links over the pins drawn into it. The full image is
+// what Google Images indexes and what "Full map" opens.
+const StoredMap = ({
+  stored,
+  spots,
+  areaName,
+  activePin,
+  setActivePin,
+  interactive,
+  interactiveMap,
+  exploreButton,
+}: StoredMapProps) => {
+  const { image, map, pins } = stored;
+  const spotsById = new Map(spots.map((spot) => [String(spot.id), spot]));
+
+  return (
+    <figure className={styles.figure}>
+      <div className={styles.map} style={{ aspectRatio: `${image.width} / ${map.height}` }}>
+        {interactive ? (
+          interactiveMap
+        ) : (
+          <>
+            <div className={styles.mapImage}>
+              {/* a plain <img> so the indexed image URL is exactly the stored one */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={image.url}
+                width={image.width}
+                height={image.height}
+                alt={`${stored.title}: numbered map of the top ${pins.length} dive and snorkel sites, with ratings`}
+                className={styles.storedImage}
+                style={{ top: `${(-map.top / map.height) * 100}%` }}
+              />
+            </div>
+            {pins.map((pin) => {
+              const spot = spotsById.get(String(pin.spotId));
+              const name = spot?.name || `Site ${pin.number}`;
+              const active = activePin === pin.number;
+              return (
+                <Link key={pin.spotId} href={pin.url}>
+                  <a
+                    className={`${styles.hotspot} ${active ? styles.hotspotActive : ''}`}
+                    style={{ left: `${pin.left}%`, top: `${pin.top}%` }}
+                    aria-label={`${pin.number}. ${name}`}
+                    aria-describedby={active ? `pin-card-${pin.number}` : undefined}
+                    onMouseEnter={() => setActivePin(pin.number)}
+                    onMouseLeave={() => setActivePin(null)}
+                    onFocus={() => setActivePin(pin.number)}
+                    onBlur={() => setActivePin(null)}
+                    onClick={() => sendEvent('loc_map__pin_click')}
+                  >
+                    {/* only shown on phones, where the image's own numbers are too small */}
+                    <span className={styles.hotspotNumber}>{pin.number}</span>
+                  </a>
+                </Link>
+              );
+            })}
+            {pins.map((pin) => {
+              const spot = spotsById.get(String(pin.spotId));
+              return activePin === pin.number && spot ? (
+                <PinCard
+                  key={`card-${pin.spotId}`}
+                  id={`pin-card-${pin.number}`}
+                  number={pin.number}
+                  spot={spot}
+                  left={pin.left}
+                  top={pin.top}
+                />
+              ) : null;
+            })}
+          </>
         )}
+      </div>
+      <figcaption className={styles.caption}>
+        <span>
+          Numbers match the ranked list of {areaName} dive and snorkel sites
+          below.{' '}
+          <a href={image.url} target="_blank" rel="noreferrer" className={styles.fullMapLink}>
+            Full map with key
+          </a>
+        </span>
+        {exploreButton}
       </figcaption>
     </figure>
   );

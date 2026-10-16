@@ -1,5 +1,6 @@
 import Page, { getPillLocalityLevel } from 'pages/loc/[country]/index';
 import { rootDomain } from "src/lib/constants";
+import { fetchLocationMap } from "lib/locationMap";
 
 export async function getStaticProps(context) {
   const area_one = context.params.area_one;
@@ -22,6 +23,7 @@ export async function getStaticProps(context) {
   }
 
   props['loc'] = 'area_one'
+  props['map'] = await fetchLocationMap(props.loc, props.area.url)
   props['country'] = country
   props['area_one'] = area_one
 

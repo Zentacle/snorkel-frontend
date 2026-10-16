@@ -4,6 +4,7 @@ import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
 import Beach from 'models/Beach';
 import Location from 'models/Location';
 import Shop from 'models/Shop';
+import { LocationMapIndexEntry } from 'lib/locationMap';
 
 export const SITE_URL = 'https://www.zentacle.com';
 const API_URL = 'https://www.zentacle.com/api';
@@ -100,12 +101,25 @@ export const shopFields = (shops: Shop[]): ISitemapField[] =>
 export const locationFields = (
   locations: Location[],
   suffix = '',
+  // annotated map images by page URL (lib/locationMap fetchLocationMapIndex)
+  maps: Record<string, LocationMapIndexEntry> = {},
 ): ISitemapField[] =>
-  locations.map((location) => ({
-    loc: `${SITE_URL}${location.url}${suffix}`,
-    changefreq: 'weekly',
-    priority: 0.7,
-  }));
+  locations.map((location) => {
+    const field: any = {
+      loc: `${SITE_URL}${location.url}${suffix}`,
+      changefreq: 'weekly',
+      priority: 0.7,
+    };
+    const map = maps[location.url];
+    if (map) {
+      field['image:image'] = `
+        <image:loc>${escapeForXML(map.image)}</image:loc>
+        <image:title>${escapeForXML(map.title)}</image:title>
+        <image:caption>${escapeForXML(`${map.title}: numbered map of the top dive and snorkel sites, with ratings`)}</image:caption>
+      `;
+    }
+    return field;
+  });
 
 export const chunk = <T>(items: T[], page: number) =>
   items.slice((page - 1) * URLS_PER_SITEMAP, page * URLS_PER_SITEMAP);

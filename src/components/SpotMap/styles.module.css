@@ -20,6 +20,67 @@
   background-color: var(--background-color);
 }
 
+/* the stored image is taller than the map area: shift it up past the title
+   band (top is set inline) and let .mapImage clip the key below */
+.storedImage {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+/* invisible, clickable area over a pin drawn into the stored image */
+.hotspot {
+  position: absolute;
+  z-index: 1;
+  width: max(24px, 3.6%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hotspot:hover,
+.hotspot:focus-visible,
+.hotspotActive {
+  z-index: 2;
+  box-shadow: 0 0 0 3px white, 0 0 0 5px var(--dark-color);
+}
+
+.hotspotNumber {
+  display: none;
+}
+
+/* On phones the image is shrunk to ~30% and its numbers become unreadable,
+   so draw readable numbered pins over the image's own pins. */
+@media (max-width: 600px) {
+  .hotspot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hotspotNumber {
+    display: block;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 3px;
+    border-radius: 9px;
+    border: 1.5px solid white;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 10px;
+    font-weight: var(--text-weight-bold);
+    line-height: 15px;
+    text-align: center;
+  }
+}
+
+.fullMapLink {
+  color: var(--primary-color);
+  font-weight: var(--text-weight-bold);
+  white-space: nowrap;
+}
+
 .pin {
   position: absolute;
   z-index: 1;
