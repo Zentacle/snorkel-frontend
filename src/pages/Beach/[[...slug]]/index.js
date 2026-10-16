@@ -36,14 +36,25 @@ export async function getStaticProps(context) {
   let nearbyBeaches = fetch(`${rootDomain}/spots/nearby?beach_id=${beachid}`);
   let nearbyShops = fetch(`${rootDomain}/shop/nearby?beach_id=${beachid}`);
 
-  beach_data = await beach_data.then((res) => {
+  beach_data = await beach_data.then(async (res) => {
     if (res.status == 404) {
+      // deleted spots 404; merged ones include the spot they were merged into
+      const body = await res.json().catch(() => ({}));
       return {
         errorCode: 404,
+        redirectUrl: body.redirect_url,
       };
     }
     return res.json().catch(() => null);
   });
+  if (beach_data && beach_data.redirectUrl) {
+    return {
+      redirect: {
+        destination: beach_data.redirectUrl,
+        permanent: true,
+      },
+    };
+  }
   if (!beach_data || beach_data.errorCode || !beach_data.data) {
     return {
       notFound: true,
@@ -184,6 +195,11 @@ const Beach = (props) => {
         <meta property="og:url" content={canonicalURL} key="og-url" />
         <meta name="description" content={description} key="description" />
         <link rel="canonical" href={canonicalURL} key="canonical" />
+        {beach.is_verified === false && (
+          // user-submitted spots awaiting admin approval: reachable by link,
+          // but kept out of search until approved
+          <meta name="robots" content="noindex, follow" key="robots" />
+        )}
         <meta
           name="apple-itunes-app"
           content={`app-id=1611242564, app-argument=${beach.url}`}

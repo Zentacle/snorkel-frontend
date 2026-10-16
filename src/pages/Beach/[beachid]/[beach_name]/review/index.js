@@ -22,7 +22,7 @@ const Review = () => {
         }).then(response => {
             return response.json();
         }).then(data => {
-            setBeach(data.data);
+            setBeach(data.data || {});
         })
     }, [router.isReady, beachid])
 
