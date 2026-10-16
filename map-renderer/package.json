@@ -1,0 +1,25 @@
+{
+  "name": "zentacle-map-renderer",
+  "private": true,
+  "description": "Renders annotated location map images (Protomaps base map + numbered pins + key) and uploads them to S3. Run by .github/workflows/render-location-maps.yml.",
+  "scripts": {
+    "render": "tsx src/cli.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1152.0",
+    "@maplibre/maplibre-gl-native": "6.4.1",
+    "@protomaps/basemaps": "5.7.2",
+    "@resvg/resvg-js": "2.6.2",
+    "pmtiles": "4.5.0",
+    "pngjs": "7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "@types/pngjs": "6.0.5",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}

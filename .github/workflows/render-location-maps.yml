@@ -1,0 +1,90 @@
+# Renders annotated map images for location pages and uploads them to S3.
+# Daily, it only re-renders locations whose top spots, ratings or reviews
+# changed. See map-renderer/README.md.
+name: Render location maps
+
+on:
+  schedule:
+    - cron: '17 9 * * *' # daily, 09:17 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: render without uploading; images are attached to the run as an artifact'
+        type: boolean
+        default: false
+      force:
+        description: 'Re-render every location, changed or not'
+        type: boolean
+        default: false
+      limit:
+        description: 'Render at most this many locations (blank = no limit)'
+        type: string
+        default: ''
+      only:
+        description: 'Render only this location URL, e.g. /loc/us/hi/maui/wailea-makena'
+        type: string
+        default: ''
+
+concurrency:
+  group: render-location-maps
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    defaults:
+      run:
+        working-directory: map-renderer
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: map-renderer/package-lock.json
+
+      # MapLibre Native needs a (virtual) display and these libraries on Linux,
+      # as in maplibre-native's own node CI
+      - name: Install system libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libcurl4-openssl-dev libglfw3-dev libuv1-dev libjpeg-dev libpng-dev libwebp-dev
+
+      - run: npm ci
+
+      - name: Cache map fonts and sprites
+        uses: actions/cache@v4
+        with:
+          path: map-renderer/.cache
+          key: map-assets-v1
+
+      - name: Render and upload
+        if: ${{ !inputs.dry_run }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.MAP_RENDERER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.MAP_RENDERER_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+          MAP_S3_BUCKET: snorkel
+          FORCE: ${{ inputs.force && '--force' || '' }}
+          LIMIT: ${{ inputs.limit && format('--limit {0}', inputs.limit) || '' }}
+          ONLY: ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+        run: xvfb-run --auto-servernum npm run render -- --apply $FORCE $LIMIT $ONLY
+
+      - name: Render (dry run)
+        if: ${{ inputs.dry_run }}
+        env:
+          LIMIT: ${{ inputs.limit && format('--limit {0}', inputs.limit) || '--limit 10' }}
+          ONLY: ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+        run: xvfb-run --auto-servernum npm run render -- --force $LIMIT $ONLY
+
+      - name: Attach dry-run images
+        if: ${{ inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: location-maps-dry-run
+          path: map-renderer/out
